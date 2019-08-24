@@ -11,6 +11,8 @@
     <title>Title</title>
 </head>
 <body>
-dziala
+<h2>dziala</h2>
+
+<a href="/secure">Secure page</a>
 </body>
 </html>
