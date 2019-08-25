@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: kacpe
-  Date: 23.08.2019
-  Time: 22:04
+  Date: 25.08.2019
+  Time: 19:15
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,9 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<h2>dziala</h2>
-
-<a href="/secure">Secure page</a>
-<a href="/register">Register Page</a>
+<h2>AccountPage</h2>
 </body>
 </html>

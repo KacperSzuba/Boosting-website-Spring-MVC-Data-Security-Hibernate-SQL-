@@ -15,21 +15,10 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-    @Autowired
-    UserRoleRepository userRoleRepository;
-
-    @Autowired
-    UserRepository userRepository;
 
     @RequestMapping("/")
     public String showHomePage(){
 
-        UserRole userRole = userRoleRepository.getUserRole(UserRoles.ROLE_USER.toString());
-        userRoleRepository.save(userRole);
-        List<UserRole> roles = new ArrayList<>();
-        roles.add(userRole);
-        User user = new User("username2","{noop}test123","email",roles);
-        userRepository.save(user);
 
         return "home";
     }
