@@ -4,28 +4,28 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
-public class User implements UserDetails {
+public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String username;
     private String password;
     private String email;
-
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<UserRole> roles;
     public User(){}
 
-    public User(String username, String password, String email) {
+    public User(String username, String password, String email,List<UserRole> roles) {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -36,7 +36,6 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    @Override
     public String getUsername() {
         return username;
     }
@@ -45,7 +44,6 @@ public class User implements UserDetails {
         this.username = username;
     }
 
-    @Override
     public String getPassword() {
         return password;
     }
@@ -62,28 +60,11 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+    public List<UserRole> getRoles() {
+        return roles;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
+    public void setRoles(List<UserRole> roles) {
+        this.roles = roles;
     }
 }
