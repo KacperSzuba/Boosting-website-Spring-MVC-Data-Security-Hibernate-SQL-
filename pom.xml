@@ -21,6 +21,8 @@
         <javax.validation.version>2.0.1.Final</javax.validation.version>
         <hibernate.validator.version>6.0.17.Final</hibernate.validator.version>
         <junit.version>5.5.1</junit.version>
+        <jstl.version>1.2</jstl.version>
+        <spring-security.version>5.1.6.RELEASE</spring-security.version>
     </properties>
 
     <dependencies>
@@ -117,12 +119,17 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>5.1.6.RELEASE</version>
+            <version>${spring-security.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>5.1.6.RELEASE</version>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring-security.version}</version>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
@@ -134,8 +141,9 @@
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.2</version>
+            <version>${jstl.version}</version>
         </dependency>
+
     </dependencies>
 
 </project>
