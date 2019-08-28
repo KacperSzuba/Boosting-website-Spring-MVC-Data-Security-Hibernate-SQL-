@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%--
   Created by IntelliJ IDEA.
   User: kacpe
@@ -10,32 +11,33 @@
 <html>
 <head>
     <title>Title</title>
+    <style type="text/css">
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 <div id="Register">
     <h2>Account Registration</h2>
 
-    <form:form action="registerForm"  method="post">
+
+    <form:form action="${pageContext.request.contextPath}/registerForm" modelAttribute="register" method="post">
         <table>
             <tr>
-                <td>
-                    <input name="username"  placeholder="Username"></input>
-                </td>
+                <td><form:input path="username" name="username"  placeholder="Username" /></td>
+                <td><form:errors path="username" cssClass="error"/></td>
             </tr>
             <tr>
-                <td>
-                    <input name="password"  placeholder="Password" type="password"></input>
-                </td>
+                <td><form:input path="password" name="password"  placeholder="Password" type="password" /></td>
+                <td><form:errors path="password" cssClass="error"/></td>
             </tr>
             <tr>
-                <td>
-                    <input name="email"  placeholder="Email"></input>
-                </td>
+                <td><form:input path="email" name="email"  placeholder="Email" /></td>
+                <td><form:errors path="email" cssClass="error"/></td>
             </tr>
             <tr>
-                <td>
-                    <input type="submit" value="Submit" class="save" />
-                </td>
+                <td><input type="submit" value="Submit" /></td>
             </tr>
         </table>
     </form:form>

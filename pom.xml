@@ -130,6 +130,12 @@
             <version>8.0.1</version>
             <scope>provided</scope><!--provided by the container-->
         </dependency>
+        <!-- https://mvnrepository.com/artifact/jstl/jstl -->
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
     </dependencies>
 
 </project>

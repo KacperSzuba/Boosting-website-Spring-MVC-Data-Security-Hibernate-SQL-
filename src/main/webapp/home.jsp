@@ -11,9 +11,10 @@
     <title>Title</title>
 </head>
 <body>
-<h2>dziala</h2>
+<h2>Home Page</h2>
 
 <a href="/secure">Secure page</a>
+<a href="/login">Login Page</a>
 <a href="/register">Register Page</a>
 </body>
 </html>

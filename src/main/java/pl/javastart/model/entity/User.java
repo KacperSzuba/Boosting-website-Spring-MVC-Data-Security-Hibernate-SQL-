@@ -1,12 +1,9 @@
-package pl.javastart.model;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+package pl.javastart.model.entity;
 
 import javax.persistence.*;
-import java.util.Arrays;
-import java.util.Collection;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -14,8 +11,12 @@ public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotEmpty(message = "Username cannot be empty")
     private String username;
+    @NotEmpty(message = "Password cannot be empty")
     private String password;
+    @NotEmpty(message = "Email cannot be empty")
+    @Email(message = "Invalid email")
     private String email;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<UserRole> roles;

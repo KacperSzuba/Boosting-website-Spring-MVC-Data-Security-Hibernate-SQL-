@@ -3,7 +3,7 @@ package pl.javastart.repository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
-import pl.javastart.model.UserRole;
+import pl.javastart.model.entity.UserRole;
 
 
 public interface UserRoleRepository extends CrudRepository<UserRole,Long>{
