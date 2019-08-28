@@ -1,6 +1,7 @@
 package pl.javastart.validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.javastart.model.UserRoles;
 import pl.javastart.model.entity.User;
@@ -15,6 +16,8 @@ import java.util.List;
 public class RegisterValidator {
 
     private String message;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private UserRepository userRepository;
@@ -48,8 +51,8 @@ public class RegisterValidator {
             userRoleRepository.save(userRole);
             List<UserRole> roles = new ArrayList<>();
             roles.add(userRole);
-            userRepository.save(new User(user.getUsername(),"{noop}"+user.getPassword()
-                    ,user.getEmail(),roles));
+            String password = passwordEncoder.encode(user.getPassword());
+            userRepository.save(new User(user.getUsername(),password,user.getEmail(),roles));
         }
     }
 
