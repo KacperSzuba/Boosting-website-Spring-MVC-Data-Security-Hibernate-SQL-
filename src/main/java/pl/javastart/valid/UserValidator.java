@@ -1,4 +1,4 @@
-package pl.javastart.validator;
+package pl.javastart.valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class RegisterValidator {
+public class UserValidator {
 
     private String message;
     @Autowired
@@ -34,7 +34,6 @@ public class RegisterValidator {
         catch (Exception exception){
             exception.getCause();
             setUserRegistrationInformation("Invalid registration");
-
             return false;
         }
     }
@@ -43,7 +42,7 @@ public class RegisterValidator {
         boolean isUserExist = userRepository.existsUserByUsername(user.getUsername());
 
         if(isUserExist){
-            setUserRegistrationInformation("Invalid registration ");
+            setUserRegistrationInformation("Invalid registration");
 
         }
         else {
@@ -52,7 +51,7 @@ public class RegisterValidator {
             List<UserRole> roles = new ArrayList<>();
             roles.add(userRole);
             String password = passwordEncoder.encode(user.getPassword());
-            userRepository.save(new User(user.getUsername(),password,user.getEmail(),roles));
+            userRepository.save(new User(user.getUsername(),password,true,user.getEmail(),roles));
         }
     }
 

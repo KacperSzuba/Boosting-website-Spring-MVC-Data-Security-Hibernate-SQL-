@@ -14,10 +14,7 @@
     </head>
     <body>
 
-
-    <c:if test="${}">
-
-    </c:if>
+    
 
     <form:form action="${pageContext.request.contextPath}/authenticateTheUser"
                method="POST">

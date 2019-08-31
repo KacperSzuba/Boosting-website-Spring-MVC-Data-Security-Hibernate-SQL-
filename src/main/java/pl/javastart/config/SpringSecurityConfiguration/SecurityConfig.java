@@ -1,4 +1,4 @@
-package pl.javastart.config;
+package pl.javastart.config.SpringSecurityConfiguration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -32,7 +32,9 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http)throws Exception{
         http.authorizeRequests()
-                .antMatchers("/secure","/account/**").hasRole("USER")
+                .antMatchers("/secure").hasRole("USER")
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/account/**").hasAnyRole("USER","ADMIN")
                 .antMatchers("/").permitAll()
                 .and()
                 .formLogin()

@@ -1,4 +1,4 @@
-package pl.javastart.config;
+package pl.javastart.config.DatabaseConfiguration;
 
 import java.util.HashMap;
 import java.util.Map;

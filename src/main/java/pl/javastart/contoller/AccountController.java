@@ -10,7 +10,7 @@ public class AccountController {
 
     @RequestMapping
     public String showAccountPage(){
-        return "account";
+        return "jsp/account";
     }
 
 }

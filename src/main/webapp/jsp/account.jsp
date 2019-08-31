@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: kacpe
@@ -14,6 +15,14 @@
     </head>
 
     <body>
+    <nav>
+        <security:authorize access="hasAnyRole('USER','ADMIN')">
+            <a href="${pageContext.request.contextPath}/account">Account page</a>
+        </security:authorize>
+        <security:authorize access="hasRole('ADMIN')">
+            <a href="${pageContext.request.contextPath}/admin">Admin page</a>
+        </security:authorize>
+    </nav>
     <h2>AccountPage</h2>
     <form:form action="${pageContext.request.contextPath}/logout" method="post">
         <input type="submit" value="Logout" />

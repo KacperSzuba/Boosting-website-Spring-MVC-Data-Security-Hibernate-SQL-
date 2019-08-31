@@ -12,7 +12,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String showHomePage(){
-        return "home";
+        return "jsp/home";
     }
 
     @RequestMapping("/logout")

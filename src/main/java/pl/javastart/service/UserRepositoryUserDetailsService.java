@@ -33,7 +33,7 @@ public class UserRepositoryUserDetailsService implements UserDetailsService {
                     .map(userRole -> new SimpleGrantedAuthority(userRole.getRoleName()))
                     .collect(Collectors.toCollection(ArrayList::new));
             return new org.springframework.security.core.userdetails.
-                    User(username,user.getPassword(),true,true,
+                    User(username,user.getPassword(),user.isEnabled(),true,
                     true,true,authorities);
         }
         else {

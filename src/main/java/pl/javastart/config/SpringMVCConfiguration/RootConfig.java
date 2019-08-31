@@ -1,4 +1,4 @@
-package pl.javastart.config;
+package pl.javastart.config.SpringMVCConfiguration;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
