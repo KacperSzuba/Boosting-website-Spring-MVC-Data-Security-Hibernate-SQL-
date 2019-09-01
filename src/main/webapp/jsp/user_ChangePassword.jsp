@@ -34,7 +34,10 @@
         <form  action="${pageContext.request.contextPath}/account/changePasswordForm" method="get">
             <table>
                 <tr>
-                    <td><input name="password"  type="password"/></td>
+                    <td><input name="password"  type="password" placeholder="Password"/></td>
+                </tr>
+                <tr>
+                    <td><input name="repeatPassword"  type="password" placeholder="Repeat Password"/></td>
                 </tr>
                 <tr>
                     <td><input type="submit" value="Submit" /></td>

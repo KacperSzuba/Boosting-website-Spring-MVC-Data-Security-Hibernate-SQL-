@@ -16,18 +16,18 @@ public class PasswordChange {
     @Autowired
     private UserRepository userRepository;
 
-    public void changePassword(Long id,String password){
-        tryToChangePassword(id,password);
+    public void changePassword(Long id,String password,String repeatPassword){
+        tryToChangePassword(id,password,repeatPassword);
     }
 
-    private void tryToChangePassword(Long id,String password){
+    private void tryToChangePassword(Long id,String password,String repeatPassword){
         try {
-            if(isPasswordLengthSufficient(password)){
+            if(isPasswordLengthSufficient(password) && whetherThePasswordsAreTheSame(password,repeatPassword)){
                 userRepository.changePasswordQuery(id,passwordEncoder.encode(password));
                 setMessage("Your new password is : "+password);
             }
             else {
-                throw new IllegalArgumentException("Your password is too short");
+                throw new IllegalArgumentException("Your password is too short or passwords are different");
             }
         }
         catch (IllegalArgumentException exception){
@@ -37,6 +37,10 @@ public class PasswordChange {
 
     private boolean isPasswordLengthSufficient(String password){
         return password.length() >= 7;
+    }
+
+    private boolean whetherThePasswordsAreTheSame(String password,String repeatPassword){
+        return password.equals(repeatPassword);
     }
 
     public String getMessage() {

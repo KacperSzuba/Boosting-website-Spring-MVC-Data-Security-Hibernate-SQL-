@@ -32,10 +32,11 @@ public class AccountController {
     }
 
     @GetMapping("/changePasswordForm")
-    public String showChangePasswordPage(@RequestParam("password") String password,Model model,HttpServletRequest request){
+    public String showChangePasswordPage(@RequestParam("password") String password,
+        @RequestParam("repeatPassword")String repeatPassword, Model model,HttpServletRequest request){
         Principal principal = request.getUserPrincipal();
         User user = userRepository.findByUsername(principal.getName());
-        passwordChange.changePassword(user.getId(),password);
+        passwordChange.changePassword(user.getId(),password,repeatPassword);
         model.addAttribute("newPassword",passwordChange.getMessage());
         return "jsp/user_ChangePassword";
     }
