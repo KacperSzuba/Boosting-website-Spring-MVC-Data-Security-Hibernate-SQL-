@@ -14,7 +14,7 @@
     </head>
     <body>
 
-    
+
 
     <form:form action="${pageContext.request.contextPath}/authenticateTheUser"
                method="POST">

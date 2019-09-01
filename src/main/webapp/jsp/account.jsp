@@ -24,6 +24,7 @@
         </security:authorize>
     </nav>
     <h2>AccountPage</h2>
+    <a href="${pageContext.request.contextPath}/account/showChangePasswordPage">Change Password</a>
     <form:form action="${pageContext.request.contextPath}/logout" method="post">
         <input type="submit" value="Logout" />
     </form:form>

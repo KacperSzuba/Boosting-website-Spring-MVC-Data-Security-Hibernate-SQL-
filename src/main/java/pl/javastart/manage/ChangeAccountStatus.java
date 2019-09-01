@@ -1,11 +1,11 @@
-package pl.javastart.manage.user;
+package pl.javastart.manage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.javastart.repository.UserRepository;
 
 @Service
-public class UserManage {
+public class ChangeAccountStatus {
 
     @Autowired
     private UserRepository userRepository;
@@ -13,7 +13,7 @@ public class UserManage {
 
     public void banAccount(Long id){
         System.out.println(" >>>>>>>>>>>>>>"+checkId(id));
-        userRepository.updateEnabledStatement2(checkId(id),false);
+        userRepository.changeEnabledStatementQuery(checkId(id),false);
         //get user
         //set enabled to false
         //delete user
@@ -21,7 +21,7 @@ public class UserManage {
     }
 
     public void unBanAccount(Long id){
-        userRepository.updateEnabledStatement2(checkId(id),true);
+        userRepository.changeEnabledStatementQuery(checkId(id),true);
     }
 
     private Long checkId(Long id){
