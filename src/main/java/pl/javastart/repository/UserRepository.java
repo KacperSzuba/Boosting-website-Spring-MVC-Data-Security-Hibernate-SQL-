@@ -20,4 +20,9 @@ public interface UserRepository extends CrudRepository<User,Long> {
     @Query(value = "UPDATE User u SET u.password =:password where u.id=:id")
     void changePasswordQuery(@Param("id") Long id,@Param("password") String password);
 
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE User u SET u.email =:email where u.id=:id")
+    void changeEmailQuery(@Param("id") Long id,@Param("email") String email);
+
 }

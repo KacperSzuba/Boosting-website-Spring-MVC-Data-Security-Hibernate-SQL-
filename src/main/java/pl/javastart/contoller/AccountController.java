@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.javastart.manage.EmailChange;
 import pl.javastart.manage.PasswordChange;
 import pl.javastart.model.entity.User;
 import pl.javastart.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller
@@ -21,18 +23,21 @@ public class AccountController {
     @Autowired
     private PasswordChange passwordChange;
 
+    @Autowired
+    private EmailChange emailChange;
+
     @RequestMapping
     public String showAccountPage(){
         return "jsp/account";
     }
 
     @GetMapping("/showChangePasswordPage")
-    public String showPage(){
+    public String showChangePasswordPage(){
         return "jsp/user_ChangePassword";
     }
 
     @GetMapping("/changePasswordForm")
-    public String showChangePasswordPage(@RequestParam("password") String password,
+    public String changePassword(@RequestParam ("password") String password,
         @RequestParam("repeatPassword")String repeatPassword, Model model,HttpServletRequest request){
         Principal principal = request.getUserPrincipal();
         User user = userRepository.findByUsername(principal.getName());
@@ -40,13 +45,19 @@ public class AccountController {
         model.addAttribute("newPassword",passwordChange.getMessage());
         return "jsp/user_ChangePassword";
     }
-/*
-    @RequestMapping(value = "/changePassword")
-    public String currentUserNameSimple(HttpServletRequest request) {
+
+    @GetMapping("/showEmailChangePage")
+    public String showEmailChangePage(){
+        return "jsp/user_ChangeEmail";
+    }
+
+    @GetMapping("/changeEmailForm")
+    public String changeEmail(@RequestParam ("email") String email,
+        @RequestParam("repeatEmail")String repeatEmail, Model model,HttpServletRequest request){
         Principal principal = request.getUserPrincipal();
         User user = userRepository.findByUsername(principal.getName());
-        passwordChange.changePassword(user.getId(),user.getPassword());
-        return "jsp/user_ChangePassword";
+        emailChange.changeEmail(user.getId(),email,repeatEmail);
+        model.addAttribute("newEmail",emailChange.getMessage());
+        return "jsp/user_ChangeEmail";
     }
-    */
 }
