@@ -1,4 +1,4 @@
-package pl.javastart.manage;
+package pl.javastart.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,21 +17,21 @@ public class PasswordChange {
     private UserRepository userRepository;
 
     public void changePassword(Long id,String password,String repeatPassword){
-        tryToChangePassword(id,password,repeatPassword);
+        try {
+            tryToChangePassword(id,password,repeatPassword);
+        }
+        catch (IllegalArgumentException exceptoin){
+            setMessage(exceptoin.getMessage());
+        }
     }
 
     private void tryToChangePassword(Long id,String password,String repeatPassword){
-        try {
-            if(isPasswordLengthSufficient(password) && whetherThePasswordsAreTheSame(password,repeatPassword)){
-                userRepository.changePasswordQuery(id,passwordEncoder.encode(password));
-                setMessage("Your new password is : "+password);
-            }
-            else {
-                throw new IllegalArgumentException("Your password is too short or passwords are different");
-            }
+        if(isPasswordLengthSufficient(password) && whetherThePasswordsAreTheSame(password,repeatPassword)){
+            userRepository.changePasswordQuery(id,passwordEncoder.encode(password));
+            setMessage("Your new password is : "+password);
         }
-        catch (IllegalArgumentException exception){
-            setMessage(exception.getMessage());
+        else {
+            throw new IllegalArgumentException("Your password is too short or passwords are different");
         }
     }
 

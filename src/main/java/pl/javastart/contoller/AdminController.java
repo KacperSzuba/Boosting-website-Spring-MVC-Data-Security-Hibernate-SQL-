@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import pl.javastart.manage.ChangeAccountStatus;
+import pl.javastart.service.ChangeAccountStatus;
 import pl.javastart.model.entity.User;
 import pl.javastart.repository.UserRepository;
 
@@ -32,8 +32,8 @@ public class AdminController {
         List<User> users = (List<User>) userRepository.findAll();
         return new ModelAndView("jsp/admin_UserStatement","user",users);
     }
-    @GetMapping("/ban/{id}")
-    public String ban(@PathVariable("id") final  Long id){
+    @GetMapping("/ban/{id2}")
+    public String ban(@PathVariable("id2") final  Long id){
         //User user = userRepository.findByUsername(username);
         System.out.println("BAN >>>>>>>>>>>>>>>>>>> "+id);
         changeAccountStatus.banAccount(id);

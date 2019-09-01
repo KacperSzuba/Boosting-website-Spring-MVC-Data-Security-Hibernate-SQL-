@@ -47,7 +47,7 @@
                         <spring:url value="/admin/un-ban/${iterator.id}" var="unbanUser" />
 
                         <c:if test="${iterator.enabled == true}">
-                            <input type="button"  onclick="location.href='${banUser}}'" value="Ban" >
+                            <input type="button"  onclick="location.href='${banUser}'" value="Ban" >
                         </c:if>
                         <c:if test="${iterator.enabled == false}">
                             <input type="button"  onclick="location.href='${unbanUser}'" value="Un-ban" >

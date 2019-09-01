@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.javastart.model.entity.User;
-import pl.javastart.valid.UserValidator;
+import pl.javastart.service.UserCreator;
 
 import javax.validation.Valid;
 
@@ -16,7 +16,7 @@ import javax.validation.Valid;
 public class RegisterController {
 
     @Autowired
-    private UserValidator userValidator;
+    private UserCreator userCreator;
 
     @GetMapping("/register")
     public String showRegisterPage(Model model){
@@ -30,7 +30,7 @@ public class RegisterController {
         if (result.hasErrors()) {
             return "jsp/register";
         } else {
-            if (userValidator.createAccount(user)) {
+            if (userCreator.createAccount(user)) {
                 return "redirect:/login";
             } else {
                 return "jsp/register";

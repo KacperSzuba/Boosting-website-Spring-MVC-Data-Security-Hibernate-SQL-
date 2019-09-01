@@ -4,13 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.javastart.manage.EmailChange;
-import pl.javastart.manage.PasswordChange;
+import pl.javastart.service.EmailChange;
+import pl.javastart.service.PasswordChange;
 import pl.javastart.model.entity.User;
 import pl.javastart.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller

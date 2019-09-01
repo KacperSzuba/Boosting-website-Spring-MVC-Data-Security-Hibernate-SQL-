@@ -1,4 +1,4 @@
-package pl.javastart.valid;
+package pl.javastart.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserValidator {
+public class UserCreator {
 
     private String message;
     @Autowired
@@ -42,7 +42,7 @@ public class UserValidator {
         boolean isUserExist = userRepository.existsUserByUsername(user.getUsername());
 
         if(isUserExist){
-            setUserRegistrationInformation("Invalid registration");
+            setUserRegistrationInformation("User with this username already exist");
 
         }
         else {

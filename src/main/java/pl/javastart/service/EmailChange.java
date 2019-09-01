@@ -1,4 +1,4 @@
-package pl.javastart.manage;
+package pl.javastart.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,20 +17,20 @@ public class EmailChange {
     private UserRepository userRepository;
 
     public void changeEmail(Long id,String email,String repeatEmail){
-        tryToChangeEmail(id,email,repeatEmail);
-    }
-
-    private void tryToChangeEmail(Long id,String email,String repeatEmail){
-        try {
-            if (whetherTheEmailsAreTheSame(email, repeatEmail) && isValid(email)) {
-                userRepository.changeEmailQuery(id, email);
-                setMessage("Your new email is : " + email);
-            } else {
-                throw new IllegalArgumentException("Your email is wrong or emails are different");
-            }
+        try{
+            tryToChangeEmail(id,email,repeatEmail);
         }
         catch (IllegalArgumentException exception){
             setMessage(exception.getMessage());
+        }
+    }
+
+    private void tryToChangeEmail(Long id,String email,String repeatEmail){
+        if (whetherTheEmailsAreTheSame(email, repeatEmail) && isValid(email)) {
+            userRepository.changeEmailQuery(id, email);
+            setMessage("Your new email is : " + email);
+        } else {
+            throw new IllegalArgumentException("Your email is wrong or emails are different");
         }
     }
 
