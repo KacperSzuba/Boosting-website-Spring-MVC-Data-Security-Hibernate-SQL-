@@ -19,6 +19,6 @@ public class HomeController {
     public String logout(HttpServletRequest request){
         HttpSession httpSession = request.getSession();
         httpSession.invalidate();
-        return "redirect:/";
+        return "jsp/home";
     }
 }

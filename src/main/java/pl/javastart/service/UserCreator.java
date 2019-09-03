@@ -9,6 +9,7 @@ import pl.javastart.model.entity.UserRole;
 import pl.javastart.repository.UserRepository;
 import pl.javastart.repository.UserRoleRepository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class UserCreator {
             List<UserRole> roles = new ArrayList<>();
             roles.add(userRole);
             String password = passwordEncoder.encode(user.getPassword());
-            userRepository.save(new User(user.getUsername(),password,true,user.getEmail(),roles));
+            userRepository.save(new User(user.getUsername(),password,true,user.getEmail(),LocalDateTime.now(),roles));
         }
     }
 

@@ -16,12 +16,18 @@
 
     <body>
     <nav>
-        <security:authorize access="hasAnyRole('USER','ADMIN')">
-            <a href="${pageContext.request.contextPath}/account">Account page</a>
-        </security:authorize>
-        <security:authorize access="hasRole('ADMIN')">
-            <a href="${pageContext.request.contextPath}/admin">Admin page</a>
-        </security:authorize>
+        <ul>
+            <security:authorize access="hasAnyRole('USER','ADMIN')">
+                <li>
+                    <a href="${pageContext.request.contextPath}/account">Account page</a>
+                </li>
+            </security:authorize>
+            <security:authorize access="hasRole('ADMIN')">
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin">Admin page</a>
+                </li>
+            </security:authorize>
+        </ul>
     </nav>
     <h2>AccountPage</h2>
     <a href="${pageContext.request.contextPath}/account/showChangePasswordPage">Change Password</a>

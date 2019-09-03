@@ -13,21 +13,23 @@
 <html>
     <head>
         <title>Title</title>
-    </head>
+    </head>f
 
     <body>
-        <nav>
+    <nav>
+        <ul>
             <security:authorize access="hasAnyRole('USER','ADMIN')">
-                <a href="${pageContext.request.contextPath}/account">Account page</a>
+                <li>
+                    <a href="${pageContext.request.contextPath}/account">Account page</a>
+                </li>
             </security:authorize>
             <security:authorize access="hasRole('ADMIN')">
-                <a href="${pageContext.request.contextPath}/admin">Admin page</a>
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin">Admin page</a>
+                </li>
             </security:authorize>
-            <c:if test="${empty pageContext.request.userPrincipal}">
-                <a href="${pageContext.request.contextPath}/login">Login Page</a>
-                <a href="${pageContext.request.contextPath}/register">Register Page</a>
-            </c:if>
-        </nav>
+        </ul>
+    </nav>
 
         <h1>Change Password</h1>
 
@@ -43,7 +45,6 @@
                     <td><input type="submit" value="Submit" /></td>
                 </tr>
             </table>
-
             <p> ${newPassword}</p>
         </form>
     </body>

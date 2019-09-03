@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -27,15 +28,17 @@ public class User{
     @NotEmpty(message = "Email cannot be empty")
     @Email(message = "Invalid email")
     private String email;
+    private LocalDateTime date;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<UserRole> roles;
     public User(){}
 
-    public User(String username, String password, boolean enabled,String email,List<UserRole> roles) {
+    public User(String username, String password, boolean enabled,String email,LocalDateTime date,List<UserRole> roles) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
         this.email = email;
+        this.date = date;
         this.roles = roles;
     }
 

@@ -14,16 +14,18 @@
     </head>
     <body>
         <nav>
-            <security:authorize access="hasAnyRole('USER','ADMIN')">
-                <a href="${pageContext.request.contextPath}/account">Account page</a>
-            </security:authorize>
-            <security:authorize access="hasRole('ADMIN')">
-                <a href="${pageContext.request.contextPath}/admin">Admin page</a>
-            </security:authorize>
-            <c:if test="${empty pageContext.request.userPrincipal}">
-                <a href="${pageContext.request.contextPath}/login">Login Page</a>
-                <a href="${pageContext.request.contextPath}/register">Register Page</a>
-            </c:if>
+            <ul>
+                <security:authorize access="hasAnyRole('USER','ADMIN')">
+                    <li>
+                        <a href="${pageContext.request.contextPath}/account">Account page</a>
+                    </li>
+                </security:authorize>
+                <security:authorize access="hasRole('ADMIN')">
+                    <li>
+                        <a href="${pageContext.request.contextPath}/admin">Admin page</a>
+                    </li>
+                </security:authorize>
+            </ul>
         </nav>
 
         <h1>Change Email</h1>

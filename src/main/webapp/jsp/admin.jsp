@@ -8,21 +8,28 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
-<head>
+    <head>
 
-    <title>Title</title>
-</head>
-<body>
+        <title>Title</title>
+    </head>
+
+    <body>
     <nav>
-        <security:authorize access="hasAnyRole('USER','ADMIN')">
-            <a href="${pageContext.request.contextPath}/account">Account page</a>
-        </security:authorize>
-        <security:authorize access="hasRole('ADMIN')">
-            <a href="${pageContext.request.contextPath}/admin">Admin page</a>
-        </security:authorize>
+        <ul>
+            <security:authorize access="hasAnyRole('USER','ADMIN')">
+                <li>
+                    <a href="${pageContext.request.contextPath}/account">Account page</a>
+                </li>
+            </security:authorize>
+            <security:authorize access="hasRole('ADMIN')">
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin">Admin page</a>
+                </li>
+            </security:authorize>
+        </ul>
     </nav>
-<i class='fas fa-lock-open'></i>
-    <h1>Admin Page</h1>
-    <a href="${pageContext.request.contextPath}/admin/ban_user">Ban User</a>
-</body>
+    <i class='fas fa-lock-open'></i>
+        <h1>Admin Page</h1>
+        <a href="${pageContext.request.contextPath}/admin/ban_user">Ban User</a>
+    </body>
 </html>

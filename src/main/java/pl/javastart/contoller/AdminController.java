@@ -32,17 +32,13 @@ public class AdminController {
         List<User> users = (List<User>) userRepository.findAll();
         return new ModelAndView("jsp/admin_UserStatement","user",users);
     }
-    @GetMapping("/ban/{id2}")
-    public String ban(@PathVariable("id2") final  Long id){
-        //User user = userRepository.findByUsername(username);
-        System.out.println("BAN >>>>>>>>>>>>>>>>>>> "+id);
+    @GetMapping("/ban/{id}")
+    public String ban(@PathVariable("id") final  Long id){
         changeAccountStatus.banAccount(id);
         return "redirect:/admin/ban_user";
     }
     @GetMapping("/un-ban/{id}")
     public String unban(@PathVariable("id") final Long id){
-        //User user = userRepository.findByUsername(id);
-        System.out.println("UN-BAN >>>>>>>>>>>>>>>>>>> "+id);
         changeAccountStatus.unBanAccount(id);
         return "redirect:/admin/ban_user";
     }
