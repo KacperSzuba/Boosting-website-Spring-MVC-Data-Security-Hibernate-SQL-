@@ -14,16 +14,8 @@
     </head>
     <body>
 
-
-
     <form:form action="${pageContext.request.contextPath}/authenticateTheUser"
                method="POST">
-
-        <!-- Check for login error -->
-        <c:if test="${param.logout != null}">
-            <i>You have been log out</i>
-        </c:if>
-
         <p>
             User name: <input type="text" name="username" />
         </p>

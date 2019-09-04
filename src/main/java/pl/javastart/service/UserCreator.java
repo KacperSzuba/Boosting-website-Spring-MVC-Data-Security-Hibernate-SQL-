@@ -44,7 +44,6 @@ public class UserCreator {
 
         if(isUserExist){
             setUserRegistrationInformation("User with this username already exist");
-
         }
         else {
             UserRole userRole = userRoleRepository.getUserRole(UserRoles.ROLE_USER.toString());

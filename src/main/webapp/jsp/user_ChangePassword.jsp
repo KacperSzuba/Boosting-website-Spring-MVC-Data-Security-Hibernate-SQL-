@@ -28,6 +28,9 @@
                     <a href="${pageContext.request.contextPath}/admin">Admin page</a>
                 </li>
             </security:authorize>
+            <li>
+                <a href="${pageContext.request.contextPath}/order/showOrderPage">Order page</a>
+            </li>
         </ul>
     </nav>
 
