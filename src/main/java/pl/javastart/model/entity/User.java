@@ -31,6 +31,8 @@ public class User{
     private LocalDateTime date;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<UserRole> roles;
+    @OneToOne(mappedBy = "user")
+    private OrderBoost orderBoost;
     public User(){}
 
     public User(String username, String password, boolean enabled,String email,LocalDateTime date,List<UserRole> roles) {
@@ -89,4 +91,5 @@ public class User{
     public void setRoles(List<UserRole> roles) {
         this.roles = roles;
     }
+
 }

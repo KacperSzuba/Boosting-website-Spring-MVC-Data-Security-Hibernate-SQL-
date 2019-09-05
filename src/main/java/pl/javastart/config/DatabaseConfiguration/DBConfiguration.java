@@ -29,10 +29,11 @@ public class DBConfiguration {
         emf.setPersistenceUnitName("spring-jpa-pu");
         Map<String, String> properties = new HashMap<>();
         properties.put("javax.persistence.schema-generation.database.action", "update");
+        properties.put("hibernate.dialect","org.hibernate.dialect.MySQL8Dialect");
         emf.setJpaPropertyMap(properties);
         emf.setDataSource(ds);
         emf.setJpaVendorAdapter(adapter);
-        emf.setPackagesToScan("pl.javastart.model");
+        emf.setPackagesToScan("pl.javastart.model.entity");
         return emf;
     }
 

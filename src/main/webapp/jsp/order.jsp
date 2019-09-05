@@ -31,7 +31,7 @@
             </li>
         </ul>
     </nav>
-    <img src="<spring:url value="/img/Silver.png" />" />
-
+    <img src="<spring:url value="/img/Silver/Silver.png" />" />
+    <a href="/order/makeOrder">Make order</a>
     </body>
 </html>
