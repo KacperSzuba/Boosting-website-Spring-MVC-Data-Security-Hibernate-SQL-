@@ -40,22 +40,43 @@
         </ul>
     </nav>
 
+    <section>
+        <img class="center" src="${currentTierImage}" />
 
-        <img class="center" src="${image}" />
+        <div class="left">
+            <a href="${pageContext.request.contextPath}/order/moveCurrentTierImageToLeft">Left</a>
+        </div>
+        <div class="right">
+            <a href="${pageContext.request.contextPath}/order/moveCurrentTierImageToRight">Right</a>
+        </div>
+        <div class="Up">
+            <a href="${pageContext.request.contextPath}/order/moveCurrentTierImageUp">Up</a>
+        </div>
+        <div class="Down">
+            <a href="${pageContext.request.contextPath}/order/moveCurrentTierImageDown">Down</a>
+        </div>
+        <p>${currentTierDivision}</p>
+    </section>
 
-    <div class="left">
-        <a href="${pageContext.request.contextPath}/order/moveCurrentTierImageToLeft">Left</a>
+    <section>
+        <img class="center" src="${destinationTierImage}" />
+
+        <div class="left">
+            <a href="${pageContext.request.contextPath}/order/moveCurrentTierImageToLeft">Left</a>
+        </div>
+        <div class="right">
+            <a href="${pageContext.request.contextPath}/order/moveCurrentTierImageToRight">Right</a>
+        </div>
+        <div class="Up">
+            <a href="${pageContext.request.contextPath}/order/moveCurrentTierImageUp">Up</a>
+        </div>
+        <div class="Down">
+            <a href="${pageContext.request.contextPath}/order/moveCurrentTierImageDown">Down</a>
+        </div>
+        <p>${destinationTierDivision}</p>
+    </section>
+    <div>
+        <a href="${pageContext.request.contextPath}/order/makeOrder">Make order</a>
     </div>
-    <div class="right">
-        <a href="${pageContext.request.contextPath}/order/moveCurrentTierImageToRight">Right</a>
-    </div>
-    <div class="Top">
-        <a href="${pageContext.request.contextPath}/order/moveCurrentTierImageUp">Top</a>
-    </div>
-    <div class="Bottom">
-        <a href="${pageContext.request.contextPath}/order/moveCurrentTierImageDown">Bottom</a>
-    </div>
-    <a href="${pageContext.request.contextPath}/order/makeOrder">Make order</a>
-    <p>${msg}</p>
     </body>
 </html>

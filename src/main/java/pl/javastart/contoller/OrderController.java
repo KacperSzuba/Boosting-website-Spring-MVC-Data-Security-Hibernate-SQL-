@@ -23,10 +23,14 @@ public class OrderController {
 
     @RequestMapping("/showOrderPage")
     public String showOrderPage(HttpSession session,Model model){
-        Divisions divisions = orderBoostAnimationHandler.getDefaultCurrentTier();
-        session.setAttribute("division",divisions);
-        model.addAttribute("msg",divisions.getTier()+" "+divisions.getDivision());
-        model.addAttribute("image",divisions.getImgSource());
+        Divisions defaultCurrentTier = orderBoostAnimationHandler.getDefaultCurrentTier();
+        session.setAttribute("currentTierClass",defaultCurrentTier);
+        model.addAttribute("currentTierDivision",defaultCurrentTier.getTier()+" "+defaultCurrentTier.getDivision());
+        model.addAttribute("currentTierImage",defaultCurrentTier.getImgSource());
+        Divisions defaultDestinationTier = orderBoostAnimationHandler.getDefaultdestinationTier();
+        session.setAttribute("destinationTierClass",defaultDestinationTier);
+        model.addAttribute("destinationTierDivision",defaultDestinationTier.getTier()+" "+defaultDestinationTier.getDivision());
+        model.addAttribute("destinationTierImage",defaultDestinationTier.getImgSource());
         return "jsp/order";
     }
 
@@ -38,45 +42,57 @@ public class OrderController {
 
     @RequestMapping("/moveCurrentTierImageToLeft")
     public String moveImageToLeft(HttpSession session, HttpServletRequest request, Model model){
-        Divisions divisions = (Divisions) request.getSession().getAttribute("division");
+        Divisions divisions = (Divisions) request.getSession().getAttribute("currentTierClass");
         Divisions divisions2 = orderBoostAnimationHandler.moveImageToLeft(divisions);
-        session.removeAttribute("division");
-        session.setAttribute("division",divisions2);
-        model.addAttribute("msg",divisions2.getTier()+" "+divisions2.getDivision()+" ID:"+divisions2.getId());
-        model.addAttribute("image",divisions2.getImgSource());
+        session.removeAttribute("currentTierClass");
+        session.setAttribute("currentTierClass",divisions2);
+        model.addAttribute("currentTierDivision",divisions2.getTier()+" "+divisions2.getDivision()+" ID:"+divisions2.getId());
+        model.addAttribute("currentTierImage",divisions2.getImgSource());
+        Divisions defaultDestinationTier = (Divisions) request.getSession().getAttribute("destinationTierClass");
+        model.addAttribute("destinationTierDivision",defaultDestinationTier.getTier()+" "+defaultDestinationTier.getDivision());
+        model.addAttribute("destinationTierImage",defaultDestinationTier.getImgSource());
         return "jsp/order";
     }
 
     @RequestMapping("/moveCurrentTierImageToRight")
     public String moveImageToRight(HttpSession session, HttpServletRequest request, Model model){
-        Divisions divisions = (Divisions) request.getSession().getAttribute("division");
+        Divisions divisions = (Divisions) request.getSession().getAttribute("currentTierClass");
         Divisions divisions2 = orderBoostAnimationHandler.moveImageToRight(divisions);
-        session.removeAttribute("division");
-        session.setAttribute("division",divisions2);
-        model.addAttribute("msg",divisions2.getTier()+" "+divisions2.getDivision()+" ID:"+divisions2.getId());
-        model.addAttribute("image",divisions2.getImgSource());
+        session.removeAttribute("currentTierClass");
+        session.setAttribute("currentTierClass",divisions2);
+        model.addAttribute("currentTierDivision",divisions2.getTier()+" "+divisions2.getDivision()+" ID:"+divisions2.getId());
+        model.addAttribute("currentTierImage",divisions2.getImgSource());
+        Divisions defaultDestinationTier = (Divisions) request.getSession().getAttribute("destinationTierClass");
+        model.addAttribute("destinationTierDivision",defaultDestinationTier.getTier()+" "+defaultDestinationTier.getDivision());
+        model.addAttribute("destinationTierImage",defaultDestinationTier.getImgSource());
         return "jsp/order";
     }
 
     @RequestMapping("/moveCurrentTierImageUp")
     public String moveImageUp(HttpSession session, HttpServletRequest request, Model model){
-        Divisions divisions = (Divisions) request.getSession().getAttribute("division");
+        Divisions divisions = (Divisions) request.getSession().getAttribute("currentTierClass");
         Divisions divisions2 = orderBoostAnimationHandler.moveImageUp(divisions);
-        session.removeAttribute("division");
-        session.setAttribute("division",divisions2);
-        model.addAttribute("msg",divisions2.getTier()+" "+divisions2.getDivision()+" ID:"+divisions2.getId());
-        model.addAttribute("image",divisions2.getImgSource());
+        session.removeAttribute("currentTierClass");
+        session.setAttribute("currentTierClass",divisions2);
+        model.addAttribute("currentTierDivision",divisions2.getTier()+" "+divisions2.getDivision()+" ID:"+divisions2.getId());
+        model.addAttribute("currentTierImage",divisions2.getImgSource());
+        Divisions defaultDestinationTier = (Divisions) request.getSession().getAttribute("destinationTierClass");
+        model.addAttribute("destinationTierDivision",defaultDestinationTier.getTier()+" "+defaultDestinationTier.getDivision());
+        model.addAttribute("destinationTierImage",defaultDestinationTier.getImgSource());
         return "jsp/order";
     }
 
     @RequestMapping("/moveCurrentTierImageDown")
     public String moveImageDown(HttpSession session, HttpServletRequest request, Model model){
-        Divisions divisions = (Divisions) request.getSession().getAttribute("division");
+        Divisions divisions = (Divisions) request.getSession().getAttribute("currentTierClass");
         Divisions divisions2 = orderBoostAnimationHandler.moveImageDown(divisions);
-        session.removeAttribute("division");
-        session.setAttribute("division",divisions2);
-        model.addAttribute("msg",divisions2.getTier()+" "+divisions2.getDivision());
-        model.addAttribute("image",divisions2.getImgSource());
+        session.removeAttribute("currentTierClass");
+        session.setAttribute("currentTierClass",divisions2);
+        model.addAttribute("currentTierDivision",divisions2.getTier()+" "+divisions2.getDivision()+" ID:"+divisions2.getId());
+        model.addAttribute("currentTierImage",divisions2.getImgSource());
+        Divisions defaultDestinationTier = (Divisions) request.getSession().getAttribute("destinationTierClass");
+        model.addAttribute("destinationTierDivision",defaultDestinationTier.getTier()+" "+defaultDestinationTier.getDivision());
+        model.addAttribute("destinationTierImage",defaultDestinationTier.getImgSource());
         return "jsp/order";
     }
 }
