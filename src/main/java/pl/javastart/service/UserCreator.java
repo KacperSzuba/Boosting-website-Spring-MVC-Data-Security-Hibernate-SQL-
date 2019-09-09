@@ -3,9 +3,8 @@ package pl.javastart.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.javastart.model.UserRoles;
+import pl.javastart.model.entity.enums.RoleName;
 import pl.javastart.model.entity.User;
-import pl.javastart.model.entity.UserRole;
 import pl.javastart.repository.UserRepository;
 import pl.javastart.repository.UserRoleRepository;
 
@@ -46,9 +45,9 @@ public class UserCreator {
             setUserRegistrationInformation("User with this username already exist");
         }
         else {
-            UserRole userRole = userRoleRepository.getUserRole(UserRoles.ROLE_USER.toString());
+            pl.javastart.model.entity.UserRole userRole = userRoleRepository.getUserRole(RoleName.ROLE_USER);
             userRoleRepository.save(userRole);
-            List<UserRole> roles = new ArrayList<>();
+            List<pl.javastart.model.entity.UserRole> roles = new ArrayList<>();
             roles.add(userRole);
             String password = passwordEncoder.encode(user.getPassword());
             userRepository.save(new User(user.getUsername(),password,true,user.getEmail(),LocalDateTime.now(),roles));

@@ -5,5 +5,5 @@ import pl.javastart.model.entity.OrderBoost;
 
 
 public interface OrderRepository extends CrudRepository<OrderBoost,Long> {
-    OrderBoost findOrderBoostByOrderName(String orderName);
+    OrderBoost findOrderBoostBylolUsername(String lolUsername);
 }

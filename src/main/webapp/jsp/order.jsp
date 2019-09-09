@@ -12,6 +12,14 @@
 <html>
     <head>
         <title>Title</title>
+        <style>
+            .center {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 10%;
+            }
+        </style>
     </head>
     <body>
     <nav>
@@ -31,7 +39,23 @@
             </li>
         </ul>
     </nav>
-    <img src="<spring:url value="/img/Silver/Silver.png" />" />
-    <a href="/order/makeOrder">Make order</a>
+
+
+        <img class="center" src="${image}" />
+
+    <div class="left">
+        <a href="${pageContext.request.contextPath}/order/moveCurrentTierImageToLeft">Left</a>
+    </div>
+    <div class="right">
+        <a href="${pageContext.request.contextPath}/order/moveCurrentTierImageToRight">Right</a>
+    </div>
+    <div class="Top">
+        <a href="${pageContext.request.contextPath}/order/moveCurrentTierImageUp">Top</a>
+    </div>
+    <div class="Bottom">
+        <a href="${pageContext.request.contextPath}/order/moveCurrentTierImageDown">Bottom</a>
+    </div>
+    <a href="${pageContext.request.contextPath}/order/makeOrder">Make order</a>
+    <p>${msg}</p>
     </body>
 </html>

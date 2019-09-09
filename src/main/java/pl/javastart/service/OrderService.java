@@ -18,19 +18,25 @@ public class OrderService {
     private UserRepository userRepository;
 
     public void makeOrder(){
-        OrderBoost orderBoost = new OrderBoost();
         User user = userRepository.findByUsername("user123");
-        System.out.println(">>>>>>>>>>>>>>>>>"+user.getUsername());
-        orderBoost.setDate(LocalDateTime.now());
-        orderBoost.setOrderName("Boost2");
-        orderBoost.setWhetherPaid(true);
+        OrderBoost orderBoost = new OrderBoost();
         orderBoost.setUser(user);
+        orderBoost.setWhetherPaid(true);
+        orderBoost.setDate(LocalDateTime.now());
+        orderBoost.setCurrentDivision("Diamond");
+        orderBoost.setCurrentTier("4");
+        orderBoost.setDestinationDivision("Master");
+        orderBoost.setDestinationTier("1");
+        orderBoost.setLolPassword("voler");
+        orderBoost.setLolUsername("voler");
+        orderBoost.setSummonerID("voler");
+        orderBoost.setRegion("EUW");
+        orderBoost.setNoteToBoosters("Brak");
         orderRepository.save(orderBoost);
-
     }
 
     public void whichUserBought(){
-        OrderBoost orderBoost =orderRepository.findOrderBoostByOrderName("Boost");
+        OrderBoost orderBoost =orderRepository.findOrderBoostBylolUsername("Boost");
         System.out.println(orderBoost.getUser().getUsername());
     }
 }

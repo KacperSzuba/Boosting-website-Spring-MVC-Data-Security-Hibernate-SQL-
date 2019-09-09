@@ -30,7 +30,7 @@ public class UserRepositoryUserDetailsService implements UserDetailsService {
         if(user!=null){
             Collection<GrantedAuthority> authorities = user.getRoles()
                     .stream()
-                    .map(userRole -> new SimpleGrantedAuthority(userRole.getRoleName()))
+                    .map(userRole -> new SimpleGrantedAuthority(userRole.getRoleName().toString()))
                     .collect(Collectors.toCollection(ArrayList::new));
             return new org.springframework.security.core.userdetails.
                     User(username,user.getPassword(),user.isEnabled(),true,

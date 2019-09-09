@@ -13,7 +13,7 @@
 <html>
     <head>
         <title>Title</title>
-    </head>f
+    </head>
 
     <body>
     <nav>

@@ -43,12 +43,5 @@
     </nav>
 
     <h2>Home Page</h2>
-
-    <div>
-        <p>${logoutMessage}</p>
-        <p>213</p>
-    </div>
-
-
     </body>
 </html>
