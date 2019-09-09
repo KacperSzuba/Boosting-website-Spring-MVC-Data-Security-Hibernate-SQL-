@@ -3,8 +3,6 @@ package pl.javastart.manage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.javastart.model.entity.Divisions;
-import pl.javastart.model.entity.enums.Division;
-import pl.javastart.model.entity.enums.Tier;
 import pl.javastart.repository.DivisionsRepository;
 
 import java.util.List;
@@ -15,7 +13,6 @@ public class OrderBoostAnimationHandler {
 
     @Autowired
     private DivisionsRepository divisionsRepository;
-    private int numberOfTIer;
 
     public Divisions getDefaultCurrentTier(){
         return getListOfTiersByPointsAndDivision().get(5);
@@ -78,23 +75,6 @@ public class OrderBoostAnimationHandler {
 
     private Optional<Divisions> getListOfTiersById(Long id){
         return divisionsRepository.findById(id);
-    }
-
-    public Long getFirstIdNumber(){
-        return getListOfTiersByPointsAndDivision().get(0).getId();
-    }
-
-    public Long getLastIdNumber(){
-        int lastIdNumber = getListOfTiersByPointsAndDivision().size()-1;
-        return getListOfTiersByPointsAndDivision().get(lastIdNumber).getId();
-    }
-
-    private void setCurrentNumberTier(int numberOfTier){
-        this.numberOfTIer = numberOfTier;
-    }
-
-    private int getCurrentNumberTier(){
-        return numberOfTIer;
     }
 
 }

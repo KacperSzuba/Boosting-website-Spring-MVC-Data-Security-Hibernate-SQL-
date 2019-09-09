@@ -23,12 +23,10 @@ public class OrderController {
 
     @RequestMapping("/showOrderPage")
     public String showOrderPage(HttpSession session,Model model){
-
         Divisions divisions = orderBoostAnimationHandler.getDefaultCurrentTier();
         session.setAttribute("division",divisions);
         model.addAttribute("msg",divisions.getTier()+" "+divisions.getDivision());
         model.addAttribute("image",divisions.getImgSource());
-
         return "jsp/order";
     }
 
