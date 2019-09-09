@@ -62,16 +62,16 @@
         <img class="center" src="${destinationTierImage}" />
 
         <div class="left">
-            <a href="${pageContext.request.contextPath}/order/moveCurrentTierImageToLeft">Left</a>
+            <a href="${pageContext.request.contextPath}/order/moveDestinationTierImageLeft">Left</a>
         </div>
         <div class="right">
-            <a href="${pageContext.request.contextPath}/order/moveCurrentTierImageToRight">Right</a>
+            <a href="${pageContext.request.contextPath}/order/moveDestinationTierImageRight">Right</a>
         </div>
         <div class="Up">
-            <a href="${pageContext.request.contextPath}/order/moveCurrentTierImageUp">Up</a>
+            <a href="${pageContext.request.contextPath}/order/moveDestinationTierImageUp">Up</a>
         </div>
         <div class="Down">
-            <a href="${pageContext.request.contextPath}/order/moveCurrentTierImageDown">Down</a>
+            <a href="${pageContext.request.contextPath}/order/moveDestinationTierImageDown">Down</a>
         </div>
         <p>${destinationTierDivision}</p>
     </section>
