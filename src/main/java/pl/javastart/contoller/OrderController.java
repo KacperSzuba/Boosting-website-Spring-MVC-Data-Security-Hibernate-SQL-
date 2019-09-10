@@ -6,10 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.javastart.model.entity.Divisions;
 import pl.javastart.manage.OrderBoostAnimationHandler;
+import pl.javastart.model.entity.OrderBoost;
+import pl.javastart.model.entity.User;
+import pl.javastart.repository.UserRepository;
 import pl.javastart.service.OrderService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 
 @RequestMapping("/order")
 @Controller
@@ -17,6 +21,9 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private OrderBoostAnimationHandler orderBoostAnimationHandler;
@@ -31,13 +38,23 @@ public class OrderController {
         session.setAttribute("destinationTierClass",defaultDestinationTier);
         model.addAttribute("destinationTierDivision",defaultDestinationTier.getTier()+" "+defaultDestinationTier.getDivision());
         model.addAttribute("destinationTierImage",defaultDestinationTier.getImgSource());
-        return "jsp/order";
+        return "jsp/order_CompleteTheInformationAboutTheDivision";
     }
 
     @RequestMapping("/makeOrder")
-    public String makeOrder(){
-        orderService.makeOrder();
-        return "jsp/order";
+    public String makeOrder(HttpSession session, HttpServletRequest request){
+        Divisions currentDivision = (Divisions) request.getSession().getAttribute("currentTierClass");
+        Divisions destinationDivision = (Divisions) request.getSession().getAttribute("destinationTierClass");
+        Principal principal = request.getUserPrincipal();
+        User user = userRepository.findByUsername(principal.getName());
+        OrderBoost orderBoost = new OrderBoost();
+        orderBoost.setCurrentTier(currentDivision.getTier());
+        orderBoost.setCurrentDivision(currentDivision.getDivision());
+        orderBoost.setDestinationTier(destinationDivision.getTier());
+        orderBoost.setDestinationDivision(destinationDivision.getDivision());
+        orderBoost.setUser(user);
+        session.setAttribute("orderBoostClass",orderBoost);
+        return "jsp/order_CompleteYourAccountInformation";
     }
 
     @RequestMapping("/moveCurrentTierImageToLeft")
@@ -51,7 +68,7 @@ public class OrderController {
         Divisions defaultDestinationTier = (Divisions) request.getSession().getAttribute("destinationTierClass");
         model.addAttribute("destinationTierDivision",defaultDestinationTier.getTier()+" "+defaultDestinationTier.getDivision());
         model.addAttribute("destinationTierImage",defaultDestinationTier.getImgSource());
-        return "jsp/order";
+        return "jsp/order_CompleteTheInformationAboutTheDivision";
     }
 
     @RequestMapping("/moveCurrentTierImageToRight")
@@ -65,7 +82,7 @@ public class OrderController {
         Divisions defaultDestinationTier = (Divisions) request.getSession().getAttribute("destinationTierClass");
         model.addAttribute("destinationTierDivision",defaultDestinationTier.getTier()+" "+defaultDestinationTier.getDivision());
         model.addAttribute("destinationTierImage",defaultDestinationTier.getImgSource());
-        return "jsp/order";
+        return "jsp/order_CompleteTheInformationAboutTheDivision";
     }
 
     @RequestMapping("/moveCurrentTierImageUp")
@@ -79,7 +96,7 @@ public class OrderController {
         Divisions defaultDestinationTier = (Divisions) request.getSession().getAttribute("destinationTierClass");
         model.addAttribute("destinationTierDivision",defaultDestinationTier.getTier()+" "+defaultDestinationTier.getDivision());
         model.addAttribute("destinationTierImage",defaultDestinationTier.getImgSource());
-        return "jsp/order";
+        return "jsp/order_CompleteTheInformationAboutTheDivision";
     }
 
     @RequestMapping("/moveCurrentTierImageDown")
@@ -93,7 +110,7 @@ public class OrderController {
         Divisions defaultDestinationTier = (Divisions) request.getSession().getAttribute("destinationTierClass");
         model.addAttribute("destinationTierDivision",defaultDestinationTier.getTier()+" "+defaultDestinationTier.getDivision());
         model.addAttribute("destinationTierImage",defaultDestinationTier.getImgSource());
-        return "jsp/order";
+        return "jsp/order_CompleteTheInformationAboutTheDivision";
     }
 
     @RequestMapping("/moveDestinationTierImageLeft")
@@ -107,7 +124,7 @@ public class OrderController {
         Divisions currentTier = (Divisions) request.getSession().getAttribute("currentTierClass");
         model.addAttribute("currentTierDivision",currentTier.getTier()+" "+currentTier.getDivision()+" ID:"+currentTier.getId());
         model.addAttribute("currentTierImage",currentTier.getImgSource());
-        return "jsp/order";
+        return "jsp/order_CompleteTheInformationAboutTheDivision";
     }
 
     @RequestMapping("/moveDestinationTierImageRight")
@@ -121,7 +138,7 @@ public class OrderController {
         Divisions currentTier = (Divisions) request.getSession().getAttribute("currentTierClass");
         model.addAttribute("currentTierDivision",currentTier.getTier()+" "+currentTier.getDivision()+" ID:"+currentTier.getId());
         model.addAttribute("currentTierImage",currentTier.getImgSource());
-        return "jsp/order";
+        return "jsp/order_CompleteTheInformationAboutTheDivision";
     }
 
     @RequestMapping("/moveDestinationTierImageUp")
@@ -135,7 +152,7 @@ public class OrderController {
         Divisions currentTier = (Divisions) request.getSession().getAttribute("currentTierClass");
         model.addAttribute("currentTierDivision",currentTier.getTier()+" "+currentTier.getDivision()+" ID:"+currentTier.getId());
         model.addAttribute("currentTierImage",currentTier.getImgSource());
-        return "jsp/order";
+        return "jsp/order_CompleteTheInformationAboutTheDivision";
     }
 
     @RequestMapping("/moveDestinationTierImageDown")
@@ -149,6 +166,6 @@ public class OrderController {
         Divisions currentTier = (Divisions) request.getSession().getAttribute("currentTierClass");
         model.addAttribute("currentTierDivision",currentTier.getTier()+" "+currentTier.getDivision()+" ID:"+currentTier.getId());
         model.addAttribute("currentTierImage",currentTier.getImgSource());
-        return "jsp/order";
+        return "jsp/order_CompleteTheInformationAboutTheDivision";
     }
 }

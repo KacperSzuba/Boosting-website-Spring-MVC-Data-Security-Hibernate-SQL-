@@ -1,6 +1,7 @@
 package pl.javastart.model.entity;
 
 import org.hibernate.annotations.Type;
+import pl.javastart.model.entity.enums.Tier;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,10 +13,12 @@ public class OrderBoost {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String currentTier; //should be in enum
-    private String currentDivision; //should be in enum
-    private String destinationTier; //should be in enum
-    private String destinationDivision; //should be in enum
+    @Enumerated(EnumType.STRING)
+    private Tier currentTier;
+    private Integer currentDivision; //should be in enum
+    @Enumerated(EnumType.STRING)
+    private Tier destinationTier;
+    private Integer destinationDivision; //should be in enum
     private String summonerID;
     private String lolUsername;
     private String lolPassword;
@@ -30,8 +33,8 @@ public class OrderBoost {
 
     public OrderBoost() {}
 
-    public OrderBoost(String currentTier, String currentDivision, String destinationTier,
-                      String destinationDivision, String summonerID, String lolUsername,
+    public OrderBoost(Tier currentTier, Integer currentDivision, Tier destinationTier,
+                      Integer destinationDivision, String summonerID, String lolUsername,
                       String lolPassword, String region, String noteToBoosters, LocalDateTime date,
                       boolean whetherPaid, User user) {
         this.currentTier = currentTier;
@@ -56,35 +59,35 @@ public class OrderBoost {
         this.id = id;
     }
 
-    public String getCurrentTier() {
+    public Tier getCurrentTier() {
         return currentTier;
     }
 
-    public void setCurrentTier(String currentTier) {
+    public void setCurrentTier(Tier currentTier) {
         this.currentTier = currentTier;
     }
 
-    public String getCurrentDivision() {
+    public Integer getCurrentDivision() {
         return currentDivision;
     }
 
-    public void setCurrentDivision(String currentDivision) {
+    public void setCurrentDivision(Integer currentDivision) {
         this.currentDivision = currentDivision;
     }
 
-    public String getDestinationTier() {
+    public Tier getDestinationTier() {
         return destinationTier;
     }
 
-    public void setDestinationTier(String destinationTier) {
+    public void setDestinationTier(Tier destinationTier) {
         this.destinationTier = destinationTier;
     }
 
-    public String getDestinationDivision() {
+    public Integer getDestinationDivision() {
         return destinationDivision;
     }
 
-    public void setDestinationDivision(String destinationDivision) {
+    public void setDestinationDivision(Integer destinationDivision) {
         this.destinationDivision = destinationDivision;
     }
 

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.javastart.model.entity.OrderBoost;
 import pl.javastart.model.entity.User;
+import pl.javastart.model.entity.enums.Tier;
 import pl.javastart.repository.OrderRepository;
 import pl.javastart.repository.UserRepository;
 
@@ -23,10 +24,10 @@ public class OrderService {
         orderBoost.setUser(user);
         orderBoost.setWhetherPaid(true);
         orderBoost.setDate(LocalDateTime.now());
-        orderBoost.setCurrentDivision("Diamond");
-        orderBoost.setCurrentTier("4");
-        orderBoost.setDestinationDivision("Master");
-        orderBoost.setDestinationTier("1");
+        orderBoost.setCurrentDivision(1);
+        orderBoost.setCurrentTier(Tier.PLATINUM);
+        orderBoost.setDestinationDivision(4);
+        orderBoost.setDestinationTier(Tier.DIAMOND);
         orderBoost.setLolPassword("voler");
         orderBoost.setLolUsername("voler");
         orderBoost.setSummonerID("voler");
