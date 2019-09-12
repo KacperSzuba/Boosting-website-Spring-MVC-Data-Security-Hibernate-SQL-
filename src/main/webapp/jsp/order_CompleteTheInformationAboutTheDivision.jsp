@@ -76,7 +76,7 @@
         <p>${destinationTierDivision}</p>
     </section>
     <div>
-        <a href="${pageContext.request.contextPath}/order/makeOrder">Make order</a>
+        <a href="${pageContext.request.contextPath}/order/informationAboutDivision">Make order</a>
     </div>
     </body>
 </html>

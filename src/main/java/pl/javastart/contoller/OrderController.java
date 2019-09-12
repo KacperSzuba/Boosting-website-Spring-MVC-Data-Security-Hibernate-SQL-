@@ -3,17 +3,17 @@ package pl.javastart.contoller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.javastart.model.entity.Divisions;
 import pl.javastart.manage.OrderBoostAnimationHandler;
+import pl.javastart.model.entity.Divisions;
 import pl.javastart.model.entity.OrderBoost;
-import pl.javastart.model.entity.User;
+import pl.javastart.model.entity.enums.Region;
 import pl.javastart.repository.UserRepository;
 import pl.javastart.service.OrderService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.security.Principal;
 
 @RequestMapping("/order")
 @Controller
@@ -41,20 +41,18 @@ public class OrderController {
         return "jsp/order_CompleteTheInformationAboutTheDivision";
     }
 
-    @RequestMapping("/makeOrder")
-    public String makeOrder(HttpSession session, HttpServletRequest request){
-        Divisions currentDivision = (Divisions) request.getSession().getAttribute("currentTierClass");
-        Divisions destinationDivision = (Divisions) request.getSession().getAttribute("destinationTierClass");
-        Principal principal = request.getUserPrincipal();
-        User user = userRepository.findByUsername(principal.getName());
+    @RequestMapping("/informationAboutDivision")
+    public String informationAboutDivision(Model model){
         OrderBoost orderBoost = new OrderBoost();
-        orderBoost.setCurrentTier(currentDivision.getTier());
-        orderBoost.setCurrentDivision(currentDivision.getDivision());
-        orderBoost.setDestinationTier(destinationDivision.getTier());
-        orderBoost.setDestinationDivision(destinationDivision.getDivision());
-        orderBoost.setUser(user);
-        session.setAttribute("orderBoostClass",orderBoost);
+        model.addAttribute("orderBoost",orderBoost);
+        model.addAttribute("listOfRegions", Region.values());
         return "jsp/order_CompleteYourAccountInformation";
+    }
+
+    @RequestMapping("/informationAboutAccount")
+    public String informationAboutAccount(@ModelAttribute("orderBoost") OrderBoost orderBoost,Model model,HttpServletRequest request){
+        orderService.makeOrder(orderBoost,request);
+        return "jsp/order_ConfirmOrder";
     }
 
     @RequestMapping("/moveCurrentTierImageToLeft")

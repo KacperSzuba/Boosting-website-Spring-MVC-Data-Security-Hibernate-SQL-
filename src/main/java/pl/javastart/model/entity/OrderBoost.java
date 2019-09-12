@@ -1,6 +1,7 @@
 package pl.javastart.model.entity;
 
 import org.hibernate.annotations.Type;
+import pl.javastart.model.entity.enums.Region;
 import pl.javastart.model.entity.enums.Tier;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 public class OrderBoost {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
     private Tier currentTier;
@@ -22,7 +23,8 @@ public class OrderBoost {
     private String summonerID;
     private String lolUsername;
     private String lolPassword;
-    private String region; //should be in enum
+    @Enumerated(EnumType.STRING)
+    private Region region; //should be in enum
     private String noteToBoosters;
     private LocalDateTime date;
     @Type(type = "org.hibernate.type.NumericBooleanType")
@@ -35,7 +37,7 @@ public class OrderBoost {
 
     public OrderBoost(Tier currentTier, Integer currentDivision, Tier destinationTier,
                       Integer destinationDivision, String summonerID, String lolUsername,
-                      String lolPassword, String region, String noteToBoosters, LocalDateTime date,
+                      String lolPassword, Region region, String noteToBoosters, LocalDateTime date,
                       boolean whetherPaid, User user) {
         this.currentTier = currentTier;
         this.currentDivision = currentDivision;
@@ -115,11 +117,11 @@ public class OrderBoost {
         this.lolPassword = lolPassword;
     }
 
-    public String getRegion() {
+    public Region getRegion() {
         return region;
     }
 
-    public void setRegion(String region) {
+    public void setRegion(Region region) {
         this.region = region;
     }
 
