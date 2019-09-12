@@ -35,7 +35,7 @@
                 </li>
             </security:authorize>
             <li>
-                <a href="${pageContext.request.contextPath}/order/showOrderPage">Order page</a>
+                <a href="${pageContext.request.contextPath}/order">Order page</a>
             </li>
         </ul>
     </nav>

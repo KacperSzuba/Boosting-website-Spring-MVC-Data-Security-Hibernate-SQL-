@@ -28,7 +28,7 @@ public class OrderController {
     @Autowired
     private OrderBoostAnimationHandler orderBoostAnimationHandler;
 
-    @RequestMapping("/showOrderPage")
+    @RequestMapping
     public String showOrderPage(HttpSession session,Model model){
         Divisions defaultCurrentTier = orderBoostAnimationHandler.getDefaultCurrentTier();
         session.setAttribute("currentTierClass",defaultCurrentTier);

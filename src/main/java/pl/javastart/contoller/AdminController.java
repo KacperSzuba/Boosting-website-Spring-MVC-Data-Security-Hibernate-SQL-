@@ -24,13 +24,13 @@ public class AdminController {
 
     @RequestMapping
     public String showAdminPage(){
-        return "jsp/admin";
+        return "jsp/adminPages/admin";
     }
 
     @RequestMapping("/ban_user")
     public ModelAndView showUserStatementPage(){
         List<User> users = (List<User>) userRepository.findAll();
-        return new ModelAndView("jsp/admin_UserStatement","user",users);
+        return new ModelAndView("jsp/adminPages/admin_UserStatement","user",users);
     }
     @GetMapping("/ban/{id}")
     public String ban(@PathVariable("id") final  Long id){
