@@ -31,7 +31,6 @@
                     <th scope="col">No.</th>
                     <th scope="col">Id</th>
                     <th scope="col">Username</th>
-                    <th scope="col">Enabled</th>
                     <th scope="col">Ban User</th>
                 </tr>
                 </thead>
@@ -41,17 +40,9 @@
                         <th>${status.count}</th>
                         <th><c:out value="${iterator.id}" /></th>
                         <th><c:out value="${iterator.username}" /></th>
-                        <th><c:out value="${iterator.enabled}" /></th>
                         <th>
-                            <spring:url value="/admin/ban/${iterator.id}" var="banUser" />
-                            <spring:url value="/admin/un-ban/${iterator.id}" var="unbanUser" />
-
-                            <c:if test="${iterator.enabled == true}">
-                                <input type="button"  onclick="location.href='${banUser}'" value="Ban">
-                            </c:if>
-                            <c:if test="${iterator.enabled == false}">
-                                <input type="button"  onclick="location.href='${unbanUser}'" value="Un-ban">
-                            </c:if>
+                            <spring:url value="/admin/userDetails/${iterator.id}" var="banUser" />
+                            <a href="${banUser}">More</a>
                         </th>
                     </tr>
                     </tbody>

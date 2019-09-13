@@ -1,4 +1,6 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: kacpe
@@ -24,8 +26,19 @@
                 <a href="${pageContext.request.contextPath}/admin">Admin page</a>
             </li>
         </security:authorize>
-
     </ul>
 </nav>
+    <p>Username : ${user.username}</p>
+    <p>Email : ${user.email}</p>
+    <p>Role : ${user.roles}</p>
+    <spring:url value="/admin/ban/${user.id}" var="banUser" />
+    <spring:url value="/admin/un-ban/${user.id}" var="unbanUser" />
+
+    <c:if test="${user.enabled == true}">
+    <input type="button"  onclick="location.href='${banUser}'" value="Ban">
+    </c:if>
+    <c:if test="${user.enabled == false}">
+    <input type="button"  onclick="location.href='${unbanUser}'" value="Un-ban">
+    </c:if>
 </body>
 </html>

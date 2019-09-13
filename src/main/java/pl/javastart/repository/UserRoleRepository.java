@@ -11,4 +11,5 @@ public interface UserRoleRepository extends CrudRepository<UserRole,Long>{
 
     @Query(value = "SELECT ur FROM UserRole ur WHERE ur.roleName = :role")
     UserRole getUserRole(@Param("role") RoleName role);
+
 }

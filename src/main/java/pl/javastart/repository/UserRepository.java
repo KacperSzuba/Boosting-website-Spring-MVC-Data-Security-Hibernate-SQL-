@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import pl.javastart.model.entity.User;
+import pl.javastart.model.entity.UserRole;
 
 public interface UserRepository extends CrudRepository<User,Long> {
     User findByUsername(String username);

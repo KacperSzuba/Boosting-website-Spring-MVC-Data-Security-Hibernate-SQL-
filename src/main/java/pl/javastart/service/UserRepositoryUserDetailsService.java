@@ -17,6 +17,9 @@ import java.util.stream.Collectors;
 @Service
 public class UserRepositoryUserDetailsService implements UserDetailsService {
 
+    @Autowired
+    private UserCreator userCreator;
+
     private UserRepository userRepository;
 
     @Autowired
@@ -28,10 +31,11 @@ public class UserRepositoryUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if(user!=null){
-            Collection<GrantedAuthority> authorities = user.getRoles()
-                    .stream()
-                    .map(userRole -> new SimpleGrantedAuthority(userRole.getRoleName().toString()))
-                    .collect(Collectors.toCollection(ArrayList::new));
+                Collection<GrantedAuthority> authorities = user.getRoles()
+                        .stream()
+                        .map(userRole -> new SimpleGrantedAuthority(userRole.getRoleName().toString()))
+                        .collect(Collectors.toCollection(ArrayList::new));
+            System.out.println(">>>>>>>>>>>"+authorities);
             return new org.springframework.security.core.userdetails.
                     User(username,user.getPassword(),user.isEnabled(),true,
                     true,true,authorities);

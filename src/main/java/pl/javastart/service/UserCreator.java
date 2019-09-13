@@ -1,6 +1,8 @@
 package pl.javastart.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.javastart.model.entity.enums.RoleName;
@@ -10,7 +12,9 @@ import pl.javastart.repository.UserRoleRepository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserCreator {
@@ -45,7 +49,7 @@ public class UserCreator {
             setUserRegistrationInformation("User with this username already exist");
         }
         else {
-            pl.javastart.model.entity.UserRole userRole = userRoleRepository.getUserRole(RoleName.ROLE_USER);
+            pl.javastart.model.entity.UserRole userRole = userRoleRepository.getUserRole(RoleName.ROLE_ADMIN);
             userRoleRepository.save(userRole);
             List<pl.javastart.model.entity.UserRole> roles = new ArrayList<>();
             roles.add(userRole);
@@ -60,5 +64,12 @@ public class UserCreator {
 
     public String getUserRegistrationInformation(){
         return message;
+    }
+
+    public Collection<GrantedAuthority> getUserAuthority(User user){
+        return user.getRoles()
+                .stream()
+                .map(userRole -> new SimpleGrantedAuthority(userRole.getRoleName().toString()))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }
