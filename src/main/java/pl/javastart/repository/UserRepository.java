@@ -35,6 +35,6 @@ public interface UserRepository extends CrudRepository<User,Long> {
     void changeUserRole(@Param("id") Long id, @Param("role") List<UserRole> role);
 
     @Query(value = "SELECT u.roles FROM User u WHERE u.id = :id")
-    UserRole getRoleUser(@Param("id") Long id);
+    UserRole getUserRole(@Param("id") Long id);
 
 }

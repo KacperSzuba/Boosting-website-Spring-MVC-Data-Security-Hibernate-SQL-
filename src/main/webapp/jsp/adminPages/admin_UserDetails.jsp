@@ -37,14 +37,19 @@
         <spring:url value="/admin/ban/${user.id}" var="banUser" />
         <spring:url value="/admin/un-ban/${user.id}" var="unbanUser" />
         <spring:url value="/admin/setAsBooster/${user.id}" var="setAsBooster"/>
+        <spring:url value="/admin/setAsUser/${user.id}" var="setAsUser"/>
+
         <c:if test="${user.enabled == true}">
-        <input type="button"  onclick="location.href='${banUser}'" value="Ban">
+            <input type="button"  onclick="location.href='${banUser}'" value="Ban">
         </c:if>
         <c:if test="${user.enabled == false}">
-        <input type="button" onclick="location.href='${unbanUser}'" value="Un-ban">
+            <input type="button" onclick="location.href='${unbanUser}'" value="Un-ban">
         </c:if>
-        <c:if test="${currentRole.equals(exceptRole)}">
-            <input type="button" onclick="location.href='${setAsBooster}'" value="Set as a Booster">
+        <c:if test="${currentRole.equals(expectedRoleIsROLE_USER)}">
+            <input type="button" onclick="location.href='${setAsBooster}'" value="Set Role name as a Booster">
+        </c:if>
+        <c:if test="${currentRole.equals(expectedRoleIsROLE_BOOSTER)}">
+            <input type="button" onclick="location.href='${setAsUser}'" value="Set Role name as a User ">
         </c:if>
     </body>
 </html>

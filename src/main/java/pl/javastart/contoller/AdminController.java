@@ -7,14 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import pl.javastart.model.entity.UserRole;
-import pl.javastart.model.entity.enums.RoleName;
-import pl.javastart.repository.UserRoleRepository;
-import pl.javastart.service.ChangeAccountStatus;
 import pl.javastart.model.entity.User;
+import pl.javastart.model.entity.enums.RoleName;
 import pl.javastart.repository.UserRepository;
+import pl.javastart.service.ChangeAccountStatus;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/admin")
@@ -26,9 +23,6 @@ public class AdminController {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private UserRoleRepository userRoleRepository;
 
     @RequestMapping
     public String showAdminPage(){
@@ -56,18 +50,13 @@ public class AdminController {
     public String setAsBooster(@PathVariable("id") final Long id){
         //Move to ChangeAccountStatus.class
         //Develop more optimized versions
-        UserRole userRole = userRoleRepository.getUserRole(RoleName.ROLE_BOOSTER);
-        List<UserRole> roles = new ArrayList<>();
-        roles.add(userRole);
-        User user = userRepository.findById(id).get();
-        user.setRoles(roles);
-        userRepository.save(user);
+        changeAccountStatus.changeTheRoleName(id,RoleName.ROLE_BOOSTER);
 
         return "redirect:/admin/userDetails/{id}";
     }
     @GetMapping("/setAsUser/{id}")
     public String setAsUser(@PathVariable("id") final Long id){
-        changeAccountStatus.unBanAccount(id);
+        changeAccountStatus.changeTheRoleName(id,RoleName.ROLE_USER);
         return "redirect:/admin/userDetails/{id}";
     }
 
@@ -75,8 +64,9 @@ public class AdminController {
     public String showUserDetailsPage(@PathVariable("id") final Long id, Model model){
         User user = userRepository.findById(id).get();
         model.addAttribute("user",user);
-        model.addAttribute("currentRole",changeAccountStatus.setd(user));
-        model.addAttribute("exceptRole",RoleName.ROLE_USER);
+        model.addAttribute("currentRole",changeAccountStatus.getCurrentUserRole(user));
+        model.addAttribute("expectedRoleIsROLE_USER",RoleName.ROLE_USER);
+        model.addAttribute("expectedRoleIsROLE_BOOSTER",RoleName.ROLE_BOOSTER);
         return "jsp/adminPages/admin_UserDetails";
     }
 }
