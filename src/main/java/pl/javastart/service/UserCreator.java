@@ -66,10 +66,4 @@ public class UserCreator {
         return message;
     }
 
-    public Collection<GrantedAuthority> getUserAuthority(User user){
-        return user.getRoles()
-                .stream()
-                .map(userRole -> new SimpleGrantedAuthority(userRole.getRoleName().toString()))
-                .collect(Collectors.toCollection(ArrayList::new));
-    }
 }

@@ -15,7 +15,7 @@ import java.util.Queue;
 @Entity
 public class User{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotEmpty(message = "Username cannot be empty")
     @Size(min = 7,max = 20,message = "Username length should between 7 and 20 letters")

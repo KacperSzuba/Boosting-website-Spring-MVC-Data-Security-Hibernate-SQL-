@@ -10,35 +10,41 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-<nav>
-    <ul>
-        <security:authorize access="hasAnyRole('USER','ADMIN')">
+    <head>
+        <title>Title</title>
+    </head>
+    <body>
+    <nav>
+        <ul>
+            <security:authorize access="hasAnyRole('USER','ADMIN')">
+                <li>
+                    <a href="${pageContext.request.contextPath}/account">Account page</a>
+                </li>
+            </security:authorize>
+            <security:authorize access="hasRole('ADMIN')">
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin">Admin page</a>
+                </li>
+            </security:authorize>
             <li>
-                <a href="${pageContext.request.contextPath}/account">Account page</a>
+                <a href="${pageContext.request.contextPath}/admin/ban_user">Back to previous page</a>
             </li>
-        </security:authorize>
-        <security:authorize access="hasRole('ADMIN')">
-            <li>
-                <a href="${pageContext.request.contextPath}/admin">Admin page</a>
-            </li>
-        </security:authorize>
-    </ul>
-</nav>
-    <p>Username : ${user.username}</p>
-    <p>Email : ${user.email}</p>
-    <p>Role : ${user.roles}</p>
-    <spring:url value="/admin/ban/${user.id}" var="banUser" />
-    <spring:url value="/admin/un-ban/${user.id}" var="unbanUser" />
-
-    <c:if test="${user.enabled == true}">
-    <input type="button"  onclick="location.href='${banUser}'" value="Ban">
-    </c:if>
-    <c:if test="${user.enabled == false}">
-    <input type="button"  onclick="location.href='${unbanUser}'" value="Un-ban">
-    </c:if>
-</body>
+        </ul>
+    </nav>
+        <p>Username : ${user.username}</p>
+        <p>Email : ${user.email}</p>
+        <p>Role : ${currentRole}</p>
+        <spring:url value="/admin/ban/${user.id}" var="banUser" />
+        <spring:url value="/admin/un-ban/${user.id}" var="unbanUser" />
+        <spring:url value="/admin/setAsBooster/${user.id}" var="setAsBooster"/>
+        <c:if test="${user.enabled == true}">
+        <input type="button"  onclick="location.href='${banUser}'" value="Ban">
+        </c:if>
+        <c:if test="${user.enabled == false}">
+        <input type="button" onclick="location.href='${unbanUser}'" value="Un-ban">
+        </c:if>
+        <c:if test="${currentRole.equals(exceptRole)}">
+            <input type="button" onclick="location.href='${setAsBooster}'" value="Set as a Booster">
+        </c:if>
+    </body>
 </html>
