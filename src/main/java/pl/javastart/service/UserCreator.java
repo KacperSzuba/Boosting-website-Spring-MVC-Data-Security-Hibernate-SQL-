@@ -49,7 +49,7 @@ public class UserCreator {
             setUserRegistrationInformation("User with this username already exist");
         }
         else {
-            pl.javastart.model.entity.UserRole userRole = userRoleRepository.getUserRole(RoleName.ROLE_ADMIN);
+            pl.javastart.model.entity.UserRole userRole = userRoleRepository.getUserRole(RoleName.ROLE_USER);
             userRoleRepository.save(userRole);
             List<pl.javastart.model.entity.UserRole> roles = new ArrayList<>();
             roles.add(userRole);

@@ -33,6 +33,6 @@
     </nav>
     <i class='fas fa-lock-open'></i>
         <h1>Admin Page</h1>
-        <a href="${pageContext.request.contextPath}/admin/ban_user">List of users</a>
+        <a href="${pageContext.request.contextPath}/admin/listOfUsers">List of users</a>
     </body>
 </html>

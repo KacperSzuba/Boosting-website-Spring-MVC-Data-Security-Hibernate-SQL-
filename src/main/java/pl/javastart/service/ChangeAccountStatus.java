@@ -1,6 +1,5 @@
 package pl.javastart.service;
 
-import org.apache.commons.collections4.queue.CircularFifoQueue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.javastart.model.entity.User;
@@ -10,9 +9,7 @@ import pl.javastart.repository.UserRepository;
 import pl.javastart.repository.UserRoleRepository;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 @Service
 public class ChangeAccountStatus {
@@ -23,12 +20,16 @@ public class ChangeAccountStatus {
     @Autowired
     private UserRoleRepository userRoleRepository;
 
-    public void banAccount(Long id){
+    public void banUser(Long id){
         userRepository.changeEnabledStatementQuery(id,false);
     }
 
-    public void unBanAccount(Long id){
+    public void unBanUser(Long id){
         userRepository.changeEnabledStatementQuery(id,true);
+    }
+
+    public void deleteUser(Long id){
+        userRepository.deleteUser(id);
     }
 
     public void changeTheRoleName(Long id, RoleName roleName){

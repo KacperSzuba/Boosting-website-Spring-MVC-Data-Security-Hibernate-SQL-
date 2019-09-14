@@ -27,7 +27,7 @@
                 </li>
             </security:authorize>
             <li>
-                <a href="${pageContext.request.contextPath}/admin/ban_user">Back to previous page</a>
+                <a href="${pageContext.request.contextPath}/admin/listOfUsers">Back to previous page</a>
             </li>
         </ul>
     </nav>
@@ -38,6 +38,7 @@
         <spring:url value="/admin/un-ban/${user.id}" var="unbanUser" />
         <spring:url value="/admin/setAsBooster/${user.id}" var="setAsBooster"/>
         <spring:url value="/admin/setAsUser/${user.id}" var="setAsUser"/>
+        <spring:url value="/admin/deleteUser/${user.id}" var="deleteUser"/>
 
         <c:if test="${user.enabled == true}">
             <input type="button"  onclick="location.href='${banUser}'" value="Ban">
@@ -51,5 +52,6 @@
         <c:if test="${currentRole.equals(expectedRoleIsROLE_BOOSTER)}">
             <input type="button" onclick="location.href='${setAsUser}'" value="Set Role name as a User ">
         </c:if>
+        <input type="button" onclick="location.href='${deleteUser}'" value="Delete User">
     </body>
 </html>

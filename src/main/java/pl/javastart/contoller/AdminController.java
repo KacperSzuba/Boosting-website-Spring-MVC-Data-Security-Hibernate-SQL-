@@ -29,31 +29,37 @@ public class AdminController {
         return "jsp/adminPages/admin";
     }
 
-    @RequestMapping("/ban_user")
+    @RequestMapping("/listOfUsers")
     public ModelAndView showUserStatementPage(){
         List<User> users = (List<User>) userRepository.findAll();
-        return new ModelAndView("jsp/adminPages/admin_UserStatement","user",users);
+        return new ModelAndView("jsp/adminPages/admin_ListOfUsers","user",users);
     }
 
     @GetMapping("/ban/{id}")
     public String ban(@PathVariable("id") final  Long id){
-        changeAccountStatus.banAccount(id);
+        changeAccountStatus.banUser(id);
         return "redirect:/admin/userDetails/{id}";
     }
+
     @GetMapping("/un-ban/{id}")
     public String unban(@PathVariable("id") final Long id){
-        changeAccountStatus.unBanAccount(id);
+        changeAccountStatus.unBanUser(id);
         return "redirect:/admin/userDetails/{id}";
+    }
+
+    @GetMapping("/deleteUser/{id}")
+    public String deleteUser(@PathVariable("id") final Long id){
+        changeAccountStatus.deleteUser(id);
+        return "redirect:/admin/listOfUsers";
     }
 
     @GetMapping("/setAsBooster/{id}")
     public String setAsBooster(@PathVariable("id") final Long id){
-        //Move to ChangeAccountStatus.class
         //Develop more optimized versions
         changeAccountStatus.changeTheRoleName(id,RoleName.ROLE_BOOSTER);
-
         return "redirect:/admin/userDetails/{id}";
     }
+
     @GetMapping("/setAsUser/{id}")
     public String setAsUser(@PathVariable("id") final Long id){
         changeAccountStatus.changeTheRoleName(id,RoleName.ROLE_USER);
