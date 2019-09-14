@@ -18,7 +18,7 @@ public class OrderBoostAnimationHandler {
         return getListOfTiersByPointsAndDivision().get(5);
     }
 
-    public Divisions getDefaultdestinationTier(){
+    public Divisions getDefaultDestinationTier(){
         return getListOfTiersByPointsAndDivision().get(4);
     }
 

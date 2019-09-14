@@ -44,5 +44,4 @@ public class ChangeAccountStatus {
        UserRole ur = userRepository.getUserRole(user.getId());
        return ur.getRoleName();
     }
-    
 }

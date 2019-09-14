@@ -9,7 +9,6 @@ import pl.javastart.manage.OrderBoostAnimationHandler;
 import pl.javastart.model.entity.Divisions;
 import pl.javastart.model.entity.OrderBoost;
 import pl.javastart.model.entity.enums.Region;
-import pl.javastart.repository.UserRepository;
 import pl.javastart.service.OrderService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,9 +22,6 @@ public class OrderController {
     private OrderService orderService;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private OrderBoostAnimationHandler orderBoostAnimationHandler;
 
     @RequestMapping
@@ -34,7 +30,7 @@ public class OrderController {
         session.setAttribute("currentTierClass",defaultCurrentTier);
         model.addAttribute("currentTierDivision",defaultCurrentTier.getTier()+" "+defaultCurrentTier.getDivision());
         model.addAttribute("currentTierImage",defaultCurrentTier.getImgSource());
-        Divisions defaultDestinationTier = orderBoostAnimationHandler.getDefaultdestinationTier();
+        Divisions defaultDestinationTier = orderBoostAnimationHandler.getDefaultDestinationTier();
         session.setAttribute("destinationTierClass",defaultDestinationTier);
         model.addAttribute("destinationTierDivision",defaultDestinationTier.getTier()+" "+defaultDestinationTier.getDivision());
         model.addAttribute("destinationTierImage",defaultDestinationTier.getImgSource());
