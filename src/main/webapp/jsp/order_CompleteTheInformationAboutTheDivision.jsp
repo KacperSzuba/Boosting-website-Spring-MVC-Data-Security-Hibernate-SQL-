@@ -41,7 +41,7 @@
     </nav>
 
     <section>
-        <img class="center" src="${currentTierImage}" />
+        <img class="center" src="${pageContext.request.contextPath}${currentTierImage}" />
 
         <div class="left">
             <a href="${pageContext.request.contextPath}/order/moveCurrentTierImageToLeft">Left</a>
@@ -59,7 +59,7 @@
     </section>
 
     <section>
-        <img class="center" src="${destinationTierImage}" />
+        <img class="center" src="${pageContext.request.contextPath}${destinationTierImage}" />
 
         <div class="left">
             <a href="${pageContext.request.contextPath}/order/moveDestinationTierImageLeft">Left</a>
