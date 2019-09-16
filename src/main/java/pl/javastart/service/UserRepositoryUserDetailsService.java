@@ -35,7 +35,6 @@ public class UserRepositoryUserDetailsService implements UserDetailsService {
                         .stream()
                         .map(userRole -> new SimpleGrantedAuthority(userRole.getRoleName().toString()))
                         .collect(Collectors.toCollection(ArrayList::new));
-            System.out.println(">>>>>>>>>>>"+authorities);
             return new org.springframework.security.core.userdetails.
                     User(username,user.getPassword(),user.isEnabled(),true,
                     true,true,authorities);

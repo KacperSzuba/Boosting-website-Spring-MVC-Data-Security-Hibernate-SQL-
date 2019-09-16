@@ -1,6 +1,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: kacpe
@@ -39,23 +40,23 @@
     <form:form method="get" modelAttribute="orders">
         <table class="table">
             <thead class="thead-dark">
-                <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Id</th>
-                    <th scope="col">Current Tier</th>
-                    <th scope="col">Destination Tier</th>
-                    <th scope="col">Take the order</th>
-                </tr>
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Id</th>
+                <th scope="col">Current Tier</th>
+                <th scope="col">Destination Tier</th>
+                <th scope="col">More about order</th>
+            </tr>
             </thead>
             <c:forEach items="${orders}" var="order" varStatus="status">
                 <tbody>
-                    <tr>
-                        <th>${status.count}</th>
-                        <th>${order.id}</th>
-                        <th>${order.currentTier}</th>
-                        <th>${order.destinationTier}</th>
-                        <th>Take</th>
-                    </tr>
+                <tr>
+                    <th>${status.count}</th>
+                    <th><c:out value="${order.id}" /></th>
+                    <th><c:out value="${order.currentTier}" /></th>
+                    <th><c:out value="${order.destinationTier}" /></th>
+                    <th>More</th>
+                </tr>
                 </tbody>
             </c:forEach>
         </table>
