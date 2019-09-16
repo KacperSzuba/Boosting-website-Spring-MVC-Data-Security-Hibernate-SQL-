@@ -14,8 +14,8 @@ import pl.javastart.service.OrderService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-@RequestMapping("/order")
 @Controller
+@RequestMapping("/order")
 public class OrderController {
 
     @Autowired

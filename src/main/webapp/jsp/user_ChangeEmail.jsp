@@ -13,23 +13,28 @@
         <title>Title</title>
     </head>
     <body>
-        <nav>
-            <ul>
-                <security:authorize access="hasAnyRole('USER','ADMIN')">
-                    <li>
-                        <a href="${pageContext.request.contextPath}/account">Account page</a>
-                    </li>
-                </security:authorize>
-                <security:authorize access="hasRole('ADMIN')">
-                    <li>
-                        <a href="${pageContext.request.contextPath}/admin">Admin page</a>
-                    </li>
-                </security:authorize>
+    <nav>
+        <ul>
+            <security:authorize access="hasAnyRole('USER','ADMIN','BOOSTER')">
                 <li>
-                    <a href="${pageContext.request.contextPath}/order">Order page</a>
+                    <a href="${pageContext.request.contextPath}/account">Account page</a>
                 </li>
-            </ul>
-        </nav>
+            </security:authorize>
+            <security:authorize access="hasRole('BOOSTER')">
+                <li>
+                    <a href="${pageContext.request.contextPath}/booster">Booster page</a>
+                </li>
+            </security:authorize>
+            <security:authorize access="hasRole('ADMIN')">
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin">Admin page</a>
+                </li>
+            </security:authorize>
+            <li>
+                <a href="${pageContext.request.contextPath}/order">Order page</a>
+            </li>
+        </ul>
+    </nav>
 
         <h1>Change Email</h1>
 

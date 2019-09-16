@@ -22,6 +22,11 @@
                     <a href="${pageContext.request.contextPath}/account">Account page</a>
                 </li>
             </security:authorize>
+            <security:authorize access="hasRole('BOOSTER')">
+                <li>
+                    <a href="${pageContext.request.contextPath}/booster">Booster page</a>
+                </li>
+            </security:authorize>
             <security:authorize access="hasRole('ADMIN')">
                 <li>
                     <a href="${pageContext.request.contextPath}/admin">Admin page</a>

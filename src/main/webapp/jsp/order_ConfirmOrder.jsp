@@ -14,14 +14,9 @@
     <body>
     <nav>
         <ul>
-            <security:authorize access="hasAnyRole('USER','ADMIN')">
+            <security:authorize access="hasAnyRole('USER','ADMIN','BOOSTER')">
                 <li>
                     <a href="${pageContext.request.contextPath}/account">Account page</a>
-                </li>
-            </security:authorize>
-            <security:authorize access="hasRole('ADMIN')">
-                <li>
-                    <a href="${pageContext.request.contextPath}/admin">Admin page</a>
                 </li>
             </security:authorize>
             <li>

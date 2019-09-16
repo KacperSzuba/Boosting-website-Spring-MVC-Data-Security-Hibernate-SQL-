@@ -14,8 +14,8 @@ import pl.javastart.service.ChangeAccountStatus;
 
 import java.util.List;
 
-@RequestMapping("/admin")
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 
     @Autowired

@@ -14,6 +14,22 @@
     </head>
     <body>
 
+    <nav>
+        <ul>
+            <c:if test="${empty pageContext.request.userPrincipal}">
+                <li>
+                    <a href="${pageContext.request.contextPath}/login">Login Page</a>
+                </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/register">Register Page</a>
+                </li>
+            </c:if>
+            <li>
+                <a href="${pageContext.request.contextPath}/order">Order page</a>
+            </li>
+        </ul>
+    </nav>
+    <h1>Login to your account</h1>
     <form:form action="${pageContext.request.contextPath}/authenticateTheUser"
                method="POST">
         <p>
