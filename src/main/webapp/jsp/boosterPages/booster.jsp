@@ -30,5 +30,8 @@
         </ul>
     </nav>
     <h1>Booster Page</h1>
+    <div>
+        <a href="${pageContext.request.contextPath}/booster/listOfFreeOrders">List of free orders</a>
+    </div>
     </body>
 </html>

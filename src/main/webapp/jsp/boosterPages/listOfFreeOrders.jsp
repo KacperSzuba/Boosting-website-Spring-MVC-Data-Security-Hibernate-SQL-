@@ -1,24 +1,21 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: kacpe
-  Date: 30.08.2019
-  Time: 16:00
+  Date: 16.09.2019
+  Time: 13:49
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
         <title>Title</title>
-        <meta charset="utf-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    </head>
     </head>
     <body>
     <nav>
@@ -28,9 +25,9 @@
                     <a href="${pageContext.request.contextPath}/account">Account page</a>
                 </li>
             </security:authorize>
-            <security:authorize access="hasRole('ADMIN')">
+            <security:authorize access="hasRole('BOOSTER')">
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin">Admin page</a>
+                    <a href="${pageContext.request.contextPath}/booster">Booster page</a>
                 </li>
             </security:authorize>
             <li>
@@ -38,30 +35,30 @@
             </li>
         </ul>
     </nav>
-        <form:form method="get" modelAttribute="users">
-            <table class="table">
-                <thead class="thead-dark">
+    <h1>List of free orders</h1>
+    <form:form method="get" modelAttribute="orders">
+        <table class="table">
+            <thead class="thead-dark">
                 <tr>
                     <th scope="col">No.</th>
                     <th scope="col">Id</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Ban User</th>
+                    <th scope="col">Current Tier</th>
+                    <th scope="col">Destination Tier</th>
+                    <th scope="col">Take the order</th>
                 </tr>
-                </thead>
-                <c:forEach items="${users}" var="user" varStatus="status">
-                    <tbody>
+            </thead>
+            <c:forEach items="${orders}" var="order" varStatus="status">
+                <tbody>
                     <tr>
                         <th>${status.count}</th>
-                        <th><c:out value="${user.id}" /></th>
-                        <th><c:out value="${user.username}" /></th>
-                        <th>
-                            <spring:url value="/admin/userDetails/${user.id}" var="banUser" />
-                            <a href="${banUser}">More</a>
-                        </th>
+                        <th>${order.id}</th>
+                        <th>${order.currentTier}</th>
+                        <th>${order.destinationTier}</th>
+                        <th>Take</th>
                     </tr>
-                    </tbody>
-                </c:forEach>
-            </table>
-        </form:form>
+                </tbody>
+            </c:forEach>
+        </table>
+    </form:form>
     </body>
 </html>

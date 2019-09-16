@@ -32,7 +32,7 @@ public class AdminController {
     @RequestMapping("/listOfUsers")
     public ModelAndView showUserStatementPage(){
         List<User> users = (List<User>) userRepository.findAll();
-        return new ModelAndView("jsp/adminPages/admin_ListOfUsers","user",users);
+        return new ModelAndView("jsp/adminPages/admin_ListOfUsers","users",users);
     }
 
     @GetMapping("/ban/{id}")
