@@ -16,29 +16,34 @@ public class OrderBoost {
     private Long id;
     @Enumerated(EnumType.STRING)
     private Tier currentTier;
-    private Integer currentDivision; //should be in enum
+    private Integer currentDivision;
     @Enumerated(EnumType.STRING)
     private Tier destinationTier;
-    private Integer destinationDivision; //should be in enum
+    private Integer destinationDivision;
     private String summonerID;
     private String lolUsername;
     private String lolPassword;
     @Enumerated(EnumType.STRING)
-    private Region region; //should be in enum
+    private Region region;
     private String noteToBoosters;
     private LocalDateTime date;
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean whetherPaid;
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    private boolean whetherDone;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
     private User user;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="booster_id")
+    private User booster;
 
     public OrderBoost() {}
 
     public OrderBoost(Tier currentTier, Integer currentDivision, Tier destinationTier,
                       Integer destinationDivision, String summonerID, String lolUsername,
                       String lolPassword, Region region, String noteToBoosters, LocalDateTime date,
-                      boolean whetherPaid, User user) {
+                      boolean whetherPaid, boolean whetherDone, User user,User booster) {
         this.currentTier = currentTier;
         this.currentDivision = currentDivision;
         this.destinationTier = destinationTier;
@@ -50,7 +55,9 @@ public class OrderBoost {
         this.noteToBoosters = noteToBoosters;
         this.date = date;
         this.whetherPaid = whetherPaid;
+        this.whetherDone = whetherDone;
         this.user = user;
+        this.booster = booster;
     }
 
     public Long getId() {
@@ -145,9 +152,19 @@ public class OrderBoost {
         return whetherPaid;
     }
 
+    public boolean isWhetherDone() {
+        return whetherDone;
+    }
+
+    public void setWhetherDone(boolean whetherDone) {
+        this.whetherDone = whetherDone;
+    }
+
     public void setWhetherPaid(boolean whetherPaid) {
         this.whetherPaid = whetherPaid;
     }
+
+
 
     public User getUser() {
         return user;
@@ -155,5 +172,13 @@ public class OrderBoost {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public User getBooster() {
+        return booster;
+    }
+
+    public void setBooster(User booster) {
+        this.booster = booster;
     }
 }

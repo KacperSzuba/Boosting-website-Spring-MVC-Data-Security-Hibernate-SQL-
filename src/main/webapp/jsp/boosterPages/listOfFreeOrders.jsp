@@ -55,11 +55,15 @@
                     <th><c:out value="${order.id}" /></th>
                     <th><c:out value="${order.currentTier}" /></th>
                     <th><c:out value="${order.destinationTier}" /></th>
-                    <th>More</th>
+                    <th>
+                        <spring:url value="/booster/orderDetails/${order.id}" var="orderDetails" />
+                        <a href="${orderDetails}">More</a>
+                    </th>
                 </tr>
                 </tbody>
             </c:forEach>
         </table>
     </form:form>
+
     </body>
 </html>

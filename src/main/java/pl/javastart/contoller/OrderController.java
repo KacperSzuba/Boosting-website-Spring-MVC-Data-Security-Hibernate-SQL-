@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.javastart.manage.OrderBoostAnimationHandler;
+import pl.javastart.manage.animation.OrderBoostAnimationHandler;
 import pl.javastart.model.entity.Divisions;
 import pl.javastart.model.entity.OrderBoost;
 import pl.javastart.model.entity.enums.Region;

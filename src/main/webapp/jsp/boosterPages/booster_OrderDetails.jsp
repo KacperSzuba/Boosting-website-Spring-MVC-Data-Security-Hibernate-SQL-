@@ -1,4 +1,5 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: kacpe
@@ -33,6 +34,7 @@
         </ul>
     </nav>
     <h1>Order details</h1>
-
+        <spring:url value="/booster/orderDetails/${id}/addBoost" var="addBoost" />
+        <a href="${addBoost}">Add boost</a>
     </body>
 </html>

@@ -33,5 +33,6 @@
     <div>
         <a href="${pageContext.request.contextPath}/booster/listOfFreeOrders">List of free orders</a>
     </div>
+    <p>${addingBoostMessage}</p>
     </body>
 </html>

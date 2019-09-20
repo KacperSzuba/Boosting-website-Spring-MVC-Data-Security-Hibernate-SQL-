@@ -1,4 +1,4 @@
-package pl.javastart.manage;
+package pl.javastart.manage.animation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
