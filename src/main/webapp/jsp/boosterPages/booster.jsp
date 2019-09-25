@@ -33,6 +33,12 @@
     <div>
         <a href="${pageContext.request.contextPath}/booster/listOfFreeOrders">List of free orders</a>
     </div>
+    <div>
+        <a href="${pageContext.request.contextPath}/booster/currentBoost">Current boost</a>
+    </div>
+    <div>
+        <a href="${pageContext.request.contextPath}/booster/doneOrderBoosts">Done order boosts</a>
+    </div>
     <p>${addingBoostMessage}</p>
     </body>
 </html>

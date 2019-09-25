@@ -1,5 +1,6 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: kacpe
@@ -36,5 +37,18 @@
     <h1>Order details</h1>
         <spring:url value="/booster/orderDetails/${id}/addBoost" var="addBoost" />
         <a href="${addBoost}">Add boost</a>
+        <p><label>League Of Legends username:</label>${boostDetails.lolUsername}</p>
+        <p><label>League Of Legends password</label>${boostDetails.lolPassword}</p>
+        <p>
+            <label>Current Tier:</label>${boostDetails.currentTier} ${boostDetails.currentDivision}
+            <label>Points:</label>
+        </p>
+        <p>
+            <label>Current Tier:</label>${boostDetails.destinationTier} ${boostDetails.destinationDivision}
+            <label>Points:</label>
+        </p>
+        <p><label>Region:</label>${boostDetails.region}</p>
+        <p><label>Note to booster:</label>${boostDetails.noteToBoosters}</p>
+
     </body>
 </html>

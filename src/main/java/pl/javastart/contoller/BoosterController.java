@@ -38,6 +38,7 @@ public class BoosterController {
     @RequestMapping("/orderDetails/{id}")
     public String showOrderDetailsPage(@PathVariable("id")Long id, Model model){
         OrderBoost orderBoost = orderBoostRepository.findById(id).get();
+        model.addAttribute("boostDetails",orderBoost);
         return "jsp/boosterPages/booster_OrderDetails";
     }
 
@@ -48,4 +49,15 @@ public class BoosterController {
         return "jsp/boosterPages/booster";
     }
 
+    @RequestMapping("/currentBoost")
+    public ModelAndView currentBoost(HttpServletRequest request){
+        List<OrderBoost> currentOrderBoost = boosterService.findCurrentBoost(request);
+        return new ModelAndView("jsp/boosterPages/currentBoost","currentOrderBoost",currentOrderBoost);
+    }
+
+    @RequestMapping("/doneOrderBoosts")
+    public ModelAndView listOfDoneOrderBoosts(HttpServletRequest request){
+        List<OrderBoost> listOfDoneOrderBoosts = boosterService.listOfDoneOrderBoosts(request);
+        return new ModelAndView("jsp/boosterPages/doneOrderBoosts","doneOrderBoosts",listOfDoneOrderBoosts);
+    }
 }

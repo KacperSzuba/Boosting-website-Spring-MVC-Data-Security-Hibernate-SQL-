@@ -1,6 +1,7 @@
 package pl.javastart.manage;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pl.javastart.model.entity.enums.Region;
 import pl.javastart.model.entity.enums.Tier;
@@ -10,13 +11,14 @@ import java.net.MalformedURLException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 class LeagueOfLegendsAPIConnectorTest {
     private LeagueOfLegendsAPIConnector leagueConnector;
 
     @BeforeEach
     void initializeSummonerLeagueConnector() throws MalformedURLException {
+        //given
         leagueConnector = new LeagueOfLegendsAPIConnector("xVoleRx",Region.EUW);
     }
 
@@ -35,9 +37,9 @@ class LeagueOfLegendsAPIConnectorTest {
     }
 
     @Test
-    void leaguePointsShouldBeCorrent() throws IOException {
+    void leaguePointsShouldBeCorrect() throws IOException {
         //then
-        assertThat(leagueConnector.getActualSoloDuoLeaguePoints(),is("75"));
+        assertThat(leagueConnector.getActualSoloDuoLeaguePoints(),is("33"));
         assertThat(leagueConnector.getActual5vs5LeaguePoints(),is("53"));
     }
 }

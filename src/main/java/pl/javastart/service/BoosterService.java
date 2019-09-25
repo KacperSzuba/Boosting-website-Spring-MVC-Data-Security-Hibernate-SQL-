@@ -34,6 +34,14 @@ public class BoosterService {
         }
     }
 
+    public List<OrderBoost> findCurrentBoost(HttpServletRequest request){
+        return orderBoostRepository.findCurrentBoost(booster(request));
+    }
+
+    public List<OrderBoost> listOfDoneOrderBoosts(HttpServletRequest request){
+        return orderBoostRepository.findDoneOrderBoost(booster(request));
+    }
+
     private boolean checkIfTheBoosterHasNoOrders(HttpServletRequest request){
         return orderBoostRepository.checkIfTheBoosterHasNoOrders(booster(request)).isEmpty();
     }

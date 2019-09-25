@@ -4,10 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.javastart.repository.UserRepository;
 
-import javax.validation.Valid;
-import javax.validation.Validator;
-import javax.validation.constraints.Email;
-
 @Service
 public class EmailChange {
 
@@ -38,7 +34,7 @@ public class EmailChange {
         return email.equals(repeatEmail);
     }
 
-    static boolean isValid(String email) {
+    private static boolean isValid(String email) {
         String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
         return email.matches(regex);
     }
