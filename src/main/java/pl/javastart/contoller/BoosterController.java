@@ -11,6 +11,7 @@ import pl.javastart.repository.OrderBoostRepository;
 import pl.javastart.service.BoosterService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -51,7 +52,7 @@ public class BoosterController {
 
     @RequestMapping("/currentBoost")
     public ModelAndView currentBoost(HttpServletRequest request){
-        List<OrderBoost> currentOrderBoost = boosterService.findCurrentBoost(request);
+        OrderBoost currentOrderBoost = boosterService.findCurrentBoost(request);
         return new ModelAndView("jsp/boosterPages/currentBoost","currentOrderBoost",currentOrderBoost);
     }
 
@@ -59,5 +60,12 @@ public class BoosterController {
     public ModelAndView listOfDoneOrderBoosts(HttpServletRequest request){
         List<OrderBoost> listOfDoneOrderBoosts = boosterService.listOfDoneOrderBoosts(request);
         return new ModelAndView("jsp/boosterPages/doneOrderBoosts","doneOrderBoosts",listOfDoneOrderBoosts);
+    }
+
+    @RequestMapping("/currentBoost/finishBoost")
+    public String finishBoost(HttpServletRequest request,Model model) throws IOException {
+        boosterService.finishBoost(request);
+        model.addAttribute("finishingBoostMessage",boosterService.getMessage());
+        return "jsp/boosterPages/booster";
     }
 }

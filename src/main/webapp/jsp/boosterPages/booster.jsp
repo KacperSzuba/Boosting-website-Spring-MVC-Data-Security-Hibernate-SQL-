@@ -40,5 +40,6 @@
         <a href="${pageContext.request.contextPath}/booster/doneOrderBoosts">Done order boosts</a>
     </div>
     <p>${addingBoostMessage}</p>
+    <p>${finishingBoostMessage}</p>
     </body>
 </html>

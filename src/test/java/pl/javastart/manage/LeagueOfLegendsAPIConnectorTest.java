@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class LeagueOfLegendsAPIConnectorTest {
@@ -32,14 +33,15 @@ class LeagueOfLegendsAPIConnectorTest {
     @Test
     void divisionsShouldBeCorrect() throws IOException {
         //then
-        assertThat(leagueConnector.getActualSoloDuoDivision(),is("IV"));
-        assertThat(leagueConnector.getActual5vs5Division(),is("III"));
+        assertThat(leagueConnector.getActualSoloDuoDivision(),is("4"));
+        assertThat(leagueConnector.getActual5vs5Division(),is("3"));
     }
 
     @Test
     void leaguePointsShouldBeCorrect() throws IOException {
         //then
         assertThat(leagueConnector.getActualSoloDuoLeaguePoints(),is("33"));
+        assertEquals("dea","dea");
         assertThat(leagueConnector.getActual5vs5LeaguePoints(),is("53"));
     }
 }

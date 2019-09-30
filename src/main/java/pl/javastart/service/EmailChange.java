@@ -2,7 +2,10 @@ package pl.javastart.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.javastart.manage.ActualUser;
 import pl.javastart.repository.UserRepository;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Service
 public class EmailChange {
@@ -12,9 +15,12 @@ public class EmailChange {
     @Autowired
     private UserRepository userRepository;
 
-    public void changeEmail(Long id,String email,String repeatEmail){
+    @Autowired
+    private ActualUser actualUser;
+
+    public void changeEmail(HttpServletRequest request, String email, String repeatEmail){
         try{
-            tryToChangeEmail(id,email,repeatEmail);
+            tryToChangeEmail(actualUser.getActualUser(request).getId(),email,repeatEmail);
         }
         catch (IllegalArgumentException exception){
             setMessage(exception.getMessage());

@@ -22,7 +22,7 @@ public interface OrderBoostRepository extends CrudRepository<OrderBoost,Long> {
     Optional<OrderBoost> checkIfTheBoosterHasNoOrders(@Param("u") User u);
 
     @Query(value = "select orderboost from OrderBoost orderboost where orderboost.booster =:user and orderboost.whetherDone=false")
-    List<OrderBoost> findCurrentBoost(@Param("user")User user);
+    OrderBoost findCurrentBoost(@Param("user")User user);
 
     @Transactional
     @Modifying

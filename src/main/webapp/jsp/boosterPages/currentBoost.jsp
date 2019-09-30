@@ -46,22 +46,31 @@
                 <th scope="col">Id</th>
                 <th scope="col">Current Tier</th>
                 <th scope="col">Destination Tier</th>
+                <th scope="col">More about boost</th>
                 <th scope="col">Finish boost</th>
             </tr>
             </thead>
-            <c:forEach items="${currentOrderBoost}" var="order" varStatus="status">
-                <tbody>
-                            <tr>
-                                <th>${status.count}</th>
-                                <th><c:out value="${order.id}" /></th>
-                                <th><c:out value="${order.currentTier}" /></th>
-                                <th><c:out value="${order.destinationTier}" /></th>
-                                <th>
-                                    <a href="#">Finish</a>
-                                </th>
-                            </tr>
-                    </tbody>
-                </c:forEach>
+            <tbody>
+            <tr>
+                <th>
+                    <c:if test="${currentOrderBoost.id != null}">
+                        <c:out value="1" />
+                    </c:if>
+                </th>
+                <th><c:out value="${currentOrderBoost.id}" /></th>
+                <th><c:out value="${currentOrderBoost.currentTier}" /></th>
+                <th><c:out value="${currentOrderBoost.destinationTier}" /></th>
+                <th>
+                    <spring:url value="/booster/orderDetails/${currentOrderBoost.id}" var="orderDetails" />
+                    <a href="${orderDetails}">More</a>
+                </th>
+                <th>
+                    <c:if test="${currentOrderBoost.id != null}">
+                        <a href="${pageContext.request.contextPath}/booster/currentBoost/finishBoost">Finish</a>
+                    </c:if>
+                </th>
+            </tr>
+            </tbody>
         </table>
     </form:form>
     </body>

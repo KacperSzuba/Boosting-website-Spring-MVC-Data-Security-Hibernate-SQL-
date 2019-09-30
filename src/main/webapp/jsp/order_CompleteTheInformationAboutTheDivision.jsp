@@ -12,6 +12,7 @@
 <html>
     <head>
         <title>Title</title>
+        <meta http-equiv="Cache-Control" content="cache">
         <style>
             .center {
                 display: block;

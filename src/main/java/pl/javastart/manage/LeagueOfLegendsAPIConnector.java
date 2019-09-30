@@ -17,9 +17,9 @@ import java.util.TreeMap;
 public class LeagueOfLegendsAPIConnector {
     private Region region;
     private String username;
-    private final String apiKey = "RGAPI-afa7f136-196a-4054-89b3-ba23ffe40928";
+    private final String apiKey = "RGAPI-ae5d0115-3041-43dd-b860-6c00b475abc1";
 
-    LeagueOfLegendsAPIConnector(String username, Region region) {
+    public LeagueOfLegendsAPIConnector(String username, Region region) {
         this.username = username;
         this.region = region;
     }
@@ -58,7 +58,8 @@ public class LeagueOfLegendsAPIConnector {
 
     public String getActualSoloDuoDivision() throws IOException {
         String division = getJsonObject("RANKED_SOLO_5x5").get("rank").toString();
-        return removeQuotes(division);
+        String str = removeQuotes(division);
+        return mapOfDivisions().get(str);
     }
 
     public String getActualSoloDuoLeaguePoints() throws IOException {
@@ -73,7 +74,8 @@ public class LeagueOfLegendsAPIConnector {
 
     public String getActual5vs5Division() throws IOException {
         String division = getJsonObject("RANKED_FLEX_SR").get("rank").toString();
-        return removeQuotes(division);
+        String str = removeQuotes(division);
+        return  mapOfDivisions().get(str);
     }
 
     public String getActual5vs5LeaguePoints() throws IOException {
@@ -85,15 +87,24 @@ public class LeagueOfLegendsAPIConnector {
         return text.replace("\"", "");
     }
 
-    private Map<Region,String> listOfRegions(){
-        Map<Region ,String> listOfRegions2 = new TreeMap<>();
-        listOfRegions2.put(Region.EUW,"euw1");
-        listOfRegions2.put(Region.EUNE,"eun1");
-        listOfRegions2.put(Region.TR,"tr1");
-        return listOfRegions2;
+    private Map<Region,String> mapOfRegions(){
+        Map<Region ,String> mapOfRegions = new TreeMap<>();
+        mapOfRegions.put(Region.EUW,"euw1");
+        mapOfRegions.put(Region.EUNE,"eun1");
+        mapOfRegions.put(Region.TR,"tr1");
+        return mapOfRegions;
+    }
+
+    private Map<String,String> mapOfDivisions(){
+        Map<String,String> mapOfDivisions = new TreeMap<>();
+        mapOfDivisions.put("I","1");
+        mapOfDivisions.put("II","2");
+        mapOfDivisions.put("III","3");
+        mapOfDivisions.put("IV","4");
+        return mapOfDivisions;
     }
 
     private String region(){
-        return listOfRegions().get(region);
+        return mapOfRegions().get(region);
     }
 }

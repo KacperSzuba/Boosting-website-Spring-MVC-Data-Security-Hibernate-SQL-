@@ -44,7 +44,7 @@
             <label>Points:</label>
         </p>
         <p>
-            <label>Current Tier:</label>${boostDetails.destinationTier} ${boostDetails.destinationDivision}
+            <label>Destination Tier:</label>${boostDetails.destinationTier} ${boostDetails.destinationDivision}
             <label>Points:</label>
         </p>
         <p><label>Region:</label>${boostDetails.region}</p>

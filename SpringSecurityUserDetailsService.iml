@@ -71,15 +71,14 @@
     <orderEntry type="library" name="Maven: org.hibernate.validator:hibernate-validator:6.0.17.Final" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate.validator:hibernate-validator-annotation-processor:6.0.17.Final" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.5.1" level="project" />
-    <orderEntry type="library" name="Maven: org.apiguardian:apiguardian-api:1.1.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.5.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.5.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.opentest4j:opentest4j:1.2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-commons:1.5.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-launcher:1.5.0-RC1" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest:2.1" level="project" />
-    <orderEntry type="library" name="Maven: org.junit.jupiter:junit-jupiter-params:5.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.glassfish:javax.el:3.0.1-b08" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-params:5.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:5.1.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:5.1.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-config:5.1.6.RELEASE" level="project" />

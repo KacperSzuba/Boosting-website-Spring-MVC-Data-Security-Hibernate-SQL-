@@ -3,7 +3,10 @@ package pl.javastart.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.javastart.manage.ActualUser;
 import pl.javastart.repository.UserRepository;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Service
 public class PasswordChange {
@@ -16,12 +19,15 @@ public class PasswordChange {
     @Autowired
     private UserRepository userRepository;
 
-    public void changePassword(Long id,String password,String repeatPassword){
+    @Autowired
+    private ActualUser actualUser;
+
+    public void changePassword(HttpServletRequest request, String password, String repeatPassword){
         try {
-            tryToChangePassword(id,password,repeatPassword);
+            tryToChangePassword(actualUser.getActualUser(request).getId(),password,repeatPassword);
         }
-        catch (IllegalArgumentException exceptoin){
-            setMessage(exceptoin.getMessage());
+        catch (IllegalArgumentException exception){
+            setMessage(exception.getMessage());
         }
     }
 

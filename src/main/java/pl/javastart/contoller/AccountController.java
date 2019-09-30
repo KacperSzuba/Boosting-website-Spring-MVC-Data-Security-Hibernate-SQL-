@@ -17,9 +17,6 @@ import java.security.Principal;
 public class AccountController {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private PasswordChange passwordChange;
 
     @Autowired
@@ -38,9 +35,7 @@ public class AccountController {
     @GetMapping("/changePasswordForm")
     public String changePassword(@RequestParam ("password") String password,
         @RequestParam("repeatPassword")String repeatPassword, Model model,HttpServletRequest request){
-        Principal principal = request.getUserPrincipal();
-        User user = userRepository.findByUsername(principal.getName());
-        passwordChange.changePassword(user.getId(),password,repeatPassword);
+        passwordChange.changePassword(request,password,repeatPassword);
         model.addAttribute("newPassword",passwordChange.getMessage());
         return "jsp/user_ChangePassword";
     }
@@ -53,9 +48,7 @@ public class AccountController {
     @GetMapping("/changeEmailForm")
     public String changeEmail(@RequestParam ("email") String email,
         @RequestParam("repeatEmail")String repeatEmail, Model model,HttpServletRequest request){
-        Principal principal = request.getUserPrincipal();
-        User user = userRepository.findByUsername(principal.getName());
-        emailChange.changeEmail(user.getId(),email,repeatEmail);
+        emailChange.changeEmail(request,email,repeatEmail);
         model.addAttribute("newEmail",emailChange.getMessage());
         return "jsp/user_ChangeEmail";
     }
