@@ -9,7 +9,7 @@ import pl.javastart.repository.UserRepository;
 import javax.servlet.http.HttpServletRequest;
 
 @Service
-public class PasswordChange {
+public class PasswordManager {
 
     private String message;
 

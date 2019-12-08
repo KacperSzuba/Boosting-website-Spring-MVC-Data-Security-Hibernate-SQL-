@@ -1,8 +1,8 @@
 package pl.javastart.manage;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import pl.javastart.manage.api.LeagueOfLegendsAPIConnector;
 import pl.javastart.model.entity.enums.Region;
 import pl.javastart.model.entity.enums.Tier;
 

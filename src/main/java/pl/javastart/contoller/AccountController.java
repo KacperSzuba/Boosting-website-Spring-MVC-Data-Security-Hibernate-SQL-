@@ -4,23 +4,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.javastart.service.EmailChange;
-import pl.javastart.service.PasswordChange;
-import pl.javastart.model.entity.User;
-import pl.javastart.repository.UserRepository;
+import pl.javastart.service.EmailManager;
+import pl.javastart.service.PasswordManager;
 
 import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
 
 @Controller
 @RequestMapping("/account")
 public class AccountController {
 
     @Autowired
-    private PasswordChange passwordChange;
+    private PasswordManager passwordManager;
 
     @Autowired
-    private EmailChange emailChange;
+    private EmailManager emailChange;
 
     @RequestMapping
     public String showAccountPage(){
@@ -35,8 +32,8 @@ public class AccountController {
     @GetMapping("/changePasswordForm")
     public String changePassword(@RequestParam ("password") String password,
         @RequestParam("repeatPassword")String repeatPassword, Model model,HttpServletRequest request){
-        passwordChange.changePassword(request,password,repeatPassword);
-        model.addAttribute("newPassword",passwordChange.getMessage());
+        passwordManager.changePassword(request,password,repeatPassword);
+        model.addAttribute("newPassword", passwordManager.getMessage());
         return "jsp/user_ChangePassword";
     }
 

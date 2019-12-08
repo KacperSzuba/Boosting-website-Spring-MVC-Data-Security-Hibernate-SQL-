@@ -1,4 +1,4 @@
-package pl.javastart.manage;
+package pl.javastart.manage.api;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

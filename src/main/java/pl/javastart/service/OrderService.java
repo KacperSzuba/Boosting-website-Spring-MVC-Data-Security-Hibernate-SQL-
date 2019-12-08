@@ -5,16 +5,14 @@ import org.springframework.stereotype.Service;
 import pl.javastart.manage.ActualUser;
 import pl.javastart.model.entity.Divisions;
 import pl.javastart.model.entity.OrderBoost;
-import pl.javastart.model.entity.User;
 import pl.javastart.repository.OrderBoostRepository;
-import pl.javastart.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
 import java.time.LocalDateTime;
 
 @Service
 public class OrderService {
+
     @Autowired
     private OrderBoostRepository orderBoostRepository;
 
@@ -32,10 +30,5 @@ public class OrderService {
         orderBoost.setWhetherPaid(false);
         orderBoost.setUser(actualUser.getActualUser(request));
         orderBoostRepository.save(orderBoost);
-    }
-
-    public void whichUserBought(){
-        OrderBoost orderBoost = orderBoostRepository.findOrderBoostBylolUsername("Boost");
-        System.out.println(orderBoost.getUser().getUsername());
     }
 }

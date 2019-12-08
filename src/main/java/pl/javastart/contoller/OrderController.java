@@ -46,7 +46,7 @@ public class OrderController {
     }
 
     @RequestMapping("/informationAboutAccount")
-    public String informationAboutAccount(@ModelAttribute("orderBoost") OrderBoost orderBoost,Model model,HttpServletRequest request){
+    public String informationAboutAccount(@ModelAttribute("orderBoost") OrderBoost orderBoost,HttpServletRequest request){
         orderService.makeOrder(orderBoost,request);
         return "jsp/order_ConfirmOrder";
     }

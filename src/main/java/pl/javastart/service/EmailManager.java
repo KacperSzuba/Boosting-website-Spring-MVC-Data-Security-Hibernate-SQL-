@@ -8,7 +8,7 @@ import pl.javastart.repository.UserRepository;
 import javax.servlet.http.HttpServletRequest;
 
 @Service
-public class EmailChange {
+public class EmailManager {
 
     private String message;
 

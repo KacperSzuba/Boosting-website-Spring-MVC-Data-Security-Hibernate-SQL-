@@ -15,6 +15,9 @@ import java.util.Optional;
 public interface OrderBoostRepository extends CrudRepository<OrderBoost,Long> {
     OrderBoost findOrderBoostBylolUsername(String lolUsername);
 
+    @Query(value = "select orderboost from OrderBoost orderboost where orderboost.user =:user and orderboost.whetherDone=false")
+    Optional<OrderBoost> findOrderBoostByUser(@Param("user") User user);
+
     @Query(value = "SELECT orderboost FROM OrderBoost orderboost WHERE orderboost.booster = null")
     List<OrderBoost> findOrderBoostByBoosterEqualsNull();
 
