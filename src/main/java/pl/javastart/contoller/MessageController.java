@@ -32,11 +32,11 @@ public class MessageController {
 
     @RequestMapping("/send")
     public String sendMessage(@RequestParam("username") String username ,@ModelAttribute("message") Message message , HttpServletRequest request){
-        messageHandler.sendMessage(request,message,username);
+        messageHandler.sendMessage(request,message  ,username);
         return "redirect:/message";
     }
 
-    @RequestMapping("retrieve")
+    @RequestMapping("/retrieve")
     public String getMessage(Model model,HttpServletRequest request){
         model.addAttribute("msg", messageHandler.listOfMessages(request));
         return "jsp/messageHandler/listOfMessages";

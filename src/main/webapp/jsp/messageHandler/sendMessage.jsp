@@ -38,7 +38,12 @@
         <form:input path="message" placeholder="Message" />
         <select name="username">
             <option value="Admin123x">Admin</option>
-            <option value="booster">Booster</option>
+            <security:authorize access="hasRole('USER')">
+                <option value="booster">Booster</option>
+            </security:authorize>
+            <security:authorize access="hasRole('BOOSTER')">
+                    <option value="customer">Customer</option>
+            </security:authorize>
         </select>
         <input type="submit" value="Submit"/>
     </form:form>

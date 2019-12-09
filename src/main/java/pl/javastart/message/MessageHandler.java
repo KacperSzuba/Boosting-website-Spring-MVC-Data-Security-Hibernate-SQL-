@@ -32,7 +32,8 @@ public class MessageHandler {
 
     //Rozbić na funkcje
     public void sendMessage(HttpServletRequest request, Message message, String username){
-        Optional<OrderBoost> orderBoost = orderBoostRepository.findOrderBoostByUser(actualUser.getActualUser(request));
+        Optional<OrderBoost> orderBoost = orderBoostRepository.findOrderBoostByUserOrBooster(actualUser.getActualUser(request));
+        System.out.println(orderBoost.get().getBooster().getUsername());
         switch (username) {
             case "Admin123x":
                 message.setUser2(userRepository.findByUsername("Admin123x"));
