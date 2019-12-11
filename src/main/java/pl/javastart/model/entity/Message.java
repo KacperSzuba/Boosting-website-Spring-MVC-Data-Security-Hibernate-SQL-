@@ -9,22 +9,22 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String title;
+    private String message;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="messageSender")
     private User user;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="recipientOfTheMessage")
     private User user2;
-    private String title;
-    private String message;
     private LocalDateTime date;
     public Message(){ }
 
-    public Message(User user, User user2, String title, String message) {
-        this.user = user;
-        this.user2 = user2;
+    public Message(String title, String message,User user, User user2) {
         this.title = title;
         this.message = message;
+        this.user = user;
+        this.user2 = user2;
         this.date = LocalDateTime.now();
     }
 
