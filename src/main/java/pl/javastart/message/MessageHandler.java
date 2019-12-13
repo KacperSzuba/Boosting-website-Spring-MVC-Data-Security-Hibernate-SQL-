@@ -34,34 +34,7 @@ public class MessageHandler {
         this.orderBoostRepository = orderBoostRepository;
         this.changeAccountStatus = changeAccountStatus;
     }
-/*
-    //Rozbić na funkcje
-    public void sendMessage(HttpServletRequest request, Message message, String username){
-        Optional<OrderBoost> orderBoost = orderBoostRepository.findOrderBoostByUserOrBooster(actualUser.getActualUser(request));
-        switch (username) {
-            case "Admin123x":
-                message.setUser2(userRepository.findByUsername("Admin123x"));
-                break;
-            case "booster":
-                orderBoost.ifPresent(boost -> message.setUser2(boost.getBooster()));
-                break;
-            case "customer":
-                orderBoost.ifPresent(boost -> message.setUser2(boost.getUser()));
-                break;
-        }
-        Message messageDB = new Message(message.getTitle(), message.getMessage(),actualUser.getActualUser(request),message.getUser2());
-        messageRepository.save(messageDB);
-    }
 
-    public void sendMessage(Message message){
-        List<Message> listOfMessages = new ArrayList<>();
-        for(Message message2 :messageRepository.findAll()){
-            if(message2.getUser2().getUsername().equals("Admin123x")){
-                listOfMessages.add(message2);
-            }
-        }
-    }
-    */
     public Set<Long> setOfRecipientId(HttpServletRequest request){
         Set<Long> recipientId = new TreeSet<>();
         for (Message message : messageRepository.findAll()) {
@@ -71,26 +44,7 @@ public class MessageHandler {
         }
         return recipientId;
     }
-    /*
-    public Set<Long> setOfSenderId(HttpServletRequest request){
-        Set<Long> senderId = new TreeSet<>();
-        for (Message message : messageRepository.findAll()) {
-            if (Objects.equals(message.getUser().getId(), actualUser.getActualUser(request).getId())) {
-                senderId.add(message.getUser2().getId());
-            }
-        }
-        return senderId;
-    }
-    public Set<Message> listOfMessages3(HttpServletRequest request){
-        Set<Message> usernames = new HashSet<>();
-        for (Message message : messageRepository.findAll()) {
-            if (Integer.parseInt(String.valueOf(message.getUser2().getId())) == Integer.parseInt(String.valueOf(actualUser.getActualUser(request).getId()))) {
-                usernames.add(message);
-            }
-        }
-        return usernames;
-    }
-    */
+
     public List<User> listOfRecipients(HttpServletRequest request){
         Optional<OrderBoost> orderBoost = orderBoostRepository.findOrderBoostByUserOrBooster(actualUser.getActualUser(request));
         List<User> users = new ArrayList<>();
@@ -119,7 +73,7 @@ public class MessageHandler {
         messageRepository.save(messageDB);
     }
 
-    public List<Message> getConversation(User user,User user2){
-        return messageRepository.findAllByUserAndUser2(user,user2);
+    public List<Message> getConversation(Long id,HttpServletRequest request){
+        return messageRepository.findAllByUserAndUser2(userRepository.findById(id).get(),actualUser.getActualUser(request));
     }
 }
