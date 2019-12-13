@@ -14,10 +14,10 @@
     </head>
     <body>
         <h1>Single Conversation</h1>
-        <c:forEach items="${msg2}" var="project">
+        <c:forEach items="${conversation}" var="conversation">
             <div>
-                <c:out value="${project.user.id}" />
-                <c:out value="${project.message}" />
+                <c:out value="${conversation.user.id}" />
+                <c:out value="${conversation.message}" />
             </div>
         </c:forEach>
     </body>

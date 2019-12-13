@@ -14,10 +14,10 @@
     </head>
     <body>
         <h1>Messages received</h1>
-        <c:forEach items="${messages}" var="project">
+        <c:forEach items="${conversations}" var="recipient">
             <div>
-                <c:out value="${project}" />
-                <spring:url value="/message/singleConversation/${project}" var="orderDetails" />
+                <c:out value="${recipient}" />
+                <spring:url value="/message/singleConversation/${recipient}" var="orderDetails" />
                 <a href="${orderDetails}">More</a>
             </div>
         </c:forEach>

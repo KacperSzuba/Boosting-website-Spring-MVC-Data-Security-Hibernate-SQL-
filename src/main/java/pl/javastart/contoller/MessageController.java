@@ -32,12 +32,12 @@ public class MessageController {
 
     @RequestMapping("/retrieve")
     public ModelAndView getMessage2(HttpServletRequest request){
-        return new ModelAndView("jsp/messageHandler/messagesReceived","messages",messageHandler.setOfRecipientId(request));
+        return new ModelAndView("jsp/messageHandler/messagesReceived", "conversations",messageHandler.setOfRecipientId(request));
     }
 
     @GetMapping("/singleConversation/{id}")
     public String singleConversation(@PathVariable("id") final Long id, Model model,HttpServletRequest request){
-        model.addAttribute("msg2",messageHandler.getConversation(id,request));
+        model.addAttribute("conversation",messageHandler.getConversation(id,request));
         return "jsp/messageHandler/singleConversation";
     }
 }
