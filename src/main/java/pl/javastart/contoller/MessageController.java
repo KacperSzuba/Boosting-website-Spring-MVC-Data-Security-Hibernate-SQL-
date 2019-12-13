@@ -1,6 +1,5 @@
 package pl.javastart.contoller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/message")
 public class MessageController {
-    @Autowired
-    private MessageHandler messageHandler;
+    private final MessageHandler messageHandler;
+
+    public MessageController(MessageHandler messageHandler) {
+        this.messageHandler = messageHandler;
+    }
 
     @RequestMapping
     public String message(Model model,HttpServletRequest request){
@@ -27,7 +29,7 @@ public class MessageController {
     @PostMapping("/send")
     public String sendMessage(@ModelAttribute("message") Message message , HttpServletRequest request){
         messageHandler.sendMessage(message,request);
-        return "jsp/home";
+        return "redirect:/message/singleConversation/"+messageHandler.getTemp();
     }
 
     @RequestMapping("/retrieve")

@@ -28,6 +28,14 @@ public class Message {
         this.date = LocalDateTime.now();
     }
 
+    public Message(Message copyMessage) {
+        this.id = copyMessage.id;
+        this.title = copyMessage.title;
+        this.message = copyMessage.message;
+        this.user = copyMessage.user;
+        this.user2 = copyMessage.user2;
+        this.date = LocalDateTime.now();
+    }
     public Long getId() {
         return id;
     }

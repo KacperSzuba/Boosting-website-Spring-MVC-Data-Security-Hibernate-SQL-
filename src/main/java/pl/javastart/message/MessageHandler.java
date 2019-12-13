@@ -16,6 +16,7 @@ import java.util.*;
 
 @Service
 public class MessageHandler {
+    public Long temp;
     private final MessageRepository messageRepository;
 
     private final ActualUser actualUser;
@@ -35,24 +36,12 @@ public class MessageHandler {
         this.changeAccountStatus = changeAccountStatus;
     }
 
-    public Set<Long> setOfRecipientId(HttpServletRequest request){
-        Set<Long> recipientId = new TreeSet<>();
-        for (Message message : messageRepository.findAll()) {
-            if (Objects.equals(message.getUser2().getId(), actualUser.getActualUser(request).getId())) {
-                recipientId.add(message.getUser().getId());
-            }
-        }
-        return recipientId;
-    }
-
     public List<User> listOfRecipients(HttpServletRequest request){
         Optional<OrderBoost> orderBoost = orderBoostRepository.findOrderBoostByUserOrBooster(actualUser.getActualUser(request));
         List<User> users = new ArrayList<>();
         if(changeAccountStatus.getCurrentUserRole(actualUser.getActualUser(request)) == RoleName.ROLE_ADMIN){
             userRepository.findAll().iterator().forEachRemaining(user -> {
-                if(user.getUsername().equals(actualUser.getActualUser(request).getUsername())){
-                }
-                else {
+                if( ! user.getUsername().equals(actualUser.getActualUser(request).getUsername())) {
                     users.add(user);
                 }
             });
@@ -67,13 +56,42 @@ public class MessageHandler {
         }
         return users;
     }
+    public Long getTemp(){
+        return messageRepository.findTopByOrderByIdDesc().getUser2().getId();
+    }
 
     public void sendMessage(Message message,HttpServletRequest request){
         Message messageDB = new Message(message.getTitle(), message.getMessage(),actualUser.getActualUser(request),message.getUser2());
         messageRepository.save(messageDB);
     }
 
+    public Set<Long> setOfRecipientId(HttpServletRequest request){
+        Set<Long> recipientId = new TreeSet<>();
+        for (Message message : messageRepository.findAll()) {
+            if (Objects.equals(message.getUser2().getId(), actualUser.getActualUser(request).getId())) {
+                System.out.println(message.getUser().getUsername());
+                recipientId.add(message.getUser().getId());
+            }
+        }
+        return recipientId;
+    }
+
+    public Set<Long> setOfSendMessages(HttpServletRequest request){
+        Set<Long> recipientId = new TreeSet<>();
+        for (Message message : messageRepository.findAll()) {
+            if (Objects.equals(message.getUser().getId(), actualUser.getActualUser(request).getId())) {
+                System.out.println(message.getUser().getUsername());
+                recipientId.add(message.getUser().getId());
+            }
+        }
+        return recipientId;
+    }
+
     public List<Message> getConversation(Long id,HttpServletRequest request){
         return messageRepository.findAllByUserAndUser2(userRepository.findById(id).get(),actualUser.getActualUser(request));
+    }
+
+    public List<Message> getConversation(User user, User user2){
+        return messageRepository.findAllByUserAndUser2(user,user2);
     }
 }

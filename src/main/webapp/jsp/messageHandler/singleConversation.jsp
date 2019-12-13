@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: kacpe
@@ -13,6 +14,23 @@
         <title>Title</title>
     </head>
     <body>
+    <nav>
+        <ul>
+            <security:authorize access="hasAnyRole('USER','ADMIN','BOOSTER')">
+                <li>
+                    <a href="${pageContext.request.contextPath}/account">Account page</a>
+                </li>
+            </security:authorize>
+            <security:authorize access="hasRole('BOOSTER')">
+                <li>
+                    <a href="${pageContext.request.contextPath}/booster">Booster page</a>
+                </li>
+            </security:authorize>
+            <li>
+                <a href="${pageContext.request.contextPath}/order">Order page</a>
+            </li>
+        </ul>
+    </nav>
         <h1>Single Conversation</h1>
         <c:forEach items="${conversation}" var="conversation">
             <div>
