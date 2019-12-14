@@ -38,5 +38,30 @@
                 <c:out value="${conversation.message}" />
             </div>
         </c:forEach>
+        <div id="div1">
+            <c:forEach items="${conv}" var="conv">
+                <div class="div">
+                    <p class="message">${conv.message}</p>
+                </div>
+            </c:forEach>
+        </div>
+        <script>
+            var div1 = document.getElementById("div1").setAttribute("align","right");
+            var div = document.getElementsByClassName("div").setAttribute("align","right");
+            var message = document.getElementsByClassName("message").value.toString();
+            var you = String("123");
+
+            if(JSON.stringify(message) === JSON.stringify(you)){
+                 div1 = document.getElementById("div1").setAttribute("align","left");
+                 div = document.getElementsByClassName("div").setAttribute("align","left");
+            }
+            /*
+            else {
+                var div1 = document.getElementById("div1").setAttribute("align","right");
+                var div = document.getElementsByClassName("div").setAttribute("align","right");
+            }
+
+             */
+        </script>
     </body>
 </html>

@@ -40,6 +40,7 @@ public class MessageController {
     @GetMapping("/singleConversation/{id}")
     public String singleConversation(@PathVariable("id") final Long id, Model model,HttpServletRequest request){
         model.addAttribute("conversation",messageHandler.getConversation(id,request));
+        model.addAttribute("conv",messageHandler.getCoonv(id,request));
         return "jsp/messageHandler/singleConversation";
     }
 }

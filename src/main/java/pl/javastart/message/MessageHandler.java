@@ -91,7 +91,33 @@ public class MessageHandler {
         return messageRepository.findAllByUserAndUser2(userRepository.findById(id).get(),actualUser.getActualUser(request));
     }
 
-    public List<Message> getConversation(User user, User user2){
-        return messageRepository.findAllByUserAndUser2(user,user2);
+    public List<Message> getConversation(HttpServletRequest request,Long id){
+        return messageRepository.findAllByUserAndUser2(actualUser.getActualUser(request),userRepository.findById(id).get());
+    }
+    public List<Message> getCoonv(Long id,HttpServletRequest request){
+        List<Message> list = new ArrayList<>();
+        list.addAll(getConversation(id,request));
+        list.addAll(getConversation(request,id));
+        Collections.sort(list);
+        return list;
+    }
+
+    public List<Message> left(Long id , HttpServletRequest request){
+        ArrayList<Message> list = new ArrayList<>();
+        for (Message message : getCoonv(id, request)) {
+            if(message.getUser().getId() == id){
+                list.add(message);
+            }
+        }
+        return list;
+    }
+    public List<Message> right(Long id , HttpServletRequest request){
+        ArrayList<Message> list = new ArrayList<>();
+        for (Message message : getCoonv(id, request)) {
+            if(message.getUser2().getId() == id){
+                list.add(message);
+            }
+        }
+        return list;
     }
 }
