@@ -1,25 +1,22 @@
 package pl.javastart.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.javastart.model.entity.enums.RoleName;
 import pl.javastart.model.entity.User;
+import pl.javastart.model.entity.enums.RoleName;
 import pl.javastart.repository.UserRepository;
 import pl.javastart.repository.UserRoleRepository;
+import pl.javastart.model.entity.UserRole;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
-public class UserCreator {
-
+public class UserCreatorService {
     private String message;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -28,7 +25,6 @@ public class UserCreator {
 
     @Autowired
     private UserRoleRepository userRoleRepository;
-
 
     public boolean createAccount(User user){
         try {
@@ -49,9 +45,9 @@ public class UserCreator {
             setUserRegistrationInformation("User with this username already exist");
         }
         else {
-            pl.javastart.model.entity.UserRole userRole = userRoleRepository.getUserRole(RoleName.ROLE_USER);
+            UserRole userRole = userRoleRepository.getUserRole(RoleName.ROLE_USER);
             userRoleRepository.save(userRole);
-            List<pl.javastart.model.entity.UserRole> roles = new ArrayList<>();
+            List<UserRole> roles = new ArrayList<>();
             roles.add(userRole);
             String password = passwordEncoder.encode(user.getPassword());
             userRepository.save(new User(user.getUsername(),password,true,user.getEmail(),LocalDateTime.now(),roles));

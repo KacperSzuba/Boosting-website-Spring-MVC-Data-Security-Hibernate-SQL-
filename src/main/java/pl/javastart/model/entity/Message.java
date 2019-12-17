@@ -13,18 +13,18 @@ public class Message implements Comparable<Message>{
     private String message;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="messageSender")
-    private User messageSender;
+    private User user;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="recipientOfTheMessage")
-    private User recipientOfTheMessage;
+    private User user2;
     private LocalDateTime date;
     public Message(){ }
 
-    public Message(String title, String message, User messageSender, User recipientOfTheMessage) {
+    public Message(String title, String message, User user, User user2) {
         this.title = title;
         this.message = message;
-        this.messageSender = messageSender;
-        this.recipientOfTheMessage = recipientOfTheMessage;
+        this.user = user;
+        this.user2 = user2;
         this.date = LocalDateTime.now();
     }
 
@@ -32,8 +32,8 @@ public class Message implements Comparable<Message>{
         this.id = copyMessage.id;
         this.title = copyMessage.title;
         this.message = copyMessage.message;
-        this.messageSender = copyMessage.messageSender;
-        this.recipientOfTheMessage = copyMessage.recipientOfTheMessage;
+        this.user = copyMessage.user;
+        this.user2 = copyMessage.user2;
         this.date = LocalDateTime.now();
     }
     public Long getId() {
@@ -44,20 +44,20 @@ public class Message implements Comparable<Message>{
         this.id = id;
     }
 
-    public User getMessageSender() {
-        return messageSender;
+    public User getUser() {
+        return user;
     }
 
-    public void setMessageSender(User messageSender) {
-        this.messageSender = messageSender;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public User getRecipientOfTheMessage() {
-        return recipientOfTheMessage;
+    public User getUser2() {
+        return user2;
     }
 
-    public void setRecipientOfTheMessage(User recipientOfTheMessage) {
-        this.recipientOfTheMessage = recipientOfTheMessage;
+    public void setUser2(User user2) {
+        this.user2 = user2;
     }
 
     public String getTitle() {
@@ -91,8 +91,8 @@ public class Message implements Comparable<Message>{
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", message='" + message + '\'' +
-                ", user=" + messageSender +
-                ", user2=" + recipientOfTheMessage +
+                ", user=" + user +
+                ", user2=" + user2 +
                 ", date=" + date +
                 '}';
     }

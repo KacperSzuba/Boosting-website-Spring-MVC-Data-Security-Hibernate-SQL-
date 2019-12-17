@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 
 @Entity
 public class OrderBoost {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -163,8 +162,6 @@ public class OrderBoost {
     public void setWhetherPaid(boolean whetherPaid) {
         this.whetherPaid = whetherPaid;
     }
-
-
 
     public User getUser() {
         return user;

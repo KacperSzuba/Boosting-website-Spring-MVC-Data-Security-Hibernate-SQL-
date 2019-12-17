@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.javastart.model.entity.User;
-import pl.javastart.service.UserCreator;
+import pl.javastart.service.UserCreatorService;
 
 import javax.validation.Valid;
 
@@ -16,7 +16,7 @@ import javax.validation.Valid;
 public class RegisterController {
 
     @Autowired
-    private UserCreator userCreator;
+    private UserCreatorService userCreator;
 
     @GetMapping("/register")
     public String showRegisterPage(Model model){

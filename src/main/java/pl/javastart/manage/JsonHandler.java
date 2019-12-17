@@ -24,8 +24,8 @@ public class JsonHandler {
             record.put("id",message.getId());
             record.put("title",message.getTitle());
             record.put("message",message.getMessage());
-            record.put("messageSender",message.getMessageSender().getId());
-            record.put("recipientOfTheMessage",message.getRecipientOfTheMessage().getId());
+            record.put("messageSender",message.getUser().getId());
+            record.put("recipientOfTheMessage",message.getUser2().getId());
             record.put("date",message.getDate().toString());
             jsonArray.add(record);
         }try {

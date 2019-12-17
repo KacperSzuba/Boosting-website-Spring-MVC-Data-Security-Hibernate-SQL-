@@ -8,5 +8,4 @@ import java.util.List;
 public interface DivisionsRepository extends CrudRepository<Divisions,Long> {
     List<Divisions> findAllByPointsAndDivision(String points,Integer division);
     List<Divisions> findAllByPoints(String points);
-
 }

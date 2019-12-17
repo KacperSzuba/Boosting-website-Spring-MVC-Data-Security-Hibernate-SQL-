@@ -33,7 +33,7 @@
     <h1>Send message</h1>
     <body>
     <form:form method="post" action="message/send" modelAttribute="message">
-        <form:select path="recipientOfTheMessage.id" items="${users}" itemLabel="username" itemValue="id"/>
+        <form:select path="user2.id" items="${users}" itemLabel="username" itemValue="id"/>
         <form:input path="title" placeholder="title"/>
         <form:input path="message" placeholder="message"/>
         <input type="submit" value="Submit"/>

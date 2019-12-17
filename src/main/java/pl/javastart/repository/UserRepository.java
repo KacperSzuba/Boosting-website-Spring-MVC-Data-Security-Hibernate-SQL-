@@ -8,8 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.javastart.model.entity.User;
 import pl.javastart.model.entity.UserRole;
 
-import java.util.List;
-
 public interface UserRepository extends CrudRepository<User,Long> {
     User findByUsername(String username);
     boolean existsUserByUsername(String username);
@@ -27,11 +25,6 @@ public interface UserRepository extends CrudRepository<User,Long> {
     @Modifying
     @Query(value = "UPDATE User u SET u.email =:email where u.id=:id")
     void changeEmailQuery(@Param("id") Long id,@Param("email") String email);
-
-    @Transactional
-    @Modifying
-    @Query(value = "update User u Set u.roles =:role where u.id =:id")
-    void changeUserRole(@Param("id") Long id, @Param("role") List<UserRole> role);
 
     @Transactional
     @Modifying

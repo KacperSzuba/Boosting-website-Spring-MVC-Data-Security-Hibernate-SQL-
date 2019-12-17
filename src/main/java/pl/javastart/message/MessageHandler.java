@@ -34,7 +34,7 @@ public class MessageHandler {
     }
 
     public void sendMessage(Message message,HttpServletRequest request){
-        Message messageDB = new Message(message.getTitle(), message.getMessage(),actualUser.getActualUser(request),message.getRecipientOfTheMessage());
+        Message messageDB = new Message(message.getTitle(), message.getMessage(),actualUser.getActualUser(request),message.getUser2());
         messageRepository.save(messageDB);
     }
 
@@ -62,11 +62,11 @@ public class MessageHandler {
     public Set<Long> setOfSendMessages(HttpServletRequest request){
         Set<Long> recipientId = new TreeSet<>();
         for (Message message : messageRepository.findAll()) {
-            if (Objects.equals(message.getMessageSender().getId(), actualUser.getActualUser(request).getId())) {
-                recipientId.add(message.getRecipientOfTheMessage().getId());
+            if (Objects.equals(message.getUser().getId(), actualUser.getActualUser(request).getId())) {
+                recipientId.add(message.getUser2().getId());
             }
-            else if (Objects.equals(message.getRecipientOfTheMessage().getId(), actualUser.getActualUser(request).getId())) {
-                recipientId.add(message.getMessageSender().getId());
+            else if (Objects.equals(message.getUser2().getId(), actualUser.getActualUser(request).getId())) {
+                recipientId.add(message.getUser().getId());
             }
         }
         return recipientId;
@@ -81,7 +81,15 @@ public class MessageHandler {
     }
 
     private List<Message> getMessagesReceived(Long id, HttpServletRequest request){
-        return messageRepository.findAllByUserAndUser2(userRepository.findById(id).get(),actualUser.getActualUser(request));
+        List<Message> list = null;
+        try{
+            list = messageRepository.findAllByUserAndUser2(userRepository.findById(id).get(),actualUser.getActualUser(request));;
+            return list;
+        }
+        catch (IllegalStateException exeption){
+            exeption.getCause();
+        }
+        return list;
     }
 
     private List<Message> getMessagesSent(HttpServletRequest request, Long id){
@@ -90,7 +98,7 @@ public class MessageHandler {
 
     //zmienić metode getTemp
     public Long getTemp(){
-        return messageRepository.findTopByOrderByIdDesc().getRecipientOfTheMessage().getId();
+        return messageRepository.findTopByOrderByIdDesc().getUser2().getId();
     }
 
     public void setIdOfConversation(Long idOfConversation){

@@ -1,6 +1,5 @@
 package pl.javastart.config.SpringMVCConfiguration;
 
-
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class WebInit extends AbstractAnnotationConfigDispatcherServletInitializer {

@@ -7,7 +7,6 @@ import pl.javastart.manage.api.LeagueOfLegendsAPIConnector;
 import pl.javastart.model.entity.OrderBoost;
 import pl.javastart.model.entity.enums.Region;
 import pl.javastart.repository.OrderBoostRepository;
-import pl.javastart.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -22,9 +21,6 @@ public class BoosterService {
 
     @Autowired
     private OrderBoostRepository orderBoostRepository;
-
-    @Autowired
-    private UserRepository userRepository;
 
     private LeagueOfLegendsAPIConnector leagueOfLegendsAPIConnector;
 
@@ -42,6 +38,7 @@ public class BoosterService {
             setMessage("You incorrect took order");
         }
     }
+
     public void finishBoost(HttpServletRequest request) throws IOException {
         leagueOfLegendsAPIConnector = new LeagueOfLegendsAPIConnector(getUsername(request),getRegion(request));
         if(isDivisionsAreEqual(request) && isTiersAreEqual(request)){
