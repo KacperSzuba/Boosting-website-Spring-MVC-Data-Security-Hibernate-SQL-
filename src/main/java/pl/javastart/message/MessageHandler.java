@@ -34,7 +34,7 @@ public class MessageHandler {
     }
 
     public void sendMessage(Message message,HttpServletRequest request){
-        Message messageDB = new Message(message.getTitle(), message.getMessage(),actualUser.getActualUser(request),message.getUser2());
+        Message messageDB = new Message(message.getTitle(), message.getMessage(),actualUser.getActualUser(request),message.getRecipientOfTheMessage());
         messageRepository.save(messageDB);
     }
 
@@ -62,11 +62,11 @@ public class MessageHandler {
     public Set<Long> setOfSendMessages(HttpServletRequest request){
         Set<Long> recipientId = new TreeSet<>();
         for (Message message : messageRepository.findAll()) {
-            if (Objects.equals(message.getUser().getId(), actualUser.getActualUser(request).getId())) {
-                recipientId.add(message.getUser2().getId());
+            if (Objects.equals(message.getMessageSender().getId(), actualUser.getActualUser(request).getId())) {
+                recipientId.add(message.getRecipientOfTheMessage().getId());
             }
-            else if (Objects.equals(message.getUser2().getId(), actualUser.getActualUser(request).getId())) {
-                recipientId.add(message.getUser().getId());
+            else if (Objects.equals(message.getRecipientOfTheMessage().getId(), actualUser.getActualUser(request).getId())) {
+                recipientId.add(message.getMessageSender().getId());
             }
         }
         return recipientId;
@@ -90,7 +90,7 @@ public class MessageHandler {
 
     //zmienić metode getTemp
     public Long getTemp(){
-        return messageRepository.findTopByOrderByIdDesc().getUser2().getId();
+        return messageRepository.findTopByOrderByIdDesc().getRecipientOfTheMessage().getId();
     }
 
     public void setIdOfConversation(Long idOfConversation){
