@@ -16,15 +16,12 @@ import java.util.*;
 
 @Service
 public class MessageHandler {
-    public Long temp;
+    private Long idOfConversation;
+
     private final MessageRepository messageRepository;
-
     private final ActualUser actualUser;
-
     private final UserRepository userRepository;
-
     private final OrderBoostRepository orderBoostRepository;
-
     private final ChangeAccountStatus changeAccountStatus;
 
     public MessageHandler(MessageRepository messageRepository, ActualUser actualUser, UserRepository userRepository, OrderBoostRepository orderBoostRepository,
@@ -34,6 +31,11 @@ public class MessageHandler {
         this.userRepository = userRepository;
         this.orderBoostRepository = orderBoostRepository;
         this.changeAccountStatus = changeAccountStatus;
+    }
+
+    public void sendMessage(Message message,HttpServletRequest request){
+        Message messageDB = new Message(message.getTitle(), message.getMessage(),actualUser.getActualUser(request),message.getUser2());
+        messageRepository.save(messageDB);
     }
 
     public List<User> listOfRecipients(HttpServletRequest request){
@@ -56,68 +58,46 @@ public class MessageHandler {
         }
         return users;
     }
-    public Long getTemp(){
-        return messageRepository.findTopByOrderByIdDesc().getUser2().getId();
-    }
-
-    public void sendMessage(Message message,HttpServletRequest request){
-        Message messageDB = new Message(message.getTitle(), message.getMessage(),actualUser.getActualUser(request),message.getUser2());
-        messageRepository.save(messageDB);
-    }
-
-    public Set<Long> setOfRecipientId(HttpServletRequest request){
-        Set<Long> recipientId = new TreeSet<>();
-        for (Message message : messageRepository.findAll()) {
-            if (Objects.equals(message.getUser2().getId(), actualUser.getActualUser(request).getId())) {
-                System.out.println(message.getUser().getUsername());
-                recipientId.add(message.getUser().getId());
-            }
-        }
-        return recipientId;
-    }
 
     public Set<Long> setOfSendMessages(HttpServletRequest request){
         Set<Long> recipientId = new TreeSet<>();
         for (Message message : messageRepository.findAll()) {
             if (Objects.equals(message.getUser().getId(), actualUser.getActualUser(request).getId())) {
-                System.out.println(message.getUser().getUsername());
+                recipientId.add(message.getUser2().getId());
+            }
+            else if (Objects.equals(message.getUser2().getId(), actualUser.getActualUser(request).getId())) {
                 recipientId.add(message.getUser().getId());
             }
         }
         return recipientId;
     }
 
-    public List<Message> getConversation(Long id,HttpServletRequest request){
-        return messageRepository.findAllByUserAndUser2(userRepository.findById(id).get(),actualUser.getActualUser(request));
-    }
-
-    public List<Message> getConversation(HttpServletRequest request,Long id){
-        return messageRepository.findAllByUserAndUser2(actualUser.getActualUser(request),userRepository.findById(id).get());
-    }
-    public List<Message> getCoonv(Long id,HttpServletRequest request){
+    public List<Message> conversationSortedByDataDESC(Long id, HttpServletRequest request){
         List<Message> list = new ArrayList<>();
-        list.addAll(getConversation(id,request));
-        list.addAll(getConversation(request,id));
+        list.addAll(getMessagesReceived(id,request));
+        list.addAll(getMessagesSent(request,id));
         Collections.sort(list);
         return list;
     }
 
-    public List<Message> left(Long id , HttpServletRequest request){
-        ArrayList<Message> list = new ArrayList<>();
-        for (Message message : getCoonv(id, request)) {
-            if(message.getUser().getId() == id){
-                list.add(message);
-            }
-        }
-        return list;
+    private List<Message> getMessagesReceived(Long id, HttpServletRequest request){
+        return messageRepository.findAllByUserAndUser2(userRepository.findById(id).get(),actualUser.getActualUser(request));
     }
-    public List<Message> right(Long id , HttpServletRequest request){
-        ArrayList<Message> list = new ArrayList<>();
-        for (Message message : getCoonv(id, request)) {
-            if(message.getUser2().getId() == id){
-                list.add(message);
-            }
-        }
-        return list;
+
+    private List<Message> getMessagesSent(HttpServletRequest request, Long id){
+        return messageRepository.findAllByUserAndUser2(actualUser.getActualUser(request),userRepository.findById(id).get());
+    }
+
+    //zmienić metode getTemp
+    public Long getTemp(){
+        return messageRepository.findTopByOrderByIdDesc().getUser2().getId();
+    }
+
+    public void setIdOfConversation(Long idOfConversation){
+        this.idOfConversation= idOfConversation;
+    }
+
+    public Long getIdOfConversation(){
+        return idOfConversation;
     }
 }

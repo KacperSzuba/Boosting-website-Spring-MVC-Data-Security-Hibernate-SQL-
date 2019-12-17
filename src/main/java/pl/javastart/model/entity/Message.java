@@ -84,4 +84,16 @@ public class Message implements Comparable<Message>{
     public int compareTo(Message o) {
         return getDate().compareTo(o.getDate());
     }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", message='" + message + '\'' +
+                ", user=" + user +
+                ", user2=" + user2 +
+                ", date=" + date +
+                '}';
+    }
 }

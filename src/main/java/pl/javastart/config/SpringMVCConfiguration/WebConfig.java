@@ -25,8 +25,9 @@ public class WebConfig implements WebMvcConfigurer {
 
     public void addResourceHandlers(final ResourceHandlerRegistry registry){
         registry.addResourceHandler("/*.css/**").addResourceLocations("/css/");
-        registry.addResourceHandler("/*.js/**").addResourceLocations("/js/");
-
+        registry.addResourceHandler("/*.js/**").addResourceLocations("/js/")
+            .setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
         registry.addResourceHandler("/img/**").addResourceLocations("/img/")
-                .setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());    }
+                .setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
+    }
 }

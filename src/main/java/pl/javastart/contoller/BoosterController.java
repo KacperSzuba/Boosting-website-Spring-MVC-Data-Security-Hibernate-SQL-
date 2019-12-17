@@ -26,46 +26,46 @@ public class BoosterController {
 
     @RequestMapping
     public String showBoosterPage(){
-        return "jsp/boosterPages/booster";
+        return "jsp/boosterView/booster";
     }
 
     @RequestMapping("/listOfFreeOrders")
     public ModelAndView listOfFreeOrders(){
         List<OrderBoost> orders = boosterService.findFreeOrderBoost();
         boosterService.findFreeOrderBoost().stream().map(OrderBoost::getBooster).forEach(System.out::println);
-        return new ModelAndView("jsp/boosterPages/listOfFreeOrders","orders",orders);
+        return new ModelAndView("jsp/boosterView/listOfFreeOrders","orders",orders);
     }
 
     @RequestMapping("/orderDetails/{id}")
     public String showOrderDetailsPage(@PathVariable("id")Long id, Model model){
         OrderBoost orderBoost = orderBoostRepository.findById(id).get();
         model.addAttribute("boostDetails",orderBoost);
-        return "jsp/boosterPages/booster_OrderDetails";
+        return "jsp/boosterView/booster_OrderDetails";
     }
 
     @RequestMapping("/orderDetails/{id}/addBoost")
     public String addBoost(@PathVariable("id")Long id, HttpServletRequest request,Model model){
         boosterService.addBoost(id,request);
         model.addAttribute("addingBoostMessage",boosterService.getMessage());
-        return "jsp/boosterPages/booster";
+        return "jsp/boosterView/booster";
     }
 
     @RequestMapping("/currentBoost")
     public ModelAndView currentBoost(HttpServletRequest request){
         OrderBoost currentOrderBoost = boosterService.findCurrentBoost(request);
-        return new ModelAndView("jsp/boosterPages/currentBoost","currentOrderBoost",currentOrderBoost);
+        return new ModelAndView("jsp/boosterView/currentBoost","currentOrderBoost",currentOrderBoost);
     }
 
     @RequestMapping("/doneOrderBoosts")
     public ModelAndView listOfDoneOrderBoosts(HttpServletRequest request){
         List<OrderBoost> listOfDoneOrderBoosts = boosterService.listOfDoneOrderBoosts(request);
-        return new ModelAndView("jsp/boosterPages/doneOrderBoosts","doneOrderBoosts",listOfDoneOrderBoosts);
+        return new ModelAndView("jsp/boosterView/doneOrderBoosts","doneOrderBoosts",listOfDoneOrderBoosts);
     }
 
     @RequestMapping("/currentBoost/finishBoost")
     public String finishBoost(HttpServletRequest request,Model model) throws IOException {
         boosterService.finishBoost(request);
         model.addAttribute("finishingBoostMessage",boosterService.getMessage());
-        return "jsp/boosterPages/booster";
+        return "jsp/boosterView/booster";
     }
 }
