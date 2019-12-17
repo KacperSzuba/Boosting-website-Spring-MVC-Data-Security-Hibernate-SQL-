@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import pl.javastart.model.entity.OrderBoost;
 import pl.javastart.model.entity.User;
 import pl.javastart.model.entity.enums.RoleName;
+import pl.javastart.repository.OrderBoostRepository;
 import pl.javastart.repository.UserRepository;
 import pl.javastart.service.ChangeAccountStatus;
 
@@ -24,6 +26,9 @@ public class AdminController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private OrderBoostRepository orderBoostRepository;
+
     @RequestMapping
     public String showAdminPage(){
         return "jsp/adminView/admin";
@@ -33,6 +38,12 @@ public class AdminController {
     public ModelAndView showUserStatementPage(){
         List<User> users = (List<User>) userRepository.findAll();
         return new ModelAndView("jsp/adminView/admin_ListOfUsers","users",users);
+    }
+
+    @RequestMapping("/listOfOrders")
+    public ModelAndView showListOfOrders(){
+        List<OrderBoost> orderBoostList = (List<OrderBoost>) orderBoostRepository.findAll();
+        return new ModelAndView("jsp/adminView/admin_ListOfOrders","orders",orderBoostList);
     }
 
     @GetMapping("/ban/{id}")

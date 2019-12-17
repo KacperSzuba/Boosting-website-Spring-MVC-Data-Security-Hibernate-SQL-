@@ -31,8 +31,9 @@
             </li>
         </ul>
     </nav>
-    <i class='fas fa-lock-open'></i>
         <h1>Admin Page</h1>
         <a href="${pageContext.request.contextPath}/admin/listOfUsers">List of users</a>
+        <a href="${pageContext.request.contextPath}/admin/listOfOrders">List of orders</a>
+
     </body>
 </html>
