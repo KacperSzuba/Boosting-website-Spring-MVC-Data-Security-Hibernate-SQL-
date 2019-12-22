@@ -17,6 +17,8 @@ import java.util.List;
 public class UserCreatorService {
     private String message;
 
+    private String endPoint;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -31,6 +33,11 @@ public class UserCreatorService {
             tryToCreateAccount(user);
             return true;
         }
+        catch (IllegalArgumentException exception2){
+            exception2.getCause();
+            setUserRegistrationInformation("User with this username already exist");
+            return false;
+        }
         catch (Exception exception){
             exception.getCause();
             setUserRegistrationInformation("Invalid registration");
@@ -40,9 +47,8 @@ public class UserCreatorService {
 
     private void tryToCreateAccount(User user){
         boolean isUserExist = userRepository.existsUserByUsername(user.getUsername());
-
         if(isUserExist){
-            setUserRegistrationInformation("User with this username already exist");
+            throw new IllegalArgumentException();
         }
         else {
             UserRole userRole = userRoleRepository.getUserRole(RoleName.ROLE_USER);
@@ -62,4 +68,11 @@ public class UserCreatorService {
         return message;
     }
 
+    public String getEndPoint() {
+        return endPoint;
+    }
+
+    public void setEndPoint(String endPoint) {
+        this.endPoint = endPoint;
+    }
 }

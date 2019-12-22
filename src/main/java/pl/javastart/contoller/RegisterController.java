@@ -26,13 +26,15 @@ public class RegisterController {
     }
 
     @PostMapping("/registerForm")
-    public String register(@Valid @ModelAttribute("register") User user, BindingResult result) {
+    public String register(@Valid @ModelAttribute("register") User user, BindingResult result,Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("message",userCreator.getUserRegistrationInformation());
             return "jsp/register";
         } else {
             if (userCreator.createAccount(user)) {
                 return "redirect:/login";
             } else {
+                model.addAttribute("message",userCreator.getUserRegistrationInformation());
                 return "jsp/register";
             }
         }

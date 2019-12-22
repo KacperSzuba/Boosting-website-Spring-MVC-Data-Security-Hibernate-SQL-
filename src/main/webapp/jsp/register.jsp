@@ -35,6 +35,7 @@
             </ul>
         </nav>
         <h1>Account registration</h1>
+        <p>${message}</p>
         <form:form action="${pageContext.request.contextPath}/registerForm" modelAttribute="register" method="post">
             <table>
                 <tr>

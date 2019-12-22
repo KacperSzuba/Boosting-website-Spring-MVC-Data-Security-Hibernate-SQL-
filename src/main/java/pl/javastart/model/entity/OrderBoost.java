@@ -7,7 +7,6 @@ import pl.javastart.model.entity.enums.Tier;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-
 @Entity
 public class OrderBoost {
     @Id
