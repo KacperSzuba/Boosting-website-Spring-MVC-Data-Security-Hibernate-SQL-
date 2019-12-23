@@ -34,7 +34,7 @@ public class OrderController {
         session.setAttribute("destinationTierClass",defaultDestinationTier);
         model.addAttribute("destinationTierDivision",defaultDestinationTier.getTier()+" "+defaultDestinationTier.getDivision());
         model.addAttribute("destinationTierImage",defaultDestinationTier.getImgSource());
-        return "jsp/order_CompleteTheInformationAboutTheDivision";
+        return "jsp/orderView/order_CompleteTheInformationAboutTheDivision";
     }
 
     @RequestMapping("/informationAboutDivision")
@@ -42,13 +42,13 @@ public class OrderController {
         OrderBoost orderBoost = new OrderBoost();
         model.addAttribute("orderBoost",orderBoost);
         model.addAttribute("listOfRegions", Region.values());
-        return "jsp/order_CompleteYourAccountInformation";
+        return "jsp/orderView/order_CompleteYourAccountInformation";
     }
 
     @RequestMapping("/informationAboutAccount")
     public String informationAboutAccount(@ModelAttribute("orderBoost") OrderBoost orderBoost,HttpServletRequest request){
         orderService.makeOrder(orderBoost,request);
-        return "jsp/order_ConfirmOrder";
+        return "jsp/orderView/order_ConfirmOrder";
     }
 
     @RequestMapping("/moveCurrentTierImageToLeft")
@@ -62,7 +62,7 @@ public class OrderController {
         Divisions defaultDestinationTier = (Divisions) request.getSession().getAttribute("destinationTierClass");
         model.addAttribute("destinationTierDivision",defaultDestinationTier.getTier()+" "+defaultDestinationTier.getDivision());
         model.addAttribute("destinationTierImage",defaultDestinationTier.getImgSource());
-        return "jsp/order_CompleteTheInformationAboutTheDivision";
+        return "jsp/orderView/order_CompleteTheInformationAboutTheDivision";
     }
 
     @RequestMapping("/moveCurrentTierImageToRight")
@@ -76,7 +76,7 @@ public class OrderController {
         Divisions defaultDestinationTier = (Divisions) request.getSession().getAttribute("destinationTierClass");
         model.addAttribute("destinationTierDivision",defaultDestinationTier.getTier()+" "+defaultDestinationTier.getDivision());
         model.addAttribute("destinationTierImage",defaultDestinationTier.getImgSource());
-        return "jsp/order_CompleteTheInformationAboutTheDivision";
+        return "jsp/orderView/order_CompleteTheInformationAboutTheDivision";
     }
 
     @RequestMapping("/moveCurrentTierImageUp")
@@ -90,7 +90,7 @@ public class OrderController {
         Divisions defaultDestinationTier = (Divisions) request.getSession().getAttribute("destinationTierClass");
         model.addAttribute("destinationTierDivision",defaultDestinationTier.getTier()+" "+defaultDestinationTier.getDivision());
         model.addAttribute("destinationTierImage",defaultDestinationTier.getImgSource());
-        return "jsp/order_CompleteTheInformationAboutTheDivision";
+        return "jsp/orderView/order_CompleteTheInformationAboutTheDivision";
     }
 
     @RequestMapping("/moveCurrentTierImageDown")
@@ -104,7 +104,7 @@ public class OrderController {
         Divisions defaultDestinationTier = (Divisions) request.getSession().getAttribute("destinationTierClass");
         model.addAttribute("destinationTierDivision",defaultDestinationTier.getTier()+" "+defaultDestinationTier.getDivision());
         model.addAttribute("destinationTierImage",defaultDestinationTier.getImgSource());
-        return "jsp/order_CompleteTheInformationAboutTheDivision";
+        return "jsp/orderView/order_CompleteTheInformationAboutTheDivision";
     }
 
     @RequestMapping("/moveDestinationTierImageLeft")
@@ -118,7 +118,7 @@ public class OrderController {
         Divisions currentTier = (Divisions) request.getSession().getAttribute("currentTierClass");
         model.addAttribute("currentTierDivision",currentTier.getTier()+" "+currentTier.getDivision()+" ID:"+currentTier.getId());
         model.addAttribute("currentTierImage",currentTier.getImgSource());
-        return "jsp/order_CompleteTheInformationAboutTheDivision";
+        return "jsp/orderView/order_CompleteTheInformationAboutTheDivision";
     }
 
     @RequestMapping("/moveDestinationTierImageRight")
@@ -132,7 +132,7 @@ public class OrderController {
         Divisions currentTier = (Divisions) request.getSession().getAttribute("currentTierClass");
         model.addAttribute("currentTierDivision",currentTier.getTier()+" "+currentTier.getDivision()+" ID:"+currentTier.getId());
         model.addAttribute("currentTierImage",currentTier.getImgSource());
-        return "jsp/order_CompleteTheInformationAboutTheDivision";
+        return "jsp/orderView/order_CompleteTheInformationAboutTheDivision";
     }
 
     @RequestMapping("/moveDestinationTierImageUp")
@@ -146,7 +146,7 @@ public class OrderController {
         Divisions currentTier = (Divisions) request.getSession().getAttribute("currentTierClass");
         model.addAttribute("currentTierDivision",currentTier.getTier()+" "+currentTier.getDivision()+" ID:"+currentTier.getId());
         model.addAttribute("currentTierImage",currentTier.getImgSource());
-        return "jsp/order_CompleteTheInformationAboutTheDivision";
+        return "jsp/orderView/order_CompleteTheInformationAboutTheDivision";
     }
 
     @RequestMapping("/moveDestinationTierImageDown")
@@ -160,6 +160,6 @@ public class OrderController {
         Divisions currentTier = (Divisions) request.getSession().getAttribute("currentTierClass");
         model.addAttribute("currentTierDivision",currentTier.getTier()+" "+currentTier.getDivision()+" ID:"+currentTier.getId());
         model.addAttribute("currentTierImage",currentTier.getImgSource());
-        return "jsp/order_CompleteTheInformationAboutTheDivision";
+        return "jsp/orderView/order_CompleteTheInformationAboutTheDivision";
     }
 }
