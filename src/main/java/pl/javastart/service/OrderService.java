@@ -3,7 +3,7 @@ package pl.javastart.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.javastart.manage.ActualUser;
-import pl.javastart.model.entity.Divisions;
+import pl.javastart.model.entity.Division;
 import pl.javastart.model.entity.OrderBoost;
 import pl.javastart.repository.OrderBoostRepository;
 
@@ -20,8 +20,8 @@ public class OrderService {
     private ActualUser actualUser;
 
     public void makeOrder(OrderBoost orderBoost, HttpServletRequest request){
-        Divisions currentDivision = (Divisions) request.getSession().getAttribute("currentTierClass");
-        Divisions destinationDivision = (Divisions) request.getSession().getAttribute("destinationTierClass");
+        Division currentDivision = (Division) request.getSession().getAttribute("currentTierClass");
+        Division destinationDivision = (Division) request.getSession().getAttribute("destinationTierClass");
         orderBoost.setCurrentTier(currentDivision.getTier());
         orderBoost.setCurrentDivision(currentDivision.getDivision());
         orderBoost.setDestinationTier(destinationDivision.getTier());

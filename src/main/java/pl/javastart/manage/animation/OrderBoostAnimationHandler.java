@@ -2,8 +2,8 @@ package pl.javastart.manage.animation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.javastart.model.entity.Divisions;
-import pl.javastart.repository.DivisionsRepository;
+import pl.javastart.model.entity.Division;
+import pl.javastart.repository.DivisionRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,69 +12,69 @@ import java.util.Optional;
 public class OrderBoostAnimationHandler {
 
     @Autowired
-    private DivisionsRepository divisionsRepository;
+    private DivisionRepository divisionRepository;
 
-    public Divisions getDefaultCurrentTier(){
+    public Division getDefaultCurrentTier(){
         return getListOfTiersByPointsAndDivision().get(5);
     }
 
-    public Divisions getDefaultDestinationTier(){
+    public Division getDefaultDestinationTier(){
         return getListOfTiersByPointsAndDivision().get(4);
     }
 
-    public Divisions moveImageToLeft(Divisions divisions){
+    public Division moveImageToLeft(Division division){
         int plus24ID = 24;
-        Long divID = divisions.getId();
+        Long divID = division.getId();
         if(plus24ID+divID>144){
             return getListOfTiersById(plus24ID+divID-144).get();
         }
         else {
-            return getListOfTiersById(divisions.getId()+24).get();
+            return getListOfTiersById(division.getId()+24).get();
 
         }
     }
 
-    public Divisions moveImageToRight(Divisions divisions){
+    public Division moveImageToRight(Division division){
         int minus24ID = 24;
-        Long divID = divisions.getId();
+        Long divID = division.getId();
         if(divID-minus24ID<0){
             return getListOfTiersById(divID-minus24ID+144).get();
         }
         else {
-            return getListOfTiersById(divisions.getId()-24).get();
+            return getListOfTiersById(division.getId()-24).get();
 
         }
     }
-    public Divisions moveImageUp(Divisions divisions){
+    public Division moveImageUp(Division division){
 
-        if(divisions.getId()==1){
+        if(division.getId()==1){
             return getListOfTiersById(139L).get();
         }
         else {
-            return getListOfTiersById(divisions.getId()-6).get();
+            return getListOfTiersById(division.getId()-6).get();
         }
     }
 
-    public Divisions moveImageDown(Divisions divisions){
+    public Division moveImageDown(Division division){
 
-        if(divisions.getId()==139){
+        if(division.getId()==139){
             return getListOfTiersById(1L).get();
         }
         else {
-            return getListOfTiersById(divisions.getId()+6).get();
+            return getListOfTiersById(division.getId()+6).get();
         }
     }
 
-    private List<Divisions> getListOfTiersByPointsAndDivision(){
-        return divisionsRepository.findAllByPointsAndDivision("0-20",1);
+    private List<Division> getListOfTiersByPointsAndDivision(){
+        return divisionRepository.findAllByPointsAndDivision("0-20",1);
     }
 
-    public List<Divisions> getListOfTiersByPoints(){
-        return divisionsRepository.findAllByPoints("0-20");
+    public List<Division> getListOfTiersByPoints(){
+        return divisionRepository.findAllByPoints("0-20");
     }
 
-    private Optional<Divisions> getListOfTiersById(Long id){
-        return divisionsRepository.findById(id);
+    private Optional<Division> getListOfTiersById(Long id){
+        return divisionRepository.findById(id);
     }
 
 }

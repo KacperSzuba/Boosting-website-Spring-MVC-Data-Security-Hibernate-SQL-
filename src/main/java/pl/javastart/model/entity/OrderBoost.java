@@ -8,26 +8,37 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "order_boost")
 public class OrderBoost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
+    @Column(name = "current_tier")
     private Tier currentTier;
+    @Column(name = "current_division")
     private Integer currentDivision;
     @Enumerated(EnumType.STRING)
+    @Column(name = "destination_tier")
     private Tier destinationTier;
+    @Column(name = "destination_division")
     private Integer destinationDivision;
+    @Column(name = "summoner_id")
     private String summonerID;
+    @Column(name = "lol_username")
     private String lolUsername;
+    @Column(name = "lol_password")
     private String lolPassword;
     @Enumerated(EnumType.STRING)
     private Region region;
+    @Column(name = "note_to_boosters")
     private String noteToBoosters;
     private LocalDateTime date;
     @Type(type = "org.hibernate.type.NumericBooleanType")
+    @Column(name = "whether_paid")
     private boolean whetherPaid;
     @Type(type = "org.hibernate.type.NumericBooleanType")
+    @Column(name = "whether_done")
     private boolean whetherDone;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")

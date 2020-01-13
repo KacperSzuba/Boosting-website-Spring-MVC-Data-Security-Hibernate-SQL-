@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "messages")
 public class Message implements Comparable<Message>{
 
     @Id
@@ -12,10 +13,10 @@ public class Message implements Comparable<Message>{
     private String title;
     private String message;
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="messageSender")
+    @JoinColumn(name="message_sender")
     private User user;
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="recipientOfTheMessage")
+    @JoinColumn(name="recipient_of_the_message")
     private User user2;
     private LocalDateTime date;
     public Message(){ }

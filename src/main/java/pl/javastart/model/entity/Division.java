@@ -6,7 +6,9 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class Divisions {
+@Table(name = "divisions")
+public class Division {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,9 +19,9 @@ public class Divisions {
     private String imgSource;
     private Integer price;
 
-    public Divisions(){}
+    public Division(){}
 
-    public Divisions(Tier tier, Integer division, String points, String imgSource, Integer price) {
+    public Division(Tier tier, Integer division, String points, String imgSource, Integer price) {
         this.tier = tier;
         this.division = division;
         this.points = points;
@@ -79,13 +81,13 @@ public class Divisions {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Divisions divisions = (Divisions) o;
-        return Objects.equals(id, divisions.id) &&
-                tier == divisions.tier &&
-                Objects.equals(division, divisions.division) &&
-                Objects.equals(points, divisions.points) &&
-                Objects.equals(imgSource, divisions.imgSource) &&
-                Objects.equals(price, divisions.price);
+        Division division = (Division) o;
+        return Objects.equals(id, division.id) &&
+                tier == division.tier &&
+                Objects.equals(this.division, division.division) &&
+                Objects.equals(points, division.points) &&
+                Objects.equals(imgSource, division.imgSource) &&
+                Objects.equals(price, division.price);
     }
 
     @Override
