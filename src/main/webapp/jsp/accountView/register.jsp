@@ -30,7 +30,7 @@
                     </li>
                 </c:if>
                 <li>
-                    <a href="${pageContext.request.contextPath}/order">Order page</a>
+                    <a href="${pageContext.request.contextPath}/order/">Order page</a>
                 </li>
             </ul>
         </nav>

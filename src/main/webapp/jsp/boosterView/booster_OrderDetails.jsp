@@ -27,7 +27,7 @@
                 </li>
             </security:authorize>
             <li>
-                <a href="${pageContext.request.contextPath}/order">Order page</a>
+                <a href="${pageContext.request.contextPath}/order/">Order page</a>
             </li>
             <li>
                 <a href="${pageContext.request.contextPath}/booster/listOfFreeOrders">Back to previous page</a>

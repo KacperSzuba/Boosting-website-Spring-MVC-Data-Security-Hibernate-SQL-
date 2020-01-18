@@ -11,7 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 @Component
-public class JsonHandler {
+public class JsonOrderHandler {
 
     @Autowired
     private TierImageRepository tierImageRepository;

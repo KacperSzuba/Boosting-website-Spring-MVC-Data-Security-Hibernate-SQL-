@@ -47,7 +47,7 @@
                     </li>
                 </c:if>
                 <li>
-                    <a href="${pageContext.request.contextPath}/order">Order page</a>
+                    <a href="${pageContext.request.contextPath}/order/">Order page</a>
                 </li>
             </ul>
         </nav>
@@ -63,7 +63,7 @@
         <button onclick="rightDestinationTier()">Increase destination division</button>
         <img class="center" id="destinationTier">
 
-        <a href="${pageContext.request.contextPath}/NewOrder/informationAboutDivision" onclick="writeDestinationTierAndDivisionJSONFile()">Place an order</a>
+        <a href="${pageContext.request.contextPath}/order/informationAboutDivision" onclick="createDestinationTierAndDivisionCookie()">Complete information about your account</a>
         <script>
             const xhr = new XMLHttpRequest();
             xhr.onload = function () {
@@ -279,7 +279,7 @@
         </script>
 
         <script>
-            function writeDestinationTierAndDivisionJSONFile() {
+            function createDestinationTierAndDivisionCookie() {
                 var d = new Date();
                 d.setTime(d.getTime()+(24 * 60 *60*1000));
                 var expires = "expires="+d.toUTCString();
