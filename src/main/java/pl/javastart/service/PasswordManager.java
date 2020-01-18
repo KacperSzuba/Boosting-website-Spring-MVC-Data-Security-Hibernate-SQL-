@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.javastart.manage.ActualUser;
-import pl.javastart.repository.UserRepository;
+import pl.javastart.repository.user.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
 

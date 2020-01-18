@@ -1,6 +1,6 @@
 package pl.javastart.model.entity;
 
-import pl.javastart.model.entity.enums.Tier;
+import pl.javastart.model.enums.Tier;
 
 import javax.persistence.*;
 import java.util.Objects;

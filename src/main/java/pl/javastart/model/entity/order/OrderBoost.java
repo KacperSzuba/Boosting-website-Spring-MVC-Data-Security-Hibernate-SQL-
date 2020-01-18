@@ -1,8 +1,9 @@
-package pl.javastart.model.entity;
+package pl.javastart.model.entity.order;
 
 import org.hibernate.annotations.Type;
-import pl.javastart.model.entity.enums.Region;
-import pl.javastart.model.entity.enums.Tier;
+import pl.javastart.model.entity.user.User;
+import pl.javastart.model.enums.Region;
+import pl.javastart.model.enums.Tier;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

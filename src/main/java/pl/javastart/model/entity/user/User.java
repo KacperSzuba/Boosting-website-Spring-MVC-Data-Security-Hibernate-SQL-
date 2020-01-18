@@ -1,4 +1,4 @@
-package pl.javastart.model.entity;
+package pl.javastart.model.entity.user;
 
 import org.hibernate.annotations.Type;
 

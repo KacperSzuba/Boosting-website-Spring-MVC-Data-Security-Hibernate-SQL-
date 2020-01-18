@@ -2,11 +2,11 @@ package pl.javastart.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.javastart.model.entity.User;
-import pl.javastart.model.entity.UserRole;
-import pl.javastart.model.entity.enums.RoleName;
-import pl.javastart.repository.UserRepository;
-import pl.javastart.repository.UserRoleRepository;
+import pl.javastart.model.entity.user.User;
+import pl.javastart.model.entity.user.UserRole;
+import pl.javastart.model.enums.RoleName;
+import pl.javastart.repository.user.UserRepository;
+import pl.javastart.repository.user.UserRoleRepository;
 
 import java.util.ArrayList;
 import java.util.List;

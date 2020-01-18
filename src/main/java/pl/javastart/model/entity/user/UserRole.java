@@ -1,6 +1,6 @@
-package pl.javastart.model.entity;
+package pl.javastart.model.entity.user;
 
-import pl.javastart.model.entity.enums.RoleName;
+import pl.javastart.model.enums.RoleName;
 
 import javax.persistence.*;
 

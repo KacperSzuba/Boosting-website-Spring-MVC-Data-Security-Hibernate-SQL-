@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.javastart.message.MessageHandler;
-import pl.javastart.model.entity.Message;
+import pl.javastart.model.entity.message.Message;
 
 import javax.servlet.http.HttpServletRequest;
 

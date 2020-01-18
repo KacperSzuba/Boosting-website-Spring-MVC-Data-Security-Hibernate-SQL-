@@ -1,4 +1,4 @@
-package pl.javastart.model.entity.enums;
+package pl.javastart.model.enums;
 
 public enum Tier {
     IRON,BRONZE,SILVER,GOLD,PLATINUM,DIAMOND;

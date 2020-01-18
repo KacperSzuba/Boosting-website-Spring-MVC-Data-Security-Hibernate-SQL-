@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import pl.javastart.model.entity.OrderBoost;
-import pl.javastart.model.entity.User;
-import pl.javastart.model.entity.enums.RoleName;
-import pl.javastart.repository.OrderBoostRepository;
-import pl.javastart.repository.UserRepository;
+import pl.javastart.model.entity.order.OrderBoost;
+import pl.javastart.model.entity.user.User;
+import pl.javastart.model.enums.RoleName;
+import pl.javastart.repository.order.OrderBoostRepository;
+import pl.javastart.repository.user.UserRepository;
 import pl.javastart.service.ChangeAccountStatus;
 
 import java.util.List;

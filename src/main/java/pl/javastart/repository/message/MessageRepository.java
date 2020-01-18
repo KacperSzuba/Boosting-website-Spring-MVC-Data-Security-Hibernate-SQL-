@@ -1,8 +1,8 @@
-package pl.javastart.repository;
+package pl.javastart.repository.message;
 
 import org.springframework.data.repository.CrudRepository;
-import pl.javastart.model.entity.Message;
-import pl.javastart.model.entity.User;
+import pl.javastart.model.entity.message.Message;
+import pl.javastart.model.entity.user.User;
 
 import java.util.List;
 

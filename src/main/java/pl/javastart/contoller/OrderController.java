@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.javastart.manage.animation.OrderBoostAnimationHandler;
 import pl.javastart.model.entity.Division;
-import pl.javastart.model.entity.OrderBoost;
-import pl.javastart.model.entity.enums.Region;
+import pl.javastart.model.entity.order.OrderBoost;
+import pl.javastart.model.enums.Region;
 import pl.javastart.service.OrderService;
 
 import javax.servlet.http.HttpServletRequest;

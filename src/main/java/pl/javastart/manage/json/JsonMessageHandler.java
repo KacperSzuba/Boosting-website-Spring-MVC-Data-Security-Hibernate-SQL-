@@ -1,18 +1,18 @@
-package pl.javastart.manage;
+package pl.javastart.manage.json;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.javastart.message.MessageHandler;
-import pl.javastart.model.entity.Message;
+import pl.javastart.model.entity.message.Message;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileWriter;
 import java.io.IOException;
 
 @Component
-public class JsonHandler {
+public class JsonMessageHandler {
 
     @Autowired
     private MessageHandler messageHandler;

@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.javastart.manage.ActualUser;
 import pl.javastart.manage.api.LeagueOfLegendsAPIConnector;
-import pl.javastart.model.entity.OrderBoost;
-import pl.javastart.model.entity.enums.Region;
-import pl.javastart.repository.OrderBoostRepository;
+import pl.javastart.model.entity.order.OrderBoost;
+import pl.javastart.model.enums.Region;
+import pl.javastart.repository.order.OrderBoostRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;

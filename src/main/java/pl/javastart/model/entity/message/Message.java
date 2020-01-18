@@ -1,4 +1,6 @@
-package pl.javastart.model.entity;
+package pl.javastart.model.entity.message;
+
+import pl.javastart.model.entity.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

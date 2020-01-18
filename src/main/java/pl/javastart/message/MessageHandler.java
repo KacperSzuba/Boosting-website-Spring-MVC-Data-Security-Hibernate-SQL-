@@ -2,13 +2,13 @@ package pl.javastart.message;
 
 import org.springframework.stereotype.Service;
 import pl.javastart.manage.ActualUser;
-import pl.javastart.model.entity.Message;
-import pl.javastart.model.entity.OrderBoost;
-import pl.javastart.model.entity.User;
-import pl.javastart.model.entity.enums.RoleName;
-import pl.javastart.repository.MessageRepository;
-import pl.javastart.repository.OrderBoostRepository;
-import pl.javastart.repository.UserRepository;
+import pl.javastart.model.entity.message.Message;
+import pl.javastart.model.entity.order.OrderBoost;
+import pl.javastart.model.entity.user.User;
+import pl.javastart.model.enums.RoleName;
+import pl.javastart.repository.message.MessageRepository;
+import pl.javastart.repository.order.OrderBoostRepository;
+import pl.javastart.repository.user.UserRepository;
 import pl.javastart.service.ChangeAccountStatus;
 
 import javax.servlet.http.HttpServletRequest;
