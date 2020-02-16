@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      lang="en">
+    <head>
+        <title>Order division</title>
+        <style>
+            .center {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 10%;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li sec:authorize="isAnonymous()">
+                    <a href="/login">Login Page</a>
+                </li>
+                <li sec:authorize="isAnonymous()">
+                    <a href="/register">Register Page</a>
+                </li>
+                <li sec:authorize="hasAnyRole('USER','ADMIN','BOOSTER')">
+                    <a href="/account">Account page</a>
+                </li>
+                <li sec:authorize="hasRole('BOOSTER')">
+                    <a href="/booster">Booster page</a>
+                </li>
+                <li sec:authorize="hasRole('ADMIN')">
+                    <a href="/admin">Admin page</a>
+                </li>
+                <li>
+                    <a href="/order/">Order page</a>
+                </li>
+            </ul>
+        </nav>
+        <button onclick="upCurrentTier()">Increase current tier</button>
+        <button onclick="downCurrentTier()">Decrease current tier</button>
+        <button onclick="leftCurrentTier()">Decrease current division</button>
+        <button onclick="rightCurrentTier()">Increase current division</button>
+        <img class="center" id="currentTier">
+        <button onclick="upDestinationTier()">Increase destination tier</button>
+        <button onclick="downDestinationTier()">Decrease destination tier</button>
+        <button onclick="leftDestinationTier()">Decrease destination division</button>
+        <button onclick="rightDestinationTier()">Increase destination division</button>
+        <img class="center" id="destinationTier">
+
+        <a href="/order/informationAboutDivision" onclick="createDestinationTierAndDivisionCookie()">Complete information about your account</a>
+        <script>
+            const xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                if(this.status === 200){
+                    temp = JSON.parse(this.responseText);
+                    const conversation = JSON.parse(this.responseText);
+                    var defaultCurrentTier = conversation[21]['img_source'];
+                    var defaultDestinationTier = conversation[17]['img_source'];
+                    document.getElementById('currentTier').setAttribute("src",defaultCurrentTier);
+                    document.getElementById('destinationTier').setAttribute("src",defaultDestinationTier);
+                }
+            }
+            xhr.open('GET','./Order',true);
+            xhr.send();
+        </script>
+
+        <script>
+            function upCurrentTier() {
+                const xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if(this.status === 200){
+                        const conversation = JSON.parse(this.responseText);
+                        var temp = document.getElementById('currentTier').src.toString();
+                        let temp3 = conversation.filter(data => data.img_source);
+                        let op = conversation.filter(data => "http://localhost:8090"+data.img_source == temp);
+                        var tier = parseInt(op[0]['tier_id']);
+                        if(tier === 1){
+                            let temp2 = conversation.filter(data => data.tier_id === 6 && data.division_id === parseInt(op[0]['division_id']));
+                            document.getElementById('currentTier').setAttribute("src",temp2[0]['img_source']);
+                        }
+                        else {
+                            let temp2 = conversation.filter(data => data.tier_id == parseInt(op[0]['tier_id']-1) && data.division_id == parseInt(op[0]['division_id']));
+                            document.getElementById('currentTier').setAttribute("src",temp2[0]['img_source']);
+                        }
+
+                    }
+                }
+                xhr.open('GET','./Order',true);
+                xhr.send();
+            }
+            function upDestinationTier() {
+                const xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if(this.status === 200){
+                        const conversation = JSON.parse(this.responseText);
+                        var temp = document.getElementById('destinationTier').src.toString();
+                        let op = conversation.filter(data => "http://localhost:8090"+data.img_source == temp);
+                        var tier = parseInt(op[0]['tier_id']);
+                        if(tier === 1){
+                            let temp2 = conversation.filter(data => data.tier_id === 6 && data.division_id === parseInt(op[0]['division_id']));
+                            document.getElementById('destinationTier').setAttribute("src",temp2[0]['img_source']);
+                        }
+                        else {
+                            let temp2 = conversation.filter(data => data.tier_id == parseInt(op[0]['tier_id']-1) && data.division_id == parseInt(op[0]['division_id']));
+                            document.getElementById('destinationTier').setAttribute("src",temp2[0]['img_source']);
+                        }
+                    }
+                }
+                xhr.open('GET','./Order',true);
+                xhr.send();
+            }
+
+            function downCurrentTier() {
+                const xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if(this.status === 200){
+                        const conversation = JSON.parse(this.responseText);
+                        var temp = document.getElementById('currentTier').src.toString();
+                        let op = conversation.filter(data => "http://localhost:8090"+data.img_source == temp);
+                        var tier = parseInt(op[0]['tier_id']);
+                        if(tier === 6){
+                            let temp2 = conversation.filter(data => data.tier_id === 1 && data.division_id === parseInt(op[0]['division_id']));
+                            document.getElementById('currentTier').setAttribute("src",temp2[0]['img_source']);
+                        }
+                        else {
+                            let temp2 = conversation.filter(data => data.tier_id == parseInt(op[0]['tier_id']+1) && data.division_id == parseInt(op[0]['division_id']));
+                            document.getElementById('currentTier').setAttribute("src",temp2[0]['img_source']);
+                        }
+                    }
+                }
+                xhr.open('GET','./Order',true);
+                xhr.send();
+            }
+
+            function downDestinationTier() {
+                const xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if(this.status === 200){
+                        const conversation = JSON.parse(this.responseText);
+                        var temp = document.getElementById('destinationTier').src.toString();
+                        let op = conversation.filter(data => "http://localhost:8090"+data.img_source == temp);
+                        var tier = parseInt(op[0]['tier_id']);
+                        if(tier === 6){
+                            let temp2 = conversation.filter(data => data.tier_id === 1 && data.division_id === parseInt(op[0]['division_id']));
+                            document.getElementById('destinationTier').setAttribute("src",temp2[0]['img_source']);
+                        }
+                        else {
+                            let temp2 = conversation.filter(data => data.tier_id == parseInt(op[0]['tier_id']+1) && data.division_id == parseInt(op[0]['division_id']));
+                            document.getElementById('destinationTier').setAttribute("src",temp2[0]['img_source']);
+                        }
+                    }
+                }
+                xhr.open('GET','./Order',true);
+                xhr.send();
+            }
+
+            function leftCurrentTier() {
+                const xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if(this.status === 200){
+                        const conversation = JSON.parse(this.responseText);
+                        var temp = document.getElementById('currentTier').src.toString();
+                        let op = conversation.filter(data => "http://localhost:8090"+data.img_source == temp);
+                        var division = parseInt(op[0]['division_id']);
+                        if(division ===4 && parseInt(op[0]['tier_id'])===6 ){
+                            let temp2 = conversation.filter(data => data.tier_id == 1 && data.division_id == 1);
+                            document.getElementById('currentTier').setAttribute("src",temp2[0]['img_source']);
+                        }
+                        else if(division === 4){
+                            let temp2 = conversation.filter(data => data.tier_id == parseInt(op[0]['tier_id']+1) && data.division_id == 1);
+                            document.getElementById('currentTier').setAttribute("src",temp2[0]['img_source']);
+                        }
+
+                        else {
+                            let temp2 = conversation.filter(data => data.tier_id == parseInt(op[0]['tier_id']) && data.division_id == parseInt(op[0]['division_id']+1));
+                            document.getElementById('currentTier').setAttribute("src",temp2[0]['img_source']);
+                        }
+                    }
+                }
+                xhr.open('GET','./Order',true);
+                xhr.send();
+            }
+
+            function leftDestinationTier() {
+                const xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if(this.status === 200){
+                        const conversation = JSON.parse(this.responseText);
+                        var temp = document.getElementById('destinationTier').src.toString();
+                        let op = conversation.filter(data => "http://localhost:8090"+data.img_source == temp);
+                        var division = parseInt(op[0]['division_id']);
+                        if(division ===4 && parseInt(op[0]['tier_id'])===6 ){
+                            let temp2 = conversation.filter(data => data.tier_id == 1 && data.division_id == 1);
+                            document.getElementById('destinationTier').setAttribute("src",temp2[0]['img_source']);
+                        }
+                        else if(division === 4){
+                            let temp2 = conversation.filter(data => data.tier_id == parseInt(op[0]['tier_id']+1) && data.division_id == 1);
+                            document.getElementById('destinationTier').setAttribute("src",temp2[0]['img_source']);
+                        }
+
+                        else {
+                            let temp2 = conversation.filter(data => data.tier_id == parseInt(op[0]['tier_id']) && data.division_id == parseInt(op[0]['division_id']+1));
+                            document.getElementById('destinationTier').setAttribute("src",temp2[0]['img_source']);
+                        }
+                    }
+                }
+                xhr.open('GET','./Order',true);
+                xhr.send();
+            }
+
+            function rightCurrentTier() {
+                const xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if(this.status === 200){
+                        const conversation = JSON.parse(this.responseText);
+                        var temp = document.getElementById('currentTier').src.toString();
+                        let op = conversation.filter(data => "http://localhost:8090"+data.img_source == temp);
+                        var division = parseInt(op[0]['division_id']);
+                        if(division ===1 && parseInt(op[0]['tier_id'])===1 ){
+                            let temp2 = conversation.filter(data => data.tier_id == 6 && data.division_id == 4);
+                            document.getElementById('currentTier').setAttribute("src",temp2[0]['img_source']);
+                        }
+                        else if(division === 1){
+                            let temp2 = conversation.filter(data => data.tier_id == parseInt(op[0]['tier_id']-1) && data.division_id == 4);
+                            document.getElementById('currentTier').setAttribute("src",temp2[0]['img_source']);
+                        }
+
+                        else {
+                            let temp2 = conversation.filter(data => data.tier_id == parseInt(op[0]['tier_id']) && data.division_id == parseInt(op[0]['division_id']-1));
+                            document.getElementById('currentTier').setAttribute("src",temp2[0]['img_source']);
+                        }
+                    }
+                }
+                xhr.open('GET','./Order',true);
+                xhr.send();
+            }
+
+            function rightDestinationTier() {
+                const xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if(this.status === 200){
+                        const conversation = JSON.parse(this.responseText);
+                        var temp = document.getElementById('destinationTier').src.toString();
+                        let op = conversation.filter(data => "http://localhost:8090"+data.img_source == temp);
+                        var division = parseInt(op[0]['division_id']);
+                        if(division ===1 && parseInt(op[0]['tier_id'])===1 ){
+                            let temp2 = conversation.filter(data => data.tier_id == 6 && data.division_id == 4);
+                            document.getElementById('destinationTier').setAttribute("src",temp2[0]['img_source']);
+                        }
+                        else if(division === 1){
+                            let temp2 = conversation.filter(data => data.tier_id == parseInt(op[0]['tier_id']-1) && data.division_id == 4);
+                            document.getElementById('destinationTier').setAttribute("src",temp2[0]['img_source']);
+                        }
+
+                        else {
+                            let temp2 = conversation.filter(data => data.tier_id == parseInt(op[0]['tier_id']) && data.division_id == parseInt(op[0]['division_id']-1));
+                            document.getElementById('destinationTier').setAttribute("src",temp2[0]['img_source']);
+                        }
+                    }
+                }
+                xhr.open('GET','./Order',true);
+                xhr.send();
+            }
+        </script>
+
+        <script>
+            function createDestinationTierAndDivisionCookie() {
+                var d = new Date();
+                d.setTime(d.getTime()+(24 * 60 *60*1000));
+                var expires = "expires="+d.toUTCString();
+                var currentTierImageSource = document.getElementById('currentTier').src.toString().replace("http://localhost:8090","");
+                document.cookie = "currentTierImageSource ="+ currentTierImageSource+";"+expires+";";
+                var destinationTierImageSource = document.getElementById('destinationTier').src.toString().replace("http://localhost:8090","");
+                document.cookie = "destinationTierImageSource ="+ destinationTierImageSource+";"+expires+";";
+            }
+        </script>
+    </body>
+</html>

@@ -1,6 +1,7 @@
 package pl.javastart.config.SpringSecurityConfiguration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
+    @Qualifier("userRepositoryUserDetailsService")
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -36,9 +38,10 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/booster").hasRole("BOOSTER")
                 .antMatchers("/account/**").hasAnyRole("USER","ADMIN","BOOSTER")
-                .antMatchers("/message/**").hasAnyRole("ADMIN","USER","BOOSTER")
-               // .antMatchers("/message/send").hasAnyRole("ADMIN","USER","BOOSTER")
+                .antMatchers("/sendMessage/**").hasAnyRole("ADMIN","USER","BOOSTER")
+               // .antMatchers("/sendMessage/send").hasAnyRole("ADMIN","USER","BOOSTER")
                 .antMatchers("/").permitAll()
+                .antMatchers("/register").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")

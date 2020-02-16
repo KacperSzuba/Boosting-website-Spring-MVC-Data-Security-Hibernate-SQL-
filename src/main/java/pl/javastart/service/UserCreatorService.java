@@ -34,12 +34,12 @@ public class UserCreatorService {
             return true;
         }
         catch (IllegalArgumentException exception2){
-            exception2.getCause();
+            exception2.printStackTrace();
             setUserRegistrationInformation("User with this username already exist");
             return false;
         }
         catch (Exception exception){
-            exception.getCause();
+            exception.printStackTrace();
             setUserRegistrationInformation("Invalid registration");
             return false;
         }

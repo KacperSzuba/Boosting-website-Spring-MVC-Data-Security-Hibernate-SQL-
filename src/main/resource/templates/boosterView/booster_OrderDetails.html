@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:spring="http://java.sun.com/xml/ns/javaee"
+      lang="en">
+    <head>
+        <title>Booster order details</title>
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li sec:authorize="hasAnyRole('USER','ADMIN','BOOSTER')">
+                    <a href="/account">Account page</a>
+                </li>
+                <li sec:authorize="hasRole('BOOSTER')">
+                    <a href="/booster">Booster page</a>
+                </li>
+                <li>
+                    <a href="/order/">Order page</a>
+                </li>
+                <li>
+                    <a href="/booster/listOfFreeOrders">Back to previous page</a>
+                </li>
+            </ul>
+        </nav>
+        <h1>Order details</h1>
+        <spring:url value="/booster/orderDetails/${id}/addBoost" var="addBoost" />
+        <a href="${addBoost}">Add boost</a>
+        <p th:text="${boostDetails.lolUsername}"><label>League Of Legends username:</label></p>
+        <p th:text="${boostDetails.lolPassword}"><label>League Of Legends password</label></p>
+        <p>
+            <label>Current Tier:</label> <p th:text="${boostDetails.currentTier} ${boostDetails.currentDivision}"> </p>
+            <label>Points:</label>
+        </p>
+        <p>
+            <label>Destination Tier:</label><p th:text="${boostDetails.destinationTier} ${boostDetails.destinationDivision}"></p>
+            <label>Points:</label>
+        </p>
+        <p th:text="${boostDetails.region}"><label>Region:</label></p>
+        <p th:text="${boostDetails.noteToBoosters}"><label>Note to booster:</label></p>
+    </body>
+</html>

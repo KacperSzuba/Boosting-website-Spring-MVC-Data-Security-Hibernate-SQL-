@@ -1,5 +1,5 @@
 package pl.javastart.manage;
-
+/*
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pl.javastart.manage.api.LeagueOfLegendsAPIConnector;
@@ -45,3 +45,5 @@ class LeagueOfLegendsAPIConnectorTest {
         assertThat(leagueConnector.getActual5vs5LeaguePoints(),is("53"));
     }
 }
+
+ */

@@ -9,15 +9,16 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class HomeController {
 
+
     @RequestMapping("/")
     public String showHomePage(){
-        return "jsp/home";
+        return "home";
     }
 
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request){
         HttpSession httpSession = request.getSession();
         httpSession.invalidate();
-        return "jsp/home";
+        return "home";
     }
 }

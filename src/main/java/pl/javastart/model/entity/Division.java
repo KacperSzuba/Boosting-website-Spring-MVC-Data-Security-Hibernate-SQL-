@@ -1,5 +1,5 @@
 package pl.javastart.model.entity;
-
+/*
 import pl.javastart.model.enums.Tier;
 
 import javax.persistence.*;
@@ -95,3 +95,5 @@ public class Division {
         return Objects.hash(id, tier, division, points, imgSource, price);
     }
 }
+
+ */

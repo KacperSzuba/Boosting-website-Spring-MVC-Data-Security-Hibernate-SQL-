@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:spring="http://java.sun.com/xml/ns/javaee"
+      lang="en">
+    <head>
+        <title>Messages received</title>
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li sec:authorize="hasAnyRole('USER','ADMIN','BOOSTER')">
+                    <a href="/account">Account page</a>
+                </li>
+                <li sec:authorize="hasRole('BOOSTER')">
+                    <a href="/booster">Booster page</a>
+                </li>
+                <li>
+                    <a href="/order/">Order page</a>
+                </li>
+            </ul>
+        </nav>
+        <h1>Messages received</h1>
+            <div th:each="recipient : ${conversations}">
+                <p th:text="${recipient.username}" ></p>
+                <a th:href="@{/message/singleConversation/{id}(id = ${recipient.id})}"  >More</a>
+            </div>
+    </body>
+</html>

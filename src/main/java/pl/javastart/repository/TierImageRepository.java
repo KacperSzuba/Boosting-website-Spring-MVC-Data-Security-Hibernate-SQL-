@@ -6,3 +6,4 @@ import pl.javastart.model.entity.TierImage;
 public interface TierImageRepository extends CrudRepository<TierImage,Long> {
     TierImage findByImgSource(String imgSource);
 }
+

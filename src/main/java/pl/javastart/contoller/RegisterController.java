@@ -22,20 +22,20 @@ public class RegisterController {
     public String showRegisterPage(Model model){
         User user = new User();
         model.addAttribute("register",user);
-        return "jsp/accountView/register";
+        return "accountView/register";
     }
 
     @PostMapping("/registerForm")
     public String register(@Valid @ModelAttribute("register") User user, BindingResult result,Model model) {
         if (result.hasErrors()) {
             model.addAttribute("message",userCreator.getUserRegistrationInformation());
-            return "jsp/accountView/register";
+            return "accountView/register";
         } else {
             if (userCreator.createAccount(user)) {
                 return "redirect:/login";
             } else {
                 model.addAttribute("message",userCreator.getUserRegistrationInformation());
-                return "jsp/accountView/register";
+                return "accountView/register";
             }
         }
     }

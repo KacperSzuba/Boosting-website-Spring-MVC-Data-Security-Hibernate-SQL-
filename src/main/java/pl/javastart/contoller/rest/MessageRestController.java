@@ -13,7 +13,7 @@ public class MessageRestController {
     @Autowired
     private JsonMessageHandler jsonMessageHandler;
 
-    @RequestMapping("/message/singleConversation/Message")
+    @RequestMapping("/sendMessage/singleConversation/Message")
     private String shareJSONWithConversation(HttpServletRequest request) {
         return jsonMessageHandler.createJsonFile(request).toJSONString();
     }

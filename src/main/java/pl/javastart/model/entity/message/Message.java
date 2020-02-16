@@ -93,7 +93,7 @@ public class Message implements Comparable<Message>{
         return "Message{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", message='" + message + '\'' +
+                ", sendMessage='" + message + '\'' +
                 ", user=" + user +
                 ", user2=" + user2 +
                 ", date=" + date +

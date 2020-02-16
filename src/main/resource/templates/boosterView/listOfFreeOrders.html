@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:spring="http://java.sun.com/xml/ns/javaee"
+      lang="en">
+    <head>
+        <title>list of free orders</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li sec:authorize="hasAnyRole('USER','ADMIN','BOOSTER')">
+                    <a href="/account">Account page</a>
+                </li>
+                <li sec:authorize="hasRole('BOOSTER')">
+                    <a href="/booster">Booster page</a>
+                </li>
+                <li>
+                    <a href="/order/">Order page</a>
+                </li>
+            </ul>
+        </nav>
+        <h1>List of free orders</h1>
+        <form method="get" th:object="${orders}">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Id</th>
+                        <th scope="col">Current Tier</th>
+                        <th scope="col">Destination Tier</th>
+                        <th scope="col">More about order</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                        <tr th:each="order : ${orders}">
+                            <th th:text="${orderStat.count}"></th>
+                            <th th:text="${order.id}"></th>
+                            <th th:text="${order.currentTier}"></th>
+                            <th th:text="${order.destinationTier}"></th>
+                            <th>
+                                <spring:url value="/booster/orderDetails/${order.id}" var="orderDetails" />
+                                <a href="${orderDetails}">More</a>
+                            </th>
+                        </tr>
+                    </tbody>
+            </table>
+        </form>
+    </body>
+</html>

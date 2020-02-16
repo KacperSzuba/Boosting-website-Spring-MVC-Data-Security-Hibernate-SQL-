@@ -16,25 +16,25 @@ import javax.servlet.http.HttpServletRequest;
 
 public class OrderController {
 
-    @RequestMapping("/")
-    public String showOrderPage(){
-        return "jsp/orderView/order_division";
-    }
-
     @Autowired
     private OrderService orderService;
+
+    @RequestMapping("/")
+    public String showOrderPage(){
+        return "orderView/order_division";
+    }
 
     @RequestMapping("/informationAboutDivision")
     public String informationAboutDivision(Model model){
         OrderBoost orderBoost = new OrderBoost();
         model.addAttribute("orderBoost",orderBoost);
         model.addAttribute("listOfRegions", Region.values());
-        return "jsp/orderView/order";
+        return "orderView/order";
     }
 
     @RequestMapping("/informationAboutAccount")
     public String informationAboutAccount(@ModelAttribute("orderBoost") OrderBoost orderBoost, HttpServletRequest request){
         orderService.makeOrder(orderBoost,request);
-        return "jsp/orderView/order_result";
+        return "orderView/order_result";
     }
 }

@@ -14,7 +14,7 @@ public class DivisionPoints {
 
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "divisionPoints_id")
+    @JoinColumn(name = "division_points_id")
     private List<Price> prices;
 
     public DivisionPoints() {
@@ -39,4 +39,14 @@ public class DivisionPoints {
     public void setPoints(String points) {
         this.points = points;
     }
+
+    public List<Price> getPrices() {
+        return prices;
+    }
+
+    public void setPrices(List<Price> prices) {
+        this.prices = prices;
+    }
 }
+
+

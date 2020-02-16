@@ -7,9 +7,6 @@ import org.springframework.stereotype.Component;
 import pl.javastart.model.entity.TierImage;
 import pl.javastart.repository.TierImageRepository;
 
-import java.io.FileWriter;
-import java.io.IOException;
-
 @Component
 public class JsonOrderHandler {
 
@@ -25,13 +22,6 @@ public class JsonOrderHandler {
             record.put("tier_id",tierImage.getTier().getId());
             record.put("division_id",tierImage.getDivision().getId());
             jsonArray.add(record);
-        }
-        try {
-            FileWriter file = new FileWriter("C:\\Users\\kacpe\\IdeaProjects\\BoostingPage\\src\\main\\webapp\\json\\Order.json");
-            file.write(jsonArray.toJSONString());
-            file.close();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         return jsonArray;
     }

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      lang="en">
+    <head>
+        <title>Admin page</title>
+    </head>
+    <body>
+    <nav>
+        <ul>
+            <li sec:authorize="hasAnyRole('USER','ADMIN','BOOSTER')">
+                <a href="/account">Account page</a>
+            </li>
+            <li sec:authorize="hasRole('ADMIN')">
+                <a href="/admin">Admin page</a>
+            </li>
+            <li>
+                <a href="/order/">Order page</a>
+            </li>
+        </ul>
+    </nav>
+    <h1>Admin Page</h1>
+    <a href="/admin/listOfUsers">List of users</a>
+    <a href="/admin/listOfOrders">List of orders</a>
+    </body>
+</html>

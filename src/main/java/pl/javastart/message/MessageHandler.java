@@ -72,6 +72,20 @@ public class MessageHandler {
         return recipientId;
     }
 
+    public List<User> setOfSendRecipients(HttpServletRequest request){
+        Set<Long> recipientId = new HashSet<>();
+        for (Message message : messageRepository.findAll()) {
+            if (Objects.equals(message.getUser().getId(), actualUser.getActualUser(request).getId())) {
+                recipientId.add(message.getUser2().getId());
+            }
+            else if (Objects.equals(message.getUser2().getId(), actualUser.getActualUser(request).getId())) {
+                recipientId.add(message.getUser().getId());
+            }
+        }
+        List<User> users = (List<User>) userRepository.findAllById(recipientId);
+        return users;
+    }
+
     public List<Message> conversationSortedByDataDESC(Long id, HttpServletRequest request){
         List<Message> list = new ArrayList<>();
         list.addAll(getMessagesReceived(id,request));
@@ -81,13 +95,16 @@ public class MessageHandler {
     }
 
     private List<Message> getMessagesReceived(Long id, HttpServletRequest request){
-        List<Message> list = null;
+        List<Message> list = new ArrayList<>();
         try{
             list = messageRepository.findAllByUserAndUser2(userRepository.findById(id).get(),actualUser.getActualUser(request));;
             return list;
         }
-        catch (IllegalStateException exeption){
-            exeption.getCause();
+        catch (IllegalStateException exception){
+            exception.printStackTrace();
+        }
+        catch (Exception exception){
+            exception.printStackTrace();
         }
         return list;
     }

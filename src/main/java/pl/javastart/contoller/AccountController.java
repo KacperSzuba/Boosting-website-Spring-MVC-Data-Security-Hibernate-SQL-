@@ -21,12 +21,12 @@ public class AccountController {
 
     @RequestMapping
     public String showAccountPage(){
-        return "jsp/accountView/account";
+        return "accountView/account";
     }
 
     @GetMapping("/showChangePasswordPage")
     public String showChangePasswordPage(){
-        return "jsp/accountView/user_ChangePassword";
+        return "accountView/user_ChangePassword";
     }
 
     @GetMapping("/changePasswordForm")
@@ -34,12 +34,12 @@ public class AccountController {
         @RequestParam("repeatPassword")String repeatPassword, Model model,HttpServletRequest request){
         passwordManager.changePassword(request,password,repeatPassword);
         model.addAttribute("newPassword", passwordManager.getMessage());
-        return "jsp/accountView/user_ChangePassword";
+        return "accountView/user_ChangePassword";
     }
 
     @GetMapping("/showEmailChangePage")
     public String showEmailChangePage(){
-        return "jsp/accountView/user_ChangeEmail";
+        return "accountView/user_ChangeEmail";
     }
 
     @GetMapping("/changeEmailForm")
@@ -47,6 +47,6 @@ public class AccountController {
         @RequestParam("repeatEmail")String repeatEmail, Model model,HttpServletRequest request){
         emailChange.changeEmail(request,email,repeatEmail);
         model.addAttribute("newEmail",emailChange.getMessage());
-        return "jsp/accountView/user_ChangeEmail";
+        return "accountView/user_ChangeEmail";
     }
 }

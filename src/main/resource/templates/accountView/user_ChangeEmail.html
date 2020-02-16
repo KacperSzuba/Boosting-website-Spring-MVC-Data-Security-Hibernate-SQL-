@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      lang="en">
+    <head>
+        <title>Change email</title>
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li sec:authorize="hasAnyRole('USER','ADMIN','BOOSTER')">
+                    <a href="/account">Account page</a>
+                </li>
+                <li sec:authorize="hasRole('BOOSTER')">
+                    <a href="/booster">Booster page</a>
+                </li>
+
+                <li sec:authorize="hasRole('ADMIN')">
+                    <a href="/admin">Admin page</a>
+                </li>
+                <li>
+                    <a href="/order/">Order page</a>
+                </li>
+            </ul>
+        </nav>
+
+    <h1>Change Email</h1>
+
+    <form th:action="@{/account/changeEmailForm}" method="get">
+        <table>
+            <tr>
+                <td><input name="email"  type="text" placeholder="Email"/></td>
+            </tr>
+            <tr>
+                <td><input name="repeatEmail"  type="text" placeholder="Repeat Email"/></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Submit" /></td>
+            </tr>
+        </table>
+        <p th:text="${newEmail}"></p>
+    </form>
+    </body>
+</html>

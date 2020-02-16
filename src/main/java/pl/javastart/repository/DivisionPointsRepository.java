@@ -5,3 +5,5 @@ import pl.javastart.model.entity.DivisionPoints;
 
 public interface DivisionPointsRepository extends CrudRepository<DivisionPoints,Long> {
 }
+
+

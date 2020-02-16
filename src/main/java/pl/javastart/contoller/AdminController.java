@@ -31,19 +31,19 @@ public class AdminController {
 
     @RequestMapping
     public String showAdminPage(){
-        return "jsp/adminView/admin";
+        return "adminView/admin";
     }
 
     @RequestMapping("/listOfUsers")
     public ModelAndView showUserStatementPage(){
         List<User> users = (List<User>) userRepository.findAll();
-        return new ModelAndView("jsp/adminView/admin_ListOfUsers","users",users);
+        return new ModelAndView("adminView/admin_ListOfUsers","users",users);
     }
 
     @RequestMapping("/listOfOrders")
     public ModelAndView showListOfOrders(){
         List<OrderBoost> orderBoostList = (List<OrderBoost>) orderBoostRepository.findAll();
-        return new ModelAndView("jsp/adminView/admin_ListOfOrders","orders",orderBoostList);
+        return new ModelAndView("adminView/admin_ListOfOrders","orders",orderBoostList);
     }
 
     @GetMapping("/ban/{id}")
@@ -84,6 +84,6 @@ public class AdminController {
         model.addAttribute("currentRole",changeAccountStatus.getCurrentUserRole(user));
         model.addAttribute("expectedRoleIsROLE_USER",RoleName.ROLE_USER);
         model.addAttribute("expectedRoleIsROLE_BOOSTER",RoleName.ROLE_BOOSTER);
-        return "jsp/adminView/admin_UserDetails";
+        return "adminView/admin_UserDetails";
     }
 }

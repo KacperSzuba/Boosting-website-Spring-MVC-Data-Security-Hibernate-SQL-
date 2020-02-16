@@ -70,3 +70,5 @@ public class Price {
         this.divisionPoints = divisionPoints;
     }
 }
+
+

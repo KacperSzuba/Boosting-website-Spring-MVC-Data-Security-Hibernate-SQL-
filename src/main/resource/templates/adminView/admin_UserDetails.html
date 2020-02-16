@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:spring="http://java.sun.com/xml/ns/javaee"
+      lang="en">
+    <head>
+        <title>Admin user details</title>
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li sec:authorize="hasAnyRole('USER','ADMIN','BOOSTER')">
+                    <a href="/account">Account page</a>
+                </li>
+                <li sec:authorize="hasRole('ADMIN')">
+                    <a href="/admin">Admin page</a>
+                </li>
+                <li>
+                    <a href="/order/">Order page</a>
+                </li>
+                <li>
+                    <a href="/admin/listOfUsers">Back to previous page</a>
+                </li>
+            </ul>
+        </nav>
+        <p th:text="${user.username}">Username : </p>
+        <p th:text="${user.email}">Email : </p>
+        <p th:text="${currentRole}">Role : </p>
+        <spring:url value="/admin/ban/${user.id}" var="banUser" />
+        <spring:url value="/admin/un-ban/${user.id}" var="unbanUser" />
+        <spring:url value="/admin/setAsBooster/${user.id}" var="setAsBooster"/>
+        <spring:url value="/admin/setAsUser/${user.id}" var="setAsUser"/>
+        <spring:url value="/admin/deleteUser/${user.id}" var="deleteUser"/>
+        <div th:if="${user.enabled == true}">
+            <input type="button" th:onclick="'window.location.href = \'' + @{/admin/ban/{id}(id=${user.id})} + '\''"  value="Ban">
+        </div>
+        <div th:if="${user.enabled == false}">
+            <input type="button" th:onclick="'window.location.href = \'' + @{/admin/un-ban/{id}(id=${user.id})} + '\''"   value="Ban">
+        </div>
+        <div th:if="${currentRole.equals(expectedRoleIsROLE_USER)}">
+            <input type="button" th:onclick="'window.location.href = \'' + @{/admin/setAsBooster/{id}(id=${user.id})} + '\''"  value="Set Role name as a Booster">
+        </div>
+        <div th:if="${currentRole.equals(expectedRoleIsROLE_BOOSTER)}">
+            <input type="button" th:onclick="'window.location.href = \'' + @{/admin/setAsUser/{id}(id=${user.id})} + '\''"  value="Set Role name as a User ">
+        </div>
+        <input type="button" th:onclick="'window.location.href = \'' + @{/admin/deleteUser/{id}(id=${user.id})} + '\''"  value="Delete User">
+    </body>
+</html>
