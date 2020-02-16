@@ -45,7 +45,7 @@
                             <th th:text="${order.destinationTier}"></th>
                             <th>
                                 <spring:url value="/booster/orderDetails/${order.id}" var="orderDetails" />
-                                <a href="${orderDetails}">More</a>
+                                <a th:href="@{/booster/orderDetails/{id}(id = ${order.id})}" >More</a>
                             </th>
                         </tr>
                     </tbody>

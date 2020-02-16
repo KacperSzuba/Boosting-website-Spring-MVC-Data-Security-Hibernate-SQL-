@@ -25,16 +25,18 @@
             </ul>
         </nav>
         <h1>Order details</h1>
+
         <spring:url value="/booster/orderDetails/${id}/addBoost" var="addBoost" />
-        <a href="${addBoost}">Add boost</a>
+        <a th:href="@{/booster/orderDetails/{id}/addBoost (id = ${idOfBoost})}">Add boost</a>
+
         <p th:text="${boostDetails.lolUsername}"><label>League Of Legends username:</label></p>
         <p th:text="${boostDetails.lolPassword}"><label>League Of Legends password</label></p>
         <p>
-            <label>Current Tier:</label> <p th:text="${boostDetails.currentTier} ${boostDetails.currentDivision}"> </p>
+            <label>Current Tier:</label> <span th:text="${boostDetails.currentTier}"></span><span th:text="${boostDetails.currentDivision}"></span>
             <label>Points:</label>
         </p>
         <p>
-            <label>Destination Tier:</label><p th:text="${boostDetails.destinationTier} ${boostDetails.destinationDivision}"></p>
+            <label>Destination Tier:</label><span th:text="${boostDetails.destinationTier}"></span><span th:text="${boostDetails.destinationDivision}"></span>
             <label>Points:</label>
         </p>
         <p th:text="${boostDetails.region}"><label>Region:</label></p>

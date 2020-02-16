@@ -47,7 +47,7 @@
                     <th th:text="${currentOrderBoost.destinationTier}"></th>
                     <th>
                         <spring:url value="/booster/orderDetails/${currentOrderBoost.id}" var="orderDetails" />
-                        <a href="${orderDetails}">More</a>
+                        <a th:href="@{/booster/orderDetails/{id}(id = ${currentOrderBoost.id})}">More</a>
                     </th>
                     <th th:if="${currentOrderBoost.id != null}">
                         <a href="/booster/currentBoost/finishBoost">Finish</a>

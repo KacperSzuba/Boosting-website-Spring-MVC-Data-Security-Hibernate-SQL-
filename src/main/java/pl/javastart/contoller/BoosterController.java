@@ -40,6 +40,7 @@ public class BoosterController {
     public String showOrderDetailsPage(@PathVariable("id")Long id, Model model){
         OrderBoost orderBoost = orderBoostRepository.findById(id).get();
         model.addAttribute("boostDetails",orderBoost);
+        model.addAttribute("idOfBoost",id);
         return "boosterView/booster_OrderDetails";
     }
 
