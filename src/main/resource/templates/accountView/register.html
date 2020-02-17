@@ -5,6 +5,8 @@
       lang="en">
     <head>
         <title>Register page</title>
+        <link rel="stylesheet" th:href="@{/style/bootstrap.min.css}"/>
+        <link rel="stylesheet" th:href="@{/style/drop-down-nav.css}"/>
         <style type="text/css">
             .error {
                 color: red;
@@ -12,49 +14,78 @@
         </style>
     </head>
     <body>
-        <div id="Register">
-            <nav>
-                <ul>
-                    <div sec:authorize="${isAnonymous()}">
-                        <li>
-                            <a href="/login">Login Page</a>
-                        </li>
-                        <li>
-                            <a href="/register">Register Page</a>
-                        </li>
-                    </div>
-                    <li>
-                        <a href="/order/">Order page</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor03">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/order/">Boosting</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="${isAnonymous()}">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
+                        <a class="nav-link dropbtn" href="/admin">Admin resources</a>
+                        <div class="dropdown-content">
+                            <a href="/admin/listOfOrders">List of orders</a>
+                            <a href="/admin/listOfUsers">List of users</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropbtn" href="/booster" sec:authorize="hasRole('BOOSTER')">Booster resources</a>
+                        <div class="dropdown-content">
+                            <a href="/booster/listOfFreeOrders">List of free orders</a>
+                            <a href="/booster/currentBoost">Current boost</a>
+                            <a href="/booster/doneOrderBoosts">Done order boosts</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropbtn" href="/account" sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')">Account</a>
+                        <div class="dropdown-content">
+                            <a href="/account/showChangePasswordPage">Change Password</a>
+                            <a href="/account/showEmailChangePage">Change Email</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropbtn" href="/message" sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')">Messages</a>
+                        <div class="dropdown-content">
+                            <a href="/message">Send Message</a>
+                            <a href="/message/retrieve">Retrieve message</a>
+                        </div>
                     </li>
                 </ul>
-            </nav>
-            <h1>Account registration</h1>
-            <p th:object="${message}"></p>
-            <form th:action="@{/registerForm}" th:object="${register}"  method="post">
-                <table>
-                    <tr>
-                        <td>
-                            <input th:field="*{username}" placeholder="Username" />
-                            <span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input th:field="*{password}"  placeholder="Password" type="password" />
-                            <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input th:field="*{email}"  placeholder="Email" />
-                            <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="submit" value="Submit" /></td>
-                    </tr>
-                </table>
-            </form>
-        </div>
+                <div sec:authorize="${isFullyAuthenticated()}">
+                    <form th:action="@{/logout}" method="post">
+                        <input class="btn btn-primary btn-sm" type="submit" value="Logout" />
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <h1>Account registration</h1>
+        <p th:object="${message}"></p>
+        <form th:action="@{/registerForm}" th:object="${register}"  method="post">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input th:field="*{username}" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username">
+                <span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input th:field="*{password}" type="password" class="form-control" id="password" aria-describedby="emailHelp" placeholder="Password">
+                <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input th:field="*{email}" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email">
+                <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Register" />
+        </form>
     </body>
 </html>
