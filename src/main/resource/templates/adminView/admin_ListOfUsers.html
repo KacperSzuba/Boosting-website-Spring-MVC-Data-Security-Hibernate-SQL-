@@ -82,7 +82,7 @@
                         <th th:text="${userStat.count}"></th>
                         <th th:text="${user.id}"></th>
                         <th th:text="${user.username}"></th>
-                        <th><a th:href="@{/admin/userDetails/{id}(id = ${user.id})}" >More</a></th>
+                        <th><a class="btn btn-info btn-sm" th:href="@{/admin/userDetails/{id}(id = ${user.id})}" >More</a></th>
                     </tr>
                     </tbody>
             </table>

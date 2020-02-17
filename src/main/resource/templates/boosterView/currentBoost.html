@@ -89,10 +89,10 @@
                     <th th:text="${currentOrderBoost.destinationTier}"></th>
                     <th>
                         <spring:url value="/booster/orderDetails/${currentOrderBoost.id}" var="orderDetails" />
-                        <a th:href="@{/booster/orderDetails/{id}(id = ${currentOrderBoost.id})}">More</a>
+                        <a class="btn btn-info btn-sm" th:href="@{/booster/orderDetails/{id}(id = ${currentOrderBoost.id})}">More</a>
                     </th>
                     <th th:if="${currentOrderBoost.id != null}">
-                        <a href="/booster/currentBoost/finishBoost">Finish</a>
+                        <a class="btn btn-info btn-sm" href="/booster/currentBoost/finishBoost">Finish</a>
                     </th>
                 </tr>
                 </tbody>

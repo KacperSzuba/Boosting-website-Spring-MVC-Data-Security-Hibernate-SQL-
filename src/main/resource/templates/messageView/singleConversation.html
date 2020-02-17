@@ -7,6 +7,12 @@
         <title>Single conversation</title>
         <link rel="stylesheet" th:href="@{/style/bootstrap.min.css}"/>
         <link rel="stylesheet" th:href="@{/style/drop-down-nav.css}"/>
+        <style>
+            .sendMessage{
+                margin-left: 10%;
+                margin-right: 10%;
+            }
+        </style>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -63,7 +69,6 @@
             </div>
         </nav>
         <h1>Single Conversation</h1>
-
         <div id="test1"></div>
         <script>
             const xhr = new XMLHttpRequest();
@@ -74,7 +79,7 @@
                     for (var i = 0; i < conversation.length; i++){
                         var singleMessage = document.createElement("div");
                         singleMessage.innerHTML = conversation[i]['sendMessage'];
-                        singleMessage.setAttribute("class","sendMessage");
+                        singleMessage.setAttribute("class","sendMessage lead");
                         singleMessage.setAttribute("id","sendMessage"+i);
                         var initialDiv = document.getElementById('test1');
                         document.body.insertBefore(singleMessage,initialDiv);

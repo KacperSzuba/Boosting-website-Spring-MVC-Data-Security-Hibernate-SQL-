@@ -64,13 +64,24 @@
         </nav>
 
         <form th:action="@{informationAboutAccount}" th:object="${orderBoost}" >
-            <input th:field="*{lolUsername}"  placeholder="LoL Username" />
-            <input th:field="*{lolPassword}" placeholder="LoL Password" />
-            <select th:field="*{region}" id="region">
-                <option th:each="region : ${listOfRegions}" th:value="${region}" th:text="${region}"></option>
-            </select>
-            <textarea th:field="*{noteToBoosters}" placeholder="Message to the booster" />
-            <input type="submit" value="Submit"/>
+            <div class="form-group">
+                <label class="col-form-label" for="lolUsername">LoL Username</label>
+                <input th:field="*{lolUsername}" type="text" class="form-control" placeholder="LoL Username" id="lolUsername">
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" for="lolPassword">LoL Password</label>
+                <input th:field="*{lolPassword}" type="password" class="form-control" placeholder="LoL Password" id="lolPassword">
+            </div>
+            <div class="form-group">
+                <select class="custom-select" th:field="*{region}" id="region">
+                    <option th:each="region : ${listOfRegions}" th:value="${region}" th:text="${region}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleTextarea">Message to the booster</label>
+                <textarea th:field="*{noteToBoosters}" placeholder="Message to the booster" class="form-control" id="exampleTextarea" rows="3"></textarea>
+            </div>
+            <input class="btn btn-info btn-sm" type="submit" value="Submit"/>
         </form>
     </body>
 </html>

@@ -70,15 +70,16 @@
                 </div>
             </div>
         </nav>
-        <button onclick="upCurrentTier()">Increase current tier</button>
-        <button onclick="downCurrentTier()">Decrease current tier</button>
-        <button onclick="leftCurrentTier()">Decrease current division</button>
-        <button onclick="rightCurrentTier()">Increase current division</button>
+        <img th:src="@{/images/Bronze/Bronze1.png}"/>
+        <button class="btn btn-secondary" onclick="upCurrentTier()">Increase current tier</button>
+        <button class="btn btn-secondary" onclick="downCurrentTier()">Decrease current tier</button>
+        <button class="btn btn-secondary" onclick="leftCurrentTier()">Decrease current division</button>
+        <button class="btn btn-secondary" onclick="rightCurrentTier()">Increase current division</button>
         <img class="center" id="currentTier">
-        <button onclick="upDestinationTier()">Increase destination tier</button>
-        <button onclick="downDestinationTier()">Decrease destination tier</button>
-        <button onclick="leftDestinationTier()">Decrease destination division</button>
-        <button onclick="rightDestinationTier()">Increase destination division</button>
+        <button class="btn btn-secondary" onclick="upDestinationTier()">Increase destination tier</button>
+        <button class="btn btn-secondary" onclick="downDestinationTier()">Decrease destination tier</button>
+        <button class="btn btn-secondary" onclick="leftDestinationTier()">Decrease destination division</button>
+        <button class="btn btn-secondary" onclick="rightDestinationTier()">Increase destination division</button>
         <img class="center" id="destinationTier">
 
         <a href="/order/informationAboutDivision" onclick="createDestinationTierAndDivisionCookie()">Complete information about your account</a>

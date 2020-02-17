@@ -63,26 +63,39 @@
                 </div>
             </div>
         </nav>
-        <p th:text="${user.username}">Username : </p>
-        <p th:text="${user.email}">Email : </p>
-        <p th:text="${currentRole}">Role : </p>
-        <spring:url value="/admin/ban/${user.id}" var="banUser" />
-        <spring:url value="/admin/un-ban/${user.id}" var="unbanUser" />
-        <spring:url value="/admin/setAsBooster/${user.id}" var="setAsBooster"/>
-        <spring:url value="/admin/setAsUser/${user.id}" var="setAsUser"/>
-        <spring:url value="/admin/deleteUser/${user.id}" var="deleteUser"/>
-        <div th:if="${user.enabled == true}">
-            <input type="button" th:onclick="'window.location.href = \'' + @{/admin/ban/{id}(id=${user.id})} + '\''"  value="Ban">
-        </div>
-        <div th:if="${user.enabled == false}">
-            <input type="button" th:onclick="'window.location.href = \'' + @{/admin/un-ban/{id}(id=${user.id})} + '\''"   value="Ban">
-        </div>
-        <div th:if="${currentRole.equals(expectedRoleIsROLE_USER)}">
-            <input type="button" th:onclick="'window.location.href = \'' + @{/admin/setAsBooster/{id}(id=${user.id})} + '\''"  value="Set Role name as a Booster">
-        </div>
-        <div th:if="${currentRole.equals(expectedRoleIsROLE_BOOSTER)}">
-            <input type="button" th:onclick="'window.location.href = \'' + @{/admin/setAsUser/{id}(id=${user.id})} + '\''"  value="Set Role name as a User ">
-        </div>
-        <input type="button" th:onclick="'window.location.href = \'' + @{/admin/deleteUser/{id}(id=${user.id})} + '\''"  value="Delete User">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Username :
+                <span class="badge badge-primary badge-pill"><p th:text="${user.username}"></p></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Email :
+                <span class="badge badge-primary badge-pill"><p th:text="${user.email}"></p></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Role :
+                <span class="badge badge-primary badge-pill"><p th:text="${currentRole}"></p></span>
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                 <div th:if="${user.enabled == true}">
+                    <input class="btn btn-secondary" type="button" th:onclick="'window.location.href = \'' + @{/admin/ban/{id}(id=${user.id})} + '\''"  value="Ban">
+                </div>
+                <div th:if="${user.enabled == false}">
+                    <input class="btn btn-secondary" type="button" th:onclick="'window.location.href = \'' + @{/admin/un-ban/{id}(id=${user.id})} + '\''"   value="Un-Ban">
+                </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div th:if="${currentRole.equals(expectedRoleIsROLE_USER)}">
+                    <input class="btn btn-secondary"  type="button" th:onclick="'window.location.href = \'' + @{/admin/setAsBooster/{id}(id=${user.id})} + '\''"  value="Set Role name as a Booster">
+                </div>
+                <div th:if="${currentRole.equals(expectedRoleIsROLE_BOOSTER)}">
+                    <input class="btn btn-secondary"  type="button" th:onclick="'window.location.href = \'' + @{/admin/setAsUser/{id}(id=${user.id})} + '\''"  value="Set Role name as a User ">
+                </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <input class="btn btn-secondary" type="button" th:onclick="'window.location.href = \'' + @{/admin/deleteUser/{id}(id=${user.id})} + '\''"  value="Delete User">
+            </li>
+        </ul>
     </body>
 </html>

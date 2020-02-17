@@ -87,7 +87,7 @@
                             <th th:text="${order.destinationTier}"></th>
                             <th>
                                 <spring:url value="/booster/orderDetails/${order.id}" var="orderDetails" />
-                                <a th:href="@{/booster/orderDetails/{id}(id = ${order.id})}" >More</a>
+                                <a class="btn btn-info btn-sm" th:href="@{/booster/orderDetails/{id}(id = ${order.id})}" >More</a>
                             </th>
                         </tr>
                     </tbody>

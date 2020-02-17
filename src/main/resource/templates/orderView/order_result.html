@@ -62,9 +62,25 @@
                 </div>
             </div>
         </nav>
-        <p th:text="${orderBoost.region}"></p>
-        <p th:text="${orderBoost.lolUsername}"></p>
-        <p th:text="${orderBoost.lolPassword}"></p>
-        <p th:text="${orderBoost.noteToBoosters}"></p>
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Lol username :
+                <span class="badge badge-primary badge-pill"><p th:text="${orderBoost.lolUsername}"></p></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Lol password :
+                <span class="badge badge-primary badge-pill"><p th:text="${orderBoost.lolPassword}"></p></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Region :
+                <span class="badge badge-primary badge-pill"> <p th:text="${orderBoost.region}"></p></span>
+            </li>
+            <div th:if="${orderBoost.noteToBoosters != ''}">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Note to boosters
+                    <span class="badge badge-primary badge-pill"> <p th:text="${orderBoost.noteToBoosters}"></p></span>
+                </li>
+            </div>
+        </ul>
     </body>
 </html>
