@@ -30,7 +30,7 @@ public class EmailManager {
 
     private void tryToChangeEmail(Long id,String email,String repeatEmail){
         if (whetherTheEmailsAreTheSame(email, repeatEmail) && isValid(email)) {
-            userRepository.changeEmailQuery(id, email);
+            userRepository.changeEmail(id, email);
             setMessage("Your new email is : " + email);
         } else {
             throw new IllegalArgumentException("Your email is wrong or emails are different");

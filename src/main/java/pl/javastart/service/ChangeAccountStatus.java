@@ -22,11 +22,11 @@ public class ChangeAccountStatus {
     }
 
     public void banUser(Long id){
-        userRepository.changeEnabledStatementQuery(id,false);
+        userRepository.changeUserEnabledStatement(id,false);
     }
 
     public void unBanUser(Long id){
-        userRepository.changeEnabledStatementQuery(id,true);
+        userRepository.changeUserEnabledStatement(id,true);
     }
 
     public void deleteUser(Long id){

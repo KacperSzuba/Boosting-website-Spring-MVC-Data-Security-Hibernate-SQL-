@@ -11,20 +11,21 @@ import pl.javastart.model.entity.user.UserRole;
 public interface UserRepository extends CrudRepository<User,Long> {
     User findByUsername(String username);
     boolean existsUserByUsername(String username);
+
     @Transactional
     @Modifying
     @Query(value = "UPDATE User u SET u.enabled =:enabled where u.id=:id")
-    void changeEnabledStatementQuery(@Param("id") Long id, @Param("enabled") boolean enabled);
+    void changeUserEnabledStatement(@Param("id") Long id, @Param("enabled") boolean enabled);
 
     @Transactional
     @Modifying
     @Query(value = "UPDATE User u SET u.password =:password where u.id=:id")
-    void changePasswordQuery(@Param("id") Long id,@Param("password") String password);
+    void changePassword(@Param("id") Long id, @Param("password") String password);
 
     @Transactional
     @Modifying
     @Query(value = "UPDATE User u SET u.email =:email where u.id=:id")
-    void changeEmailQuery(@Param("id") Long id,@Param("email") String email);
+    void changeEmail(@Param("id") Long id, @Param("email") String email);
 
     @Transactional
     @Modifying

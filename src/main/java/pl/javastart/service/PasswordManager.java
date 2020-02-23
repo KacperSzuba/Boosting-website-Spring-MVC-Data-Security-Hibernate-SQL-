@@ -16,6 +16,7 @@ public class PasswordManager {
     private final UserRepository userRepository;
     private final ActualUser actualUser;
     private final HttpServletRequest request;
+
     public PasswordManager(PasswordEncoder passwordEncoder, UserRepository userRepository, ActualUser actualUser,HttpServletRequest request) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
@@ -25,21 +26,24 @@ public class PasswordManager {
 
     public void changePassword(String password, String repeatPassword){
         try {
-            tryToChangePassword(actualUser.getActualUser(this.request).getId(),password,repeatPassword);
+            checkIfPasswordIsCorrect(actualUser.getActualUser(this.request).getId(),password,repeatPassword);
         }
         catch (IllegalArgumentException exception){
             setMessage(exception.getMessage());
         }
     }
-
-    private void tryToChangePassword(Long id,String password,String repeatPassword){
-        if(isPasswordLengthSufficient(password) && whetherThePasswordsAreTheSame(password,repeatPassword)){
-            userRepository.changePasswordQuery(id,passwordEncoder.encode(password));
-            setMessage("Your new password is : "+password);
+    private void checkIfPasswordIsCorrect(Long id,String password,String repeatPassword){
+        if(isPasswordLengthSufficient(password) && whetherThePasswordsAreTheSame(password,repeatPassword)) {
+            tryToChangePassword(id,password);
         }
         else {
             throw new IllegalArgumentException("Your password is too short or passwords are different");
         }
+    }
+
+    private void tryToChangePassword(Long id,String password){
+        userRepository.changePassword(id,passwordEncoder.encode(password));
+        setMessage("Your new password is : "+password);
     }
 
     private boolean isPasswordLengthSufficient(String password){
