@@ -18,7 +18,7 @@ public class AccountController {
         this.emailChange = emailChange;
     }
 
-    @RequestMapping
+    @GetMapping
     public String showAccountPage(){
         return "accountView/account";
     }

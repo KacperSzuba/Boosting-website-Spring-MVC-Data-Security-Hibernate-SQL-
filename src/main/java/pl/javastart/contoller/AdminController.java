@@ -29,18 +29,18 @@ public class AdminController {
         this.orderBoostRepository = orderBoostRepository;
     }
 
-    @RequestMapping
+    @GetMapping
     public String showAdminPage(){
         return "adminView/admin";
     }
 
-    @RequestMapping("/listOfUsers")
+    @GetMapping("/listOfUsers")
     public ModelAndView showUserStatementPage(){
         List<User> users = (List<User>) userRepository.findAll();
         return new ModelAndView("adminView/admin_ListOfUsers","users",users);
     }
 
-    @RequestMapping("/listOfOrders")
+    @GetMapping("/listOfOrders")
     public ModelAndView showListOfOrders(){
         List<OrderBoost> orderBoostList = (List<OrderBoost>) orderBoostRepository.findAll();
         return new ModelAndView("adminView/admin_ListOfOrders","orders",orderBoostList);

@@ -1,6 +1,6 @@
 package pl.javastart.contoller.rest;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.javastart.manage.json.JsonMessageHandler;
 
@@ -13,7 +13,7 @@ public class MessageRestController {
         this.jsonMessageHandler = jsonMessageHandler;
     }
 
-    @RequestMapping("/sendMessage/singleConversation/Message")
+    @GetMapping("/sendMessage/singleConversation/Message")
     private String shareJSONWithConversation() {
         return jsonMessageHandler.createJsonFile().toJSONString();
     }

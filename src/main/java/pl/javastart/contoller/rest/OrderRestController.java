@@ -1,6 +1,6 @@
 package pl.javastart.contoller.rest;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.javastart.manage.json.JsonOrderHandler;
 
@@ -13,7 +13,7 @@ public class OrderRestController {
         this.jsonOrderHandler = jsonOrderHandler;
     }
 
-    @RequestMapping("/order/Order")
+    @GetMapping("/order/Order")
     public String showOrderPage(){
         return jsonOrderHandler.createJsonFile().toJSONString();
     }

@@ -31,7 +31,7 @@ public class MessageController {
         return "redirect:/message/singleConversation/"+messageHandler.getTemp();
     }
 
-    @RequestMapping("/retrieve")
+    @GetMapping("/retrieve")
     public ModelAndView listOfConversations(){
         return new ModelAndView("messageView/messagesReceived", "conversations",messageHandler.setOfSendRecipients());
     }
