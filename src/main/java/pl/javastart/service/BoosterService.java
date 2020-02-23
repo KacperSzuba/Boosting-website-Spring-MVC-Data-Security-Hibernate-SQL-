@@ -32,10 +32,10 @@ public class BoosterService {
        return orderBoostRepository.findOrderBoostByBoosterEqualsNull();
     }
 
-    public void addBoost(Long id){
+    public void addBoost(Long orderId){
         leagueOfLegendsAPIConnector = new LeagueOfLegendsAPIConnector(getUsername(),getRegion());
         if(checkIfTheBoosterHasNoOrders()){
-            orderBoostRepository.findFreeOrderBoosts(id,booster());
+            orderBoostRepository.findFreeOrderBoosts(orderId,booster());
             setMessage("You correct took order");
         }
         else {
