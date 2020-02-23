@@ -2,7 +2,6 @@ package pl.javastart.manage.json;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.javastart.message.MessageHandler;
 import pl.javastart.model.entity.message.Message;
@@ -10,8 +9,11 @@ import pl.javastart.model.entity.message.Message;
 @Component
 public class JsonMessageHandler {
 
-    @Autowired
-    private MessageHandler messageHandler;
+    private final MessageHandler messageHandler;
+
+    public JsonMessageHandler(MessageHandler messageHandler) {
+        this.messageHandler = messageHandler;
+    }
 
     public JSONArray createJsonFile() {
         JSONArray jsonArray = new JSONArray();

@@ -1,6 +1,5 @@
 package pl.javastart.contoller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,11 +16,13 @@ import java.util.List;
 @RequestMapping("/booster")
 public class BoosterController {
 
-    @Autowired
-    private OrderBoostRepository orderBoostRepository;
+    private final OrderBoostRepository orderBoostRepository;
+    private final BoosterService boosterService;
 
-    @Autowired
-    private BoosterService boosterService;
+    public BoosterController(OrderBoostRepository orderBoostRepository, BoosterService boosterService) {
+        this.orderBoostRepository = orderBoostRepository;
+        this.boosterService = boosterService;
+    }
 
     @RequestMapping
     public String showBoosterPage(){

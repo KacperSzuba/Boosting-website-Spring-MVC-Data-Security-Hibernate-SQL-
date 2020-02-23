@@ -19,13 +19,9 @@ import java.util.TreeMap;
 public class OrderService {
 
     private final ActualUser actualUser;
-
     private final OrderBoostRepository orderBoostRepository;
-
     private final TierImageRepository tierImageRepository;
-
     private final TierRepository tierRepository;
-
     private final DivisionsRepository divisionsRepository;
 
     public OrderService(ActualUser actualUser, OrderBoostRepository orderBoostRepository, TierImageRepository tierImageRepository, TierRepository tierRepository, DivisionsRepository divisionsRepository) {

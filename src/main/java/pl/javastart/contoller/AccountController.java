@@ -1,6 +1,5 @@
 package pl.javastart.contoller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,11 +10,13 @@ import pl.javastart.service.PasswordManager;
 @RequestMapping("/account")
 public class AccountController {
 
-    @Autowired
-    private PasswordManager passwordManager;
+    private final PasswordManager passwordManager;
+    private final EmailManager emailChange;
 
-    @Autowired
-    private EmailManager emailChange;
+    public AccountController(PasswordManager passwordManager, EmailManager emailChange) {
+        this.passwordManager = passwordManager;
+        this.emailChange = emailChange;
+    }
 
     @RequestMapping
     public String showAccountPage(){

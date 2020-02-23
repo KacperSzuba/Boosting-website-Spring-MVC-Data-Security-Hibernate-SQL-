@@ -1,6 +1,5 @@
 package pl.javastart.contoller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,14 +19,15 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
 
-    @Autowired
-    private ChangeAccountStatus changeAccountStatus;
+    private final ChangeAccountStatus changeAccountStatus;
+    private final UserRepository userRepository;
+    private final OrderBoostRepository orderBoostRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private OrderBoostRepository orderBoostRepository;
+    public AdminController(ChangeAccountStatus changeAccountStatus, UserRepository userRepository, OrderBoostRepository orderBoostRepository) {
+        this.changeAccountStatus = changeAccountStatus;
+        this.userRepository = userRepository;
+        this.orderBoostRepository = orderBoostRepository;
+    }
 
     @RequestMapping
     public String showAdminPage(){

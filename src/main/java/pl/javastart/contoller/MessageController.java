@@ -10,6 +10,7 @@ import pl.javastart.model.entity.message.Message;
 @Controller
 @RequestMapping("/message")
 public class MessageController {
+
     private final MessageHandler messageHandler;
 
     public MessageController(MessageHandler messageHandler) {

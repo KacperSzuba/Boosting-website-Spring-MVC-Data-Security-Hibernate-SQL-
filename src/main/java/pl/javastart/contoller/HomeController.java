@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class HomeController {
 
-
     @RequestMapping("/")
     public String showHomePage(){
         return "home";

@@ -1,6 +1,5 @@
 package pl.javastart.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.javastart.model.entity.user.User;
 import pl.javastart.model.entity.user.UserRole;
@@ -14,11 +13,13 @@ import java.util.List;
 @Service
 public class ChangeAccountStatus {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final UserRoleRepository userRoleRepository;
 
-    @Autowired
-    private UserRoleRepository userRoleRepository;
+    public ChangeAccountStatus(UserRepository userRepository, UserRoleRepository userRoleRepository) {
+        this.userRepository = userRepository;
+        this.userRoleRepository = userRoleRepository;
+    }
 
     public void banUser(Long id){
         userRepository.changeEnabledStatementQuery(id,false);

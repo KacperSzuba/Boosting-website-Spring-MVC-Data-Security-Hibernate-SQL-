@@ -2,7 +2,6 @@ package pl.javastart.manage.json;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.javastart.model.entity.TierImage;
 import pl.javastart.repository.TierImageRepository;
@@ -10,8 +9,11 @@ import pl.javastart.repository.TierImageRepository;
 @Component
 public class JsonOrderHandler {
 
-    @Autowired
-    private TierImageRepository tierImageRepository;
+    private final TierImageRepository tierImageRepository;
+
+    public JsonOrderHandler(TierImageRepository tierImageRepository) {
+        this.tierImageRepository = tierImageRepository;
+    }
 
     public JSONArray createJsonFile() {
         JSONArray jsonArray = new JSONArray();
