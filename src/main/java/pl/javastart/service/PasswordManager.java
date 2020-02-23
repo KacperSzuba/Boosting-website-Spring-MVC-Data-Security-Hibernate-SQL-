@@ -3,6 +3,7 @@ package pl.javastart.service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.javastart.manage.ActualUser;
+import pl.javastart.model.entity.user.User;
 import pl.javastart.repository.user.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,24 +27,28 @@ public class PasswordManager {
 
     public void changePassword(String password, String repeatPassword){
         try {
-            checkIfPasswordIsCorrect(actualUser.getActualUser(this.request).getId(),password,repeatPassword);
+            checkIfPasswordIsCorrect(user().getId(),password,repeatPassword);
         }
         catch (IllegalArgumentException exception){
             setMessage(exception.getMessage());
         }
     }
-    private void checkIfPasswordIsCorrect(Long id,String password,String repeatPassword){
+    private void checkIfPasswordIsCorrect(Long userId,String password,String repeatPassword){
         if(isPasswordLengthSufficient(password) && whetherThePasswordsAreTheSame(password,repeatPassword)) {
-            tryToChangePassword(id,password);
+            tryToChangePassword(userId,password);
         }
         else {
             throw new IllegalArgumentException("Your password is too short or passwords are different");
         }
     }
 
-    private void tryToChangePassword(Long id,String password){
-        userRepository.changePassword(id,passwordEncoder.encode(password));
+    private void tryToChangePassword(Long userId,String password){
+        userRepository.changePassword(userId,passwordEncoder.encode(password));
         setMessage("Your new password is : "+password);
+    }
+
+    private User user(){
+        return actualUser.getActualUser(this.request);
     }
 
     private boolean isPasswordLengthSufficient(String password){

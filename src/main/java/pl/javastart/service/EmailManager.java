@@ -2,6 +2,7 @@ package pl.javastart.service;
 
 import org.springframework.stereotype.Service;
 import pl.javastart.manage.ActualUser;
+import pl.javastart.model.entity.user.User;
 import pl.javastart.repository.user.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,26 +22,29 @@ public class EmailManager {
 
     public void changeEmail(String email, String repeatEmail){
         try{
-            checkIfEmailIsCorrect(actualUser.getActualUser(this.request).getId(),email,repeatEmail);
+            checkIfEmailIsCorrect(user().getId(),email,repeatEmail);
         }
         catch (IllegalArgumentException exception){
             setMessage(exception.getMessage());
         }
     }
 
-    private void checkIfEmailIsCorrect(Long id,String email,String repeatEmail){
+    private void checkIfEmailIsCorrect(Long userId,String email,String repeatEmail){
         if (whetherTheEmailsAreTheSame(email, repeatEmail) && isValid(email)) {
-            tryToChangeEmail(id,email);
+            tryToChangeEmail(userId,email);
         }
         else {
             throw new IllegalArgumentException("Your email is wrong or emails are different");
         }
     }
 
-
-    private void tryToChangeEmail(Long id,String email){
-        userRepository.changeEmail(id, email);
+    private void tryToChangeEmail(Long userId,String email){
+        userRepository.changeEmail(userId, email);
         setMessage("Your new email is : " + email);
+    }
+
+    private User user(){
+        return actualUser.getActualUser(this.request);
     }
 
     private boolean whetherTheEmailsAreTheSame(String email,String repeatEmail){
