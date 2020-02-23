@@ -25,7 +25,6 @@ public class BoosterService {
         this.request = request;
         this.actualUser = actualUser;
         this.orderBoostRepository = orderBoostRepository;
-        leagueOfLegendsAPIConnector = new LeagueOfLegendsAPIConnector(getUsername(),getRegion());
     }
 
     public List<OrderBoost> findFreeOrderBoost(){
@@ -33,6 +32,7 @@ public class BoosterService {
     }
 
     public void addBoost(Long id){
+        leagueOfLegendsAPIConnector = new LeagueOfLegendsAPIConnector(getUsername(),getRegion());
         if(checkIfTheBoosterHasNoOrders()){
             orderBoostRepository.findFreeOrderBoosts(id,actualUser.getActualUser(this.request));
             setMessage("You correct took order");

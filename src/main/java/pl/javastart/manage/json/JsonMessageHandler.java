@@ -17,7 +17,6 @@ public class JsonMessageHandler {
 
     public JSONArray createJsonFile() {
         JSONArray jsonArray = new JSONArray();
-
         for (Message message : messageHandler.conversationSortedByDataDESC(messageHandler.getIdOfConversation())) {
             JSONObject record = new JSONObject();
             record.put("id",message.getId());
