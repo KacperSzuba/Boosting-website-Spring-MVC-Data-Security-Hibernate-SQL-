@@ -21,20 +21,26 @@ public class EmailManager {
 
     public void changeEmail(String email, String repeatEmail){
         try{
-            tryToChangeEmail(actualUser.getActualUser(this.request).getId(),email,repeatEmail);
+            checkIfEmailIsCorrect(actualUser.getActualUser(this.request).getId(),email,repeatEmail);
         }
         catch (IllegalArgumentException exception){
             setMessage(exception.getMessage());
         }
     }
 
-    private void tryToChangeEmail(Long id,String email,String repeatEmail){
+    private void checkIfEmailIsCorrect(Long id,String email,String repeatEmail){
         if (whetherTheEmailsAreTheSame(email, repeatEmail) && isValid(email)) {
-            userRepository.changeEmail(id, email);
-            setMessage("Your new email is : " + email);
-        } else {
+            tryToChangeEmail(id,email);
+        }
+        else {
             throw new IllegalArgumentException("Your email is wrong or emails are different");
         }
+    }
+
+
+    private void tryToChangeEmail(Long id,String email){
+        userRepository.changeEmail(id, email);
+        setMessage("Your new email is : " + email);
     }
 
     private boolean whetherTheEmailsAreTheSame(String email,String repeatEmail){
