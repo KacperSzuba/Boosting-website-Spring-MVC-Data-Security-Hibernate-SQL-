@@ -22,9 +22,10 @@ public class BoosterService {
     private final HttpServletRequest request;
 
     public BoosterService(HttpServletRequest request,ActualUser actualUser,OrderBoostRepository orderBoostRepository){
-    this.request = request;
-    this.actualUser = actualUser;
-    this.orderBoostRepository = orderBoostRepository;
+        this.request = request;
+        this.actualUser = actualUser;
+        this.orderBoostRepository = orderBoostRepository;
+        leagueOfLegendsAPIConnector = new LeagueOfLegendsAPIConnector(getUsername(),getRegion());
     }
 
     public List<OrderBoost> findFreeOrderBoost(){
@@ -42,14 +43,17 @@ public class BoosterService {
     }
 
     public void finishBoost() throws IOException {
-        leagueOfLegendsAPIConnector = new LeagueOfLegendsAPIConnector(getUsername(),getRegion());
-        if(isDivisionsAreEqual() && isTiersAreEqual()){
+        if(whetherOrderIsCompleted()){
             orderBoostRepository.setOrderAsDone(findCurrentBoost().getId());
             setMessage("You have successfully completed boosting");
         }
         else {
             setMessage("You have not completed boosting correctly");
         }
+    }
+
+    private boolean whetherOrderIsCompleted() throws IOException {
+        return isDivisionsAreEqual() && isTiersAreEqual();
     }
 
     private boolean isDivisionsAreEqual() throws IOException {

@@ -33,7 +33,7 @@ public class UserCreatorService {
         }
         catch (IllegalArgumentException exception){
             exception.printStackTrace();
-            setUserRegistrationInformation("User with this username already exist");
+            setUserRegistrationInformation(exception.getMessage());
             return false;
         }
         catch (Exception exception){
@@ -47,7 +47,7 @@ public class UserCreatorService {
         boolean isUserExist = userRepository.existsUserByUsername(user.getUsername());
         if(isUserExist){
             //zrobić swój wyjątek
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("User with this username already exist");
         }
         else {
             tryToCreateAccount(user);
