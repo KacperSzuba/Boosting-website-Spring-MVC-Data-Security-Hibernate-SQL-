@@ -16,22 +16,25 @@ import java.util.List;
 public class BoosterService {
     private String message;
 
-    @Autowired
-    private ActualUser actualUser;
-
-    @Autowired
-    private OrderBoostRepository orderBoostRepository;
-
     private LeagueOfLegendsAPIConnector leagueOfLegendsAPIConnector;
+
+    private final ActualUser actualUser;
+    private final OrderBoostRepository orderBoostRepository;
+    private final HttpServletRequest request;
+
+    public BoosterService(HttpServletRequest request,ActualUser actualUser,OrderBoostRepository orderBoostRepository){
+    this.request = request;
+    this.actualUser = actualUser;
+    this.orderBoostRepository = orderBoostRepository;
+    }
 
     public List<OrderBoost> findFreeOrderBoost(){
        return orderBoostRepository.findOrderBoostByBoosterEqualsNull();
     }
 
-    public void addBoost(Long id, HttpServletRequest request){
-        if(checkIfTheBoosterHasNoOrders(request)){
-            orderBoostRepository.findFreeOrderBoosts(id,actualUser.getActualUser(request));
-
+    public void addBoost(Long id){
+        if(checkIfTheBoosterHasNoOrders()){
+            orderBoostRepository.findFreeOrderBoosts(id,actualUser.getActualUser(this.request));
             setMessage("You correct took order");
         }
         else {
@@ -39,10 +42,10 @@ public class BoosterService {
         }
     }
 
-    public void finishBoost(HttpServletRequest request) throws IOException {
-        leagueOfLegendsAPIConnector = new LeagueOfLegendsAPIConnector(getUsername(request),getRegion(request));
-        if(isDivisionsAreEqual(request) && isTiersAreEqual(request)){
-            orderBoostRepository.setOrderAsDone(findCurrentBoost(request).getId());
+    public void finishBoost() throws IOException {
+        leagueOfLegendsAPIConnector = new LeagueOfLegendsAPIConnector(getUsername(),getRegion());
+        if(isDivisionsAreEqual() && isTiersAreEqual()){
+            orderBoostRepository.setOrderAsDone(findCurrentBoost().getId());
             setMessage("You have successfully completed boosting");
         }
         else {
@@ -50,36 +53,36 @@ public class BoosterService {
         }
     }
 
-    private boolean isDivisionsAreEqual(HttpServletRequest request) throws IOException {
-        String destinationDivision = findCurrentBoost(request).getDestinationDivision().toString();
+    private boolean isDivisionsAreEqual() throws IOException {
+        String destinationDivision = findCurrentBoost().getDestinationDivision().toString();
         String divisionFromApi = leagueOfLegendsAPIConnector.getActualSoloDuoDivision();
         return destinationDivision.equals(divisionFromApi);
     }
 
-    private boolean isTiersAreEqual(HttpServletRequest request) throws IOException {
-        String destinationTier = findCurrentBoost(request).getDestinationTier().toString();
+    private boolean isTiersAreEqual() throws IOException {
+        String destinationTier = findCurrentBoost().getDestinationTier().toString();
         String tierFromApi = leagueOfLegendsAPIConnector.getActualSoloDuoTier();
         return destinationTier.equals(tierFromApi);
     }
 
-    public OrderBoost findCurrentBoost(HttpServletRequest request){
-        return orderBoostRepository.findCurrentBoost(actualUser.getActualUser(request));
+    public OrderBoost findCurrentBoost(){
+        return orderBoostRepository.findCurrentBoost(actualUser.getActualUser(this.request));
     }
 
-    public List<OrderBoost> listOfDoneOrderBoosts(HttpServletRequest request){
-        return orderBoostRepository.findDoneOrderBoost(actualUser.getActualUser(request));
+    public List<OrderBoost> listOfDoneOrderBoosts(){
+        return orderBoostRepository.findDoneOrderBoost(actualUser.getActualUser(this.request));
     }
 
-    private boolean checkIfTheBoosterHasNoOrders(HttpServletRequest request){
-        return orderBoostRepository.checkIfTheBoosterHasNoOrders(actualUser.getActualUser(request)).isEmpty();
+    private boolean checkIfTheBoosterHasNoOrders(){
+        return orderBoostRepository.checkIfTheBoosterHasNoOrders(actualUser.getActualUser(this.request)).isEmpty();
     }
 
-    private String getUsername(HttpServletRequest request){
-        return findCurrentBoost(request).getLolUsername();
+    private String getUsername(){
+        return findCurrentBoost().getLolUsername();
     }
 
-    private Region getRegion(HttpServletRequest request){
-        return findCurrentBoost(request).getRegion();
+    private Region getRegion(){
+        return findCurrentBoost().getRegion();
     }
 
     public String getMessage() {

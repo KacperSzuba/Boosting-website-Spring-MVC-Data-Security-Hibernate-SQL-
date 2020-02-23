@@ -7,8 +7,6 @@ import org.springframework.web.servlet.ModelAndView;
 import pl.javastart.message.MessageHandler;
 import pl.javastart.model.entity.message.Message;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Controller
 @RequestMapping("/message")
 public class MessageController {
@@ -19,22 +17,22 @@ public class MessageController {
     }
 
     @GetMapping
-    public String messenger(Model model, HttpServletRequest request) {
-        model.addAttribute("users",messageHandler.listOfRecipients(request));
+    public String messenger(Model model) {
+        model.addAttribute("users",messageHandler.listOfRecipients());
         Message message = new Message();
         model.addAttribute("sendMessage",message);
         return "messageView/sendMessage";
     }
 
     @PostMapping("/send")
-    public String sendMessage(@ModelAttribute("sendMessage") Message message , HttpServletRequest request){
-        messageHandler.sendMessage(message,request);
+    public String sendMessage(@ModelAttribute("sendMessage") Message message){
+        messageHandler.sendMessage(message);
         return "redirect:/message/singleConversation/"+messageHandler.getTemp();
     }
 
     @RequestMapping("/retrieve")
-    public ModelAndView listOfConversations(HttpServletRequest request){
-        return new ModelAndView("messageView/messagesReceived", "conversations",messageHandler.setOfSendRecipients(request));
+    public ModelAndView listOfConversations(){
+        return new ModelAndView("messageView/messagesReceived", "conversations",messageHandler.setOfSendRecipients());
     }
 
     @GetMapping("/singleConversation/{id}")

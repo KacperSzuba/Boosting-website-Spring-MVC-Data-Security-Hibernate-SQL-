@@ -7,18 +7,16 @@ import org.springframework.stereotype.Component;
 import pl.javastart.message.MessageHandler;
 import pl.javastart.model.entity.message.Message;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Component
 public class JsonMessageHandler {
 
     @Autowired
     private MessageHandler messageHandler;
 
-    public JSONArray createJsonFile(HttpServletRequest request) {
+    public JSONArray createJsonFile() {
         JSONArray jsonArray = new JSONArray();
 
-        for (Message message : messageHandler.conversationSortedByDataDESC(messageHandler.getIdOfConversation(),request)) {
+        for (Message message : messageHandler.conversationSortedByDataDESC(messageHandler.getIdOfConversation())) {
             JSONObject record = new JSONObject();
             record.put("id",message.getId());
             record.put("title",message.getTitle());

@@ -1,4 +1,4 @@
-package pl.javastart.config.SpringSecurityConfiguration;
+package pl.javastart.SpringSecurityConfiguration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

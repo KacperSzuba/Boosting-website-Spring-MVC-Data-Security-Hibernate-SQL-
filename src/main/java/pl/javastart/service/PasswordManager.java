@@ -1,6 +1,5 @@
 package pl.javastart.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.javastart.manage.ActualUser;
@@ -13,18 +12,20 @@ public class PasswordManager {
 
     private String message;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final ActualUser actualUser;
+    private final HttpServletRequest request;
+    public PasswordManager(PasswordEncoder passwordEncoder, UserRepository userRepository, ActualUser actualUser,HttpServletRequest request) {
+        this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
+        this.actualUser = actualUser;
+        this.request = request;
+    }
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private ActualUser actualUser;
-
-    public void changePassword(HttpServletRequest request, String password, String repeatPassword){
+    public void changePassword(String password, String repeatPassword){
         try {
-            tryToChangePassword(actualUser.getActualUser(request).getId(),password,repeatPassword);
+            tryToChangePassword(actualUser.getActualUser(this.request).getId(),password,repeatPassword);
         }
         catch (IllegalArgumentException exception){
             setMessage(exception.getMessage());

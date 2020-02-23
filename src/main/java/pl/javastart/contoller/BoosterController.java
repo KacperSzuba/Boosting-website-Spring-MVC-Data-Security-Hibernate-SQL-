@@ -10,7 +10,6 @@ import pl.javastart.model.entity.order.OrderBoost;
 import pl.javastart.repository.order.OrderBoostRepository;
 import pl.javastart.service.BoosterService;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 
@@ -45,27 +44,27 @@ public class BoosterController {
     }
 
     @RequestMapping("/orderDetails/{id}/addBoost")
-    public String addBoost(@PathVariable("id")Long id, HttpServletRequest request,Model model){
-        boosterService.addBoost(id,request);
+    public String addBoost(@PathVariable("id")Long id,Model model){
+        boosterService.addBoost(id);
         model.addAttribute("addingBoostMessage",boosterService.getMessage());
         return "boosterView/booster";
     }
 
     @RequestMapping("/currentBoost")
-    public ModelAndView currentBoost(HttpServletRequest request){
-        OrderBoost currentOrderBoost = boosterService.findCurrentBoost(request);
+    public ModelAndView currentBoost(){
+        OrderBoost currentOrderBoost = boosterService.findCurrentBoost();
         return new ModelAndView("boosterView/currentBoost","currentOrderBoost",currentOrderBoost);
     }
 
     @RequestMapping("/doneOrderBoosts")
-    public ModelAndView listOfDoneOrderBoosts(HttpServletRequest request){
-        List<OrderBoost> listOfDoneOrderBoosts = boosterService.listOfDoneOrderBoosts(request);
+    public ModelAndView listOfDoneOrderBoosts(){
+        List<OrderBoost> listOfDoneOrderBoosts = boosterService.listOfDoneOrderBoosts();
         return new ModelAndView("boosterView/doneOrderBoosts","doneOrderBoosts",listOfDoneOrderBoosts);
     }
 
     @RequestMapping("/currentBoost/finishBoost")
-    public String finishBoost(HttpServletRequest request,Model model) throws IOException {
-        boosterService.finishBoost(request);
+    public String finishBoost(Model model) throws IOException {
+        boosterService.finishBoost();
         model.addAttribute("finishingBoostMessage",boosterService.getMessage());
         return "boosterView/booster";
     }

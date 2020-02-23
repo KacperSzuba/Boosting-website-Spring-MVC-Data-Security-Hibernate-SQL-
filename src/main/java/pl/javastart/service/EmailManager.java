@@ -1,6 +1,5 @@
 package pl.javastart.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.javastart.manage.ActualUser;
 import pl.javastart.repository.user.UserRepository;
@@ -9,18 +8,20 @@ import javax.servlet.http.HttpServletRequest;
 
 @Service
 public class EmailManager {
-
     private String message;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final ActualUser actualUser;
+    private final HttpServletRequest request;
+    public EmailManager(UserRepository userRepository, ActualUser actualUser,HttpServletRequest request) {
+        this.userRepository = userRepository;
+        this.actualUser = actualUser;
+        this.request = request;
+    }
 
-    @Autowired
-    private ActualUser actualUser;
-
-    public void changeEmail(HttpServletRequest request, String email, String repeatEmail){
+    public void changeEmail(String email, String repeatEmail){
         try{
-            tryToChangeEmail(actualUser.getActualUser(request).getId(),email,repeatEmail);
+            tryToChangeEmail(actualUser.getActualUser(this.request).getId(),email,repeatEmail);
         }
         catch (IllegalArgumentException exception){
             setMessage(exception.getMessage());

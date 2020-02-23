@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import pl.javastart.service.EmailManager;
 import pl.javastart.service.PasswordManager;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Controller
 @RequestMapping("/account")
 public class AccountController {
@@ -31,8 +29,8 @@ public class AccountController {
 
     @GetMapping("/changePasswordForm")
     public String changePassword(@RequestParam ("password") String password,
-        @RequestParam("repeatPassword")String repeatPassword, Model model,HttpServletRequest request){
-        passwordManager.changePassword(request,password,repeatPassword);
+        @RequestParam("repeatPassword")String repeatPassword, Model model){
+        passwordManager.changePassword(password,repeatPassword);
         model.addAttribute("newPassword", passwordManager.getMessage());
         return "accountView/user_ChangePassword";
     }
@@ -44,8 +42,8 @@ public class AccountController {
 
     @GetMapping("/changeEmailForm")
     public String changeEmail(@RequestParam ("email") String email,
-        @RequestParam("repeatEmail")String repeatEmail, Model model,HttpServletRequest request){
-        emailChange.changeEmail(request,email,repeatEmail);
+        @RequestParam("repeatEmail")String repeatEmail, Model model){
+        emailChange.changeEmail(email,repeatEmail);
         model.addAttribute("newEmail",emailChange.getMessage());
         return "accountView/user_ChangeEmail";
     }

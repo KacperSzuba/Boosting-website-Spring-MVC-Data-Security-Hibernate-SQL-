@@ -23,62 +23,63 @@ public class MessageHandler {
     private final UserRepository userRepository;
     private final OrderBoostRepository orderBoostRepository;
     private final ChangeAccountStatus changeAccountStatus;
-
+    private final HttpServletRequest request;
     public MessageHandler(MessageRepository messageRepository, ActualUser actualUser, UserRepository userRepository, OrderBoostRepository orderBoostRepository,
-                          ChangeAccountStatus changeAccountStatus) {
+                          ChangeAccountStatus changeAccountStatus,HttpServletRequest request) {
         this.messageRepository = messageRepository;
         this.actualUser = actualUser;
         this.userRepository = userRepository;
         this.orderBoostRepository = orderBoostRepository;
         this.changeAccountStatus = changeAccountStatus;
+        this.request = request;
     }
 
-    public void sendMessage(Message message,HttpServletRequest request){
-        Message messageDB = new Message(message.getTitle(), message.getMessage(),actualUser.getActualUser(request),message.getUser2());
+    public void sendMessage(Message message){
+        Message messageDB = new Message(message.getTitle(), message.getMessage(),actualUser.getActualUser(this.request),message.getUser2());
         messageRepository.save(messageDB);
     }
 
-    public List<User> listOfRecipients(HttpServletRequest request){
-        Optional<OrderBoost> orderBoost = orderBoostRepository.findOrderBoostByUserOrBooster(actualUser.getActualUser(request));
+    public List<User> listOfRecipients(){
+        Optional<OrderBoost> orderBoost = orderBoostRepository.findOrderBoostByUserOrBooster(actualUser.getActualUser(this.request));
         List<User> users = new ArrayList<>();
-        if(changeAccountStatus.getCurrentUserRole(actualUser.getActualUser(request)) == RoleName.ROLE_ADMIN){
+        if(changeAccountStatus.getCurrentUserRole(actualUser.getActualUser(this.request)) == RoleName.ROLE_ADMIN){
             userRepository.findAll().iterator().forEachRemaining(user -> {
-                if( ! user.getUsername().equals(actualUser.getActualUser(request).getUsername())) {
+                if( ! user.getUsername().equals(actualUser.getActualUser(this.request).getUsername())) {
                     users.add(user);
                 }
             });
         }
-        else if(changeAccountStatus.getCurrentUserRole(actualUser.getActualUser(request)) == RoleName.ROLE_USER) {
+        else if(changeAccountStatus.getCurrentUserRole(actualUser.getActualUser(this.request)) == RoleName.ROLE_USER) {
             users.add(userRepository.findByUsername("Admin123x"));
             orderBoost.ifPresent(boost -> users.add(boost.getBooster()));
         }
-        else if(changeAccountStatus.getCurrentUserRole(actualUser.getActualUser(request)) == RoleName.ROLE_BOOSTER) {
+        else if(changeAccountStatus.getCurrentUserRole(actualUser.getActualUser(this.request)) == RoleName.ROLE_BOOSTER) {
             users.add(userRepository.findByUsername("Admin123x"));
             orderBoost.ifPresent(boost -> users.add(boost.getUser()));
         }
         return users;
     }
 
-    public Set<Long> setOfSendMessages(HttpServletRequest request){
+    public Set<Long> setOfSendMessages(){
         Set<Long> recipientId = new TreeSet<>();
         for (Message message : messageRepository.findAll()) {
-            if (Objects.equals(message.getUser().getId(), actualUser.getActualUser(request).getId())) {
+            if (Objects.equals(message.getUser().getId(), actualUser.getActualUser(this.request).getId())) {
                 recipientId.add(message.getUser2().getId());
             }
-            else if (Objects.equals(message.getUser2().getId(), actualUser.getActualUser(request).getId())) {
+            else if (Objects.equals(message.getUser2().getId(), actualUser.getActualUser(this.request).getId())) {
                 recipientId.add(message.getUser().getId());
             }
         }
         return recipientId;
     }
 
-    public List<User> setOfSendRecipients(HttpServletRequest request){
+    public List<User> setOfSendRecipients(){
         Set<Long> recipientId = new HashSet<>();
         for (Message message : messageRepository.findAll()) {
-            if (Objects.equals(message.getUser().getId(), actualUser.getActualUser(request).getId())) {
+            if (Objects.equals(message.getUser().getId(), actualUser.getActualUser(this.request).getId())) {
                 recipientId.add(message.getUser2().getId());
             }
-            else if (Objects.equals(message.getUser2().getId(), actualUser.getActualUser(request).getId())) {
+            else if (Objects.equals(message.getUser2().getId(), actualUser.getActualUser(this.request).getId())) {
                 recipientId.add(message.getUser().getId());
             }
         }
@@ -86,18 +87,18 @@ public class MessageHandler {
         return users;
     }
 
-    public List<Message> conversationSortedByDataDESC(Long id, HttpServletRequest request){
+    public List<Message> conversationSortedByDataDESC(Long id){
         List<Message> list = new ArrayList<>();
-        list.addAll(getMessagesReceived(id,request));
-        list.addAll(getMessagesSent(request,id));
+        list.addAll(getMessagesReceived(id));
+        list.addAll(getMessagesSent(id));
         Collections.sort(list);
         return list;
     }
 
-    private List<Message> getMessagesReceived(Long id, HttpServletRequest request){
+    private List<Message> getMessagesReceived(Long id){
         List<Message> list = new ArrayList<>();
         try{
-            list = messageRepository.findAllByUserAndUser2(userRepository.findById(id).get(),actualUser.getActualUser(request));;
+            list = messageRepository.findAllByUserAndUser2(userRepository.findById(id).get(),actualUser.getActualUser(this.request));;
             return list;
         }
         catch (IllegalStateException exception){
@@ -109,8 +110,8 @@ public class MessageHandler {
         return list;
     }
 
-    private List<Message> getMessagesSent(HttpServletRequest request, Long id){
-        return messageRepository.findAllByUserAndUser2(actualUser.getActualUser(request),userRepository.findById(id).get());
+    private List<Message> getMessagesSent(Long id){
+        return messageRepository.findAllByUserAndUser2(actualUser.getActualUser(this.request),userRepository.findById(id).get());
     }
 
     //zmienić metode getTemp

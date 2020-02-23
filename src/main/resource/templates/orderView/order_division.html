@@ -70,7 +70,6 @@
                 </div>
             </div>
         </nav>
-        <img th:src="@{/images/Bronze/Bronze1.png}"/>
         <button class="btn btn-secondary" onclick="upCurrentTier()">Increase current tier</button>
         <button class="btn btn-secondary" onclick="downCurrentTier()">Decrease current tier</button>
         <button class="btn btn-secondary" onclick="leftCurrentTier()">Decrease current division</button>
@@ -80,7 +79,7 @@
         <button class="btn btn-secondary" onclick="downDestinationTier()">Decrease destination tier</button>
         <button class="btn btn-secondary" onclick="leftDestinationTier()">Decrease destination division</button>
         <button class="btn btn-secondary" onclick="rightDestinationTier()">Increase destination division</button>
-        <img class="center" id="destinationTier">
+        <img  class="center" id="destinationTier">
 
         <a href="/order/informationAboutDivision" onclick="createDestinationTierAndDivisionCookie()">Complete information about your account</a>
         <script>
@@ -107,7 +106,7 @@
                         const conversation = JSON.parse(this.responseText);
                         var temp = document.getElementById('currentTier').src.toString();
                         let temp3 = conversation.filter(data => data.img_source);
-                        let op = conversation.filter(data => "http://localhost:8090"+data.img_source == temp);
+                        let op = conversation.filter(data => "http://localhost:8091"+data.img_source == temp);
                         var tier = parseInt(op[0]['tier_id']);
                         if(tier === 1){
                             let temp2 = conversation.filter(data => data.tier_id === 6 && data.division_id === parseInt(op[0]['division_id']));
@@ -129,7 +128,7 @@
                     if(this.status === 200){
                         const conversation = JSON.parse(this.responseText);
                         var temp = document.getElementById('destinationTier').src.toString();
-                        let op = conversation.filter(data => "http://localhost:8090"+data.img_source == temp);
+                        let op = conversation.filter(data => "http://localhost:8091"+data.img_source == temp);
                         var tier = parseInt(op[0]['tier_id']);
                         if(tier === 1){
                             let temp2 = conversation.filter(data => data.tier_id === 6 && data.division_id === parseInt(op[0]['division_id']));
@@ -151,7 +150,7 @@
                     if(this.status === 200){
                         const conversation = JSON.parse(this.responseText);
                         var temp = document.getElementById('currentTier').src.toString();
-                        let op = conversation.filter(data => "http://localhost:8090"+data.img_source == temp);
+                        let op = conversation.filter(data => "http://localhost:8091"+data.img_source == temp);
                         var tier = parseInt(op[0]['tier_id']);
                         if(tier === 6){
                             let temp2 = conversation.filter(data => data.tier_id === 1 && data.division_id === parseInt(op[0]['division_id']));
@@ -173,7 +172,7 @@
                     if(this.status === 200){
                         const conversation = JSON.parse(this.responseText);
                         var temp = document.getElementById('destinationTier').src.toString();
-                        let op = conversation.filter(data => "http://localhost:8090"+data.img_source == temp);
+                        let op = conversation.filter(data => "http://localhost:8091"+data.img_source == temp);
                         var tier = parseInt(op[0]['tier_id']);
                         if(tier === 6){
                             let temp2 = conversation.filter(data => data.tier_id === 1 && data.division_id === parseInt(op[0]['division_id']));
@@ -195,7 +194,7 @@
                     if(this.status === 200){
                         const conversation = JSON.parse(this.responseText);
                         var temp = document.getElementById('currentTier').src.toString();
-                        let op = conversation.filter(data => "http://localhost:8090"+data.img_source == temp);
+                        let op = conversation.filter(data => "http://localhost:8091"+data.img_source == temp);
                         var division = parseInt(op[0]['division_id']);
                         if(division ===4 && parseInt(op[0]['tier_id'])===6 ){
                             let temp2 = conversation.filter(data => data.tier_id == 1 && data.division_id == 1);
@@ -222,7 +221,7 @@
                     if(this.status === 200){
                         const conversation = JSON.parse(this.responseText);
                         var temp = document.getElementById('destinationTier').src.toString();
-                        let op = conversation.filter(data => "http://localhost:8090"+data.img_source == temp);
+                        let op = conversation.filter(data => "http://localhost:8091"+data.img_source == temp);
                         var division = parseInt(op[0]['division_id']);
                         if(division ===4 && parseInt(op[0]['tier_id'])===6 ){
                             let temp2 = conversation.filter(data => data.tier_id == 1 && data.division_id == 1);
@@ -249,7 +248,7 @@
                     if(this.status === 200){
                         const conversation = JSON.parse(this.responseText);
                         var temp = document.getElementById('currentTier').src.toString();
-                        let op = conversation.filter(data => "http://localhost:8090"+data.img_source == temp);
+                        let op = conversation.filter(data => "http://localhost:8091"+data.img_source == temp);
                         var division = parseInt(op[0]['division_id']);
                         if(division ===1 && parseInt(op[0]['tier_id'])===1 ){
                             let temp2 = conversation.filter(data => data.tier_id == 6 && data.division_id == 4);
@@ -276,7 +275,7 @@
                     if(this.status === 200){
                         const conversation = JSON.parse(this.responseText);
                         var temp = document.getElementById('destinationTier').src.toString();
-                        let op = conversation.filter(data => "http://localhost:8090"+data.img_source == temp);
+                        let op = conversation.filter(data => "http://localhost:8091"+data.img_source == temp);
                         var division = parseInt(op[0]['division_id']);
                         if(division ===1 && parseInt(op[0]['tier_id'])===1 ){
                             let temp2 = conversation.filter(data => data.tier_id == 6 && data.division_id == 4);
@@ -303,9 +302,9 @@
                 var d = new Date();
                 d.setTime(d.getTime()+(24 * 60 *60*1000));
                 var expires = "expires="+d.toUTCString();
-                var currentTierImageSource = document.getElementById('currentTier').src.toString().replace("http://localhost:8090","");
+                var currentTierImageSource = document.getElementById('currentTier').src.toString().replace("http://localhost:8091","");
                 document.cookie = "currentTierImageSource ="+ currentTierImageSource+";"+expires+";";
-                var destinationTierImageSource = document.getElementById('destinationTier').src.toString().replace("http://localhost:8090","");
+                var destinationTierImageSource = document.getElementById('destinationTier').src.toString().replace("http://localhost:8091","");
                 document.cookie = "destinationTierImageSource ="+ destinationTierImageSource+";"+expires+";";
             }
         </script>

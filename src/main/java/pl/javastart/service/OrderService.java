@@ -1,6 +1,5 @@
 package pl.javastart.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.javastart.manage.ActualUser;
 import pl.javastart.model.entity.TierImage;
@@ -19,20 +18,23 @@ import java.util.TreeMap;
 @Service
 public class OrderService {
 
-    @Autowired
-    private ActualUser actualUser;
+    private final ActualUser actualUser;
 
-    @Autowired
-    private OrderBoostRepository orderBoostRepository;
+    private final OrderBoostRepository orderBoostRepository;
 
-    @Autowired
-    private TierImageRepository tierImageRepository;
+    private final TierImageRepository tierImageRepository;
 
-    @Autowired
-    private TierRepository tierRepository;
+    private final TierRepository tierRepository;
 
-    @Autowired
-    private DivisionsRepository divisionsRepository;
+    private final DivisionsRepository divisionsRepository;
+
+    public OrderService(ActualUser actualUser, OrderBoostRepository orderBoostRepository, TierImageRepository tierImageRepository, TierRepository tierRepository, DivisionsRepository divisionsRepository) {
+        this.actualUser = actualUser;
+        this.orderBoostRepository = orderBoostRepository;
+        this.tierImageRepository = tierImageRepository;
+        this.tierRepository = tierRepository;
+        this.divisionsRepository = divisionsRepository;
+    }
 
     public void makeOrder(OrderBoost orderBoost, HttpServletRequest request){
         TierImage currentLeague = cookies(request).get("currentTierImageSource");
