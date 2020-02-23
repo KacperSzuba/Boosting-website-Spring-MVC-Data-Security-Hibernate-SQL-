@@ -16,8 +16,6 @@ import java.util.List;
 public class UserCreatorService {
     private String message;
 
-    private String endPoint;
-
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final UserRoleRepository userRoleRepository;
@@ -30,11 +28,11 @@ public class UserCreatorService {
 
     public boolean createAccount(User user){
         try {
-            tryToCreateAccount(user);
+            checkIfUserExists(user);
             return true;
         }
-        catch (IllegalArgumentException exception2){
-            exception2.printStackTrace();
+        catch (IllegalArgumentException exception){
+            exception.printStackTrace();
             setUserRegistrationInformation("User with this username already exist");
             return false;
         }
@@ -45,19 +43,24 @@ public class UserCreatorService {
         }
     }
 
-    private void tryToCreateAccount(User user){
+    private void checkIfUserExists(User user){
         boolean isUserExist = userRepository.existsUserByUsername(user.getUsername());
         if(isUserExist){
+            //zrobić swój wyjątek
             throw new IllegalArgumentException();
         }
         else {
-            UserRole userRole = userRoleRepository.getUserRole(RoleName.ROLE_USER);
-            userRoleRepository.save(userRole);
-            List<UserRole> roles = new ArrayList<>();
-            roles.add(userRole);
-            String password = passwordEncoder.encode(user.getPassword());
-            userRepository.save(new User(user.getUsername(),password,true,user.getEmail(),LocalDateTime.now(),roles));
+            tryToCreateAccount(user);
         }
+    }
+
+    private void tryToCreateAccount(User user){
+        UserRole userRole = userRoleRepository.getUserRole(RoleName.ROLE_USER);
+        userRoleRepository.save(userRole);
+        List<UserRole> roles = new ArrayList<>();
+        roles.add(userRole);
+        String password = passwordEncoder.encode(user.getPassword());
+        userRepository.save(new User(user.getUsername(),password,true,user.getEmail(),LocalDateTime.now(),roles));
     }
 
     private void setUserRegistrationInformation(String message){
@@ -66,13 +69,5 @@ public class UserCreatorService {
 
     public String getUserRegistrationInformation(){
         return message;
-    }
-
-    public String getEndPoint() {
-        return endPoint;
-    }
-
-    public void setEndPoint(String endPoint) {
-        this.endPoint = endPoint;
     }
 }
