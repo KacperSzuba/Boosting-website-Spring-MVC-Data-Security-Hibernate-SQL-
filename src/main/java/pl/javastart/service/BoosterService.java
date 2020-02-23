@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pl.javastart.manage.ActualUser;
 import pl.javastart.manage.api.LeagueOfLegendsAPIConnector;
 import pl.javastart.model.entity.order.OrderBoost;
+import pl.javastart.model.entity.user.User;
 import pl.javastart.model.enums.Region;
 import pl.javastart.repository.order.OrderBoostRepository;
 
@@ -34,7 +35,7 @@ public class BoosterService {
     public void addBoost(Long id){
         leagueOfLegendsAPIConnector = new LeagueOfLegendsAPIConnector(getUsername(),getRegion());
         if(checkIfTheBoosterHasNoOrders()){
-            orderBoostRepository.findFreeOrderBoosts(id,actualUser.getActualUser(this.request));
+            orderBoostRepository.findFreeOrderBoosts(id,booster());
             setMessage("You correct took order");
         }
         else {
@@ -69,15 +70,19 @@ public class BoosterService {
     }
 
     public OrderBoost findCurrentBoost(){
-        return orderBoostRepository.findCurrentBoost(actualUser.getActualUser(this.request));
+        return orderBoostRepository.findCurrentBoost(booster());
     }
 
     public List<OrderBoost> listOfDoneOrderBoosts(){
-        return orderBoostRepository.findDoneOrderBoost(actualUser.getActualUser(this.request));
+        return orderBoostRepository.findDoneOrderBoost(booster());
     }
 
     private boolean checkIfTheBoosterHasNoOrders(){
-        return orderBoostRepository.checkIfTheBoosterHasNoOrders(actualUser.getActualUser(this.request)).isEmpty();
+        return orderBoostRepository.checkIfTheBoosterHasNoOrders(booster()).isEmpty();
+    }
+
+    private User booster(){
+        return actualUser.getActualUser(this.request);
     }
 
     private String getUsername(){
