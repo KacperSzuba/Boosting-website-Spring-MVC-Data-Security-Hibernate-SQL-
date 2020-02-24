@@ -29,9 +29,9 @@ public class AccountController {
     }
 
     @GetMapping("/changePasswordForm")
-    public String changePassword(@RequestParam ("password") String password,
+    public String changePassword(@RequestParam("currentPassword")String currentPassword,@RequestParam ("password") String password,
         @RequestParam("repeatPassword")String repeatPassword, Model model){
-        passwordManager.changePassword(password,repeatPassword);
+        passwordManager.changePassword(currentPassword,password,repeatPassword);
         model.addAttribute("newPassword", passwordManager.getMessage());
         return "accountView/user_ChangePassword";
     }

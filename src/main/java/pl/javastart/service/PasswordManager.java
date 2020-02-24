@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.javastart.manage.ActualUser;
 import pl.javastart.model.entity.user.User;
 import pl.javastart.repository.user.UserRepository;
+import pl.javastart.service.exception.DataMismatchException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,37 +19,53 @@ public class PasswordManager {
     private final ActualUser actualUser;
     private final HttpServletRequest request;
 
-    public PasswordManager(PasswordEncoder passwordEncoder, UserRepository userRepository, ActualUser actualUser,HttpServletRequest request) {
+    public PasswordManager(PasswordEncoder passwordEncoder, UserRepository userRepository, ActualUser actualUser, HttpServletRequest request) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.actualUser = actualUser;
         this.request = request;
     }
 
-    public void changePassword(String password, String repeatPassword){
+    public void changePassword(String currentPassword,String password, String repeatPassword){
         try {
-            checkIfPasswordIsCorrect(user().getId(),password,repeatPassword);
+            whetherPasswordCanBeChanged(currentPassword,password,repeatPassword);
         }
-        catch (IllegalArgumentException exception){
+        catch (DataMismatchException exception){
             setMessage(exception.getMessage());
         }
     }
-    private void checkIfPasswordIsCorrect(Long userId,String password,String repeatPassword){
+
+    private void whetherPasswordCanBeChanged(String currentPassword,String password,String repeatPassword) throws DataMismatchException {
+        if(checkIfPasswordEnteredMatchesCurrent(currentPassword) && checkIfPasswordsAreTheSameAndHaveRequiredLength(password,repeatPassword)){
+            tryToChangePassword(password);
+        }
+    }
+    
+    private boolean checkIfPasswordsAreTheSameAndHaveRequiredLength(String password, String repeatPassword) throws DataMismatchException {
         if(isPasswordLengthSufficient(password) && whetherThePasswordsAreTheSame(password,repeatPassword)) {
-            tryToChangePassword(userId,password);
+            return true;
         }
         else {
-            throw new IllegalArgumentException("Your password is too short or passwords are different");
+            throw new DataMismatchException("Your password is too short or passwords are different");
         }
     }
 
-    private void tryToChangePassword(Long userId,String password){
-        userRepository.changePassword(userId,passwordEncoder.encode(password));
+    private void tryToChangePassword(String password){
+        userRepository.changePassword(user().getId(),passwordEncoder.encode(password));
         setMessage("Your new password is : "+password);
     }
 
     private User user(){
         return actualUser.getActualUser(this.request);
+    }
+
+    private boolean checkIfPasswordEnteredMatchesCurrent(String currentPassword) throws DataMismatchException {
+        if(passwordEncoder.matches(currentPassword,user().getPassword())){
+            return true;
+        }
+        else {
+            throw new DataMismatchException("The password you entered does not match the current one");
+        }
     }
 
     private boolean isPasswordLengthSufficient(String password){
