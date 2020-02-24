@@ -35,7 +35,7 @@ public class BoosterService {
     public void addBoost(Long orderId){
         leagueOfLegendsAPIConnector = new LeagueOfLegendsAPIConnector(getUsername(),getRegion());
         if(checkIfTheBoosterHasNoOrders()){
-            orderBoostRepository.findFreeOrderBoosts(orderId,booster());
+            orderBoostRepository.findFreeOrderBoosts(orderId, loggedInBooster());
             setMessage("You correct took order");
         }
         else {
@@ -70,18 +70,18 @@ public class BoosterService {
     }
 
     public OrderBoost findCurrentBoost(){
-        return orderBoostRepository.findCurrentBoost(booster());
+        return orderBoostRepository.findCurrentBoost(loggedInBooster());
     }
 
     public List<OrderBoost> listOfDoneOrderBoosts(){
-        return orderBoostRepository.findDoneOrderBoost(booster());
+        return orderBoostRepository.findDoneOrderBoost(loggedInBooster());
     }
 
     private boolean checkIfTheBoosterHasNoOrders(){
-        return orderBoostRepository.checkIfTheBoosterHasNoOrders(booster()).isEmpty();
+        return orderBoostRepository.checkIfTheBoosterHasNoOrders(loggedInBooster()).isEmpty();
     }
 
-    private User booster(){
+    private User loggedInBooster(){
         return actualUser.getActualUser(this.request);
     }
 

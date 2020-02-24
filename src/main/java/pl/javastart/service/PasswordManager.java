@@ -51,16 +51,16 @@ public class PasswordManager {
     }
 
     private void tryToChangePassword(String password){
-        userRepository.changePassword(user().getId(),passwordEncoder.encode(password));
+        userRepository.changePassword(loggedInUser().getId(),passwordEncoder.encode(password));
         setMessage("Your new password is : "+password);
     }
 
-    private User user(){
+    private User loggedInUser(){
         return actualUser.getActualUser(this.request);
     }
 
     private boolean checkIfPasswordEnteredMatchesCurrent(String currentPassword) throws DataMismatchException {
-        if(passwordEncoder.matches(currentPassword,user().getPassword())){
+        if(passwordEncoder.matches(currentPassword, loggedInUser().getPassword())){
             return true;
         }
         else {
