@@ -65,6 +65,10 @@
         <h1>Change Email</h1>
         <form th:action="@{/account/changeEmailForm}" method="get">
             <div class="form-group">
+                <label class="col-form-label" for="currentEmail">Current email</label>
+                <input name="currentEmail"  type="email" class="form-control" placeholder="Current email" id="currentEmail">
+            </div>
+            <div class="form-group">
                 <label class="col-form-label" for="email">Email</label>
                 <input name="email"  type="email" class="form-control" placeholder="Email" id="email">
             </div>

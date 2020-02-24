@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pl.javastart.manage.ActualUser;
 import pl.javastart.model.entity.user.User;
 import pl.javastart.repository.user.UserRepository;
+import pl.javastart.service.exception.DataMismatchException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,36 +15,51 @@ public class EmailManager {
     private final UserRepository userRepository;
     private final ActualUser actualUser;
     private final HttpServletRequest request;
+
     public EmailManager(UserRepository userRepository, ActualUser actualUser,HttpServletRequest request) {
         this.userRepository = userRepository;
         this.actualUser = actualUser;
         this.request = request;
     }
 
-    public void changeEmail(String email, String repeatEmail){
+    public void changeEmail(String currentEmail,String email, String repeatEmail){
         try{
-            checkIfEmailIsCorrect(user().getId(),email,repeatEmail);
+            whetherEmailCanBeChanged(currentEmail,email,repeatEmail);
         }
-        catch (IllegalArgumentException exception){
+        catch (DataMismatchException exception){
             setMessage(exception.getMessage());
         }
     }
 
-    private void checkIfEmailIsCorrect(Long userId,String email,String repeatEmail){
-        if (whetherTheEmailsAreTheSame(email, repeatEmail) && isValid(email)) {
-            tryToChangeEmail(userId,email);
-        }
-        else {
-            throw new IllegalArgumentException("Your email is wrong or emails are different");
+    private void whetherEmailCanBeChanged(String currentEmail,String email, String repeatEmail) throws DataMismatchException {
+        if(checkIfEmailEnteredMatchesCurrent(currentEmail) && checkIfEmailIsCorrect(email,repeatEmail)){
+            tryToChangeEmail(email);
         }
     }
 
-    private void tryToChangeEmail(Long userId,String email){
-        userRepository.changeEmail(userId, email);
+    private boolean checkIfEmailIsCorrect(String email,String repeatEmail) throws DataMismatchException {
+        if (whetherTheEmailsAreTheSame(email, repeatEmail) && isValid(email)) {
+            return true;
+        }
+        else {
+            throw new DataMismatchException("Your email is wrong or emails are different");
+        }
+    }
+    private boolean checkIfEmailEnteredMatchesCurrent(String currentEmail) throws DataMismatchException {
+        if(currentEmail.equals(loggedInUser().getEmail())){
+            return true;
+        }
+        else {
+            throw new DataMismatchException("The email you entered does not match the current one");
+        }
+    }
+
+    private void tryToChangeEmail(String email){
+        userRepository.changeEmail(loggedInUser().getId(), email);
         setMessage("Your new email is : " + email);
     }
 
-    private User user(){
+    private User loggedInUser(){
         return actualUser.getActualUser(this.request);
     }
 

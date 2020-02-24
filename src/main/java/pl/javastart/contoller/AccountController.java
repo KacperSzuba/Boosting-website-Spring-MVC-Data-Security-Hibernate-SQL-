@@ -42,9 +42,9 @@ public class AccountController {
     }
 
     @GetMapping("/changeEmailForm")
-    public String changeEmail(@RequestParam ("email") String email,
+    public String changeEmail(@RequestParam("currentEmail")String currentEmail, @RequestParam ("email") String email,
         @RequestParam("repeatEmail")String repeatEmail, Model model){
-        emailChange.changeEmail(email,repeatEmail);
+        emailChange.changeEmail(currentEmail,email,repeatEmail);
         model.addAttribute("newEmail",emailChange.getMessage());
         return "accountView/user_ChangeEmail";
     }
