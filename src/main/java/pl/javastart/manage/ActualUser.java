@@ -11,13 +11,15 @@ import java.security.Principal;
 public class ActualUser {
 
     private final UserRepository userRepository;
+    private final HttpServletRequest request;
 
-    public ActualUser(UserRepository userRepository) {
+    public ActualUser(UserRepository userRepository, HttpServletRequest request) {
         this.userRepository = userRepository;
+        this.request = request;
     }
 
-    public User getActualUser(HttpServletRequest request){
-        Principal principal = request.getUserPrincipal();
+    public User getActualUser(){
+        Principal principal = this.request.getUserPrincipal();
         return userRepository.findByUsername(principal.getName());
     }
 }

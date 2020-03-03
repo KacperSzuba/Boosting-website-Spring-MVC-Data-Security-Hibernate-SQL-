@@ -9,8 +9,6 @@ import pl.javastart.model.entity.order.OrderBoost;
 import pl.javastart.model.enums.Region;
 import pl.javastart.service.OrderService;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Controller
 @RequestMapping("/order")
 public class OrderController {
@@ -35,8 +33,8 @@ public class OrderController {
     }
 
     @GetMapping("/informationAboutAccount")
-    public String informationAboutAccount(@ModelAttribute("orderBoost") OrderBoost orderBoost, HttpServletRequest request){
-        orderService.makeOrder(orderBoost,request);
+    public String informationAboutAccount(@ModelAttribute("orderBoost") OrderBoost orderBoost){
+        orderService.makeOrder(orderBoost);
         return "orderView/order_result";
     }
 }

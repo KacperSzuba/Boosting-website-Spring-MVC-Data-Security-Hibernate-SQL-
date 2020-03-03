@@ -31,8 +31,8 @@ public class AccountController {
     @GetMapping("/changePasswordForm")
     public String changePassword(@RequestParam("currentPassword")String currentPassword,@RequestParam ("password") String password,
         @RequestParam("repeatPassword")String repeatPassword, Model model){
-        passwordManager.changePassword(currentPassword,password,repeatPassword);
-        model.addAttribute("newPassword", passwordManager.getMessage());
+        passwordManager.changePassword(currentPassword, password, repeatPassword);
+        model.addAttribute("newPassword",passwordManager.getMessage());
         return "accountView/user_ChangePassword";
     }
 
@@ -44,8 +44,15 @@ public class AccountController {
     @GetMapping("/changeEmailForm")
     public String changeEmail(@RequestParam("currentEmail")String currentEmail, @RequestParam ("email") String email,
         @RequestParam("repeatEmail")String repeatEmail, Model model){
-        emailChange.changeEmail(currentEmail,email,repeatEmail);
+        emailChange.changeEmail(currentEmail, email, repeatEmail);
         model.addAttribute("newEmail",emailChange.getMessage());
         return "accountView/user_ChangeEmail";
     }
+
+    @GetMapping("/remindPasswordPage")
+    public String showRemindPasswordPage(){
+        return "accountView/user_RemindPassword";
+    }
+
+
 }

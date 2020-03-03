@@ -65,7 +65,7 @@ public class AdminController {
     }
 
     @GetMapping("/setAsBooster/{id}")
-    public String setAsBooster(@PathVariable("id") final Long id){
+        public String setAsBooster(@PathVariable("id") final Long id){
         //Develop more optimized versions
         changeAccountStatus.changeTheRoleName(id,RoleName.ROLE_BOOSTER);
         return "redirect:/admin/userDetails/{id}";

@@ -23,31 +23,34 @@ public class OrderService {
     private final TierImageRepository tierImageRepository;
     private final TierRepository tierRepository;
     private final DivisionsRepository divisionsRepository;
+    private HttpServletRequest request;
 
-    public OrderService(ActualUser actualUser, OrderBoostRepository orderBoostRepository, TierImageRepository tierImageRepository, TierRepository tierRepository, DivisionsRepository divisionsRepository) {
+
+    public OrderService(ActualUser actualUser, OrderBoostRepository orderBoostRepository, TierImageRepository tierImageRepository, TierRepository tierRepository, DivisionsRepository divisionsRepository, HttpServletRequest request) {
         this.actualUser = actualUser;
         this.orderBoostRepository = orderBoostRepository;
         this.tierImageRepository = tierImageRepository;
         this.tierRepository = tierRepository;
         this.divisionsRepository = divisionsRepository;
+        this.request = request;
     }
 
-    public void makeOrder(OrderBoost orderBoost, HttpServletRequest request){
-        TierImage currentLeague = cookies(request).get("currentTierImageSource");
-        TierImage destinationLeague = cookies(request).get("destinationTierImageSource");
+    public void makeOrder(OrderBoost orderBoost){
+        TierImage currentLeague = cookies().get("currentTierImageSource");
+        TierImage destinationLeague = cookies().get("destinationTierImageSource");
         orderBoost.setCurrentTier(tierRepository.findById(currentLeague.getTier().getId()).get().getTier());
         orderBoost.setCurrentDivision(divisionsRepository.findById(currentLeague.getDivision().getId()).get().getDivision());
         orderBoost.setDestinationTier(tierRepository.findById(destinationLeague.getTier().getId()).get().getTier());
         orderBoost.setDestinationDivision(divisionsRepository.findById(destinationLeague.getDivision().getId()).get().getDivision());
         orderBoost.setDate(LocalDateTime.now());
         orderBoost.setWhetherPaid(false);
-        orderBoost.setUser(actualUser.getActualUser(request));
+        orderBoost.setUser(actualUser.getActualUser());
         orderBoostRepository.save(orderBoost);
     }
 
-    private Map<String,TierImage> cookies(HttpServletRequest request){
+    private Map<String,TierImage> cookies(){
         Map<String, TierImage> cookieList = new TreeMap<>();
-        Cookie[] cookies = request.getCookies();
+        Cookie[] cookies = this.request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("currentTierImageSource")) {

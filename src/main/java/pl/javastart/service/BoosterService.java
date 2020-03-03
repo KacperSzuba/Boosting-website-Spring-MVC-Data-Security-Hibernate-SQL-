@@ -8,7 +8,6 @@ import pl.javastart.model.entity.user.User;
 import pl.javastart.model.enums.Region;
 import pl.javastart.repository.order.OrderBoostRepository;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 
@@ -20,10 +19,8 @@ public class BoosterService {
 
     private final ActualUser actualUser;
     private final OrderBoostRepository orderBoostRepository;
-    private final HttpServletRequest request;
 
-    public BoosterService(HttpServletRequest request,ActualUser actualUser,OrderBoostRepository orderBoostRepository){
-        this.request = request;
+    public BoosterService(ActualUser actualUser,OrderBoostRepository orderBoostRepository){
         this.actualUser = actualUser;
         this.orderBoostRepository = orderBoostRepository;
     }
@@ -82,7 +79,7 @@ public class BoosterService {
     }
 
     private User loggedInBooster(){
-        return actualUser.getActualUser(this.request);
+        return actualUser.getActualUser();
     }
 
     private String getUsername(){

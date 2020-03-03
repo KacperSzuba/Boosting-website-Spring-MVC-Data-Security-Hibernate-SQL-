@@ -33,7 +33,6 @@ public class BoosterController {
     @GetMapping("/listOfFreeOrders")
     public ModelAndView listOfFreeOrders(){
         List<OrderBoost> orders = boosterService.findFreeOrderBoost();
-        boosterService.findFreeOrderBoost().stream().map(OrderBoost::getBooster).forEach(System.out::println);
         return new ModelAndView("boosterView/listOfFreeOrders","orders",orders);
     }
 
@@ -46,7 +45,7 @@ public class BoosterController {
     }
 
     @GetMapping("/orderDetails/{id}/addBoost")
-    public String addBoost(@PathVariable("id")Long id,Model model){
+    public String addBoost(@PathVariable("id")Long id, Model model){
         boosterService.addBoost(id);
         model.addAttribute("addingBoostMessage",boosterService.getMessage());
         return "boosterView/booster";

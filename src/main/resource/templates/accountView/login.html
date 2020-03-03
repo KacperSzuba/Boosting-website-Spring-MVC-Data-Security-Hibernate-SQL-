@@ -5,8 +5,8 @@
       lang="en">
     <head>
         <title>Login page</title>
-        <link rel="stylesheet" th:href="@{/style/bootstrap.min.css}"/>
-        <link rel="stylesheet" th:href="@{/style/drop-down-nav.css}"/>
+        <link type="text/css" rel="stylesheet" th:href="@{/style/bootstrap.min.css}" />
+        <link type="text/css" rel="stylesheet" th:href="@{/style/drop-down-nav.css}" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -76,5 +76,6 @@
             <input class="btn btn-primary" type="submit" value="Login" />
         </form>
         <p>Don't have an account yet? <a href="/register">Click here</a> to create one and enjoy our Loyalty Program!</p>
+        <p>Do not you remember the password? <a href="/account/remindPasswordPage">Click here</a> to remember them.</p>
     </body>
 </html>

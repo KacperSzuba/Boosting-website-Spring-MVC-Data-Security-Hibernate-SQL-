@@ -28,7 +28,7 @@ public class RegisterController {
     }
 
     @PostMapping("/registerForm")
-    public String register(@Valid @ModelAttribute("register") User user, BindingResult result,Model model) {
+    public String register(@Valid @ModelAttribute("register") User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("message",userCreator.getUserRegistrationInformation());
             return "accountView/register";

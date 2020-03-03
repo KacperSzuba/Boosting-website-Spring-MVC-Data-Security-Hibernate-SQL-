@@ -11,7 +11,6 @@ import pl.javastart.repository.order.OrderBoostRepository;
 import pl.javastart.repository.user.UserRepository;
 import pl.javastart.service.ChangeAccountStatus;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @Service
@@ -23,37 +22,36 @@ public class MessageHandler {
     private final UserRepository userRepository;
     private final OrderBoostRepository orderBoostRepository;
     private final ChangeAccountStatus changeAccountStatus;
-    private final HttpServletRequest request;
+
     public MessageHandler(MessageRepository messageRepository, ActualUser actualUser, UserRepository userRepository, OrderBoostRepository orderBoostRepository,
-                          ChangeAccountStatus changeAccountStatus,HttpServletRequest request) {
+                          ChangeAccountStatus changeAccountStatus) {
         this.messageRepository = messageRepository;
         this.actualUser = actualUser;
         this.userRepository = userRepository;
         this.orderBoostRepository = orderBoostRepository;
         this.changeAccountStatus = changeAccountStatus;
-        this.request = request;
     }
 
     public void sendMessage(Message message){
-        Message messageDB = new Message(message.getTitle(), message.getMessage(),actualUser.getActualUser(this.request),message.getUser2());
+        Message messageDB = new Message(message.getTitle(), message.getMessage(),actualUser.getActualUser(),message.getUser2());
         messageRepository.save(messageDB);
     }
 
     public List<User> listOfRecipients(){
-        Optional<OrderBoost> orderBoost = orderBoostRepository.findOrderBoostByUserOrBooster(actualUser.getActualUser(this.request));
+        Optional<OrderBoost> orderBoost = orderBoostRepository.findOrderBoostByUserOrBooster(actualUser.getActualUser());
         List<User> users = new ArrayList<>();
-        if(changeAccountStatus.getCurrentUserRole(actualUser.getActualUser(this.request)) == RoleName.ROLE_ADMIN){
+        if(changeAccountStatus.getCurrentUserRole(actualUser.getActualUser()) == RoleName.ROLE_ADMIN){
             userRepository.findAll().iterator().forEachRemaining(user -> {
-                if( ! user.getUsername().equals(actualUser.getActualUser(this.request).getUsername())) {
+                if( ! user.getUsername().equals(actualUser.getActualUser().getUsername())) {
                     users.add(user);
                 }
             });
         }
-        else if(changeAccountStatus.getCurrentUserRole(actualUser.getActualUser(this.request)) == RoleName.ROLE_USER) {
+        else if(changeAccountStatus.getCurrentUserRole(actualUser.getActualUser()) == RoleName.ROLE_USER) {
             users.add(userRepository.findByUsername("Admin123x"));
             orderBoost.ifPresent(boost -> users.add(boost.getBooster()));
         }
-        else if(changeAccountStatus.getCurrentUserRole(actualUser.getActualUser(this.request)) == RoleName.ROLE_BOOSTER) {
+        else if(changeAccountStatus.getCurrentUserRole(actualUser.getActualUser()) == RoleName.ROLE_BOOSTER) {
             users.add(userRepository.findByUsername("Admin123x"));
             orderBoost.ifPresent(boost -> users.add(boost.getUser()));
         }
@@ -63,10 +61,10 @@ public class MessageHandler {
     public Set<Long> setOfSendMessages(){
         Set<Long> recipientId = new TreeSet<>();
         for (Message message : messageRepository.findAll()) {
-            if (Objects.equals(message.getUser().getId(), actualUser.getActualUser(this.request).getId())) {
+            if (Objects.equals(message.getUser().getId(), actualUser.getActualUser().getId())) {
                 recipientId.add(message.getUser2().getId());
             }
-            else if (Objects.equals(message.getUser2().getId(), actualUser.getActualUser(this.request).getId())) {
+            else if (Objects.equals(message.getUser2().getId(), actualUser.getActualUser().getId())) {
                 recipientId.add(message.getUser().getId());
             }
         }
@@ -76,10 +74,10 @@ public class MessageHandler {
     public List<User> setOfSendRecipients(){
         Set<Long> recipientId = new HashSet<>();
         for (Message message : messageRepository.findAll()) {
-            if (Objects.equals(message.getUser().getId(), actualUser.getActualUser(this.request).getId())) {
+            if (Objects.equals(message.getUser().getId(), actualUser.getActualUser().getId())) {
                 recipientId.add(message.getUser2().getId());
             }
-            else if (Objects.equals(message.getUser2().getId(), actualUser.getActualUser(this.request).getId())) {
+            else if (Objects.equals(message.getUser2().getId(), actualUser.getActualUser().getId())) {
                 recipientId.add(message.getUser().getId());
             }
         }
@@ -98,7 +96,7 @@ public class MessageHandler {
     private List<Message> getMessagesReceived(Long id){
         List<Message> list = new ArrayList<>();
         try{
-            list = messageRepository.findAllByUserAndUser2(userRepository.findById(id).get(),actualUser.getActualUser(this.request));;
+            list = messageRepository.findAllByUserAndUser2(userRepository.findById(id).get(),actualUser.getActualUser());;
             return list;
         }
         catch (IllegalStateException exception){
@@ -111,7 +109,7 @@ public class MessageHandler {
     }
 
     private List<Message> getMessagesSent(Long id){
-        return messageRepository.findAllByUserAndUser2(actualUser.getActualUser(this.request),userRepository.findById(id).get());
+        return messageRepository.findAllByUserAndUser2(actualUser.getActualUser(),userRepository.findById(id).get());
     }
 
     //zmienić metode getTemp

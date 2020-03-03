@@ -6,20 +6,16 @@ import pl.javastart.model.entity.user.User;
 import pl.javastart.repository.user.UserRepository;
 import pl.javastart.service.exception.DataMismatchException;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Service
 public class EmailManager {
     private String message;
 
     private final UserRepository userRepository;
     private final ActualUser actualUser;
-    private final HttpServletRequest request;
 
-    public EmailManager(UserRepository userRepository, ActualUser actualUser,HttpServletRequest request) {
+    public EmailManager(UserRepository userRepository, ActualUser actualUser) {
         this.userRepository = userRepository;
         this.actualUser = actualUser;
-        this.request = request;
     }
 
     public void changeEmail(String currentEmail,String email, String repeatEmail){
@@ -60,7 +56,7 @@ public class EmailManager {
     }
 
     private User loggedInUser(){
-        return actualUser.getActualUser(this.request);
+        return actualUser.getActualUser();
     }
 
     private boolean whetherTheEmailsAreTheSame(String email,String repeatEmail){

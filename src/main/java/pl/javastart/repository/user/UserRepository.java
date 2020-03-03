@@ -11,7 +11,6 @@ import pl.javastart.model.entity.user.UserRole;
 public interface UserRepository extends CrudRepository<User,Long> {
     User findByUsername(String username);
     boolean existsUserByUsername(String username);
-
     @Transactional
     @Modifying
     @Query(value = "UPDATE User u SET u.enabled =:enabled WHERE u.id=:id")

@@ -7,8 +7,6 @@ import pl.javastart.model.entity.user.User;
 import pl.javastart.repository.user.UserRepository;
 import pl.javastart.service.exception.DataMismatchException;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Service
 public class PasswordManager {
 
@@ -17,13 +15,11 @@ public class PasswordManager {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final ActualUser actualUser;
-    private final HttpServletRequest request;
 
-    public PasswordManager(PasswordEncoder passwordEncoder, UserRepository userRepository, ActualUser actualUser, HttpServletRequest request) {
+    public PasswordManager(PasswordEncoder passwordEncoder, UserRepository userRepository, ActualUser actualUser) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.actualUser = actualUser;
-        this.request = request;
     }
 
     public void changePassword(String currentPassword,String password, String repeatPassword){
@@ -56,7 +52,7 @@ public class PasswordManager {
     }
 
     private User loggedInUser(){
-        return actualUser.getActualUser(this.request);
+        return actualUser.getActualUser();
     }
 
     private boolean checkIfPasswordEnteredMatchesCurrent(String currentPassword) throws DataMismatchException {
