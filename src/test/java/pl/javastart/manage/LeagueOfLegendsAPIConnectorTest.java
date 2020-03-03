@@ -2,9 +2,9 @@ package pl.javastart.manage;
 /*
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.javastart.manage.api.LeagueOfLegendsAPIConnector;
-import pl.javastart.model.enums.Region;
-import pl.javastart.model.enums.Tier;
+import com.BoostingWebsite.LeagueOfLegendsAPIConnector;
+import com.BoostingWebsite.order.division.Region;
+import com.BoostingWebsite.order.division.Tier;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
