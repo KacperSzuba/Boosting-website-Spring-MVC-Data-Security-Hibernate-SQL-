@@ -1,5 +1,10 @@
 package com.BoostingWebsite.order.division;
 
 public enum Tier {
-    IRON,BRONZE,SILVER,GOLD,PLATINUM,DIAMOND;
+    IRON,
+    BRONZE,
+    SILVER,
+    GOLD,
+    PLATINUM,
+    DIAMOND
 }

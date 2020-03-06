@@ -25,11 +25,11 @@ public class BoosterService {
         this.orderBoostRepository = orderBoostRepository;
     }
 
-    public List<OrderBoost> findFreeOrderBoost(){
+    List<OrderBoost> findFreeOrderBoost(){
        return orderBoostRepository.findOrderBoostByBoosterEqualsNull();
     }
 
-    public void addBoost(Long orderId){
+    void addBoost(Long orderId){
         leagueOfLegendsAPIConnector = new LeagueOfLegendsAPIConnector(getUsername(),getRegion());
         if(checkIfTheBoosterHasNoOrders()){
             orderBoostRepository.findFreeOrderBoosts(orderId, loggedInBooster());
@@ -40,7 +40,7 @@ public class BoosterService {
         }
     }
 
-    public void finishBoost() throws IOException {
+    void finishBoost() throws IOException {
         if(whetherOrderIsCompleted()){
             orderBoostRepository.setOrderAsDone(findCurrentBoost().getId());
             setMessage("You have successfully completed boosting");
@@ -66,11 +66,11 @@ public class BoosterService {
         return destinationTier.equals(tierFromApi);
     }
 
-    public OrderBoost findCurrentBoost(){
+    OrderBoost findCurrentBoost(){
         return orderBoostRepository.findCurrentBoost(loggedInBooster());
     }
 
-    public List<OrderBoost> listOfDoneOrderBoosts(){
+    List<OrderBoost> listOfDoneOrderBoosts(){
         return orderBoostRepository.findDoneOrderBoost(loggedInBooster());
     }
 

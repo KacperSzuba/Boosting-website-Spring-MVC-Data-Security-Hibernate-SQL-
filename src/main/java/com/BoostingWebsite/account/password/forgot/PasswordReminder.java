@@ -1,16 +1,12 @@
 package com.BoostingWebsite.account.password.forgot;
 
-import com.BoostingWebsite.account.password.reset.PasswordManager;
 import com.BoostingWebsite.account.user.User;
 import com.BoostingWebsite.account.user.UserRepository;
 import com.BoostingWebsite.email.EmailServiceImpl;
 import com.BoostingWebsite.exceptions.DataMismatchException;
 import com.BoostingWebsite.validator.EmailValidator;
 
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -94,8 +90,7 @@ public class PasswordReminder {
         }
 
         User user = passToken.getUser();
-        Authentication auth = new UsernamePasswordAuthenticationToken(
-                user, null, Arrays.asList(
+        Authentication auth = new UsernamePasswordAuthenticationToken(user, null, Collections.singletonList(
                 new SimpleGrantedAuthority("CHANGE_PASSWORD_PRIVILEGE")));
         SecurityContextHolder.getContext().setAuthentication(auth);
         return null;

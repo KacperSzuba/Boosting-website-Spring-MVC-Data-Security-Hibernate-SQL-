@@ -30,12 +30,12 @@ public class MessageHandler {
         this.changeAccountStatus = changeAccountStatus;
     }
 
-    public void sendMessage(Message message){
+    void sendMessage(Message message){
         Message messageDB = new Message(message.getTitle(), message.getMessage(),actualUser.getActualUser(),message.getUser2());
         messageRepository.save(messageDB);
     }
 
-    public List<User> listOfRecipients(){
+    List<User> listOfRecipients(){
         Optional<OrderBoost> orderBoost = orderBoostRepository.findOrderBoostByUserOrBooster(actualUser.getActualUser());
         List<User> users = new ArrayList<>();
         if(changeAccountStatus.getCurrentUserRole(actualUser.getActualUser()) == RoleName.ROLE_ADMIN){
@@ -69,7 +69,7 @@ public class MessageHandler {
         return recipientId;
     }
 
-    public List<User> setOfSendRecipients(){
+    List<User> setOfSendRecipients(){
         Set<Long> recipientId = new HashSet<>();
         for (Message message : messageRepository.findAll()) {
             if (Objects.equals(message.getUser().getId(), actualUser.getActualUser().getId())) {
@@ -83,7 +83,7 @@ public class MessageHandler {
         return users;
     }
 
-    public List<Message> conversationSortedByDataDESC(Long id){
+    List<Message> conversationSortedByDataDESC(Long id){
         List<Message> list = new ArrayList<>();
         list.addAll(getMessagesReceived(id));
         list.addAll(getMessagesSent(id));
@@ -111,15 +111,15 @@ public class MessageHandler {
     }
 
     //zmienić metode getTemp
-    public Long getTemp(){
+    Long getTemp(){
         return messageRepository.findTopByOrderByIdDesc().getUser2().getId();
     }
 
-    public void setIdOfConversation(Long idOfConversation){
+    void setIdOfConversation(Long idOfConversation){
         this.idOfConversation= idOfConversation;
     }
 
-    public Long getIdOfConversation(){
+    Long getIdOfConversation(){
         return idOfConversation;
     }
 }

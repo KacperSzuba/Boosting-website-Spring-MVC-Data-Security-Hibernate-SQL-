@@ -33,7 +33,7 @@ public class OrderService {
         this.request = request;
     }
 
-    public void makeOrder(OrderBoost orderBoost){
+    void makeOrder(OrderBoost orderBoost){
         TierImage currentLeague = cookies().get("currentTierImageSource");
         TierImage destinationLeague = cookies().get("destinationTierImageSource");
         orderBoost.setCurrentTier(tierRepository.findById(currentLeague.getTier().getId()).get().getTier());

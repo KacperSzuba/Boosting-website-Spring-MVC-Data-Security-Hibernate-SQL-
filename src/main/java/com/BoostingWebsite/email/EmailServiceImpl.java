@@ -1,13 +1,9 @@
 package com.BoostingWebsite.email;
 
 import com.BoostingWebsite.account.user.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
-
-import java.util.Locale;
 
 @Component
 public class EmailServiceImpl implements EmailService {

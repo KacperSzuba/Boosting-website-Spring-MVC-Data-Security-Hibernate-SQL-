@@ -21,19 +21,19 @@ public class ChangeAccountStatus {
         this.userRoleRepository = userRoleRepository;
     }
 
-    public void banUser(Long userId){
+    void banUser(Long userId){
         userRepository.changeUserEnabledStatement(userId,false);
     }
 
-    public void unBanUser(Long userId){
+    void unBanUser(Long userId){
         userRepository.changeUserEnabledStatement(userId,true);
     }
 
-    public void deleteUser(Long userId){
+    void deleteUser(Long userId){
         userRepository.deleteUser(userId);
     }
 
-    public void changeTheRoleName(Long userId, RoleName roleName){
+    void changeTheRoleName(Long userId, RoleName roleName){
         UserRole userRole = userRoleRepository.getUserRole(roleName);
         List<UserRole> roles = new ArrayList<>();
         roles.add(userRole);
