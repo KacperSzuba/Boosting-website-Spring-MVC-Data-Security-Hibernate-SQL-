@@ -7,6 +7,9 @@ import com.BoostingWebsite.account.user.User;
 import com.BoostingWebsite.account.user.UserRepository;
 import com.BoostingWebsite.exceptions.DataMismatchException;
 
+import static com.BoostingWebsite.account.password.PasswordValidator.isPasswordLengthSufficient;
+import static com.BoostingWebsite.account.password.PasswordValidator.whetherThePasswordsAreTheSame;
+
 @Service
 public class PasswordManager {
 
@@ -31,7 +34,7 @@ public class PasswordManager {
         }
     }
 
-    private void whetherPasswordCanBeChanged(String currentPassword,String password,String repeatPassword) throws DataMismatchException {
+    private void whetherPasswordCanBeChanged(String currentPassword, String password, String repeatPassword) throws DataMismatchException {
         if(checkIfPasswordEnteredMatchesCurrent(currentPassword) && checkIfPasswordsAreTheSameAndHaveRequiredLength(password,repeatPassword)){
             tryToChangePassword(password);
         }
@@ -62,14 +65,6 @@ public class PasswordManager {
         else {
             throw new DataMismatchException("The password you entered does not match the current one");
         }
-    }
-
-    private boolean isPasswordLengthSufficient(String password){
-        return password.length() >= 7;
-    }
-
-    private boolean whetherThePasswordsAreTheSame(String password,String repeatPassword){
-        return password.equals(repeatPassword);
     }
 
     public String getMessage() {

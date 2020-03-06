@@ -1,11 +1,14 @@
 package com.BoostingWebsite.account.user;
 
+import com.BoostingWebsite.account.email.EmailManager;
 import com.BoostingWebsite.account.password.forgot.PasswordReminder;
+import com.BoostingWebsite.account.password.reset.PasswordManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import com.BoostingWebsite.account.email.EmailManager;
-import com.BoostingWebsite.account.password.reset.PasswordManager;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/account")
@@ -57,10 +60,30 @@ public class AccountController {
     }
 
     @GetMapping("/remindPasswordForm")
-    private String remindPassword(@RequestParam("email")String email, Model model){
-        System.out.println(email);
+    public String remindPassword(@RequestParam("email") String email){
         passwordReminder.remindPassword(email);
         return "accountView/user_RemindPassword";
+    }
+
+    @GetMapping("/remindPassword")
+    public String remind(@RequestParam("id")Long id, @RequestParam("token") String token,Model model){
+        String validatePasswordResetToken = passwordReminder.validatePasswordResetToken(id,token);
+        if(validatePasswordResetToken != null){
+            model.addAttribute("token","Your token is "+validatePasswordResetToken);
+            return "accountView/login";
+        }
+        return "redirect:/account/updatePassword";
+    }
+
+    @GetMapping("/updatePassword")
+    public String updatePassword(){
+        return "accountView/updatePassword";
+    }
+
+    @PostMapping("/resetPassword")
+    public String resetPassword(@RequestParam("password") String password,@RequestParam("repeatPassword") String repeatPassword) {
+        passwordReminder.resetPassword(password,repeatPassword);
+        return "redirect:/login";
     }
 
 }

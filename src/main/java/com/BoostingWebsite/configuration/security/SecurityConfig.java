@@ -41,6 +41,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 .antMatchers("/sendMessage/**").hasAnyRole("ADMIN","USER","BOOSTER")
                // .antMatchers("/sendMessage/send").hasAnyRole("ADMIN","USER","BOOSTER")
                 .antMatchers("/").permitAll()
+                .antMatchers("/account/updatePassword*","/account/resetPassword").hasAuthority("CHANGE_PASSWORD_PRIVILEGE")
                 .antMatchers("/css/**","/style/**","/static/**").permitAll() //Adding this line solved it
                 .antMatchers("/register").permitAll()
                 .antMatchers("/account/remindPasswordPage").permitAll()
