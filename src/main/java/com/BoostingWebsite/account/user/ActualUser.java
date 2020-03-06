@@ -1,8 +1,6 @@
 package com.BoostingWebsite.account.user;
 
 import org.springframework.stereotype.Component;
-import com.BoostingWebsite.account.user.User;
-import com.BoostingWebsite.account.user.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;

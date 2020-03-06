@@ -68,7 +68,7 @@
             </div>
         </nav>
         <h1>Account registration</h1>
-        <p th:object="${message}"></p>
+        <p th:text="${message}"></p>
         <form th:action="@{/registerForm}" th:object="${register}"  method="post">
             <div class="form-group">
                 <label for="exampleInputEmail1">Username</label>

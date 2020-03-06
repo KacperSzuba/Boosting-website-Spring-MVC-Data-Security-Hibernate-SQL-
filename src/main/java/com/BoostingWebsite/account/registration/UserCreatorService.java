@@ -13,22 +13,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserCreatorService {
+class UserCreatorService {
     private String message;
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final UserRoleRepository userRoleRepository;
 
-    public UserCreatorService(PasswordEncoder passwordEncoder, UserRepository userRepository, UserRoleRepository userRoleRepository) {
+    UserCreatorService(PasswordEncoder passwordEncoder, UserRepository userRepository, UserRoleRepository userRoleRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
     }
 
-    public boolean createAccount(User user){
+    boolean createAccount(User user){
         try {
-            checkIfUserExists(user);
+            tryToCreateAccount(user);
             return true;
         }
         catch (IllegalArgumentException exception){
@@ -43,31 +43,42 @@ public class UserCreatorService {
         }
     }
 
-    private void checkIfUserExists(User user){
-        boolean isUserExist = userRepository.existsUserByUsername(user.getUsername());
-        if(isUserExist){
-            //zrobić swój wyjątek
-            throw new IllegalArgumentException("User with this username already exist");
-        }
-        else {
-            tryToCreateAccount(user);
+    private void tryToCreateAccount(User user){
+        if (checkIfUserExists(user) && checkIfEmailExist(user)) {
+            UserRole userRole = userRoleRepository.getUserRole(RoleName.ROLE_USER);
+            userRoleRepository.save(userRole);
+            List<UserRole> roles = new ArrayList<>();
+            roles.add(userRole);
+            String password = passwordEncoder.encode(user.getPassword());
+            userRepository.save(new User(user.getUsername(), password, true, user.getEmail(), LocalDateTime.now(), roles));
         }
     }
 
-    private void tryToCreateAccount(User user){
-        UserRole userRole = userRoleRepository.getUserRole(RoleName.ROLE_USER);
-        userRoleRepository.save(userRole);
-        List<UserRole> roles = new ArrayList<>();
-        roles.add(userRole);
-        String password = passwordEncoder.encode(user.getPassword());
-        userRepository.save(new User(user.getUsername(),password,true,user.getEmail(),LocalDateTime.now(),roles));
+    private boolean checkIfUserExists(User user){
+        boolean isUserExist = userRepository.existsUserByUsername(user.getUsername());
+        if(isUserExist){
+            throw new IllegalArgumentException("User with this username already exist");
+        }
+        else {
+            return true;
+        }
+    }
+
+    private boolean checkIfEmailExist(User user){
+        boolean isEmailExist = userRepository.existsUserByEmail(user.getEmail());
+        if (isEmailExist){
+            throw new IllegalArgumentException("User with this email already exist");
+        }
+        else {
+            return true;
+        }
     }
 
     private void setUserRegistrationInformation(String message){
         this.message = message;
     }
 
-    public String getUserRegistrationInformation(){
+    String getUserRegistrationInformation(){
         return message;
     }
 }

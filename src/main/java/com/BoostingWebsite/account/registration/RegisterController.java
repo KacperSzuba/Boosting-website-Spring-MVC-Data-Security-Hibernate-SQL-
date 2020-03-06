@@ -31,10 +31,12 @@ public class RegisterController {
         if (result.hasErrors()) {
             model.addAttribute("message",userCreator.getUserRegistrationInformation());
             return "accountView/register";
-        } else {
+        }
+        else {
             if (userCreator.createAccount(user)) {
                 return "redirect:/login";
-            } else {
+            }
+            else {
                 model.addAttribute("message",userCreator.getUserRegistrationInformation());
                 return "accountView/register";
             }

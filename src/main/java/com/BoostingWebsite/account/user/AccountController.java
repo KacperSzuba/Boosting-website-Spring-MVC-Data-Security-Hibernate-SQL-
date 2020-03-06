@@ -1,5 +1,6 @@
 package com.BoostingWebsite.account.user;
 
+import com.BoostingWebsite.account.password.forgot.PasswordReminder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +13,11 @@ public class AccountController {
 
     private final PasswordManager passwordManager;
     private final EmailManager emailChange;
-
-    public AccountController(PasswordManager passwordManager, EmailManager emailChange) {
+    private final PasswordReminder passwordReminder;
+    public AccountController(PasswordManager passwordManager, EmailManager emailChange, PasswordReminder passwordReminder) {
         this.passwordManager = passwordManager;
         this.emailChange = emailChange;
+        this.passwordReminder = passwordReminder;
     }
 
     @GetMapping
@@ -57,6 +59,7 @@ public class AccountController {
     @GetMapping("/remindPasswordForm")
     private String remindPassword(@RequestParam("email")String email, Model model){
         System.out.println(email);
+        passwordReminder.remindPassword(email);
         return "accountView/user_RemindPassword";
     }
 
