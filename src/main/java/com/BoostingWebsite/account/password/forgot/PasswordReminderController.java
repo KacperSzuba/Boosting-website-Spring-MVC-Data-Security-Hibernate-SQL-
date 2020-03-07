@@ -40,12 +40,16 @@ public class PasswordReminderController {
 
     @GetMapping("/updatePassword")
     public String updatePassword(){
-        return "accountView/updatePassword";
+        return "accountView/user_updatePassword";
     }
 
     @PostMapping("/resetPassword")
-    public String resetPassword(@RequestParam("password") String password,@RequestParam("repeatPassword") String repeatPassword) {
+    public String resetPassword(@RequestParam("password") String password,@RequestParam("repeatPassword") String repeatPassword, Model model) {
         passwordReminder.resetPassword(password,repeatPassword);
+        if(passwordReminder.getPasswordRemindMessage() != null){
+            model.addAttribute("message",passwordReminder.getPasswordRemindMessage());
+            return "accountView/user_updatePassword";
+        }
         return "redirect:/login";
     }
 }

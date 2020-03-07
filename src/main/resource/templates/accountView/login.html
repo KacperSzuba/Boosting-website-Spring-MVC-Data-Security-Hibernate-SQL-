@@ -62,8 +62,7 @@
                 </div>
             </div>
         </nav>
-        <div class="alert alert-dismissible alert-warning">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <div th:if="${token != null}" class="alert alert-dismissible alert-warning">
             <h4 class="alert-heading">Warning!</h4>
             <p class="mb-0" th:text="${token}"></p>
         </div>

@@ -41,7 +41,7 @@ public class PasswordReminder {
         this.encoder = encoder;
     }
 
-    public void resetPassword(String password, String confirmPassword) {
+    void resetPassword(String password, String confirmPassword) {
         this.password = password;
         this.confirmPassword = confirmPassword;
         try {
@@ -69,7 +69,7 @@ public class PasswordReminder {
         }
     }
 
-    public void remindPassword(String email) {
+    void remindPassword(String email) {
         this.email = email;
         System.out.println(getAppUrl());
         if (whetherEmailIsInDatabase()) {
@@ -78,7 +78,7 @@ public class PasswordReminder {
         }
     }
 
-    public String validatePasswordResetToken(long id, String token) {
+    String validatePasswordResetToken(long id, String token) {
         PasswordResetToken passToken =
                 passwordResetTokenRepository.findByToken(token);
         if ((passToken == null) || (passToken.getUser()
