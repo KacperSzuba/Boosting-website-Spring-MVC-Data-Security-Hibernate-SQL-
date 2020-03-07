@@ -70,16 +70,16 @@
                 </div>
             </div>
         </nav>
-        <button class="btn btn-secondary" onclick="upCurrentTier()">Increase current tier</button>
+    <button class="btn btn-secondary" onclick="upCurrentTier()">Increase current tier</button>
         <button class="btn btn-secondary" onclick="downCurrentTier()">Decrease current tier</button>
         <button class="btn btn-secondary" onclick="leftCurrentTier()">Decrease current division</button>
         <button class="btn btn-secondary" onclick="rightCurrentTier()">Increase current division</button>
-        <img class="center" id="currentTier">
+        <img class="center"  id="currentTier">
         <button class="btn btn-secondary" onclick="upDestinationTier()">Increase destination tier</button>
         <button class="btn btn-secondary" onclick="downDestinationTier()">Decrease destination tier</button>
         <button class="btn btn-secondary" onclick="leftDestinationTier()">Decrease destination division</button>
         <button class="btn btn-secondary" onclick="rightDestinationTier()">Increase destination division</button>
-        <img  class="center" id="destinationTier">
+        <img  class="center" content="image/png" id="destinationTier">
 
         <a href="/order/informationAboutDivision" onclick="createDestinationTierAndDivisionCookie()">Complete information about your account</a>
         <script>
@@ -92,6 +92,8 @@
                     var defaultDestinationTier = conversation[17]['img_source'];
                     document.getElementById('currentTier').setAttribute("src",defaultCurrentTier);
                     document.getElementById('destinationTier').setAttribute("src",defaultDestinationTier);
+                    document.getElementById('currentTier').setAttribute("Content-Type", "image/png");
+                    console.log("@!!@#!@#"+document.getElementById('destinationTier').getAttribute("Content-Type"));
                 }
             }
             xhr.open('GET','./Order',true);
@@ -105,7 +107,6 @@
                     if(this.status === 200){
                         const conversation = JSON.parse(this.responseText);
                         var temp = document.getElementById('currentTier').src.toString();
-                        let temp3 = conversation.filter(data => data.img_source);
                         let op = conversation.filter(data => "http://localhost:8091"+data.img_source == temp);
                         var tier = parseInt(op[0]['tier_id']);
                         if(tier === 1){
