@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-public class BoosterService {
+class BoosterService {
     private String message;
 
     private LeagueOfLegendsAPIConnector leagueOfLegendsAPIConnector;
@@ -20,7 +20,7 @@ public class BoosterService {
     private final ActualUser actualUser;
     private final OrderBoostRepository orderBoostRepository;
 
-    public BoosterService(ActualUser actualUser,OrderBoostRepository orderBoostRepository){
+    BoosterService(ActualUser actualUser,OrderBoostRepository orderBoostRepository){
         this.actualUser = actualUser;
         this.orderBoostRepository = orderBoostRepository;
     }

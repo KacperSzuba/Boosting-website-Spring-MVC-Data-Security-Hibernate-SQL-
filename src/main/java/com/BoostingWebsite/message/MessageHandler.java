@@ -12,7 +12,7 @@ import com.BoostingWebsite.account.admin.ChangeAccountStatus;
 import java.util.*;
 
 @Service
-public class MessageHandler {
+class MessageHandler {
     private Long idOfConversation;
 
     private final MessageRepository messageRepository;

@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 @Service
-public class OrderService {
+class OrderService {
 
     private final ActualUser actualUser;
     private final OrderBoostRepository orderBoostRepository;

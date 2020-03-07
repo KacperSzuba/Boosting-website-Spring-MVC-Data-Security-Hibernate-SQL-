@@ -14,12 +14,12 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/booster")
-public class BoosterController {
+class BoosterController {
 
     private final OrderBoostRepository orderBoostRepository;
     private final BoosterService boosterService;
 
-    public BoosterController(OrderBoostRepository orderBoostRepository, BoosterService boosterService) {
+    BoosterController(OrderBoostRepository orderBoostRepository, BoosterService boosterService) {
         this.orderBoostRepository = orderBoostRepository;
         this.boosterService = boosterService;
     }

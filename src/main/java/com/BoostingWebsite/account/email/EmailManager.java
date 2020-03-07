@@ -8,7 +8,7 @@ import com.BoostingWebsite.validator.EmailValidator;
 import com.BoostingWebsite.exceptions.DataMismatchException;
 
 @Service
-public class EmailManager {
+class EmailManager {
     private String message;
 
     private final UserRepository userRepository;
@@ -19,7 +19,7 @@ public class EmailManager {
         this.actualUser = actualUser;
     }
 
-    public void changeEmail(String currentEmail,String email, String repeatEmail){
+    void changeEmail(String currentEmail, String email, String repeatEmail){
         try{
             whetherEmailCanBeChanged(currentEmail,email,repeatEmail);
         }
@@ -35,7 +35,7 @@ public class EmailManager {
     }
 
     private boolean checkIfEmailIsCorrect(String email,String repeatEmail) throws DataMismatchException {
-        if (whetherTheEmailsAreTheSame(email, repeatEmail) && EmailValidator.isValid(email)) {
+        if (whetherTheEmailsAreTheSame(email, repeatEmail) && EmailValidator.validateEmail(email)) {
             return true;
         }
         else {

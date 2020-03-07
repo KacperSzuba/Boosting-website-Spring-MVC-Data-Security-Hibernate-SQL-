@@ -11,7 +11,7 @@ import static com.BoostingWebsite.account.password.PasswordValidator.isPasswordL
 import static com.BoostingWebsite.account.password.PasswordValidator.whetherThePasswordsAreTheSame;
 
 @Service
-public class PasswordManager {
+class PasswordManager {
     private String message;
     private String password;
     private String confirmPassword;
@@ -26,7 +26,7 @@ public class PasswordManager {
         this.actualUser = actualUser;
     }
 
-    public void changePassword(String currentPassword,String password, String confirmPassword){
+    void changePassword(String currentPassword, String password, String confirmPassword){
         this.password = password;
         this.confirmPassword = confirmPassword;
         try {

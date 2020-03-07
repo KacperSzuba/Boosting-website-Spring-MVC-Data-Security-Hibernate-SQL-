@@ -2,7 +2,7 @@ package com.BoostingWebsite.account.password.forgot;
 
 import com.BoostingWebsite.account.user.User;
 import com.BoostingWebsite.account.user.UserRepository;
-import com.BoostingWebsite.email.EmailServiceImpl;
+import com.BoostingWebsite.email.EmailService;
 import com.BoostingWebsite.exceptions.DataMismatchException;
 import com.BoostingWebsite.validator.EmailValidator;
 
@@ -21,7 +21,7 @@ import static com.BoostingWebsite.account.password.PasswordValidator.isPasswordL
 import static com.BoostingWebsite.account.password.PasswordValidator.whetherThePasswordsAreTheSame;
 
 @Service
-public class PasswordReminder {
+class PasswordReminder {
     private String passwordRemindMessage;
     private String email;
     private String password;
@@ -30,10 +30,11 @@ public class PasswordReminder {
     private final UserRepository userRepository;
     private final PasswordResetTokenRepository passwordResetTokenRepository;
     private final HttpServletRequest request;
-    private final EmailServiceImpl emailService;
+    private final EmailService emailService;
     private final PasswordEncoder encoder;
 
-    public PasswordReminder(UserRepository userRepository, PasswordResetTokenRepository passwordResetTokenRepository, HttpServletRequest request, EmailServiceImpl emailService, PasswordEncoder encoder) {
+    public PasswordReminder(UserRepository userRepository, PasswordResetTokenRepository passwordResetTokenRepository, HttpServletRequest request, EmailService emailService,
+                            PasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.passwordResetTokenRepository = passwordResetTokenRepository;
         this.request = request;
@@ -126,7 +127,7 @@ public class PasswordReminder {
     }
 
     private boolean whetherEmailIsValid() {
-        return EmailValidator.isValid(email);
+        return EmailValidator.validateEmail(email);
     }
 
     private String getToken() {
@@ -141,7 +142,7 @@ public class PasswordReminder {
         return "http://" + this.request.getServerName() + ":" + this.request.getServerPort() + this.request.getContextPath();
     }
 
-    public String getPasswordRemindMessage() {
+    String getPasswordRemindMessage() {
         return passwordRemindMessage;
     }
 
