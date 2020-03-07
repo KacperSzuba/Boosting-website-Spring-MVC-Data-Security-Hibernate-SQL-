@@ -75,22 +75,22 @@ class PasswordReminder {
         System.out.println(getAppUrl());
         if (whetherEmailIsInDatabase()) {
             saveOrUpdateToken();
-            emailService.constructResetTokenEmail(getAppUrl(),passwordResetTokenRepository.findByUser(user().get()).get().getToken(),user().get());
+
+            User user = user().get();
+            PasswordResetToken passwordResetToken = passwordResetTokenRepository.findByUser(user).get();
+            String token = passwordResetToken.getToken();
+            emailService.constructResetTokenEmail(getAppUrl(),token,user);
         }
     }
 
     String validatePasswordResetToken(long id, String token) {
-        PasswordResetToken passToken =
-                passwordResetTokenRepository.findByToken(token);
-        if ((passToken == null) || (passToken.getUser()
-                .getId() != id)) {
+        PasswordResetToken passToken = passwordResetTokenRepository.findByToken(token);
+        if ((passToken == null) || (passToken.getUser().getId() != id)) {
             return "invalid";
         }
 
         Calendar cal = Calendar.getInstance();
-        if ((passToken.getExpiryDate()
-                .getTime() - cal.getTime()
-                .getTime()) <= 0) {
+        if ((passToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
             return "expired";
         }
 

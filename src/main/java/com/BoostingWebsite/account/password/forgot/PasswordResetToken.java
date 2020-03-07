@@ -23,18 +23,14 @@ public class PasswordResetToken {
     private Date expiryDate;
 
     public PasswordResetToken() {
-        super();
     }
 
     public PasswordResetToken(final String token) {
-        super();
-
         this.token = token;
         this.expiryDate = calculateExpiryDate(EXPIRATION);
     }
 
     PasswordResetToken(final String token, final User user) {
-        super();
         this.token = token;
         this.user = user;
         this.expiryDate = calculateExpiryDate(EXPIRATION);

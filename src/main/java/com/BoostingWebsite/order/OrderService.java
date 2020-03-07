@@ -24,7 +24,8 @@ class OrderService {
     private HttpServletRequest request;
 
 
-    public OrderService(ActualUser actualUser, OrderBoostRepository orderBoostRepository, TierImageRepository tierImageRepository, TierRepository tierRepository, DivisionsRepository divisionsRepository, HttpServletRequest request) {
+    public OrderService(ActualUser actualUser, OrderBoostRepository orderBoostRepository, TierImageRepository tierImageRepository, TierRepository tierRepository,
+                        DivisionsRepository divisionsRepository, HttpServletRequest request) {
         this.actualUser = actualUser;
         this.orderBoostRepository = orderBoostRepository;
         this.tierImageRepository = tierImageRepository;
