@@ -24,6 +24,8 @@ import static com.BoostingWebsite.account.password.PasswordValidator.whetherTheP
 public class PasswordReminder {
     private String passwordRemindMessage;
     private String email;
+    private String password;
+    private String confirmPassword;
 
     private final UserRepository userRepository;
     private final PasswordResetTokenRepository passwordResetTokenRepository;
@@ -39,9 +41,11 @@ public class PasswordReminder {
         this.encoder = encoder;
     }
 
-    public void resetPassword(String password, String repeatPassword) {
+    public void resetPassword(String password, String confirmPassword) {
+        this.password = password;
+        this.confirmPassword = confirmPassword;
         try {
-            tryToResetPassword(password,repeatPassword);
+            tryToResetPassword();
         }
         catch (DataMismatchException exception){
             exception.printStackTrace();
@@ -49,15 +53,15 @@ public class PasswordReminder {
         }
     }
 
-    private void tryToResetPassword(String password, String repeatPassword) throws DataMismatchException {
-        if (checkIfPasswordsAreTheSameAndHaveRequiredLength(password, repeatPassword)) {
+    private void tryToResetPassword() throws DataMismatchException {
+        if (checkIfPasswordsAreTheSameAndHaveRequiredLength()) {
             User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             userRepository.changePassword(user.getId(), encoder.encode(password));
         }
     }
 
-    private boolean checkIfPasswordsAreTheSameAndHaveRequiredLength(String password, String repeatPassword) throws DataMismatchException {
-        if(isPasswordLengthSufficient(password) && whetherThePasswordsAreTheSame(password,repeatPassword)) {
+    private boolean checkIfPasswordsAreTheSameAndHaveRequiredLength() throws DataMismatchException {
+        if(isPasswordLengthSufficient(this.password) && whetherThePasswordsAreTheSame(this.password,this.confirmPassword)) {
             return true;
         }
         else {

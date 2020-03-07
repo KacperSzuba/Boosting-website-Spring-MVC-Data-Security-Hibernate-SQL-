@@ -15,6 +15,7 @@ import java.util.List;
 @Service
 class UserCreatorService {
     private String message;
+    private User user;
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
@@ -27,8 +28,9 @@ class UserCreatorService {
     }
 
     boolean createAccount(User user){
+        this.user = user;
         try {
-            tryToCreateAccount(user);
+            tryToCreateAccount();
             return true;
         }
         catch (IllegalArgumentException exception){
@@ -43,19 +45,19 @@ class UserCreatorService {
         }
     }
 
-    private void tryToCreateAccount(User user){
-        if (checkIfUserExists(user) && checkIfEmailExist(user)) {
+    private void tryToCreateAccount(){
+        if (checkIfUserExists() && checkIfEmailExist()) {
             UserRole userRole = userRoleRepository.getUserRole(RoleName.ROLE_USER);
             userRoleRepository.save(userRole);
             List<UserRole> roles = new ArrayList<>();
             roles.add(userRole);
             String password = passwordEncoder.encode(user.getPassword());
-            userRepository.save(new User(user.getUsername(), password, true, user.getEmail(), LocalDateTime.now(), roles));
+            userRepository.save(new User(this.user.getUsername(), password, true, this.user.getEmail(), LocalDateTime.now(), roles));
         }
     }
 
-    private boolean checkIfUserExists(User user){
-        boolean isUserExist = userRepository.existsUserByUsername(user.getUsername());
+    private boolean checkIfUserExists(){
+        boolean isUserExist = userRepository.existsUserByUsername(this.user.getUsername());
         if(isUserExist){
             throw new IllegalArgumentException("User with this username already exist");
         }
@@ -64,8 +66,8 @@ class UserCreatorService {
         }
     }
 
-    private boolean checkIfEmailExist(User user){
-        boolean isEmailExist = userRepository.existsUserByEmail(user.getEmail());
+    private boolean checkIfEmailExist(){
+        boolean isEmailExist = userRepository.existsUserByEmail(this.user.getEmail());
         if (isEmailExist){
             throw new IllegalArgumentException("User with this email already exist");
         }

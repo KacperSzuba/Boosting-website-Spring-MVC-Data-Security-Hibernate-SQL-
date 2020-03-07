@@ -33,7 +33,7 @@ public class PasswordResetToken {
         this.expiryDate = calculateExpiryDate(EXPIRATION);
     }
 
-    public PasswordResetToken(final String token, final User user) {
+    PasswordResetToken(final String token, final User user) {
         super();
         this.token = token;
         this.user = user;
@@ -44,7 +44,7 @@ public class PasswordResetToken {
         return id;
     }
 
-    public String getToken() {
+    String getToken() {
         return token;
     }
 
@@ -60,7 +60,7 @@ public class PasswordResetToken {
         this.user = user;
     }
 
-    public Date getExpiryDate() {
+    Date getExpiryDate() {
         return expiryDate;
     }
 

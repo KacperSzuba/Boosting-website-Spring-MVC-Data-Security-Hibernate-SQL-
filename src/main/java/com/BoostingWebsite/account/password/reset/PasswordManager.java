@@ -12,8 +12,9 @@ import static com.BoostingWebsite.account.password.PasswordValidator.whetherTheP
 
 @Service
 public class PasswordManager {
-
     private String message;
+    private String password;
+    private String confirmPassword;
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
@@ -25,23 +26,25 @@ public class PasswordManager {
         this.actualUser = actualUser;
     }
 
-    public void changePassword(String currentPassword,String password, String repeatPassword){
+    public void changePassword(String currentPassword,String password, String confirmPassword){
+        this.password = password;
+        this.confirmPassword = confirmPassword;
         try {
-            whetherPasswordCanBeChanged(currentPassword,password,repeatPassword);
+            whetherPasswordCanBeChanged(currentPassword);
         }
         catch (DataMismatchException exception){
             setMessage(exception.getMessage());
         }
     }
 
-    private void whetherPasswordCanBeChanged(String currentPassword, String password, String repeatPassword) throws DataMismatchException {
-        if(checkIfPasswordEnteredMatchesCurrent(currentPassword) && checkIfPasswordsAreTheSameAndHaveRequiredLength(password,repeatPassword)){
-            tryToChangePassword(password);
+    private void whetherPasswordCanBeChanged(String currentPassword) throws DataMismatchException {
+        if(checkIfPasswordEnteredMatchesCurrent(currentPassword) && checkIfPasswordsAreTheSameAndHaveRequiredLength()){
+            tryToChangePassword();
         }
     }
     
-    private boolean checkIfPasswordsAreTheSameAndHaveRequiredLength(String password, String repeatPassword) throws DataMismatchException {
-        if(isPasswordLengthSufficient(password) && whetherThePasswordsAreTheSame(password,repeatPassword)) {
+    private boolean checkIfPasswordsAreTheSameAndHaveRequiredLength() throws DataMismatchException {
+        if(isPasswordLengthSufficient(this.password) && whetherThePasswordsAreTheSame(this.password,this.confirmPassword)) {
             return true;
         }
         else {
@@ -49,9 +52,9 @@ public class PasswordManager {
         }
     }
 
-    private void tryToChangePassword(String password){
-        userRepository.changePassword(loggedInUser().getId(),passwordEncoder.encode(password));
-        setMessage("Your new password is : "+password);
+    private void tryToChangePassword(){
+        userRepository.changePassword(loggedInUser().getId(),passwordEncoder.encode(this.password));
+        setMessage("Your new password is : "+this.password);
     }
 
     private User loggedInUser(){
