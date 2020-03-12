@@ -12,31 +12,30 @@ public class Message implements Comparable<Message>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
     private String message;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="message_sender")
-    private User user;
+    private User author;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="recipient_of_the_message")
-    private User user2;
+    private User recipient;
     private LocalDateTime date;
-    public Message(){ }
+    public Message(){
+        this.date = LocalDateTime.now();
+    }
 
-    public Message(String title, String message, User user, User user2) {
-        this.title = title;
+    public Message(String message, User author, User recipient) {
         this.message = message;
-        this.user = user;
-        this.user2 = user2;
+        this.author = author;
+        this.recipient = recipient;
         this.date = LocalDateTime.now();
     }
 
     public Message(Message copyMessage) {
         this.id = copyMessage.id;
-        this.title = copyMessage.title;
         this.message = copyMessage.message;
-        this.user = copyMessage.user;
-        this.user2 = copyMessage.user2;
+        this.author = copyMessage.author;
+        this.recipient = copyMessage.recipient;
         this.date = LocalDateTime.now();
     }
     public Long getId() {
@@ -47,28 +46,28 @@ public class Message implements Comparable<Message>{
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public User getAuthor() {
+        return author;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
-    public User getUser2() {
-        return user2;
+    Long getAuthorId(){
+        return author.getId();
     }
 
-    public void setUser2(User user2) {
-        this.user2 = user2;
+    public User getRecipient() {
+        return recipient;
     }
 
-    public String getTitle() {
-        return title;
+    public void setRecipient(User recipient) {
+        this.recipient = recipient;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    Long getRecipientId(){
+        return recipient.getId();
     }
 
     public String getMessage() {
@@ -79,7 +78,7 @@ public class Message implements Comparable<Message>{
         this.message = message;
     }
 
-    public LocalDateTime getDate() {
+    LocalDateTime getDate() {
         return date;
     }
 
@@ -91,12 +90,11 @@ public class Message implements Comparable<Message>{
     @Override
     public String toString() {
         return "Message{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", sendMessage='" + message + '\'' +
-                ", user=" + user +
-                ", user2=" + user2 +
-                ", date=" + date +
+                "id =" + id +
+                ", sendMessage ='" + message + '\'' +
+                ", author id =" + getAuthorId() +
+                ", recipient id =" + getRecipientId() +
+                ", date =" + date +
                 '}';
     }
 }

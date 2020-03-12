@@ -1,6 +1,7 @@
 package com.BoostingWebsite.message;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -12,9 +13,9 @@ public class MessageRestController {
         this.jsonMessageHandler = jsonMessageHandler;
     }
 
-    @GetMapping("/sendMessage/singleConversation/Message")
-    private String shareJSONWithConversation() {
-        return jsonMessageHandler.createJsonFile().toJSONString();
+    @GetMapping("/message/list")
+    private String shareJSONWithConversation2(@RequestParam Long id) {
+        return jsonMessageHandler.createJsonFile2(id).toJSONString();
     }
 
 }

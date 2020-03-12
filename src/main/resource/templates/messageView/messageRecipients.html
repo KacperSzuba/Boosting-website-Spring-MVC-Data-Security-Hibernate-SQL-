@@ -4,7 +4,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
       lang="en">
     <head>
-        <title>Send message</title>
+        <title>Messages received</title>
         <link type="text/css" rel="stylesheet" th:href="@{/style/bootstrap.min.css}" />
         <link type="text/css" rel="stylesheet" th:href="@{/style/drop-down-nav.css}" />
     </head>
@@ -62,22 +62,18 @@
                 </div>
             </div>
         </nav>
-        <h1>Send message</h1>
-        <form th:action="@{/message/send}" th:object="${sendMessage}" method="post" >
-            <div class="form-group">
-                <select class="custom-select" th:field="*{user2.id}">
-                    <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"></option>
-                </select>
+        <h1>Message Recipients</h1>
+        <ul class="list-group">
+            <div th:each="message : ${recipients}">
+                <li th:if="${idOfActualUser != message.recipient.id }" class="list-group-item d-flex justify-content-between align-items-center">
+                    Username : <p th:text="${message.recipient.username}" ></p>
+                    <a class="btn btn-info btn-sm" th:href="@{/message/{id}(id = ${message.recipient.id})}" >More</a>
+                </li>
+                <li th:if="${idOfActualUser == message.recipient.id}" class="list-group-item d-flex justify-content-between align-items-center">
+                    Username : <p th:text="${message.author.username}" ></p>
+                    <a class="btn btn-info btn-sm" th:href="@{/message/{id}(id = ${message.author.id})}" >More</a>
+                </li>
             </div>
-            <div class="form-group">
-                <label class="col-form-label" for="title">Default input</label>
-                <input th:field="*{title}"  type="text" class="form-control" placeholder="title" id="title">
-            </div>
-            <div class="form-group">
-                <label class="col-form-label" for="message">Default input</label>
-                <input th:field="*{message}"  type="text" class="form-control" placeholder="message" id="message">
-            </div>
-            <input class="btn btn-secondary" type="submit" value="Submit"/>
-        </form>
+        </ul>
     </body>
 </html>

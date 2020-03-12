@@ -1,42 +1,49 @@
 package com.BoostingWebsite.message;
 
+import com.BoostingWebsite.account.user.ActualUser;
+import com.BoostingWebsite.account.user.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/message")
 public class MessageController {
 
-    private final MessageHandler messageHandler;
-
-    public MessageController(MessageHandler messageHandler) {
-        this.messageHandler = messageHandler;
+    private final ActualUser actualUser;
+    private final MessageRepository messageRepository;
+    private final UserRepository userRepository;
+    public MessageController(ActualUser actualUser, MessageRepository messageRepository, UserRepository userRepository) {
+        this.actualUser = actualUser;
+        this.messageRepository = messageRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping
-    public String messenger(Model model) {
-        model.addAttribute("users",messageHandler.listOfRecipients());
+    public String listOfRecipients(Model model){
+        model.addAttribute("idOfActualUser",actualUser.getActualUser().getId());
+        model.addAttribute("recipients",messageRepository.listOfRecipients());
+        return "messageView/messageRecipients";
+    }
+
+    @GetMapping("/{id}")
+    public String newSingleConversation(@PathVariable("id") final Long id, Model model){
         Message message = new Message();
         model.addAttribute("sendMessage",message);
-        return "messageView/sendMessage";
-    }
-
-    @PostMapping("/send")
-    public String sendMessage(@ModelAttribute("sendMessage") Message message){
-        messageHandler.sendMessage(message);
-        return "redirect:/message/singleConversation/"+messageHandler.getTemp();
-    }
-
-    @GetMapping("/retrieve")
-    public ModelAndView listOfConversations(){
-        return new ModelAndView("messageView/messagesReceived", "conversations",messageHandler.setOfSendRecipients());
-    }
-
-    @GetMapping("/singleConversation/{id}")
-    public String singleConversation(@PathVariable("id") final Long id) {
-        messageHandler.setIdOfConversation(id);
+        model.addAttribute("id",id);
+        messageRepository.list(id);
         return "messageView/singleConversation";
     }
+
+    @PostMapping("/{id}")
+    public String newSingleConvrestaion2(@PathVariable("id") final Long id, @ModelAttribute("message") Message message){
+        System.out.println(id);
+        Message message1 = new Message();
+        message1.setMessage(message.getMessage());
+        message1.setRecipient(userRepository.findById(id).get());
+        message1.setAuthor(actualUser.getActualUser());
+        messageRepository.save(message1);
+        return "redirect:/message/{id}";
+    }
+
 }
