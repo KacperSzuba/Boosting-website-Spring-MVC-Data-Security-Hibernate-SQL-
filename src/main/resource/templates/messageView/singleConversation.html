@@ -53,12 +53,8 @@
                             <a href="/account/showEmailChangePage">Change Email</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropbtn" href="/message" sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')">Messages</a>
-                        <div class="dropdown-content">
-                            <a href="/message">Send Message</a>
-                            <a href="/message/retrieve">Retrieve message</a>
-                        </div>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/message" sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')">Messages</a>
                     </li>
                 </ul>
                 <div sec:authorize="${isFullyAuthenticated()}">
