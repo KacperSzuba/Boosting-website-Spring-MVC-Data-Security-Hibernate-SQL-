@@ -37,12 +37,7 @@ public class MessageController {
 
     @PostMapping("/{id}")
     public String newSingleConvrestaion2(@PathVariable("id") final Long id, @ModelAttribute("message") Message message){
-        System.out.println(id);
-        Message message1 = new Message();
-        message1.setMessage(message.getMessage());
-        message1.setRecipient(userRepository.findById(id).get());
-        message1.setAuthor(actualUser.getActualUser());
-        messageRepository.save(message1);
+        messageRepository.save(new Message(message.getMessage(), actualUser.getActualUser(), userRepository.findById(id).get()));
         return "redirect:/message/{id}";
     }
 
