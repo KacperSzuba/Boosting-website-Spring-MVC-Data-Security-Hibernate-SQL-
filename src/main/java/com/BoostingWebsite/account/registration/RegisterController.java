@@ -6,16 +6,14 @@ import com.BoostingWebsite.account.user.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.UUID;
 
 @Controller
+@RequestMapping("/register")
 public class RegisterController {
     private final UserCreatorService userCreator;
     private final UserRepository userRepository;
@@ -31,14 +29,14 @@ public class RegisterController {
         this.emailConfirmationToken = emailConfirmationToken;
     }
 
-    @GetMapping("/register")
+    @GetMapping
     public String showRegisterPage(Model model){
         User user = new User();
         model.addAttribute("register",user);
         return "accountView/register";
     }
 
-    @PostMapping("/registerForm")
+    @PostMapping
     public String register(@Valid @ModelAttribute("register") User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("message",userCreator.getUserRegistrationInformation());
@@ -57,7 +55,7 @@ public class RegisterController {
         }
     }
 
-    @GetMapping("/register/confirm")
+    @GetMapping("/confirm")
     public String remind(@RequestParam("id")Long id, @RequestParam("token") String token){
         String confirmEmail = emailConfirmationToken.emailTokenConfirmation(id,token);
         if(confirmEmail !=null){

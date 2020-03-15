@@ -1,4 +1,4 @@
-package com.BoostingWebsite.account.password.forgot;
+package com.BoostingWebsite.account.password.remind;
 
 import com.BoostingWebsite.account.token.TokenValidator;
 import com.BoostingWebsite.account.token.UserTokenRepository;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.Collections;
 
 @Component
-public class PasswordReminderToken {
+class PasswordReminderToken {
     private final TokenValidator tokenValidator;
     private final UserTokenRepository userTokenRepository;
 

@@ -14,11 +14,11 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Service
-public class UserRepositoryUserDetailsService implements UserDetailsService {
+class UserRepositoryUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    public UserRepositoryUserDetailsService(UserRepository userRepository) {
+    UserRepositoryUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

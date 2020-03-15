@@ -12,12 +12,12 @@ import org.springframework.stereotype.Component;
 import java.util.Collections;
 
 @Component
-public class EmailConfirmationToken {
+class EmailConfirmationToken {
 
     private final TokenValidator tokenValidator;
     private final UserTokenRepository userTokenRepository;
 
-    public EmailConfirmationToken(TokenValidator tokenValidator, UserTokenRepository userTokenRepository) {
+    EmailConfirmationToken(TokenValidator tokenValidator, UserTokenRepository userTokenRepository) {
         this.tokenValidator = tokenValidator;
         this.userTokenRepository = userTokenRepository;
     }

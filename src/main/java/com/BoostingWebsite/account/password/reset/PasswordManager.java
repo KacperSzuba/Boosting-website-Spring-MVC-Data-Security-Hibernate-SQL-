@@ -20,7 +20,7 @@ class PasswordManager {
     private final UserRepository userRepository;
     private final ActualUser actualUser;
 
-    public PasswordManager(PasswordEncoder passwordEncoder, UserRepository userRepository, ActualUser actualUser) {
+    PasswordManager(PasswordEncoder passwordEncoder, UserRepository userRepository, ActualUser actualUser) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.actualUser = actualUser;

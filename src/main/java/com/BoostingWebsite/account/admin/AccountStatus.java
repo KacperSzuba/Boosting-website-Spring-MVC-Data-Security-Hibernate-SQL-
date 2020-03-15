@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ChangeAccountStatus {
+class AccountStatus {
 
     private final UserRepository userRepository;
     private final UserRoleRepository userRoleRepository;
 
-    public ChangeAccountStatus(UserRepository userRepository, UserRoleRepository userRoleRepository) {
+    AccountStatus(UserRepository userRepository, UserRoleRepository userRoleRepository) {
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
     }
@@ -42,7 +42,7 @@ public class ChangeAccountStatus {
         userRepository.save(user);
     }
 
-    public RoleName getCurrentUserRole(User user){
+    RoleName getCurrentUserRole(User user){
        UserRole userRole = userRepository.getUserRole(user.getId());
        return userRole.getRoleName();
     }

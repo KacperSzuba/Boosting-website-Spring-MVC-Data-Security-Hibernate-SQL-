@@ -18,12 +18,12 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final ChangeAccountStatus changeAccountStatus;
+    private final AccountStatus accountStatus;
     private final UserRepository userRepository;
     private final OrderBoostRepository orderBoostRepository;
 
-    public AdminController(ChangeAccountStatus changeAccountStatus, UserRepository userRepository, OrderBoostRepository orderBoostRepository) {
-        this.changeAccountStatus = changeAccountStatus;
+    public AdminController(AccountStatus accountStatus, UserRepository userRepository, OrderBoostRepository orderBoostRepository) {
+        this.accountStatus = accountStatus;
         this.userRepository = userRepository;
         this.orderBoostRepository = orderBoostRepository;
     }
@@ -33,13 +33,13 @@ public class AdminController {
         return "adminView/admin";
     }
 
-    @GetMapping("/listOfUsers")
+    @GetMapping("/users")
     public ModelAndView showUserStatementPage(){
         List<User> users = (List<User>) userRepository.findAll();
         return new ModelAndView("adminView/admin_ListOfUsers","users",users);
     }
 
-    @GetMapping("/listOfOrders")
+    @GetMapping("/orders")
     public ModelAndView showListOfOrders(){
         List<OrderBoost> orderBoostList = (List<OrderBoost>) orderBoostRepository.findAll();
         return new ModelAndView("adminView/admin_ListOfOrders","orders",orderBoostList);
@@ -47,32 +47,32 @@ public class AdminController {
 
     @GetMapping("/ban/{id}")
     public String ban(@PathVariable("id") final  Long id){
-        changeAccountStatus.banUser(id);
+        accountStatus.banUser(id);
         return "redirect:/admin/userDetails/{id}";
     }
 
     @GetMapping("/un-ban/{id}")
     public String unban(@PathVariable("id") final Long id){
-        changeAccountStatus.unBanUser(id);
+        accountStatus.unBanUser(id);
         return "redirect:/admin/userDetails/{id}";
     }
 
     @GetMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable("id") final Long id){
-        changeAccountStatus.deleteUser(id);
+        accountStatus.deleteUser(id);
         return "redirect:/admin/listOfUsers";
     }
 
     @GetMapping("/setAsBooster/{id}")
         public String setAsBooster(@PathVariable("id") final Long id){
         //Develop more optimized versions
-        changeAccountStatus.changeTheRoleName(id,RoleName.ROLE_BOOSTER);
+        accountStatus.changeTheRoleName(id,RoleName.ROLE_BOOSTER);
         return "redirect:/admin/userDetails/{id}";
     }
 
     @GetMapping("/setAsUser/{id}")
     public String setAsUser(@PathVariable("id") final Long id){
-        changeAccountStatus.changeTheRoleName(id,RoleName.ROLE_USER);
+        accountStatus.changeTheRoleName(id,RoleName.ROLE_USER);
         return "redirect:/admin/userDetails/{id}";
     }
 
@@ -80,7 +80,7 @@ public class AdminController {
     public String showUserDetailsPage(@PathVariable("id") final Long id, Model model){
         User user = userRepository.findById(id).get();
         model.addAttribute("user",user);
-        model.addAttribute("currentRole",changeAccountStatus.getCurrentUserRole(user));
+        model.addAttribute("currentRole", accountStatus.getCurrentUserRole(user));
         model.addAttribute("expectedRoleIsROLE_USER",RoleName.ROLE_USER);
         model.addAttribute("expectedRoleIsROLE_BOOSTER",RoleName.ROLE_BOOSTER);
         return "adminView/admin_UserDetails";

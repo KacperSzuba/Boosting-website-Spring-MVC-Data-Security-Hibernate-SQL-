@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/booster")
+@RequestMapping("/boost")
 class BoosterController {
 
     private final OrderBoostRepository orderBoostRepository;
@@ -29,13 +29,13 @@ class BoosterController {
         return "boosterView/booster";
     }
 
-    @GetMapping("/listOfFreeOrders")
+    @GetMapping("/orders")
     public ModelAndView listOfFreeOrders(){
         List<OrderBoost> orders = boosterService.findFreeOrderBoost();
         return new ModelAndView("boosterView/listOfFreeOrders","orders",orders);
     }
 
-    @GetMapping("/orderDetails/{id}")
+    @GetMapping("/order/{id}")
     public String showOrderDetailsPage(@PathVariable("id")Long id, Model model){
         OrderBoost orderBoost = orderBoostRepository.findById(id).get();
         model.addAttribute("boostDetails",orderBoost);
@@ -43,26 +43,26 @@ class BoosterController {
         return "boosterView/booster_OrderDetails";
     }
 
-    @GetMapping("/orderDetails/{id}/addBoost")
+    @GetMapping("/order/{id}/add")
     public String addBoost(@PathVariable("id")Long id, Model model){
         boosterService.addBoost(id);
         model.addAttribute("addingBoostMessage",boosterService.getMessage());
         return "boosterView/booster";
     }
 
-    @GetMapping("/currentBoost")
+    @GetMapping("/current")
     public ModelAndView currentBoost(){
         OrderBoost currentOrderBoost = boosterService.findCurrentBoost();
         return new ModelAndView("boosterView/currentBoost","currentOrderBoost",currentOrderBoost);
     }
 
-    @GetMapping("/doneOrderBoosts")
+    @GetMapping("/completed")
     public ModelAndView listOfDoneOrderBoosts(){
         List<OrderBoost> listOfDoneOrderBoosts = boosterService.listOfDoneOrderBoosts();
         return new ModelAndView("boosterView/doneOrderBoosts","doneOrderBoosts",listOfDoneOrderBoosts);
     }
 
-    @GetMapping("/currentBoost/finishBoost")
+    @GetMapping("/current/finish")
     public String finishBoost(Model model) throws IOException {
         boosterService.finishBoost();
         model.addAttribute("finishingBoostMessage",boosterService.getMessage());

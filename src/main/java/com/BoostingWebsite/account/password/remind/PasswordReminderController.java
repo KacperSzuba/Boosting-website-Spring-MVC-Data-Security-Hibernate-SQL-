@@ -1,4 +1,4 @@
-package com.BoostingWebsite.account.password.forgot;
+package com.BoostingWebsite.account.password.remind;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -27,16 +27,16 @@
                     <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
                         <a class="nav-link dropbtn" href="/admin">Admin resources</a>
                         <div class="dropdown-content">
-                            <a href="/admin/listOfOrders">List of orders</a>
-                            <a href="/admin/listOfUsers">List of users</a>
+                            <a href="/admin/orders">List of orders</a>
+                            <a href="/admin/users">List of users</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropbtn" href="/booster" sec:authorize="hasRole('BOOSTER')">Booster resources</a>
+                        <a class="nav-link dropbtn" href="/boost" sec:authorize="hasRole('BOOSTER')">Booster resources</a>
                         <div class="dropdown-content">
-                            <a href="/booster/listOfFreeOrders">List of free orders</a>
-                            <a href="/booster/currentBoost">Current boost</a>
-                            <a href="/booster/doneOrderBoosts">Done order boosts</a>
+                            <a href="/boost/orders">List of free orders</a>
+                            <a href="/boost/current">Current boost</a>
+                            <a href="/boost/completed">Done order boosts</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">

@@ -6,12 +6,12 @@ import com.BoostingWebsite.email.EmailService;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EmailConfirmation {
+class EmailConfirmation {
 
     private final EmailService emailService;
     private final TokenRecorder tokenRecorderComponent;
 
-    public EmailConfirmation(EmailService emailService, TokenRecorder tokenRecorderComponent) {
+    EmailConfirmation(EmailService emailService, TokenRecorder tokenRecorderComponent) {
         this.emailService = emailService;
         this.tokenRecorderComponent = tokenRecorderComponent;
     }

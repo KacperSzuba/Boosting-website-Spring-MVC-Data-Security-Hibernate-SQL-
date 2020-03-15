@@ -14,7 +14,7 @@ class EmailManager {
     private final UserRepository userRepository;
     private final ActualUser actualUser;
 
-    public EmailManager(UserRepository userRepository, ActualUser actualUser) {
+    EmailManager(UserRepository userRepository, ActualUser actualUser) {
         this.userRepository = userRepository;
         this.actualUser = actualUser;
     }

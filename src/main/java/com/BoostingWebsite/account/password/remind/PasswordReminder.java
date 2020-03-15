@@ -1,4 +1,4 @@
-package com.BoostingWebsite.account.password.forgot;
+package com.BoostingWebsite.account.password.remind;
 
 import com.BoostingWebsite.account.token.TokenRecorder;
 import com.BoostingWebsite.account.token.UserToken;
@@ -33,7 +33,7 @@ class PasswordReminder {
     private final PasswordEncoder encoder;
     private final TokenRecorder tokenRecorderClass;
 
-    public PasswordReminder(UserRepository userRepository, UserTokenRepository userTokenRepository, HttpServletRequest request, EmailService emailService,
+    PasswordReminder(UserRepository userRepository, UserTokenRepository userTokenRepository, HttpServletRequest request, EmailService emailService,
                             PasswordEncoder encoder, TokenRecorder tokenRecorderClass) {
         this.userRepository = userRepository;
         this.userTokenRepository = userTokenRepository;
