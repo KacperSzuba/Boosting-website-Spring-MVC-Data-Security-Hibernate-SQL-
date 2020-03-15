@@ -8,23 +8,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/account")
-public class EmailManagerController {
+class EmailManagerController {
 
     private final EmailManager emailChange;
 
-    public EmailManagerController(EmailManager emailChange) {
+    EmailManagerController(EmailManager emailChange) {
         this.emailChange = emailChange;
     }
 
-    @GetMapping("/showEmailChangePage")
-    public String showEmailChangePage(){
+    @GetMapping("/change/email")
+    public String emailChangePage(){
         return "accountView/user_ChangeEmail";
     }
 
-    @GetMapping("/changeEmailForm")
+    @GetMapping("/change/email/form")
     public String changeEmail(@RequestParam("currentEmail")String currentEmail, @RequestParam ("email") String email,
-                              @RequestParam("repeatEmail")String repeatEmail, Model model){
-        emailChange.changeEmail(currentEmail, email, repeatEmail);
+                              @RequestParam("confirmEmail")String confirmEmail, Model model){
+        emailChange.changeEmail(currentEmail, email, confirmEmail);
         model.addAttribute("newEmail",emailChange.getMessage());
         return "accountView/user_ChangeEmail";
     }

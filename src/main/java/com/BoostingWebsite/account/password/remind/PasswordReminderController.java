@@ -19,7 +19,7 @@ public class PasswordReminderController {
     }
 
     @GetMapping("/remindPasswordPage")
-    public String showRemindPasswordPage(){
+    public String remindPasswordPage(){
         return "accountView/user_RemindPassword";
     }
 

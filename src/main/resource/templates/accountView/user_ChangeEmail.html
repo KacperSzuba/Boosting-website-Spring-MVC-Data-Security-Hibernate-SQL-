@@ -44,7 +44,7 @@
                         <a class="nav-link dropbtn" href="/account" sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')">Account</a>
                         <div class="dropdown-content">
                             <a href="/account/showChangePasswordPage">Change Password</a>
-                            <a href="/account/showEmailChangePage">Change Email</a>
+                            <a href="/account/change/email">Change Email</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -59,7 +59,7 @@
             </div>
         </nav>
         <h1>Change Email</h1>
-        <form th:action="@{/account/changeEmailForm}" method="get">
+        <form th:action="@{/account/change/email/form}" method="get">
             <div class="form-group">
                 <label class="col-form-label" for="currentEmail">Current email</label>
                 <input name="currentEmail"  type="email" class="form-control" placeholder="Current email" id="currentEmail">
