@@ -1,4 +1,4 @@
-package com.BoostingWebsite.account.password.forgot;
+package com.BoostingWebsite.account.token;
 
 import com.BoostingWebsite.account.user.User;
 
@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "password_reset_token")
-public class PasswordResetToken {
+public class UserToken {
     private static final int EXPIRATION = 60 * 24;
 
     @Id
@@ -22,15 +22,15 @@ public class PasswordResetToken {
 
     private Date expiryDate;
 
-    public PasswordResetToken() {
+    public UserToken() {
     }
 
-    public PasswordResetToken(final String token) {
+    public UserToken(final String token) {
         this.token = token;
         this.expiryDate = calculateExpiryDate(EXPIRATION);
     }
 
-    PasswordResetToken(final String token, final User user) {
+    UserToken(final String token, final User user) {
         this.token = token;
         this.user = user;
         this.expiryDate = calculateExpiryDate(EXPIRATION);
@@ -40,7 +40,7 @@ public class PasswordResetToken {
         return id;
     }
 
-    String getToken() {
+    public String getToken() {
         return token;
     }
 
@@ -99,7 +99,7 @@ public class PasswordResetToken {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final PasswordResetToken other = (PasswordResetToken) obj;
+        final UserToken other = (UserToken) obj;
         if (expiryDate == null) {
             if (other.expiryDate != null) {
                 return false;

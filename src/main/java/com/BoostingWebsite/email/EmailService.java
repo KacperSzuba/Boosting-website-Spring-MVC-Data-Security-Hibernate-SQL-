@@ -24,6 +24,7 @@ public class EmailService {
 
     public void constructResetTokenEmail(String contextPath, String token, User user) {
         String url = contextPath + "/account/remindPassword?id=" + user.getId() + "&token=" + token;
-        sendEmail(user.getEmail(),"Reset Password", " \r\n" + url);
+        sendEmail(user.getEmail(), "Reset Password", " \r\n" + url);
     }
+
 }

@@ -62,8 +62,13 @@
             <h4 class="alert-heading">Warning!</h4>
             <p class="mb-0" th:text="${token}"></p>
         </div>
+        <div th:if="${confirmEmailMessage != null}" class="alert alert-dismissible alert-primary">
+            <p th:text="${confirmEmailMessage}"></p>
+        </div>
+        <div class="alert alert-dismissible alert-primary" sec:authorize="hasAuthority('CONFIRMATION_EMAIL_PRIVILEGE')">
+            <p>Your account has been activated</p>
+        </div>
         <h1 class="text-center">Login to your account</h1>
-
         <form th:action="@{/authenticateTheUser}" method="POST">
             <div class="form-group">
                 <label for="exampleInputUsername">Login</label>

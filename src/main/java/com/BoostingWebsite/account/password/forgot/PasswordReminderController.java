@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PasswordReminderController {
 
     private final PasswordReminder passwordReminder;
-
-    public PasswordReminderController(PasswordReminder passwordReminder) {
+    private final PasswordReminderToken passwordReminderToken;
+    public PasswordReminderController(PasswordReminder passwordReminder, PasswordReminderToken passwordReminderToken) {
         this.passwordReminder = passwordReminder;
+        this.passwordReminderToken = passwordReminderToken;
     }
 
     @GetMapping("/remindPasswordPage")
@@ -30,7 +31,7 @@ public class PasswordReminderController {
 
     @GetMapping("/remindPassword")
     public String remind(@RequestParam("id")Long id, @RequestParam("token") String token, Model model){
-        String validatePasswordResetToken = passwordReminder.validatePasswordResetToken(id,token);
+        String validatePasswordResetToken = passwordReminderToken.validateResetPasswordToken(id, token);
         if(validatePasswordResetToken != null){
             model.addAttribute("token","Your token is "+validatePasswordResetToken);
             return "accountView/login";
@@ -44,8 +45,8 @@ public class PasswordReminderController {
     }
 
     @PostMapping("/resetPassword")
-    public String resetPassword(@RequestParam("password") String password,@RequestParam("repeatPassword") String repeatPassword, Model model) {
-        passwordReminder.resetPassword(password,repeatPassword);
+    public String resetPassword(@RequestParam("password") String password, @RequestParam("repeatPassword") String repeatPassword, Model model) {
+        passwordReminder.resetPassword(password, repeatPassword);
         if(passwordReminder.getPasswordRemindMessage() != null){
             model.addAttribute("message",passwordReminder.getPasswordRemindMessage());
             return "accountView/user_updatePassword";

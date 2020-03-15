@@ -52,7 +52,7 @@ class UserCreatorService {
             List<UserRole> roles = new ArrayList<>();
             roles.add(userRole);
             String password = passwordEncoder.encode(this.user.getPassword());
-            userRepository.save(new User(this.user.getUsername(), password, true, this.user.getEmail(), LocalDateTime.now(), roles));
+            userRepository.save(new User(this.user.getUsername(), password, false, this.user.getEmail(), LocalDateTime.now(), roles));
         }
     }
 

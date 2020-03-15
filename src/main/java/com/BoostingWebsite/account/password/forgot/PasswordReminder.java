@@ -1,21 +1,20 @@
 package com.BoostingWebsite.account.password.forgot;
 
+import com.BoostingWebsite.account.token.TokenRecorder;
+import com.BoostingWebsite.account.token.UserToken;
+import com.BoostingWebsite.account.token.UserTokenRepository;
 import com.BoostingWebsite.account.user.User;
 import com.BoostingWebsite.account.user.UserRepository;
 import com.BoostingWebsite.email.EmailService;
 import com.BoostingWebsite.exceptions.DataMismatchException;
 import com.BoostingWebsite.validator.EmailValidator;
-
-import java.util.*;
-
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
+import java.util.UUID;
 
 import static com.BoostingWebsite.account.password.PasswordValidator.isPasswordLengthSufficient;
 import static com.BoostingWebsite.account.password.PasswordValidator.whetherThePasswordsAreTheSame;
@@ -28,18 +27,20 @@ class PasswordReminder {
     private String confirmPassword;
 
     private final UserRepository userRepository;
-    private final PasswordResetTokenRepository passwordResetTokenRepository;
+    private final UserTokenRepository userTokenRepository;
     private final HttpServletRequest request;
     private final EmailService emailService;
     private final PasswordEncoder encoder;
+    private final TokenRecorder tokenRecorderClass;
 
-    public PasswordReminder(UserRepository userRepository, PasswordResetTokenRepository passwordResetTokenRepository, HttpServletRequest request, EmailService emailService,
-                            PasswordEncoder encoder) {
+    public PasswordReminder(UserRepository userRepository, UserTokenRepository userTokenRepository, HttpServletRequest request, EmailService emailService,
+                            PasswordEncoder encoder, TokenRecorder tokenRecorderClass) {
         this.userRepository = userRepository;
-        this.passwordResetTokenRepository = passwordResetTokenRepository;
+        this.userTokenRepository = userTokenRepository;
         this.request = request;
         this.emailService = emailService;
         this.encoder = encoder;
+        this.tokenRecorderClass = tokenRecorderClass;
     }
 
     void resetPassword(String password, String confirmPassword) {
@@ -72,55 +73,14 @@ class PasswordReminder {
 
     void remindPassword(String email) {
         this.email = email;
-        System.out.println(getAppUrl());
         if (whetherEmailIsInDatabase()) {
-            saveOrUpdateToken();
-
+            tokenRecorderClass.saveOrUpdateToken(getToken(),user().get());
             User user = user().get();
-            PasswordResetToken passwordResetToken = passwordResetTokenRepository.findByUser(user).get();
-            String token = passwordResetToken.getToken();
+            UserToken userToken = userTokenRepository.findByUser(user).get();
+            String token = userToken.getToken();
             emailService.constructResetTokenEmail(getAppUrl(),token,user);
         }
     }
-
-    String validatePasswordResetToken(long id, String token) {
-        PasswordResetToken passToken = passwordResetTokenRepository.findByToken(token);
-        if ((passToken == null) || (passToken.getUser().getId() != id)) {
-            return "invalid";
-        }
-
-        Calendar cal = Calendar.getInstance();
-        if ((passToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
-            return "expired";
-        }
-
-        User user = passToken.getUser();
-        Authentication auth = new UsernamePasswordAuthenticationToken(user, null, Collections.singletonList(
-                new SimpleGrantedAuthority("CHANGE_PASSWORD_PRIVILEGE")));
-        SecurityContextHolder.getContext().setAuthentication(auth);
-        return null;
-    }
-
-    private void saveOrUpdateToken() {
-        if (checkIfUserHasTokenGenerated()) {
-            saveToken();
-        }
-        else {
-            updateToken();
-        }
-    }
-
-    private void updateToken() {
-        this.passwordResetTokenRepository.changeToken(getToken(), user().get());
-    }
-
-    private void saveToken() {
-        this.passwordResetTokenRepository.save(new PasswordResetToken(getToken(), user().get()));
-    }
-
-    private boolean checkIfUserHasTokenGenerated() {
-        return this.passwordResetTokenRepository.findByUser(user().get()).isEmpty();
-}
 
     private boolean whetherEmailIsInDatabase() {
         return this.whetherEmailIsValid() && user().isPresent();
