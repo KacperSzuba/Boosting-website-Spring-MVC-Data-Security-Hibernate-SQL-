@@ -18,33 +18,33 @@ public class PasswordReminderController {
         this.passwordReminderToken = passwordReminderToken;
     }
 
-    @GetMapping("/remindPasswordPage")
+    @GetMapping("/remind/password")
     public String remindPasswordPage(){
         return "accountView/user_RemindPassword";
     }
 
-    @GetMapping("/remindPasswordForm")
+    @GetMapping("/remind/password/form")
     public String remindPassword(@RequestParam("email") String email){
         passwordReminder.remindPassword(email);
         return "accountView/user_RemindPassword";
     }
 
-    @GetMapping("/remindPassword")
+    @GetMapping("/remind/password/token")
     public String remind(@RequestParam("id")Long id, @RequestParam("token") String token, Model model){
         String validatePasswordResetToken = passwordReminderToken.validateResetPasswordToken(id, token);
         if(validatePasswordResetToken != null){
             model.addAttribute("token","Your token is "+validatePasswordResetToken);
             return "accountView/login";
         }
-        return "redirect:/account/updatePassword";
+        return "redirect:/account/reset/password";
     }
 
-    @GetMapping("/updatePassword")
+    @GetMapping("/reset/password")
     public String updatePassword(){
         return "accountView/user_updatePassword";
     }
 
-    @PostMapping("/resetPassword")
+    @PostMapping("/reset/password")
     public String resetPassword(@RequestParam("password") String password, @RequestParam("repeatPassword") String repeatPassword, Model model) {
         passwordReminder.resetPassword(password, repeatPassword);
         if(passwordReminder.getPasswordRemindMessage() != null){

@@ -16,12 +16,12 @@ public class PasswordManagerController {
         this.passwordManager = passwordManager;
     }
 
-    @GetMapping("/showChangePasswordPage")
+    @GetMapping("/change/password")
     public String showChangePasswordPage(){
         return "accountView/user_ChangePassword";
     }
 
-    @GetMapping("/changePasswordForm")
+    @GetMapping("/change/password/form")
     public String changePassword(@RequestParam("currentPassword")String currentPassword, @RequestParam ("password") String password,
                                  @RequestParam("repeatPassword")String repeatPassword, Model model){
         passwordManager.changePassword(currentPassword, password, repeatPassword);

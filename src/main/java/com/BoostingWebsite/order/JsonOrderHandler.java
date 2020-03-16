@@ -15,7 +15,7 @@ public class JsonOrderHandler {
         this.tierImageRepository = tierImageRepository;
     }
 
-    public JSONArray createJsonFile() {
+    JSONArray createJsonFile() {
         JSONArray jsonArray = new JSONArray();
         for (TierImage tierImage : tierImageRepository.findAll()) {
             JSONObject record = new JSONObject();

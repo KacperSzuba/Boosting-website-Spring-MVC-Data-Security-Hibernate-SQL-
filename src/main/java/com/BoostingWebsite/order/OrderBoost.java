@@ -48,9 +48,9 @@ public class OrderBoost {
     @JoinColumn(name="booster_id")
     private User booster;
 
-    public OrderBoost() {}
+    OrderBoost() {}
 
-    public OrderBoost(Tier currentTier, Integer currentDivision, Tier destinationTier,
+     OrderBoost(Tier currentTier, Integer currentDivision, Tier destinationTier,
                       Integer destinationDivision, String summonerID, String lolUsername,
                       String lolPassword, Region region, String noteToBoosters, LocalDateTime date,
                       boolean whetherPaid, boolean whetherDone, User user,User booster) {
@@ -82,7 +82,7 @@ public class OrderBoost {
         return currentTier;
     }
 
-    public void setCurrentTier(Tier currentTier) {
+    void setCurrentTier(Tier currentTier) {
         this.currentTier = currentTier;
     }
 
@@ -90,7 +90,7 @@ public class OrderBoost {
         return currentDivision;
     }
 
-    public void setCurrentDivision(Integer currentDivision) {
+    void setCurrentDivision(Integer currentDivision) {
         this.currentDivision = currentDivision;
     }
 
@@ -98,7 +98,7 @@ public class OrderBoost {
         return destinationTier;
     }
 
-    public void setDestinationTier(Tier destinationTier) {
+    void setDestinationTier(Tier destinationTier) {
         this.destinationTier = destinationTier;
     }
 
@@ -106,7 +106,7 @@ public class OrderBoost {
         return destinationDivision;
     }
 
-    public void setDestinationDivision(Integer destinationDivision) {
+    void setDestinationDivision(Integer destinationDivision) {
         this.destinationDivision = destinationDivision;
     }
 
@@ -154,7 +154,7 @@ public class OrderBoost {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    void setDate(LocalDateTime date) {
         this.date = date;
     }
 
@@ -170,7 +170,7 @@ public class OrderBoost {
         this.whetherDone = whetherDone;
     }
 
-    public void setWhetherPaid(boolean whetherPaid) {
+    void setWhetherPaid(boolean whetherPaid) {
         this.whetherPaid = whetherPaid;
     }
 

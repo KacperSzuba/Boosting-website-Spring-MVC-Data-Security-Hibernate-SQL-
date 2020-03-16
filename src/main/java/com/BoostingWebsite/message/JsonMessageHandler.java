@@ -5,10 +5,10 @@ import org.json.simple.JSONObject;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JsonMessageHandler {
+class JsonMessageHandler {
 
     private final MessageRepository messageRepository;
-    public JsonMessageHandler(MessageRepository messageRepository) {
+    JsonMessageHandler(MessageRepository messageRepository) {
         this.messageRepository = messageRepository;
     }
 

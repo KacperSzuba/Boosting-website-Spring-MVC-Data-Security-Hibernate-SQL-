@@ -41,9 +41,9 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropbtn" href="/account" sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')">Account</a>
+                        <a class="nav-link dropbtn" href="#" sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')">Account</a>
                         <div class="dropdown-content">
-                            <a href="/account/showChangePasswordPage">Change Password</a>
+                            <a href="/account/change/password">Change Password</a>
                             <a href="/account/change/email">Change Email</a>
                         </div>
                     </li>
@@ -81,6 +81,6 @@
             <input class="btn btn-primary" type="submit" value="Login" />
         </form>
         <p>Don't have an account yet? <a href="/register">Click here</a> to create one and enjoy our Loyalty Program!</p>
-        <p>Do not you remember the password? <a href="/account/remindPasswordPage">Click here</a> to remember them.</p>
+        <p>Do not you remember the password? <a href="/account/remind/password">Click here</a> to remember them.</p>
     </body>
 </html>

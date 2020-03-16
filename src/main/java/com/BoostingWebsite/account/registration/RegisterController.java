@@ -30,7 +30,7 @@ public class RegisterController {
     }
 
     @GetMapping
-    public String showRegisterPage(Model model){
+    public String registerPage(Model model){
         User user = new User();
         model.addAttribute("register",user);
         return "accountView/register";
@@ -56,7 +56,7 @@ public class RegisterController {
     }
 
     @GetMapping("/confirm")
-    public String remind(@RequestParam("id")Long id, @RequestParam("token") String token){
+    public String confirmEmail(@RequestParam("id")Long id, @RequestParam("token") String token){
         String confirmEmail = emailConfirmationToken.emailTokenConfirmation(id,token);
         if(confirmEmail !=null){
             return "redirect:/login";
