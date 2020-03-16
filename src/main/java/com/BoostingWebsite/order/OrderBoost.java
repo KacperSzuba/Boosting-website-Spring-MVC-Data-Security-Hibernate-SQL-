@@ -74,10 +74,6 @@ public class OrderBoost {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Tier getCurrentTier() {
         return currentTier;
     }

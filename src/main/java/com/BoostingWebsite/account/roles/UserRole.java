@@ -25,10 +25,6 @@ public class UserRole {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public RoleName getRoleName() {
         return roleName;
     }

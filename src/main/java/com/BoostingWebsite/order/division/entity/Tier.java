@@ -32,10 +32,6 @@ public class Tier {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public com.BoostingWebsite.order.division.Tier getTier() {
         return tier;
     }

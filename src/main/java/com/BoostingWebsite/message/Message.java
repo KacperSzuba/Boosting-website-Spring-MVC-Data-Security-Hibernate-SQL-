@@ -42,10 +42,6 @@ public class Message implements Comparable<Message>{
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public User getAuthor() {
         return author;
     }
