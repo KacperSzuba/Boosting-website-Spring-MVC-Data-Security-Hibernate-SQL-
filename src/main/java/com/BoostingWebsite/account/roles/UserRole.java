@@ -1,9 +1,12 @@
 package com.BoostingWebsite.account.roles;
 
+import org.hibernate.annotations.Immutable;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "user_roles")
+@Immutable
 public class UserRole {
 
     @Id
@@ -29,7 +32,4 @@ public class UserRole {
         return roleName;
     }
 
-    public void setRoleName(RoleName roleName) {
-        this.roleName = roleName;
-    }
 }

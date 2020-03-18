@@ -1,11 +1,13 @@
 package com.BoostingWebsite.message;
 
 import com.BoostingWebsite.account.user.User;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@DynamicUpdate
 @Table(name = "messages")
 public class Message implements Comparable<Message>{
 
