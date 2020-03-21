@@ -58,7 +58,7 @@ class UserCreatorService {
             roles.add(userRole);
             String password = passwordEncoder.encode(this.user.getPassword());
             UserGroup userGroup = userGroupRepository.findByUserGroups(UserGroups.USERS);
-            userRepository.save(new User(this.user.getUsername(), password, false, this.user.getEmail(), LocalDateTime.now(), roles,userGroup));
+            userRepository.save(new User(this.user.getUsername(), password, false, this.user.getEmail(), roles,userGroup));
         }
     }
 

@@ -1,5 +1,6 @@
 package com.BoostingWebsite.account.user;
 
+import com.BoostingWebsite.account.login.LoginHistory;
 import com.BoostingWebsite.account.roles.UserRole;
 import com.BoostingWebsite.account.user.group.UserGroup;
 import org.hibernate.annotations.Type;
@@ -8,7 +9,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -28,7 +28,10 @@ public class User{
     @NotEmpty(message = "Email cannot be empty")
     @Email(message = "Invalid email")
     private String email;
-    private LocalDateTime date;
+
+    @OneToMany
+    private List<LoginHistory> loginHistory;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private List<UserRole> roles;
 
@@ -38,12 +41,11 @@ public class User{
 
     public User(){}
 
-    public User(String username, String password, boolean enabled,String email,LocalDateTime date,List<UserRole> roles,UserGroup userGroup) {
+    public User(String username, String password, boolean enabled,String email ,List<UserRole> roles,UserGroup userGroup) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
         this.email = email;
-        this.date = date;
         this.roles = roles;
         this.userGroup = userGroup;
     }
@@ -100,7 +102,9 @@ public class User{
         this.userGroup = userGroup;
     }
 
-
+    public List<LoginHistory> getLoginHistory() {
+        return loginHistory;
+    }
 }
 
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.BoostingWebsite.account.user.User;
 import com.BoostingWebsite.account.user.UserRepository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -17,9 +18,11 @@ import java.util.stream.Collectors;
 class UserRepositoryUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final LoginHistoryRepository loginHistoryRepository;
 
-    UserRepositoryUserDetailsService(UserRepository userRepository) {
+    UserRepositoryUserDetailsService(UserRepository userRepository, LoginHistoryRepository loginHistoryRepository) {
         this.userRepository = userRepository;
+        this.loginHistoryRepository = loginHistoryRepository;
     }
 
     @Override
@@ -30,6 +33,7 @@ class UserRepositoryUserDetailsService implements UserDetailsService {
                         .stream()
                         .map(userRole -> new SimpleGrantedAuthority(userRole.getRoleName().toString()))
                         .collect(Collectors.toCollection(ArrayList::new));
+                loginHistoryRepository.save(new LoginHistory(LocalDateTime.now(),user));
             return new org.springframework.security.core.userdetails.
                     User(username,user.getPassword(),user.isEnabled(),true,
                     true,true,authorities);

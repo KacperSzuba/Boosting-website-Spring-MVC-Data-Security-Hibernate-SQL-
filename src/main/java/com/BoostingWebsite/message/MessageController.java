@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
 @Controller
 @RequestMapping("/message")
 public class MessageController {
@@ -22,7 +23,7 @@ public class MessageController {
     @GetMapping
     public String listOfRecipients(Model model){
         model.addAttribute("idOfActualUser",actualUser.getActualUser().getId());
-        model.addAttribute("recipients",messageRepository.listOfRecipients());
+        model.addAttribute("recipients",messageRepository.listOfRecipients(actualUser.getActualUser().getId()));
         return "messageView/messageRecipients";
     }
 
@@ -35,10 +36,12 @@ public class MessageController {
         return "messageView/singleConversation";
     }
 
+
     @PostMapping("/{id}")
     public String newSingleConvrestaion2(@PathVariable("id") final Long id, @ModelAttribute("sendMessage") Message message){
         messageRepository.save(new Message(message.getMessage(), actualUser.getActualUser(), userRepository.findById(id).get()));
         return "redirect:/message/{id}";
     }
+
 
 }
