@@ -2,7 +2,6 @@ package com.BoostingWebsite.account.user;
 
 import com.BoostingWebsite.account.login.LoginHistory;
 import com.BoostingWebsite.account.roles.UserRole;
-import com.BoostingWebsite.account.user.group.UserGroup;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -35,19 +34,14 @@ public class User{
     @ManyToMany(fetch = FetchType.EAGER)
     private List<UserRole> roles;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_group")
-    private UserGroup userGroup;
-
     public User(){}
 
-    public User(String username, String password, boolean enabled,String email ,List<UserRole> roles,UserGroup userGroup) {
+    public User(String username, String password, boolean enabled,String email ,List<UserRole> roles) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
         this.email = email;
         this.roles = roles;
-        this.userGroup = userGroup;
     }
 
     public Long getId() {
@@ -92,14 +86,6 @@ public class User{
 
     public void setRoles(List<UserRole> roles) {
         this.roles = roles;
-    }
-
-    public UserGroup getUserGroup() {
-        return userGroup;
-    }
-
-    public void setUserGroup(UserGroup userGroup) {
-        this.userGroup = userGroup;
     }
 
     public List<LoginHistory> getLoginHistory() {
