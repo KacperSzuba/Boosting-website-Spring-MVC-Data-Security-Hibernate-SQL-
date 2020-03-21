@@ -24,6 +24,7 @@ public class OrderBoost {
     private Tier destinationTier;
     @Column(name = "destination_division")
     private Integer destinationDivision;
+
     @Column(name = "summoner_id")
     private String summonerID;
     @Column(name = "lol_username")
@@ -32,6 +33,7 @@ public class OrderBoost {
     private String lolPassword;
     @Enumerated(EnumType.STRING)
     private Region region;
+
     @Column(name = "note_to_boosters")
     private String noteToBoosters;
     private LocalDateTime date;

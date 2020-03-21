@@ -4,7 +4,15 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
       lang="en">
     <head>
-        <title>Order page</title>
+        <title>Order division</title>
+        <style>
+            .center {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 10%;
+            }
+        </style>
         <link type="text/css" rel="stylesheet" th:href="@{/style/bootstrap.min.css}" />
         <link type="text/css" rel="stylesheet" th:href="@{/style/drop-down-nav.css}" />
     </head>
@@ -58,26 +66,28 @@
                 </div>
             </div>
         </nav>
-        <div  th:text="${incorrectLeagueChoice}"></div>
-        <form th:action="@{informationAboutAccount}" th:object="${orderBoost}" >
+        <form th:action="@{/order2/account/information}"  th:object="${orderBoost2}" method="get">
             <div class="form-group">
-                <label class="col-form-label" for="lolUsername">LoL Username</label>
-                <input th:field="*{lolUsername}" type="text" class="form-control" placeholder="LoL Username" id="lolUsername">
+                <input th:field="*{accountDetails.lolUsername}" type="text" class="form-control" placeholder="Enter your league of legends username" id="lolUsername">
+                <span class="error" th:if="${#fields.hasErrors('accountDetails.lolUsername')}" th:errors="*{accountDetails.lolUsername}"></span>
+
             </div>
             <div class="form-group">
-                <label class="col-form-label" for="lolPassword">LoL Password</label>
-                <input th:field="*{lolPassword}" type="password" class="form-control" placeholder="LoL Password" id="lolPassword">
+                <input th:field="*{accountDetails.lolPassword}" type="password" class="form-control" placeholder="Enter your league of legends password" id="lolPassword">
+                <span class="error" th:if="${#fields.hasErrors('accountDetails.lolPassword')}" th:errors="*{accountDetails.lolPassword}"></span>
+
             </div>
+
             <div class="form-group">
-                <select class="custom-select" th:field="*{region}" id="region">
-                    <option th:each="region : ${listOfRegions}" th:value="${region}" th:text="${region}"></option>
+                <textarea th:field="*{noteToBooster}" type="text" class="form-control" placeholder="Enter your note to bosoter" id="noteToBooster"></textarea>
+            </div>
+
+            <div class="form-group">
+                <select class="custom-select" th:field="*{accountDetails.region}" id="region">
+                    <option th:each="region : ${regions}" th:value="${region}" th:text="${region}"></option>
                 </select>
             </div>
-            <div class="form-group">
-                <label for="exampleTextarea">Message to the booster</label>
-                <textarea th:field="*{noteToBoosters}" placeholder="Message to the booster" class="form-control" id="exampleTextarea" rows="3"></textarea>
-            </div>
-            <input class="btn btn-info btn-sm" type="submit" value="Submit"/>
+            <input class="btn btn-primary" type="submit" value="Submit" />
         </form>
     </body>
 </html>

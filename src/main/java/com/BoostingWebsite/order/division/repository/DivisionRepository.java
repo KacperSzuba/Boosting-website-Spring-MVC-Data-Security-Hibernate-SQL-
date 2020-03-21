@@ -1,14 +1,11 @@
 package com.BoostingWebsite.order.division.repository;
-/*
-import org.springframework.data.repository.CrudRepository;
-import pl.javastart.model.entity.Division;
 
-import java.util.List;
+import com.BoostingWebsite.order.division.entity.Division;
+import org.springframework.data.repository.CrudRepository;
+
 
 public interface DivisionRepository extends CrudRepository<Division,Long> {
-    List<Division> findAllByPointsAndDivision(String points, Integer division);
-    List<Division> findAllByPoints(String points);
+
 }
 
 
- */

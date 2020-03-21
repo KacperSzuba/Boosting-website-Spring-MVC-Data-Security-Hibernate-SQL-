@@ -4,7 +4,15 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
       lang="en">
     <head>
-        <title>Order page</title>
+        <title>Order division</title>
+        <style>
+            .center {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 10%;
+            }
+        </style>
         <link type="text/css" rel="stylesheet" th:href="@{/style/bootstrap.min.css}" />
         <link type="text/css" rel="stylesheet" th:href="@{/style/drop-down-nav.css}" />
     </head>
@@ -58,25 +66,36 @@
                 </div>
             </div>
         </nav>
-        <div  th:text="${incorrectLeagueChoice}"></div>
-        <form th:action="@{informationAboutAccount}" th:object="${orderBoost}" >
+        <div th:text="${incorrectLeagueChoice}"></div>
+        <form th:action="@{/order2/league/information}" th:object="${orderBoost2}">
             <div class="form-group">
-                <label class="col-form-label" for="lolUsername">LoL Username</label>
-                <input th:field="*{lolUsername}" type="text" class="form-control" placeholder="LoL Username" id="lolUsername">
-            </div>
-            <div class="form-group">
-                <label class="col-form-label" for="lolPassword">LoL Password</label>
-                <input th:field="*{lolPassword}" type="password" class="form-control" placeholder="LoL Password" id="lolPassword">
-            </div>
-            <div class="form-group">
-                <select class="custom-select" th:field="*{region}" id="region">
-                    <option th:each="region : ${listOfRegions}" th:value="${region}" th:text="${region}"></option>
+                <select class="custom-select" th:field="*{currentLeague.tier}" id="currentTier">
+                    <option th:each="currentTier : ${tiers}" th:value="${currentTier.tier}" th:text="${currentTier.tier}"></option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="exampleTextarea">Message to the booster</label>
-                <textarea th:field="*{noteToBoosters}" placeholder="Message to the booster" class="form-control" id="exampleTextarea" rows="3"></textarea>
+                <select class="custom-select" th:field="*{currentLeague.division}" id="currentDivision">
+                    <option th:each="currentDivision : ${divisions}" th:value="${currentDivision.division}" th:text="${currentDivision.division}"></option>
+                </select>
             </div>
+            <div class="form-group">
+                <select class="custom-select" th:field="*{currentLeague.points}" id="currentPoints">
+                    <option th:each="currentPoints : ${points}" th:value="${currentPoints.points}" th:text="${currentPoints.points}"></option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <select class="custom-select" th:field="*{destinationLeague.tier}" id="destinationTier">
+                    <option th:each="destinationTier : ${tiers}" th:value="${destinationTier.tier}" th:text="${destinationTier.tier}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="custom-select" th:field="*{destinationLeague.division}" id="destinationDivision">
+                    <option th:each="destinationDivision : ${divisions}" th:value="${destinationDivision.division}" th:text="${destinationDivision.division}"></option>
+                </select>
+            </div>
+
             <input class="btn btn-info btn-sm" type="submit" value="Submit"/>
         </form>
     </body>

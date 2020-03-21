@@ -15,7 +15,7 @@ public class Price {
     private Tier tier;
 
     @ManyToOne
-    private Divisions division;
+    private Division division;
 
     @ManyToOne
     private DivisionPoints divisionPoints;
@@ -23,7 +23,7 @@ public class Price {
     public Price() {
     }
 
-    public Price(Integer price, Tier tier, Divisions division, DivisionPoints divisionPoints) {
+    public Price(Integer price, Tier tier, Division division, DivisionPoints divisionPoints) {
         this.price = price;
         this.tier = tier;
         this.division = division;
@@ -50,11 +50,11 @@ public class Price {
         this.tier = tier;
     }
 
-    public Divisions getDivision() {
+    public Division getDivision() {
         return division;
     }
 
-    public void setDivision(Divisions division) {
+    public void setDivision(Division division) {
         this.division = division;
     }
 

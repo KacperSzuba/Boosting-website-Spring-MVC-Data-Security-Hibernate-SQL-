@@ -17,7 +17,7 @@ import java.util.TreeMap;
 public class LeagueOfLegendsAPIConnector {
     private Region region;
     private String username;
-    private final String apiKey = "RGAPI-ae5d0115-3041-43dd-b860-6c00b475abc1";
+    private final String apiKey = "RGAPI-63a08ccb-7bf1-4072-9d91-7a7a722c515c";
 
     public LeagueOfLegendsAPIConnector(String username, Region region) {
         this.username = username;

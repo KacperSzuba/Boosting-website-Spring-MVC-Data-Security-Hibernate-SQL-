@@ -35,4 +35,5 @@ public interface OrderBoostRepository extends CrudRepository<OrderBoost,Long> {
 
     @Query(value = "select orderboost from OrderBoost orderboost where orderboost.whetherDone=true and orderboost.booster =:user")
     List<OrderBoost> findDoneOrderBoost(@Param("user") User user);
+
 }

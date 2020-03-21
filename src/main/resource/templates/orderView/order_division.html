@@ -89,7 +89,6 @@
                     document.getElementById('currentTier').setAttribute("src",defaultCurrentTier);
                     document.getElementById('destinationTier').setAttribute("src",defaultDestinationTier);
                     document.getElementById('currentTier').setAttribute("Content-Type", "image/png");
-                    console.log("@!!@#!@#"+document.getElementById('destinationTier').getAttribute("Content-Type"));
                 }
             }
             xhr.open('GET','./Order',true);
@@ -112,6 +111,7 @@
                         else {
                             let temp2 = conversation.filter(data => data.tier_id == parseInt(op[0]['tier_id']-1) && data.division_id == parseInt(op[0]['division_id']));
                             document.getElementById('currentTier').setAttribute("src",temp2[0]['img_source']);
+
                         }
 
                     }

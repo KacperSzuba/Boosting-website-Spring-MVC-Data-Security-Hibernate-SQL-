@@ -34,17 +34,25 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http)throws Exception{
         http.authorizeRequests()
-                .antMatchers("/order/informationAboutDivision","/order/informationAboutAccount").hasRole("USER")
+                .antMatchers(
+                        "/order/informationAboutDivision",
+                        "/order/informationAboutAccount").hasRole("USER")
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/booster").hasRole("BOOSTER")
-                .antMatchers("/account/showChangePasswordPage","/account/changePasswordForm","/account/showEmailChangePage","/account/changeEmailForm").hasAnyRole("USER","ADMIN","BOOSTER")
-                .antMatchers("/sendMessage/**").hasAnyRole("ADMIN","USER","BOOSTER")
-               // .antMatchers("/sendMessage/send").hasAnyRole("ADMIN","USER","BOOSTER")
-                .antMatchers("/").permitAll()
-                .antMatchers("/account/updatePassword*","/account/resetPassword").hasAuthority("CHANGE_PASSWORD_PRIVILEGE")
-                .antMatchers("/css/**","/style/**","/static/**").permitAll() //Adding this line solved it
-                .antMatchers("/register").permitAll()
-                .antMatchers("/account/remindPasswordPage").permitAll()
+                .antMatchers(
+                        "/account/change/password",
+                        "/account/change/password/form",
+                        "/account/change/email",
+                        "/account/change/email/form",
+                        "/message/**",
+                        "/order2/league/information",
+                        "/order2/account/information").hasAnyRole("USER","ADMIN","BOOSTER")
+                .antMatchers("/account/updatePassword*",
+                        "/account/reset/password").hasAuthority("CHANGE_PASSWORD_PRIVILEGE")
+                .antMatchers("/",
+                        "/register",
+                        "/account/remindPasswordPage",
+                        "/css/**","/style/**","/static/**").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")

@@ -10,6 +10,7 @@ public class Tier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Enumerated(EnumType.STRING)
     private com.BoostingWebsite.order.division.Tier tier;
 

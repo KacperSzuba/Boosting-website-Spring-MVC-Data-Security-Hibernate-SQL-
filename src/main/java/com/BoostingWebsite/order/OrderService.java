@@ -1,9 +1,9 @@
 package com.BoostingWebsite.order;
 
+import com.BoostingWebsite.order.division.repository.DivisionRepository;
 import org.springframework.stereotype.Service;
 import com.BoostingWebsite.account.user.ActualUser;
 import com.BoostingWebsite.order.division.entity.TierImage;
-import com.BoostingWebsite.order.division.repository.DivisionsRepository;
 import com.BoostingWebsite.order.division.repository.TierImageRepository;
 import com.BoostingWebsite.order.division.repository.TierRepository;
 
@@ -20,12 +20,12 @@ class OrderService {
     private final OrderBoostRepository orderBoostRepository;
     private final TierImageRepository tierImageRepository;
     private final TierRepository tierRepository;
-    private final DivisionsRepository divisionsRepository;
+    private final DivisionRepository divisionsRepository;
     private HttpServletRequest request;
 
 
     public OrderService(ActualUser actualUser, OrderBoostRepository orderBoostRepository, TierImageRepository tierImageRepository, TierRepository tierRepository,
-                        DivisionsRepository divisionsRepository, HttpServletRequest request) {
+                        DivisionRepository divisionsRepository, HttpServletRequest request) {
         this.actualUser = actualUser;
         this.orderBoostRepository = orderBoostRepository;
         this.tierImageRepository = tierImageRepository;

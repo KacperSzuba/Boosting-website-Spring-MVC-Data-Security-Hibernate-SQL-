@@ -16,7 +16,7 @@ public class TierImage {
     private Tier tier;
 
     @ManyToOne
-    private Divisions division;
+    private Division division;
 
     public TierImage() {
     }
@@ -45,11 +45,11 @@ public class TierImage {
         this.tier = tier;
     }
 
-    public Divisions getDivision() {
+    public Division getDivision() {
         return division;
     }
 
-    public void setDivision(Divisions division) {
+    public void setDivision(Division division2) {
         this.division = division;
     }
 

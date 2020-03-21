@@ -1,5 +1,8 @@
 package com.BoostingWebsite.account.registration;
 
+import com.BoostingWebsite.account.user.group.UserGroup;
+import com.BoostingWebsite.account.user.group.UserGroupRepository;
+import com.BoostingWebsite.account.user.group.UserGroups;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.BoostingWebsite.account.user.User;
@@ -20,11 +23,13 @@ class UserCreatorService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final UserRoleRepository userRoleRepository;
+    private final UserGroupRepository userGroupRepository;
 
-    UserCreatorService(PasswordEncoder passwordEncoder, UserRepository userRepository, UserRoleRepository userRoleRepository) {
+    UserCreatorService(PasswordEncoder passwordEncoder, UserRepository userRepository, UserRoleRepository userRoleRepository, UserGroupRepository userGroupRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
+        this.userGroupRepository = userGroupRepository;
     }
 
     boolean createAccount(User user){
@@ -52,7 +57,8 @@ class UserCreatorService {
             List<UserRole> roles = new ArrayList<>();
             roles.add(userRole);
             String password = passwordEncoder.encode(this.user.getPassword());
-            userRepository.save(new User(this.user.getUsername(), password, false, this.user.getEmail(), LocalDateTime.now(), roles));
+            UserGroup userGroup = userGroupRepository.findByUserGroups(UserGroups.USERS);
+            userRepository.save(new User(this.user.getUsername(), password, false, this.user.getEmail(), LocalDateTime.now(), roles,userGroup));
         }
     }
 

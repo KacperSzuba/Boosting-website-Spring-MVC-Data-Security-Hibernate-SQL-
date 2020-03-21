@@ -52,20 +52,12 @@ public class Message implements Comparable<Message>{
         this.author = author;
     }
 
-    Long getAuthorId(){
-        return author.getId();
-    }
-
     public User getRecipient() {
         return recipient;
     }
 
     public void setRecipient(User recipient) {
         this.recipient = recipient;
-    }
-
-    Long getRecipientId(){
-        return recipient.getId();
     }
 
     public String getMessage() {
@@ -90,8 +82,6 @@ public class Message implements Comparable<Message>{
         return "Message{" +
                 "id =" + id +
                 ", sendMessage ='" + message + '\'' +
-                ", author id =" + getAuthorId() +
-                ", recipient id =" + getRecipientId() +
                 ", date =" + date +
                 '}';
     }
