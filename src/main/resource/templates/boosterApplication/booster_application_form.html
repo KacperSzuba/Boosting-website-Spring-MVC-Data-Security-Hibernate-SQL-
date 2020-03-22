@@ -1,18 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
-      lang="en">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <head>
-        <title>Order division</title>
-        <style>
-            .center {
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
-                margin-top: 10%;
-            }
-        </style>
+        <title>Booster page</title>
         <link type="text/css" rel="stylesheet" th:href="@{/style/bootstrap.min.css}" />
         <link type="text/css" rel="stylesheet" th:href="@{/style/drop-down-nav.css}" />
     </head>
@@ -69,37 +60,65 @@
                 </div>
             </div>
         </nav>
-        <div th:text="${incorrectLeagueChoice}"></div>
-        <form th:action="@{/order2/league/information}" th:object="${orderBoost2}">
+        <form method="post" th:action="@{/booster-application}" th:object="${boosterApplication}">
             <div class="form-group">
-                <select class="custom-select" th:field="*{currentLeague.tier}" id="currentTier">
-                    <option th:each="currentTier : ${tiers}" th:value="${currentTier.tier}" th:text="${currentTier.tier}"></option>
+                <input type="text" class="form-control" placeholder="Skype" th:field="*{skype}">
+                <span class="error" th:if="${#fields.hasErrors('skype')}" th:errors="*{skype}"></span>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Discord" th:field="*{discord}">
+                <span class="error" th:if="${#fields.hasErrors('discord')}" th:errors="*{discord}"></span>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="E-mail" th:field="*{email}">
+                <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </div>
+            <div class="form-group">
+                <input class="form-control" placeholder="OP.GG" th:field="*{opgg}">
+                <span class="error" th:if="${#fields.hasErrors('opgg')}" th:errors="*{opgg}"></span>
+            </div>
+            <div class="form-group">
+                <select class="custom-select" th:field="*{region}" id="region">
+                    <option th:each="region : ${regions}" th:value="${region}" th:text="${region}"></option>
                 </select>
             </div>
             <div class="form-group">
-                <select class="custom-select" th:field="*{currentLeague.division}" id="currentDivision">
-                    <option th:each="currentDivision : ${divisions}" th:value="${currentDivision.division}" th:text="${currentDivision.division}"></option>
+                <select class="custom-select" th:field="*{leagueRank}" id="rank">
+                    <option value="Diamond 4" >Diamond IV</option>
+                    <option value="Diamond 3" >Diamond III</option>
+                    <option value="Diamond 2" >Diamond II</option>
+                    <option value="Diamond 1" >Diamond I</option>
+                    <option value="Master">Master</option>
+                    <option value="Grandmaster">Grandmaster</option>
+                    <option value="Challenger">Challenger</option>
                 </select>
             </div>
             <div class="form-group">
-                <select class="custom-select" th:field="*{currentLeague.points}" id="currentPoints">
-                    <option th:each="currentPoints : ${points}" th:value="${currentPoints.points}" th:text="${currentPoints.points}"></option>
-                </select>
-            </div>
-
-
-            <div class="form-group">
-                <select class="custom-select" th:field="*{destinationLeague.tier}" id="destinationTier">
-                    <option th:each="destinationTier : ${tiers}" th:value="${destinationTier.tier}" th:text="${destinationTier.tier}"></option>
+                <select class="custom-select" th:field="*{averageNumberOfHoursPlayedDaily}">
+                    <option value="Less then 3">Less then 3</option>
+                    <option value="3-4">3-4</option>
+                    <option value="5-6">5-6</option>
+                    <option value="7-8">7-8</option>
+                    <option value="More then 8">More then 8</option>
                 </select>
             </div>
             <div class="form-group">
-                <select class="custom-select" th:field="*{destinationLeague.division}" id="destinationDivision">
-                    <option th:each="destinationDivision : ${divisions}" th:value="${destinationDivision.division}" th:text="${destinationDivision.division}"></option>
-                </select>
+                <input class="form-control" placeholder="Age" type="number" th:field="*{age}">
+                <span class="error" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
             </div>
-
-            <input class="btn btn-info btn-sm" type="submit" value="Submit"/>
+            <div class="form-group">
+                <input class="form-control" placeholder="Country" type="text" th:field="*{country}">
+                <span class="error" th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></span>
+            </div>
+            <div class="form-group">
+                <input class="form-control" placeholder="Best schedule for future contact" type="text" th:field="*{bestFormOfContact}">
+                <span class="error" th:if="${#fields.hasErrors('bestFormOfContact')}" th:errors="*{bestFormOfContact}"></span>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" placeholder="Tell us about your booster experience and why you should work with us" th:field="*{motivation}"></textarea>
+                <span class="error" th:if="${#fields.hasErrors('motivation')}" th:errors="*{motivation}"></span>
+            </div>
+            <input class="btn btn-info btn-sm" type="submit" value="Submit">
         </form>
     </body>
 </html>

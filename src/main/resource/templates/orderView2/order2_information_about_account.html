@@ -58,6 +58,9 @@
                     <li class="nav-item">
                         <a class="nav-link " href="/message" sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')">Messages</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/booster-application">Booster application</a>
+                    </li>
                 </ul>
                 <div sec:authorize="${isFullyAuthenticated()}">
                     <form th:action="@{/logout}" method="post">
@@ -70,7 +73,6 @@
             <div class="form-group">
                 <input th:field="*{accountDetails.lolUsername}" type="text" class="form-control" placeholder="Enter your league of legends username" id="lolUsername">
                 <span class="error" th:if="${#fields.hasErrors('accountDetails.lolUsername')}" th:errors="*{accountDetails.lolUsername}"></span>
-
             </div>
             <div class="form-group">
                 <input th:field="*{accountDetails.lolPassword}" type="password" class="form-control" placeholder="Enter your league of legends password" id="lolPassword">

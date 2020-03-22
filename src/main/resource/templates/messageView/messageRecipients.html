@@ -50,6 +50,9 @@
                     <li class="nav-item">
                         <a class="nav-link " href="/message" sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')">Messages</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/booster-application">Booster application</a>
+                    </li>
                 </ul>
                 <div sec:authorize="${isFullyAuthenticated()}">
                     <form th:action="@{/logout}" method="post">
