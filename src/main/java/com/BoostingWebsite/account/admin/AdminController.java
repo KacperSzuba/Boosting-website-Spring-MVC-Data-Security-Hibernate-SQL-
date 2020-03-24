@@ -1,5 +1,6 @@
 package com.BoostingWebsite.account.admin;
 
+import com.BoostingWebsite.employment.BoosterApplicationRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +22,12 @@ public class AdminController {
     private final AccountStatus accountStatus;
     private final UserRepository userRepository;
     private final OrderBoostRepository orderBoostRepository;
-
-    public AdminController(AccountStatus accountStatus, UserRepository userRepository, OrderBoostRepository orderBoostRepository) {
+    private final BoosterApplicationRepository boosterApplicationRepository;
+    public AdminController(AccountStatus accountStatus, UserRepository userRepository, OrderBoostRepository orderBoostRepository, BoosterApplicationRepository boosterApplicationRepository) {
         this.accountStatus = accountStatus;
         this.userRepository = userRepository;
         this.orderBoostRepository = orderBoostRepository;
+        this.boosterApplicationRepository = boosterApplicationRepository;
     }
 
     @GetMapping
@@ -84,5 +86,10 @@ public class AdminController {
         model.addAttribute("expectedRoleIsROLE_USER",RoleName.ROLE_USER);
         model.addAttribute("expectedRoleIsROLE_BOOSTER",RoleName.ROLE_BOOSTER);
         return "adminView/admin_UserDetails";
+    }
+
+    @GetMapping("/booster-candidates")
+    public ModelAndView showBoosterCandidates(){
+        return new ModelAndView("adminView/admin_BoosterCandidates","listOfBoosterCandidates",boosterApplicationRepository.findAll());
     }
 }

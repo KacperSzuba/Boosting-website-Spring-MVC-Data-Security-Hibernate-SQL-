@@ -1,5 +1,6 @@
 package com.BoostingWebsite.account.registration;
 
+import com.BoostingWebsite.account.validator.CreationAccountValidator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.BoostingWebsite.account.user.User;
@@ -19,11 +20,13 @@ class UserCreatorService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final UserRoleRepository userRoleRepository;
+    private final CreationAccountValidator creationAccountValidator;
 
-    UserCreatorService(PasswordEncoder passwordEncoder, UserRepository userRepository, UserRoleRepository userRoleRepository) {
+    UserCreatorService(PasswordEncoder passwordEncoder, UserRepository userRepository, UserRoleRepository userRoleRepository, CreationAccountValidator creationAccountValidator) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
+        this.creationAccountValidator = creationAccountValidator;
     }
 
     boolean createAccount(User user){
@@ -45,33 +48,13 @@ class UserCreatorService {
     }
 
     private void tryToCreateAccount(){
-        if (checkIfUserExists() && checkIfEmailExist()) {
+        if (creationAccountValidator.isAccountCreatedCorrectly(this.user)) {
             UserRole userRole = userRoleRepository.getUserRole(RoleName.ROLE_USER);
             userRoleRepository.save(userRole);
             List<UserRole> roles = new ArrayList<>();
             roles.add(userRole);
             String password = passwordEncoder.encode(this.user.getPassword());
             userRepository.save(new User(this.user.getUsername(), password, false, this.user.getEmail(), roles));
-        }
-    }
-
-    private boolean checkIfUserExists(){
-        boolean isUserExist = userRepository.existsUserByUsername(this.user.getUsername());
-        if(isUserExist){
-            throw new IllegalArgumentException("User with this username already exist");
-        }
-        else {
-            return true;
-        }
-    }
-
-    private boolean checkIfEmailExist(){
-        boolean isEmailExist = userRepository.existsUserByEmail(this.user.getEmail());
-        if (isEmailExist){
-            throw new IllegalArgumentException("User with this email already exist");
-        }
-        else {
-            return true;
         }
     }
 

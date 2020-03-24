@@ -4,15 +4,10 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
       lang="en">
     <head>
-        <title>Order division</title>
-        <style>
-            .center {
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
-                margin-top: 10%;
-            }
-        </style>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <link type="text/css" rel="stylesheet" th:href="@{/style/bootstrap.min.css}" />
         <link type="text/css" rel="stylesheet" th:href="@{/style/drop-down-nav.css}" />
     </head>
@@ -59,9 +54,6 @@
                     <li class="nav-item">
                         <a class="nav-link " href="/message" sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')">Messages</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/booster-application">Booster application</a>
-                    </li>
                 </ul>
                 <div sec:authorize="${isFullyAuthenticated()}">
                     <form th:action="@{/logout}" method="post">
@@ -70,27 +62,38 @@
                 </div>
             </div>
         </nav>
-        <form th:action="@{/order2/account/information}"  th:object="${orderBoost2}" method="get">
-            <div class="form-group">
-                <input th:field="*{accountDetails.lolUsername}" type="text" class="form-control" placeholder="Enter your league of legends username" id="lolUsername">
-                <span class="error" th:if="${#fields.hasErrors('accountDetails.lolUsername')}" th:errors="*{accountDetails.lolUsername}"></span>
-            </div>
-            <div class="form-group">
-                <input th:field="*{accountDetails.lolPassword}" type="password" class="form-control" placeholder="Enter your league of legends password" id="lolPassword">
-                <span class="error" th:if="${#fields.hasErrors('accountDetails.lolPassword')}" th:errors="*{accountDetails.lolPassword}"></span>
-
-            </div>
-
-            <div class="form-group">
-                <textarea th:field="*{noteToBooster}" type="text" class="form-control" placeholder="Enter your note to bosoter" id="noteToBooster"></textarea>
-            </div>
-
-            <div class="form-group">
-                <select class="custom-select" th:field="*{accountDetails.region}" id="region">
-                    <option th:each="region : ${regions}" th:value="${region}" th:text="${region}"></option>
-                </select>
-            </div>
-            <input class="btn btn-primary" type="submit" value="Submit" />
+        <form method="get" th:object="${listOfBoosterCandidates}" >
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">League rank</th>
+                    <th scope="col">Opgg</th>
+                    <th scope="col">Region</th>
+                    <th scope="col">Average number of hours played daily</th>
+                    <th scope="col">Motivation</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Skype</th>
+                    <th scope="col">Discord</th>
+                    <th scope="col">Best form of contact</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="candidate : ${listOfBoosterCandidates}" >
+                    <th th:text="${candidateStat.count}"></th>
+                    <th th:text="${candidate.leagueRank}"></th>
+                    <th th:text="${candidate.opgg}"></th>
+                    <th th:text="${candidate.region}"></th>
+                    <th th:text="${candidate.averageNumberOfHoursPlayedDaily}"></th>
+                    <th th:text="${candidate.motivation}"></th>
+                    <th th:text="${candidate.age}"></th>
+                    <th th:text="${candidate.skype}"></th>
+                    <th th:text="${candidate.discord}"></th>
+                    <th th:text="${candidate.bestFormOfContact}"></th>
+                </tr>
+                </tbody>
+            </table>
         </form>
     </body>
 </html>
