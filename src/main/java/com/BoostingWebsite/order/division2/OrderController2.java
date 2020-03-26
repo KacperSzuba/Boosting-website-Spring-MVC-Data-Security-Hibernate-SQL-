@@ -1,6 +1,7 @@
 package com.BoostingWebsite.order.division2;
 
 import com.BoostingWebsite.order.division.Region;
+import com.BoostingWebsite.order.division.Tier;
 import com.BoostingWebsite.order.division2.repository.LeagueRepository;
 import com.BoostingWebsite.order.division2.entity.OrderBoost2;
 import org.springframework.stereotype.Controller;
@@ -55,7 +56,8 @@ public class OrderController2 {
             return "orderView2/order2_information_about_account";
         }
         orderBoostService2.setOrderInformation(orderBoost2);
-        orderBoostService2.makeOrder3();
+        orderBoostService2.calculatePrice();
+        orderBoostService2.makeOrder();
         return "redirect:/";
     }
 

@@ -12,6 +12,7 @@ public interface LeagueRepository extends CrudRepository<League,Long> {
     League findByTierAndDivisionAndPoints(Tier tier, String division, String points);
     League findByTierAndDivisionAndPointsEquals(Tier tier, String division, String points);
 
+    League findByTierAndDivision(Tier tier, String division);
 
     @Query(value = "select league from League league group by league.tier order by league.id desc")
     List<League> findAllTiersOrderByIdDesc();
