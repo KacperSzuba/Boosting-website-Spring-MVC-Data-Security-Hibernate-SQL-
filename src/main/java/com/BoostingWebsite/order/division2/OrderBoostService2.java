@@ -16,6 +16,7 @@ public class OrderBoostService2 {
     private LeagueRepository leagueRepository;
     private OrderBoostRepository2 orderBoostRepository2;
 
+
     public OrderBoostService2(ActualUser actualUser, LeagueRepository leagueRepository, OrderBoostRepository2 orderBoostRepository2) {
         this.actualUser = actualUser;
         this.leagueRepository = leagueRepository;
@@ -31,8 +32,10 @@ public class OrderBoostService2 {
 
     void setLeagues(OrderBoost2 orderBoost2){
         this.orderBoost2 = new OrderBoost2();
-        this.orderBoost2.setCurrentLeague(orderBoost2.getCurrentLeague());
-        this.orderBoost2.setDestinationLeague(orderBoost2.getDestinationLeague());
+        League currentLeague = leagueRepository.findByTierAndDivisionAndPoints(orderBoost2.getCurrentLeague().getTier(),orderBoost2.getCurrentLeague().getDivision(),orderBoost2.getCurrentLeague().getPoints());
+        League destinationLeague = leagueRepository.findByTierAndDivisionAndPoints(orderBoost2.getDestinationLeague().getTier(),orderBoost2.getDestinationLeague().getDivision(),"0-20");
+        this.orderBoost2.setCurrentLeague(currentLeague);
+        this.orderBoost2.setDestinationLeague(destinationLeague);
     }
 
     void setOrderInformation(OrderBoost2 orderBoost2){
@@ -41,7 +44,7 @@ public class OrderBoostService2 {
         this.orderBoost2.setNoteToBooster(orderBoost2.getNoteToBooster());
     }
 
-    void makeOrder(){
+    void makeOrder3(){
         orderBoostRepository2.save(this.orderBoost2);
     }
 
