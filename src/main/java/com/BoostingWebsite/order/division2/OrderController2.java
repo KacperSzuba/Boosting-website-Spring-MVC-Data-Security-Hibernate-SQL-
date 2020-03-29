@@ -56,7 +56,6 @@ public class OrderController2 {
             return "orderView2/order2_information_about_account";
         }
         orderBoostService2.setOrderInformation(orderBoost2);
-        orderBoostService2.calculatePrice();
         orderBoostService2.makeOrder();
         return "redirect:/";
     }

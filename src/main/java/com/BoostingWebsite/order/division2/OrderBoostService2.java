@@ -13,6 +13,9 @@ import java.util.List;
 @Service
 public class OrderBoostService2 {
 
+    private double sum2 = 0;
+
+
     private OrderBoost2 orderBoost2;
 
     private ActualUser actualUser;
@@ -45,59 +48,74 @@ public class OrderBoostService2 {
         this.orderBoost2.setUser(actualUser.getActualUser());
         this.orderBoost2.setAccountDetails(orderBoost2.getAccountDetails());
         this.orderBoost2.setNoteToBooster(orderBoost2.getNoteToBooster());
+        this.orderBoost2.setPrice(calculatePrice());
+        sum2 = 0;
     }
 
     void makeOrder(){
         orderBoostRepository2.save(this.orderBoost2);
     }
 
-    double calculatePrice(){
-        double sum = 0;
-        League currentLeague = leagueRepository.findByTierAndDivisionAndPoints(orderBoost2.getCurrentLeague().getTier(), orderBoost2.getCurrentLeague().getDivision(), orderBoost2.getCurrentLeague().getPoints());
-        League destinationLeague = leagueRepository.findByTierAndDivisionAndPointsEquals(orderBoost2.getDestinationLeague().getTier(), orderBoost2.getDestinationLeague().getDivision(), "0-20");
-        List<Tier> tiers = Tier.valuesSinceTier2(currentLeague.getTier(),destinationLeague.getTier());
+
+    private double calculatePrice(){
+        List<Tier> tiers = Tier.tiers(currentLeague().getTier(),destinationLeague().getTier());
         for (Tier tier: tiers){
-            if(tier.equals(currentLeague.getTier())){
+            if(compareCurrentTiers(tier)){
                 if(tiers.size()>1) {
-                    for (int i = Integer.parseInt(currentLeague.getDivision()); i >=1; i--) {
-                        if(tier.equals(currentLeague.getTier())&&Integer.parseInt(currentLeague.getDivision())==i){
-                            System.out.println("PIERWSZA !!! "+tier + " : " + i);
-                            sum += currentLeague.getPrice();
+                    int currentDivision = Integer.parseInt(currentLeague().getDivision());
+                    for (int i = currentDivision; i >=1; i--) {
+                        if(compareCurrentTiers(tier) && currentDivision == i){
+                            sum2 += currentLeague().getPrice();
                         }
                         else {
-                            System.out.println(tier + " : " + i);
-                            sum += leagueRepository.findByTierAndDivisionAndPoints(tier,String.valueOf(i),"0-20").getPrice();
+                            sum2 += priceForLeague(tier,i);
                         }
                     }
                 }
                 else {
-                    for (int i = Integer.parseInt(currentLeague.getDivision()); i >Integer.parseInt(destinationLeague.getDivision()); i--) {
-                        if(tier.equals(currentLeague.getTier())&&Integer.parseInt(currentLeague.getDivision())==i){
-                            System.out.println("PIERWSZA !!! "+tier + " : " + i);
-                            sum += currentLeague.getPrice();
+                    for (int i = Integer.parseInt(currentLeague().getDivision()); i >Integer.parseInt(destinationLeague().getDivision()); i--) {
+                        if(compareCurrentTiers(tier) && Integer.parseInt(currentLeague().getDivision())==i){
+                            sum2 += currentLeague().getPrice();
                         }
                         else {
-                            System.out.println(tier + " : " + i);
-                            sum += leagueRepository.findByTierAndDivisionAndPoints(tier,String.valueOf(i),"0-20").getPrice();
+                            sum2 += priceForLeague(tier,i);
                         }
                     }
                 }
             }
-            else if(tier.equals(destinationLeague.getTier())) {
-                for (int i =4; i>Integer.parseInt(destinationLeague.getDivision());i--) {
-                    System.out.println(tier + " : " + i);
-                    sum += leagueRepository.findByTierAndDivisionAndPoints(tier,String.valueOf(i),"0-20").getPrice();
+            else if(compareDestinationTiers(tier)) {
+                for (int i =4; i>Integer.parseInt(destinationLeague().getDivision());i--) {
+                    sum2 += priceForLeague(tier,i);
                 }
             }
             else {
                 for (int i =4; i>=1;i--){
-                    System.out.println(tier+" : "+i);
-                    sum += leagueRepository.findByTierAndDivisionAndPoints(tier,String.valueOf(i),"0-20").getPrice();
+                    sum2 += priceForLeague(tier,i);
                 }
             }
         }
-        System.out.println(sum);
-        return currentLeague.getPrice();
+        return sum2;
     }
 
+
+
+    private boolean compareDestinationTiers(Tier tier){
+        return tier.equals(destinationLeague().getTier());
+    }
+
+    private boolean compareCurrentTiers(Tier tier){
+        return tier.equals(currentLeague().getTier());
+    }
+
+    private League currentLeague(){
+        return leagueRepository.findByTierAndDivisionAndPoints(orderBoost2.getCurrentLeague().getTier(), orderBoost2.getCurrentLeague().getDivision(), orderBoost2.getCurrentLeague().getPoints());
+    }
+
+    private League destinationLeague(){
+        return leagueRepository.findByTierAndDivisionAndPointsEquals(orderBoost2.getDestinationLeague().getTier(), orderBoost2.getDestinationLeague().getDivision(), "0-20");
+    }
+
+    private double priceForLeague(Tier tier,int division){
+        return leagueRepository.findByTierAndDivisionAndPoints(tier,String.valueOf(division),"0-20").getPrice();
+    }
 }

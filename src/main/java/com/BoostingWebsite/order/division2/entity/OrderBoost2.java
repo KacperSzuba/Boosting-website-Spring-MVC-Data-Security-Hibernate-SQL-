@@ -26,16 +26,6 @@ public class OrderBoost2 {
     private boolean whetherDone;
 
     private double price;
-/*
-    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
-    @JoinColumn(name="current_leagues_id")
-    private League currentLeague;
-
-    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
-    @JoinColumn(name="destination_leagues_id")
-    private League destinationLeague;
-
- */
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="current_leagues_id")

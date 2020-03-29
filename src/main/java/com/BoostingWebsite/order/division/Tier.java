@@ -22,12 +22,12 @@ public enum Tier {
         return result;
     }
 
-    public static List<Tier> valuesSinceTier2(Tier currentTier,Tier destinationTier){
+    public static List<Tier> tiers(Tier initialTier, Tier finalTier){
         List<Tier> tiers = new ArrayList<>();
         boolean isEquals = false;
         Tier[] tiers1 = Tier.values();
-        for(int i=0;i<=Tier.valueOf(destinationTier);i++){
-            if(currentTier.equals(tiers1[i])|| isEquals){
+        for(int i=0;i<=Tier.valueOf(finalTier);i++){
+            if(initialTier.equals(tiers1[i])|| isEquals){
                 isEquals = true;
                 tiers.add(tiers1[i]);
             }
