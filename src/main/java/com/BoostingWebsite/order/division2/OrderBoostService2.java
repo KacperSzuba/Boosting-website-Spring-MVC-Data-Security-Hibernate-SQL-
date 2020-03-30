@@ -61,43 +61,53 @@ public class OrderBoostService2 {
         List<Tier> tiers = Tier.tiers(currentLeague().getTier(),destinationLeague().getTier());
         for (Tier tier: tiers){
             if(compareCurrentTiers(tier)){
-                if(tiers.size()>1) {
-                    int currentDivision = Integer.parseInt(currentLeague().getDivision());
-                    for (int i = currentDivision; i >=1; i--) {
-                        if(compareCurrentTiers(tier) && currentDivision == i){
-                            sum2 += currentLeague().getPrice();
-                        }
-                        else {
-                            sum2 += priceForLeague(tier,i);
-                        }
-                    }
-                }
-                else {
-                    for (int i = Integer.parseInt(currentLeague().getDivision()); i >Integer.parseInt(destinationLeague().getDivision()); i--) {
-                        if(compareCurrentTiers(tier) && Integer.parseInt(currentLeague().getDivision())==i){
-                            sum2 += currentLeague().getPrice();
-                        }
-                        else {
-                            sum2 += priceForLeague(tier,i);
-                        }
-                    }
-                }
+                calculatePriceFromCurrentTier(tier,tiers.size());
             }
             else if(compareDestinationTiers(tier)) {
-                for (int i =4; i>Integer.parseInt(destinationLeague().getDivision());i--) {
-                    sum2 += priceForLeague(tier,i);
-                }
+                calculatePriceFromDestinationTier(tier);
             }
             else {
-                for (int i =4; i>=1;i--){
-                    sum2 += priceForLeague(tier,i);
-                }
+                calculatePriceFromWholeTier(tier);
             }
         }
         return sum2;
     }
 
+    private void calculatePriceFromCurrentTier(Tier tier, int tierSize){
+        if(tierSize>1) {
+            int currentDivision = Integer.parseInt(currentLeague().getDivision());
+            for (int i = currentDivision; i >=1; i--) {
+                if(compareCurrentTiers(tier) && currentDivision == i){
+                    sum2 += currentLeague().getPrice();
+                }
+                else {
+                    sum2 += priceForLeague(tier,i);
+                }
+            }
+        }
+        else {
+            for (int i = Integer.parseInt(currentLeague().getDivision()); i >Integer.parseInt(destinationLeague().getDivision()); i--) {
+                if(compareCurrentTiers(tier) && Integer.parseInt(currentLeague().getDivision())==i){
+                    sum2 += currentLeague().getPrice();
+                }
+                else {
+                    sum2 += priceForLeague(tier,i);
+                }
+            }
+        }
+    }
 
+    private void calculatePriceFromDestinationTier(Tier tier){
+        for (int i =4; i>Integer.parseInt(destinationLeague().getDivision());i--) {
+            sum2 += priceForLeague(tier,i);
+        }
+    }
+
+    private void calculatePriceFromWholeTier(Tier tier){
+        for (int i =4; i>=1;i--){
+            sum2 += priceForLeague(tier,i);
+        }
+    }
 
     private boolean compareDestinationTiers(Tier tier){
         return tier.equals(destinationLeague().getTier());
