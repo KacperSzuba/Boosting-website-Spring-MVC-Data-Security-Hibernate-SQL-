@@ -57,8 +57,8 @@
                 </ul>
                 <div sec:authorize="${isFullyAuthenticated()}">
                     <form th:action="@{/logout}" method="post">
-                        <input class="btn btn-primary btn-sm" type="submit" value="Logout" />
-                    </form>
+                    <input class="btn btn-primary btn-sm" type="submit" value="Logout" />
+                </form>
                 </div>
             </div>
         </nav>

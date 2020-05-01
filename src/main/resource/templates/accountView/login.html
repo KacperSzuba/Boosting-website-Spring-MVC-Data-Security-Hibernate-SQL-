@@ -1,67 +1,101 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
-      lang="en">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login page</title>
-        <link type="text/css" rel="stylesheet" th:href="@{/style/bootstrap.min.css}" />
-        <link type="text/css" rel="stylesheet" th:href="@{/style/drop-down-nav.css}" />
+        <link type="text/css" rel="stylesheet" th:href="@{/fontawesome/css/all.css}">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto&display=swap&subset=latin-ext"
+              rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Dancing+Script:600&display=swap" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" th:href="@{/style/login-style.css}" />
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarColor03">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/order/">Boosting</a>
-                    </li>
-                    <li class="nav-item" sec:authorize="${isAnonymous()}">
-                        <a class="nav-link" href="/login">Login</a>
-                    </li>
-                    <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
-                        <a class="nav-link dropbtn" href="/admin">Admin resources</a>
-                        <div class="dropdown-content">
-                            <a href="/admin/orders">List of orders</a>
-                            <a href="/admin/users">List of users</a>
-                            <a href="/admin/booster-candidates">Booster candidates</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropbtn" href="/boost" sec:authorize="hasRole('BOOSTER')">Booster resources</a>
-                        <div class="dropdown-content">
-                            <a href="/boost/orders">List of free orders</a>
-                            <a href="/boost/current">Current boost</a>
-                            <a href="/boost/completed">Done order boosts</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropbtn" href="#" sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')">Account</a>
-                        <div class="dropdown-content">
-                            <a href="/account/change/password">Change Password</a>
-                            <a href="/account/change/email">Change Email</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/message" sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')">Messages</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/booster-application">Booster application</a>
-                    </li>
-                </ul>
-                <div sec:authorize="${isFullyAuthenticated()}">
-                    <form th:action="@{/logout}" method="post">
-                        <input class="btn btn-primary btn-sm" type="submit" value="Logout" />
-                    </form>
-                </div>
+        <nav class="background">
+            <aside>
+                <nav class="navigation">
+                    <ul>
+                        <li>
+                            <a href="/">
+                                <div class="height">Home</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/order/">
+                                <div class="height">Boosting</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/booster-application">
+                                <div class="height">Join our team</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="height">Contact us</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="height">F.A.Q</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li sec:authorize="${isAnonymous()}">
+                            <a href="/login">
+                                <div class="height">Login</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li sec:authorize="${isFullyAuthenticated()}">
+                            <form th:action="@{/logout}" method="post">
+                                <a class="height">
+                                    <input  type="submit" value="Logout" />
+                                </a>
+                            </form>
+                            <div class="border">
+                                <div></div>
+                            </div>
+                        </li>
+                        <li sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')">
+                            <a href="/account">
+                                <div class="height">Account</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+            <div class="burger">
+                <i class="fas fa-bars show"></i>
+                <i class="fas fa-times"></i>
             </div>
         </nav>
+        <header>
+            <p>We belive that we are able to provide each of you with the rank you deserved.</p>
+            <a href="/order/">Boost Me</a>
+        </header>
         <div th:if="${token != null}" class="alert alert-dismissible alert-warning">
             <h4 class="alert-heading">Warning!</h4>
             <p class="mb-0" th:text="${token}"></p>
@@ -72,19 +106,48 @@
         <div class="alert alert-dismissible alert-primary" sec:authorize="hasAuthority('CONFIRMATION_EMAIL_PRIVILEGE')">
             <p>Your account has been activated</p>
         </div>
-        <h1 class="text-center">Login to your account</h1>
-        <form th:action="@{/authenticateTheUser}" method="POST">
-            <div class="form-group">
-                <label for="exampleInputUsername">Login</label>
-                <input name="username" type="text" class="form-control" id="exampleInputUsername" aria-describedby="emailHelp" placeholder="Login">
+        <section class="login-form">
+            <div class="wrap">
+                <h1>Account Login</h1>
+                <form th:action="@{/authenticateTheUser}" method="POST">
+                    <div class="form-group">
+                        <label for="exampleInputUsername">E-mail Address or Username</label>
+                        <input name="username" type="text" class="form-control" id="exampleInputUsername"
+                               placeholder="Login">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword">Password</label>
+                        <input name="password" type="password" class="form-control" id="exampleInputPassword"
+                               placeholder="Password">
+                    </div>
+                    <input class="button" type="submit" value="Login" />
+                </form>
+                <p class="register">Don't have an account yet? <a href="/register">Click here</a> to create one and enjoy our Loyalty Program!</p>
+                <p>Do not you remember the password? <a href="/account/remind/password">Click here</a> to remember them.</p>
             </div>
-            <div class="form-group">
-                <label for="exampleInputPassword">Password</label>
-                <input name="password" type="password" class="form-control" id="exampleInputPassword" placeholder="Password">
+        </section>
+        <footer>
+            <div class="wrap">
+                <div class="text">
+                    <h1>Boosting</h1>
+                </div>
+                <section>
+                    <div class="customer">
+                        <h2>Customer</h2>
+                        <a href="#">Order Now</a>
+                        <a href="#">Join Our Team</a>
+                    </div>
+                    <div class="pages">
+                        <h2>Pages</h2>
+                        <a href="#">F.A.Q.</a>
+                        <a href="#">Contact Us</a>
+                        <a href="#">Terms And Conditions</a>
+                    </div>
+                </section>
             </div>
-            <input class="btn btn-primary" type="submit" value="Login" />
-        </form>
-        <p>Don't have an account yet? <a href="/register">Click here</a> to create one and enjoy our Loyalty Program!</p>
-        <p>Do not you remember the password? <a href="/account/remind/password">Click here</a> to remember them.</p>
+        </footer>
+
+        <script src="../js/navigation-animation-mobile.js"></script>
+        <script src="../js/navigation-animation-desktop.js"></script>
     </body>
 </html>
