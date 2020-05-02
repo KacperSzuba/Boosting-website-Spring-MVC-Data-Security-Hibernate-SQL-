@@ -18,7 +18,7 @@ class EmailManagerController {
 
     @GetMapping("/change/email")
     public String emailChangePage(){
-        return "accountView/user_ChangeEmail";
+        return "accountView/change-email";
     }
 
     @GetMapping("/change/email/form")
@@ -26,7 +26,7 @@ class EmailManagerController {
                               @RequestParam("confirmEmail")String confirmEmail, Model model){
         emailChange.changeEmail(currentEmail, email, confirmEmail);
         model.addAttribute("newEmail",emailChange.getMessage());
-        return "accountView/user_ChangeEmail";
+        return "accountView/change-email";
     }
 
 }

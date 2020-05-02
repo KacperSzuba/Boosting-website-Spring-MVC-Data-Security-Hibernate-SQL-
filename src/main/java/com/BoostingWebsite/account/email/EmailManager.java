@@ -29,7 +29,7 @@ class EmailManager {
     }
 
     private void whetherEmailCanBeChanged(String currentEmail,String email, String repeatEmail) throws DataMismatchException {
-        if(checkIfEmailEnteredMatchesCurrent(currentEmail) && checkIfEmailIsCorrect(email,repeatEmail)){
+        if(checkIfEmailEnteredMatchesCurrent(currentEmail) && checkIfEmailIsCorrect(email,repeatEmail) && checkIfEmailIsNotAlreadyInDatabase(currentEmail)){
             tryToChangeEmail(email);
         }
     }
@@ -55,6 +55,15 @@ class EmailManager {
     private void tryToChangeEmail(String email){
         userRepository.changeEmail(loggedInUser().getId(), email);
         setMessage("Your new email is : " + email);
+    }
+
+    private boolean checkIfEmailIsNotAlreadyInDatabase(String currentEmail) throws DataMismatchException {
+        if (userRepository.findByEmail(currentEmail).isEmpty()){
+            return true;
+        }
+        else {
+            throw new DataMismatchException("The email you entered already exists in our database");
+        }
     }
 
     private User loggedInUser(){

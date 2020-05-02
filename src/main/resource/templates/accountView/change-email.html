@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login page</title>
+        <link type="text/css" rel="stylesheet" th:href="@{/fontawesome/css/all.css}">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto&display=swap&subset=latin-ext"
+              rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Dancing+Script:600&display=swap" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" th:href="@{/style/change-email-style.css}" />
+    </head>
+    <body>
+        <nav class="background">
+            <aside>
+                <nav class="navigation">
+                    <ul>
+                        <li>
+                            <a href="/">
+                                <div class="height">Home</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/order/">
+                                <div class="height">Boosting</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/booster-application">
+                                <div class="height">Join our team</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/contact-us">
+                                <div class="height">Contact us</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="height">F.A.Q</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li sec:authorize="${isAnonymous()}">
+                            <a href="/login">
+                                <div class="height">Login</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li sec:authorize="${isFullyAuthenticated()}">
+                            <form th:action="@{/logout}" method="post">
+                                <a class="height">
+                                    <input  type="submit" value="Logout" />
+                                </a>
+                            </form>
+                            <div class="border">
+                                <div></div>
+                            </div>
+                        </li>
+                        <li sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')">
+                            <a href="/account">
+                                <div class="height">Account</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+            <div class="burger">
+                <i class="fas fa-bars show"></i>
+                <i class="fas fa-times"></i>
+            </div>
+        </nav>
+        <header>
+            <p>We belive that we are able to provide each of you with the rank you deserved.</p>
+            <a href="/order/">Boost Me</a>
+        </header>
+        <section class="login-form">
+            <div class="wrap">
+                <h1>Change Email</h1>
+                <form th:action="@{/account/change/email/form}" method="get">
+                    <div class="form-group">
+                        <label for="currentEmail">Current email</label>
+                        <input name="currentEmail" type="email" class="form-control" placeholder="Current email"
+                               id="currentEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input name="email" type="email" class="form-control" placeholder="Email" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="repeatEmail">Repeat email</label>
+                        <input name="confirmEmail" type="email" class="form-control" placeholder="Repeat Email"
+                               id="repeatEmail">
+                    </div>
+                    <input class="button" type="submit" value="Change email" />
+                </form>
+            </div>
+        </section>
+        <footer>
+            <div class="wrap">
+                <div class="text">
+                    <h1>Boosting</h1>
+                </div>
+                <section>
+                    <div class="customer">
+                        <h2>Customer</h2>
+                        <a href="/order/">Order Now</a>
+                        <a href="/booster-application">Join Our Team</a>
+                    </div>
+                    <div class="pages">
+                        <h2>Pages</h2>
+                        <a href="#">F.A.Q.</a>
+                        <a href="/contact-us">Contact Us</a>
+                        <a href="#">Terms And Conditions</a>
+                    </div>
+                </section>
+            </div>
+        </footer>
+        <script src="/js/navigation-animation-mobile.js"></script>
+        <script src="/js/navigation-animation-desktop.js"></script>
+    </body>
+</html>
