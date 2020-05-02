@@ -13,6 +13,7 @@ public class PasswordReminderController {
 
     private final PasswordReminder passwordReminder;
     private final PasswordReminderToken passwordReminderToken;
+    
     public PasswordReminderController(PasswordReminder passwordReminder, PasswordReminderToken passwordReminderToken) {
         this.passwordReminder = passwordReminder;
         this.passwordReminderToken = passwordReminderToken;
@@ -41,7 +42,7 @@ public class PasswordReminderController {
 
     @GetMapping("/reset/password")
     public String updatePassword(){
-        return "accountView/user_updatePassword";
+        return "accountView/update-password";
     }
 
     @PostMapping("/reset/password")
@@ -49,7 +50,7 @@ public class PasswordReminderController {
         passwordReminder.resetPassword(password, repeatPassword);
         if(passwordReminder.getPasswordRemindMessage() != null){
             model.addAttribute("message",passwordReminder.getPasswordRemindMessage());
-            return "accountView/user_updatePassword";
+            return "accountView/update-password";
         }
         return "redirect:/login";
     }
