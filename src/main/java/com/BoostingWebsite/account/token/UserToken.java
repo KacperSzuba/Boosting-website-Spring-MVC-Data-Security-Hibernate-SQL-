@@ -12,7 +12,7 @@ public class UserToken {
     private static final int EXPIRATION = 60 * 24;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String token;
 
@@ -76,8 +76,6 @@ public class UserToken {
         this.expiryDate = calculateExpiryDate(EXPIRATION);
     }
 
-    //
-
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -126,8 +124,11 @@ public class UserToken {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("Token [String=").append(token).append("]").append("[Expires").append(expiryDate).append("]");
-        return builder.toString();
+        return "UserToken{" +
+                "id=" + id +
+                ", token='" + token + '\'' +
+                ", user=" + user +
+                ", expiryDate=" + expiryDate +
+                '}';
     }
 }

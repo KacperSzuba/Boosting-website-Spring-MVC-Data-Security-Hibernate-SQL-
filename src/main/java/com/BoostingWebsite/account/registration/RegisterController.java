@@ -1,6 +1,5 @@
 package com.BoostingWebsite.account.registration;
 
-import com.BoostingWebsite.account.token.TokenValidator;
 import com.BoostingWebsite.account.user.User;
 import com.BoostingWebsite.account.user.UserRepository;
 import org.springframework.stereotype.Controller;
@@ -21,7 +20,7 @@ public class RegisterController {
     private final HttpServletRequest request;
     private final EmailConfirmationToken emailConfirmationToken;
 
-    public RegisterController(UserCreatorService userCreator, UserRepository userRepository, EmailConfirmation emailConfirmation, HttpServletRequest request, TokenValidator tokenValidator, EmailConfirmationToken emailConfirmationToken) {
+    public RegisterController(UserCreatorService userCreator, UserRepository userRepository, EmailConfirmation emailConfirmation, HttpServletRequest request, EmailConfirmationToken emailConfirmationToken) {
         this.userCreator = userCreator;
         this.userRepository = userRepository;
         this.emailConfirmation = emailConfirmation;
@@ -58,6 +57,7 @@ public class RegisterController {
     @GetMapping("/confirm")
     public String confirmEmail(@RequestParam("id")Long id, @RequestParam("token") String token){
         String confirmEmail = emailConfirmationToken.emailTokenConfirmation(id,token);
+        System.out.println(confirmEmail);
         if(confirmEmail !=null){
             return "redirect:/login";
         }

@@ -15,11 +15,20 @@ public class EmailService {
     }
 
     public void sendEmail(String to, String subject, String content) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(content);
-        emailSender.send(message);
+        tryToSendEmail(to,subject,content);
+    }
+
+    private void tryToSendEmail(String to, String subject, String content){
+       try{
+           SimpleMailMessage message = new SimpleMailMessage();
+           message.setTo(to);
+           message.setSubject(subject);
+           message.setText(content);
+           emailSender.send(message);
+       }
+       catch (Exception exception){
+           exception.printStackTrace();
+       }
     }
 
     public void constructResetTokenEmail(String contextPath, String token, User user) {

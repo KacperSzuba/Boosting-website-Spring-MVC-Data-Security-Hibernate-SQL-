@@ -2,6 +2,8 @@ package com.BoostingWebsite.account.user;
 
 import com.BoostingWebsite.account.login.LoginHistory;
 import com.BoostingWebsite.account.roles.UserRole;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -28,10 +30,11 @@ public class User{
     @Email(message = "Invalid email")
     private String email;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<LoginHistory> loginHistory;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<UserRole> roles;
 
     public User(){}
@@ -90,6 +93,19 @@ public class User{
 
     public List<LoginHistory> getLoginHistory() {
         return loginHistory;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", enabled=" + enabled +
+                ", email='" + email + '\'' +
+                ", loginHistory=" + loginHistory +
+                ", roles=" + roles +
+                '}';
     }
 }
 

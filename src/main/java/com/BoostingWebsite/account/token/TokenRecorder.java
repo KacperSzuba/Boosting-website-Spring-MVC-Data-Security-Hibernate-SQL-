@@ -22,12 +22,31 @@ public class TokenRecorder {
     }
 
     private void updateToken(String token,User user) {
-        userTokenRepository.delete(userTokenRepository.findByUser(user).get());
-        saveToken(token, user);
+        tryToUpdateToken(token,user);
+    }
+
+    private void tryToUpdateToken(String token, User user){
+        try{
+            userTokenRepository.delete(userTokenRepository.findByUser(user).get());
+            saveToken(token, user);
+        }
+        catch(Exception exception){
+            exception.printStackTrace();
+        }
     }
 
     private void saveToken(String token,User user) {
-        this.userTokenRepository.save(new UserToken(token, user));
+        tryToSaveToken(token,user);
+    }
+
+    private void tryToSaveToken(String token, User user){
+        try{
+            UserToken userToken = new UserToken(token,user);
+            userTokenRepository.save(userToken);
+        }
+        catch (Exception exception){
+            exception.printStackTrace();
+        }
     }
 
     private boolean checkIfUserHasTokenGenerated(User user) {

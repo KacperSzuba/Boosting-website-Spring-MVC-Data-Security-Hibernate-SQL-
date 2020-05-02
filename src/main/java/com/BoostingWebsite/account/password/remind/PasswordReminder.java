@@ -34,7 +34,7 @@ class PasswordReminder {
     private final TokenRecorder tokenRecorderClass;
 
     PasswordReminder(UserRepository userRepository, UserTokenRepository userTokenRepository, HttpServletRequest request, EmailService emailService,
-                            PasswordEncoder encoder, TokenRecorder tokenRecorderClass) {
+                     PasswordEncoder encoder, TokenRecorder tokenRecorderClass) {
         this.userRepository = userRepository;
         this.userTokenRepository = userTokenRepository;
         this.request = request;

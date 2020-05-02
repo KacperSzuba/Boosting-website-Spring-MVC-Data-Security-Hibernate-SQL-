@@ -1,7 +1,7 @@
 package com.BoostingWebsite.account.registration;
 
-import com.BoostingWebsite.account.token.UserTokenRepository;
 import com.BoostingWebsite.account.token.TokenValidator;
+import com.BoostingWebsite.account.token.UserTokenRepository;
 import com.BoostingWebsite.account.user.User;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
