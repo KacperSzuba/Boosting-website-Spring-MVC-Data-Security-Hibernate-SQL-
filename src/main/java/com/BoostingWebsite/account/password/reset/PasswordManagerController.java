@@ -18,7 +18,7 @@ public class PasswordManagerController {
 
     @GetMapping("/change/password")
     public String showChangePasswordPage(){
-        return "accountView/user_ChangePassword";
+        return "accountView/change-password";
     }
 
     @GetMapping("/change/password/form")
@@ -26,7 +26,7 @@ public class PasswordManagerController {
                                  @RequestParam("repeatPassword")String repeatPassword, Model model){
         passwordManager.changePassword(currentPassword, password, repeatPassword);
         model.addAttribute("newPassword",passwordManager.getMessage());
-        return "accountView/user_ChangePassword";
+        return "accountView/change-password";
     }
 
 }
