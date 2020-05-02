@@ -30,7 +30,8 @@ public class BoosterApplicationController {
     }
 
     @PostMapping
-    public String boosterApplicationForm(@Valid @ModelAttribute("boosterApplication") BoosterApplication boosterApplication, BindingResult bindingResult){
+    public String boosterApplicationForm(@Valid @ModelAttribute("boosterApplication") BoosterApplication boosterApplication,
+                                         BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "boosterApplication/booster-application";
         }
