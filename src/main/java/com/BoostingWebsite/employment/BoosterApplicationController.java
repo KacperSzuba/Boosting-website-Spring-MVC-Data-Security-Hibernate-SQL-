@@ -26,13 +26,13 @@ public class BoosterApplicationController {
         BoosterApplication boosterApplication = new BoosterApplication();
         model.addAttribute("boosterApplication",boosterApplication);
         model.addAttribute("regions", Region.values());
-        return "boosterApplication/booster_application_form";
+        return "boosterApplication/booster-application";
     }
 
     @PostMapping
     public String boosterApplicationForm(@Valid @ModelAttribute("boosterApplication") BoosterApplication boosterApplication, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            return "boosterApplication/booster_application_form";
+            return "boosterApplication/booster-application";
         }
         boosterApplicationRepository.save(boosterApplication);
         return "redirect:/";
