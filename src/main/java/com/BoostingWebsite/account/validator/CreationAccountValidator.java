@@ -15,9 +15,9 @@ public class CreationAccountValidator {
         this.userRepository = userRepository;
     }
 
-    public boolean isAccountCreatedCorrectly(User user){
+    public boolean isAccountCreatedCorrectly(User user, String confirmPassword){
         this.user = user;
-        return checkIfEmailExist() && checkIfUserExists();
+        return checkIfEmailExist() && checkIfUserExists() && checkIfPasswordsAreTheSame(confirmPassword);
     }
 
     private boolean checkIfUserExists(){
@@ -37,6 +37,16 @@ public class CreationAccountValidator {
         }
         else {
             return true;
+        }
+    }
+
+    private boolean checkIfPasswordsAreTheSame(String confirmPassword){
+        boolean isPasswordsAreTheSame = user.getPassword().equals(confirmPassword);
+        if(isPasswordsAreTheSame){
+            return true;
+        }
+        else {
+            throw new IllegalArgumentException("Passwords don't match");
         }
     }
 }

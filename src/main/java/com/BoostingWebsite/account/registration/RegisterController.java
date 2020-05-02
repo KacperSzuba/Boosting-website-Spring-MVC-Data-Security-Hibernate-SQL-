@@ -36,13 +36,13 @@ public class RegisterController {
     }
 
     @PostMapping
-    public String register(@Valid @ModelAttribute("register") User user, BindingResult result, Model model) {
+    public String register(@Valid @ModelAttribute("register") User user,@RequestParam("confirmPassword") String confirmPassword, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("message",userCreator.getUserRegistrationInformation());
             return "accountView/register";
         }
         else {
-            if (userCreator.createAccount(user)) {
+            if (userCreator.createAccount(user,confirmPassword)) {
                 model.addAttribute("confirmEmailMessage","Log in to the e-mail address provided and confirm your identity.");
                 emailConfirmation.confirmEmail(getAppUrl(),generateToken(),userRepository.findByUsername(user.getUsername()));
                 return "accountView/login";
@@ -57,7 +57,6 @@ public class RegisterController {
     @GetMapping("/confirm")
     public String confirmEmail(@RequestParam("id")Long id, @RequestParam("token") String token){
         String confirmEmail = emailConfirmationToken.emailTokenConfirmation(id,token);
-        System.out.println(confirmEmail);
         if(confirmEmail !=null){
             return "redirect:/login";
         }

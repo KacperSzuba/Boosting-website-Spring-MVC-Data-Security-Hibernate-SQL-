@@ -29,10 +29,10 @@ class UserCreatorService {
         this.creationAccountValidator = creationAccountValidator;
     }
 
-    boolean createAccount(User user){
+    boolean createAccount(User user, String confirmPassword){
         this.user = user;
         try {
-            tryToCreateAccount();
+            tryToCreateAccount(confirmPassword);
             return true;
         }
         catch (IllegalArgumentException exception){
@@ -47,8 +47,8 @@ class UserCreatorService {
         }
     }
 
-    private void tryToCreateAccount(){
-        if (creationAccountValidator.isAccountCreatedCorrectly(this.user)) {
+    private void tryToCreateAccount(String confirmPassword){
+        if (creationAccountValidator.isAccountCreatedCorrectly(this.user,confirmPassword)) {
             UserRole userRole = userRoleRepository.getUserRole(RoleName.ROLE_USER);
             userRoleRepository.save(userRole);
             List<UserRole> roles = new ArrayList<>();
