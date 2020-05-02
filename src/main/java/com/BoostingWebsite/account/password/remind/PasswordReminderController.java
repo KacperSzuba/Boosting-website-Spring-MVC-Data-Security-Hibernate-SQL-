@@ -20,13 +20,13 @@ public class PasswordReminderController {
 
     @GetMapping("/remind/password")
     public String remindPasswordPage(){
-        return "accountView/user_RemindPassword";
+        return "accountView/remind-password";
     }
 
     @GetMapping("/remind/password/form")
     public String remindPassword(@RequestParam("email") String email){
         passwordReminder.remindPassword(email);
-        return "accountView/user_RemindPassword";
+        return "accountView/remind-password";
     }
 
     @GetMapping("/remind/password/token")
