@@ -13,7 +13,7 @@ public class PasswordReminderController {
 
     private final PasswordReminder passwordReminder;
     private final PasswordReminderToken passwordReminderToken;
-    
+
     public PasswordReminderController(PasswordReminder passwordReminder, PasswordReminderToken passwordReminderToken) {
         this.passwordReminder = passwordReminder;
         this.passwordReminderToken = passwordReminderToken;

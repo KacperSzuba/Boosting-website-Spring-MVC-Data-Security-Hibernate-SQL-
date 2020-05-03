@@ -98,24 +98,24 @@
         </header>
         <section class="login-form">
             <div class="wrap">
-                <h1>Account Login</h1>
-                <form>
+                <h1>Contact form</h1>
+                <form th:action="@{/contact-us/send}" th:object="${contact}"  method="get">
                     <div class="form-group">
                         <label for="exampleInputName">Name</label>
-                        <input name="name" type="text" class="form-control" id="exampleInputName" placeholder="Name">
+                        <input th:field="*{name}" type="text" class="form-control" id="exampleInputName" placeholder="Name">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail">Email</label>
-                        <input name="email" type="email" class="form-control" id="exampleInputEmail" placeholder="Email">
+                        <input th:field="*{email}" type="email" class="form-control" id="exampleInputEmail" placeholder="Email">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputSubject">Subject</label>
-                        <input name="subject" type="text" class="form-control" id="exampleInputSubject"
+                        <input th:field="*{subject}" type="text" class="form-control" id="exampleInputSubject"
                                placeholder="Subject">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputQuestion">Question</label>
-                        <textarea name="question" type="text" class="form-control" id="exampleInputQuestion"
+                        <textarea th:field="*{question}" type="text" class="form-control" id="exampleInputQuestion"
                                   placeholder="Question"></textarea>
                     </div>
                     <input class="button" type="submit" value="Send message" />
