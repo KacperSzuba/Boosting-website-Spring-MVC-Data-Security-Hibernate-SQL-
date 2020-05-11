@@ -1,0 +1,913 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    max-width: 1920px;
+    margin: 0 auto;
+
+}
+
+/* Navigation */
+
+nav.background {
+    height: 100vh;
+    background-image: url(/images/others/person.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.burger i {
+    position: fixed;
+    right: 5vh;
+    top: 2.5vh;
+    font-size: 30px;
+    z-index: 3;
+}
+
+.burger:hover {
+    cursor: pointer;
+}
+
+aside {
+    position: fixed;
+    bottom: 0;
+    left: -250px;
+    width: 250px;
+    height: 100vh;
+    background-color: #f8f8ff;
+    transition: 0.3s linear;
+}
+
+aside nav {
+    height: 100%;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+aside nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-top: 5vh;
+    padding-left: 5vw;
+}
+
+aside nav ul li {
+    flex-basis: 10vh;
+    width: 100%;
+    line-height: 10vh;
+}
+
+aside nav ul li a {
+    display: flex;
+    font-size: 3vh;
+    text-decoration: none;
+    color: #181819;
+    height: 100%;
+}
+
+/* Burger icon change */
+
+.fas {
+    display: none;
+}
+
+i.show {
+    display: block;
+}
+
+aside.show {
+    left: 0;
+}
+
+.navigation {
+    transition: 0.15s linear;
+}
+
+.nav-animation {
+    background-color: rgba(20, 165, 235, 0.85)
+}
+
+.color {
+    color: #F8F8F8;
+}
+
+.aside {
+    height: 10vh;
+}
+
+@media (orientation:landscape) and (max-width: 1023px) {
+    aside nav ul li a {
+        font-size: 3vw;
+    }
+}
+
+@media(min-width:1024px) {
+    .burger {
+        display: none;
+    }
+
+    aside {
+        top: 0;
+        left: 0;
+        display: flex;
+        height: 15vh;
+        width: 100%;
+        background-color: transparent;
+        transition: 0.15s linear;
+        z-index: 3;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    aside nav ul {
+        flex-direction: row;
+        padding: 0;
+        margin: 0 auto;
+        justify-content: space-around;
+        width: 60vw;
+    }
+
+    aside nav ul li {
+        display: flex;
+        justify-content: center;
+        flex-basis: 10vw;
+        line-height: unset;
+        align-content: center;
+    }
+
+    aside nav ul li a {
+        position: relative;
+        font-size: 16px;
+        color: #f8f8ff;
+        width: auto;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.15s linear;
+    }
+
+    aside nav ul li a:hover {
+        color: #14a5eb;
+    }
+
+    aside nav ul li a.transparent:hover {
+        color: #f8f8f8;
+    }
+
+    aside nav ul li a:hover>div.border div {
+        left: 0;
+    }
+
+    .border {
+        position: absolute;
+        top: 50%;
+        left: 0%;
+        width: 100%;
+        height: 2px;
+        margin-top: 20px;
+        overflow: hidden;
+    }
+
+    .border div {
+        position: absolute;
+        left: -100%;
+        height: 100%;
+        width: 100%;
+        background-color: #14a5eb;
+        transition: 0.15s linear;
+    }
+
+    .border div.white {
+        background-color: #f8f8ff;
+    }
+}
+
+@media(min-width:1280px) {
+    aside nav ul li a {
+        font-size: 20px;
+    }
+}
+
+@media(min-width:1600px) {
+    aside nav ul li a {
+        font-size: 22px;
+    }
+}
+
+
+/* Header */
+
+header {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    max-width: 1024px;
+    transform: translate(-50%, -50%);
+    color: #181819;
+    width: 100%;
+    transition: 0.15s linear;
+
+}
+
+header p {
+    font-size: 16px;
+    text-align: center;
+    color: #181819;
+    padding-bottom: 20px;
+    width: 75%;
+    margin: 0 auto;
+}
+
+header a {
+    display: block;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 75%;
+    height: 50px;
+    margin: 0 auto;
+    line-height: 50px;
+    font-size: 20px;
+    color: #181819;
+    border-radius: 25px;
+    border: 2px solid;
+    text-align: center;
+}
+
+.hide {
+    opacity: 0;
+    left: 0%;
+}
+
+@media (orientation: portrait) and (min-width: 360px) {
+    header p {
+        font-size: 18px;
+    }
+
+    header a {
+        font-size: 22px;
+    }
+}
+
+@media (orientation: portrait) and (min-width: 414px) {
+    header p {
+        font-size: 20px;
+    }
+
+    header a {
+        font-size: 24px;
+    }
+}
+
+@media (orientation: portrait) and (min-width: 414px) {
+    header p {
+        font-size: 28px;
+        width: 65%;
+    }
+
+    header a {
+        height: 75px;
+        line-height: 75px;
+        font-size: 32px;
+        width: 65%;
+    }
+}
+
+@media (orientation: landscape) and (min-width: 560px) {
+    header {
+        top: 60%;
+    }
+
+
+    header p {
+        font-size: 24px;
+        margin-bottom: 15%;
+    }
+
+    header a {
+        font-size: 28px;
+    }
+}
+
+@media (orientation: landscape) and (min-width: 800px) {
+    header {
+        top: 55%;
+    }
+
+
+    header p {
+        font-size: 26px;
+    }
+
+    header a {
+        font-size: 30px;
+    }
+}
+
+@media (min-width: 1024px) {
+    header {
+        top: 80%;
+        width: 45%;
+    }
+
+    header p {
+        font-size: 28px;
+        margin-bottom: 0%;
+    }
+
+    header a {
+        font-size: 32px;
+        width: 50%;
+        transition: 0.3s linear;
+    }
+
+    header a:hover {
+        background-color: #14a5eb;
+        color: #f8f8ff;
+        border: none;
+    }
+}
+
+@media (min-width: 1600px) {
+    header {
+        top: 80%;
+        width: 35%;
+    }
+
+    header p {
+        font-size: 32px;
+    }
+
+    header a {
+        font-size: 36px;
+        height: 75px;
+        line-height: 75px;
+        width: 50%;
+        transition: 0.3s linear;
+    }
+
+    header a:hover {
+        background-color: #14a5eb;
+        color: #f8f8ff;
+        border: none;
+    }
+}
+
+/* main - order */
+
+main.division {
+    background-color: #F6F6F6;
+    padding: 20% 10%;
+    height: 100%;
+    width: 100%;
+    font-family: 'Open Sans', sans-serif;
+}
+
+main.division section {
+    padding: 5% 0;
+    background-color: white;
+    height: 100%;
+    border: 10px white solid;
+    border-radius: 10%;
+    margin-bottom: 15%;
+
+}
+
+main.division section div.wrap-image {
+    display: flex;
+    justify-content: center;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+main.division h2 {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 20px;
+    text-align: center;
+    padding: 10% 0;
+}
+
+main.division h3 {
+    padding-left: 0%;
+    font-size: 16px;
+    text-align: left;
+    text-transform: uppercase;
+    line-height: 40px;
+}
+
+main.division h3.test {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+main.division section.current h3,
+main.division section.desired h3,
+main.division section.account-info h3 {
+    margin-left: 5%;
+}
+
+main.division select.custom-select {
+    width: 90%;
+    padding-left: 5%;
+    margin: 2.5% 0 5%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+    height: 35px;
+    overflow: scroll;
+    font-size: 18px;
+}
+
+section.price select.custom-select {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-end;
+}
+
+section.price div.wrap {
+    display: flex;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-bottom: 7.5%;
+}
+
+section.price div.wrap div.form-group {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#division {
+    flex-direction: column;
+}
+
+section.price div.wrap p.price {
+    line-height: 40px;
+}
+
+section.price div.wrap div {
+    display: flex;
+}
+
+section.price div.wrap p.text {
+    flex-direction: row;
+    width: 75%;
+    line-height: 40px;
+    font-size: 14px;
+}
+
+section.price div.wrap p.price {
+    width: 25%;
+    text-align: right;
+}
+
+section.price div.wrap .total-price {
+    width: 75%;
+}
+
+main.division section.price h2 {
+    padding: 2.5% 0 20%;
+}
+
+main.division section.account-info input,
+main.division section.account-info textarea {
+    width: 90%;
+    padding-left: 5%;
+    margin: 2.5% 0 5%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+}
+
+main.division section.account-info input {
+    height: 40px;
+}
+
+main.division section.account-info textarea {
+    height: 80px;
+    padding-top: 5px;
+    min-width: 90%;
+    max-width: 90%;
+    min-height: 80px;
+    max-height: 160px;
+}
+
+main.division input.btn-sm {
+    display: block;
+    text-transform: uppercase;
+    width: 75%;
+    height: 50px;
+    margin: 0 auto;
+    line-height: 50px;
+    font-size: 20px;
+    color: #181819;
+    border-radius: 25px;
+    border: 2px solid;
+    background-color: transparent;
+    cursor: pointer;
+    transition: 0.3s linear;
+}
+
+@media (orientation: portrait) and (min-width: 375px) {
+    main.division h2 {
+        font-size: 26px;
+        padding: 2.5% 0 10% 0;
+    }
+
+    main.division h3 {
+        font-size: 20px;
+    }
+
+    section.price div.wrap p.text,
+    section.price div.wrap p.price {
+        font-size: 16px;
+    }
+
+    main.division section.price select.custom-select {
+        width: 60%;
+    }
+}
+
+@media (orientation: portrait) and (min-width: 768px) {
+    main.division {
+        padding: 10% 15%;
+    }
+
+    main.division h2 {
+        font-size: 34px;
+        padding: 2.5% 0 10% 0;
+    }
+
+    main.division h3 {
+        font-size: 26px;
+    }
+
+    main.division section.current h3,
+    main.division section.desired h3,
+    main.division section.account-info h3 {
+        margin-left: 20%;
+    }
+
+    section.price div.wrap p.text,
+    section.price div.wrap p.price {
+        font-size: 22px;
+    }
+
+    main.division select.custom-select {
+        width: 60%;
+        height: 65px;
+    }
+
+    main.division section.price h2 {
+        padding: 2.5% 0 15%;
+    }
+
+    main.division section.price select.custom-select {
+        width: 50%;
+        height: 55px;
+    }
+}
+
+
+@media (orientation: landscape) and (min-width: 550px) {
+
+    main.division {
+        padding: 15% 10% 5%;
+    }
+
+    main.division section {
+        padding: 5% 2.5%;
+    }
+
+    main.division section.price h2 {
+        font-size: 24px;
+    }
+
+    main.division h3 {
+        font-size: 18px;
+    }
+
+    main.division section.current h2,
+    main.division section.desired h2,
+    main.division section.account-info h2 {
+        padding: 2.5% 0 5%;
+    }
+
+    main.division section.current h3,
+    main.division section.desired h3,
+    main.division section.account-info h3 {
+        margin-left: 12.5%;
+    }
+
+    main.division select.custom-select {
+        width: 75%;
+        height: 40px;
+    }
+
+    main.division section.price select.custom-select {
+        width: 50%;
+    }
+
+    section.price div.wrap p.text,
+    section.price div.wrap p.price {
+        font-size: 16px;
+    }
+}
+
+@media (orientation: landscape) and (min-width: 730px) {
+    main.division {
+        padding: 12.5% 15% 5%;
+    }
+
+    main.division h2 {
+        font-size: 28px;
+    }
+
+    main.division h3 {
+        font-size: 22px;
+    }
+
+    section.price div.wrap p.text,
+    section.price div.wrap p.price {
+        font-size: 18px;
+    }
+}
+
+@media (min-width: 1024px) {
+    main.division {
+        padding: 12.5% 40% 5% 10%;
+        position: relative;
+    }
+
+    main.division section.price {
+        position: absolute;
+        top: 0;
+        margin-top: 12.5%;
+        right: 2.5%;
+        width: auto;
+        height: auto;
+    }
+
+    main.division input.btn-sm {
+        width: 50%;
+    }
+
+    main.division input.btn-sm:hover {
+        background-color: #14a5eb;
+    }
+}
+
+@media (min-width: 1300px) {
+    main.division {
+        padding: 12.5% 50% 5% 5%;
+    }
+
+    main.division section.price {
+        right: 7.5%;
+    }
+}
+
+@media (min-width: 1600px) {
+    main.division {
+        padding: 12.5% 55% 5% 5%;
+    }
+
+    main.division section.price {
+        right: 20%;
+    }
+}
+
+/* Footer  */
+
+footer {
+    background-color: #4d4d4d;
+    color: #f8f8ff;
+}
+
+footer div.wrap {
+    width: 80%;
+    margin: 0 auto;
+}
+
+footer .wrap section {
+    display: flex;
+    width: 90%;
+    margin: 15% auto 0;
+    padding: 0 7.5%;
+    flex-direction: column;
+}
+
+footer .text h1 {
+    text-align: center;
+    margin: 5% 5% 10%;
+    padding-bottom: 5%;
+    font-size: 36px;
+    font-family: 'Dancing Script', cursive;
+    border-bottom: 1px solid #14a5eb;
+}
+
+.text h1:nth-last-of-type(1) {
+    margin-bottom: 5%;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+}
+
+footer div.customer {
+    display: flex;
+    flex-direction: column;
+}
+
+footer div.pages {
+    display: flex;
+    flex-direction: column;
+}
+
+footer h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 2.5%;
+    padding-bottom: 2.5%;
+    border-bottom: 1px solid #14a5eb;
+}
+
+footer div a {
+    text-decoration: none;
+    color: #f8f8ff;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    margin-bottom: 2.5%;
+    transition: 0.3s linear;
+}
+
+.customer {
+    margin-bottom: 10%;
+}
+
+@media (orientation: portrait) and (min-width: 375px) {
+    footer .text h1 {
+        font-size: 40px;
+    }
+
+    footer .wrap section {
+        padding: 0 5%;
+    }
+
+    footer h2 {
+        font-size: 22px;
+    }
+
+    footer div a {
+        font-size: 18px;
+    }
+}
+
+@media (orientation: portrait) and (min-width: 768px) {
+    footer .text h1 {
+        font-size: 44px;
+    }
+
+    footer h2 {
+        font-size: 28px;
+    }
+
+    footer div a {
+        font-size: 22px;
+    }
+}
+
+@media (orientation: landscape) and (min-width: 550px) {
+    footer .text h1 {
+        font-size: 40px;
+    }
+
+    footer h2 {
+        font-size: 22px;
+    }
+
+    footer div a {
+        font-size: 18px;
+    }
+}
+
+@media (orientation: landscape) and (min-width: 730px) {
+    footer .text h1 {
+        font-size: 44px;
+    }
+
+    footer h2 {
+        font-size: 28px;
+    }
+
+    footer div a {
+        font-size: 20px;
+    }
+}
+
+
+@media (min-width: 1024px) {
+    footer .wrap section {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0;
+        width: 100%;
+        margin: 5% 0 0;
+    }
+
+    footer .wrap section .pages {
+        flex-basis: 40%;
+    }
+
+    footer .wrap section .customer {
+        flex-basis: 40%;
+    }
+
+    .text {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    footer .text h1 {
+        padding-bottom: 2.5%;
+        font-size: 44px;
+    }
+
+    .text h1:nth-last-of-type(1) {
+        margin-bottom: 5%;
+    }
+
+    section {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    footer h2 {
+        font-size: 34px;
+        padding-bottom: 5%;
+        margin-bottom: 10%;
+    }
+
+    footer div.wrap section h2 {
+        text-align: left;
+    }
+
+    footer div a {
+        font-size: 20px;
+        margin-left: 2.5%;
+    }
+
+    footer div a:hover {
+        color: #14a5eb;
+    }
+}
+
+@media (min-width: 1300px) {
+    footer .wrap section {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    footer .text h1 {
+        font-size: 50px;
+    }
+
+    footer h2 {
+        font-size: 34px;
+    }
+
+    footer div a {
+        font-size: 24px;
+    }
+}
+
+@media (min-width: 1300px) {
+
+    footer .wrap section {
+        width: 85%;
+    }
+
+    footer h2 {
+        font-size: 36px;
+    }
+}

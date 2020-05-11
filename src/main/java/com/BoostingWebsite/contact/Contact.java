@@ -21,9 +21,7 @@ public class Contact {
     @Column(length = 1000)
     private String question;
 
-    public Contact(){
-
-    }
+    public Contact(){ }
 
     public Contact(String name, String email, String subject, String question) {
         this.name = name;

@@ -1,12 +1,15 @@
 package com.BoostingWebsite.order.division2;
 
 import com.BoostingWebsite.account.user.ActualUser;
+import com.BoostingWebsite.account.user.User;
+import com.BoostingWebsite.account.user.exception.UserExistException;
 import com.BoostingWebsite.order.division.Tier;
 import com.BoostingWebsite.order.division2.entity.League;
 import com.BoostingWebsite.order.division2.repository.LeagueRepository;
 import com.BoostingWebsite.order.division2.entity.OrderBoost2;
 import com.BoostingWebsite.order.division2.repository.OrderBoostRepository2;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
 import java.util.List;
 
@@ -14,7 +17,6 @@ import java.util.List;
 public class OrderBoostService2 {
 
     private double sum2 = 0;
-
 
     private OrderBoost2 orderBoost2;
 
@@ -55,7 +57,6 @@ public class OrderBoostService2 {
     void makeOrder(){
         orderBoostRepository2.save(this.orderBoost2);
     }
-
 
     private double calculatePrice(){
         List<Tier> tiers = Tier.tiers(currentLeague().getTier(),destinationLeague().getTier());

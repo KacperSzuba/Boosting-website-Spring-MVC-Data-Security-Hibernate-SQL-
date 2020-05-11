@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Order</title>
+        <link type="text/css" rel="stylesheet" th:href="@{/fontawesome/css/all.css}">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto&display=swap&subset=latin-ext"
+              rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Dancing+Script:600&display=swap" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" th:href="@{/style/order-style.css}" />
+    </head>
+    <body>
+        <nav class="background">
+            <aside>
+                <nav class="navigation">
+                    <ul>
+                        <li>
+                            <a href="/">
+                                <div class="height">Home</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/order/">
+                                <div class="height">Boosting</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/booster-application">
+                                <div class="height">Join our team</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/contact-us">
+                                <div class="height">Contact us</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="height">F.A.Q</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li sec:authorize="${isAnonymous()}">
+                            <a href="/login">
+                                <div class="height">Login</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li sec:authorize="${isFullyAuthenticated()}">
+                            <form th:action="@{/logout}" method="post">
+                                <a class="height">
+                                    <input  type="submit" value="Logout" />
+                                </a>
+                            </form>
+                            <div class="border">
+                                <div></div>
+                            </div>
+                        </li>
+                        <li sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')">
+                            <a href="/account">
+                                <div class="height">Account</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+            <div class="burger">
+                <i class="fas fa-bars show"></i>
+                <i class="fas fa-times"></i>
+            </div>
+        </nav>
+        <header>
+            <p>We belive that we are able to provide each of you with the rank you deserved.</p>
+            <a href="/order/">Boost Me</a>
+        </header>
+        <main class="division">
+            <form th:action="@{/order3/account/information}" th:object="${orderBoost2}" method="get">
+                <section class="current">
+                    <h2>Current Division</h2>
+                    <div class="wrap-image">
+                        <img src="../images/Iron/Iron4.png" alt="Current division image">
+                    </div>
+                    <div class="form-group">
+                        <h3>Current Tier</h3>
+                        <select class="custom-select" th:field="*{currentLeague.tier}" id="currentTier">
+                            <option th:each="currentTier : ${tiers}" th:value="${currentTier.tier}"
+                                    th:text="${currentTier.tier}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h3>Current Division</h3>
+                        <select class="custom-select" th:field="*{currentLeague.division}" id="currentDivision">
+                            <option th:each="currentDivision : ${divisions}" th:value="${currentDivision.division}"
+                                    th:text="${currentDivision.division}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h3>Current Points</h3>
+                        <select class="custom-select" th:field="*{currentLeague.points}" id="currentPoints">
+                            <option th:each="currentPoints : ${points}" th:value="${currentPoints.points}"
+                                    th:text="${currentPoints.points}"></option>
+                        </select>
+                    </div>
+                </section>
+                <section class="desired">
+                    <h2>Desired Division</h2>
+                    <div class="wrap-image">
+                        <img src="../images/Bronze/Bronze4.png" alt="Desired division image">
+                    </div>
+                    <div class="form-group">
+                        <h3>Desired Tier</h3>
+                        <select class="custom-select" th:field="*{destinationLeague.tier}" id="destinationTier">
+                            <option th:each="destinationTier : ${tiers}" th:value="${destinationTier.tier}"
+                                    th:text="${destinationTier.tier}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h3>Desired Division</h3>
+                        <select class="custom-select" th:field="*{destinationLeague.division}" id="destinationDivision">
+                            <option th:each="destinationDivision : ${divisions}" th:value="${destinationDivision.division}"
+                                    th:text="${destinationDivision.division}"></option>
+                        </select>
+                    </div>
+                </section>
+                <section class="account-info">
+                    <h2>Account information</h2>
+                    <div class="form-group">
+                        <input th:field="*{accountDetails.lolUsername}" type="text" class="form-control"
+                               placeholder="Enter your league of legends username" id="lolUsername">
+                        <span class="error" th:if="${#fields.hasErrors('accountDetails.lolUsername')}" th:errors="*{accountDetails.lolUsername}"></span>
+                    </div>
+                    <div class="form-group">
+                        <input th:field="*{accountDetails.lolPassword}" type="password" class="form-control" placeholder="Enter your league of legends password" id="lolPassword">
+                        <span class="error" th:if="${#fields.hasErrors('accountDetails.lolPassword')}" th:errors="*{accountDetails.lolPassword}"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <textarea th:field="*{noteToBooster}" type="text" class="form-control" placeholder="Enter your note to bosoter" id="noteToBooster"></textarea>
+                    </div>
+                </section>
+                <section class="price">
+                    <h2>Your Order</h2>
+                    <div class="wrap">
+                        <h3 class="test">Server:</h3>
+                        <div class="form-group">
+                            <select class="custom-select" th:field="*{accountDetails.region}" id="region">
+                                <option th:each="region : ${regions}" th:value="${region}" th:text="${region}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="wrap" id="division">
+                        <h3>Solo Division Boost:</h3>
+                        <div>
+                            <p class="text">5 vs 5 Ranked Solo/Duo:</p>
+                            <p class="price">60</p>
+                        </div>
+                        <p class="text">Iron IV To Bronze IV</p>
+
+                    </div>
+                    <div class="wrap">
+                        <h3>Extras:</h3>
+                    </div>
+                    <div class="wrap">
+                        <h3 class="total-price">Total: </h3>
+                        <p class="price">60</p>
+                    </div>
+                </section>
+                <input class="btn-sm" type="submit" value="Place order" />
+            </form>
+        </main>
+        <footer>
+            <div class="wrap">
+                <div class="text">
+                    <h1>Boosting</h1>
+                </div>
+                <section>
+                    <div class="customer">
+                        <h2>Customer</h2>
+                        <a href="#">Order Now</a>
+                        <a href="#">Join Our Team</a>
+                    </div>
+                    <div class="pages">
+                        <h2>Pages</h2>
+                        <a href="#">F.A.Q.</a>
+                        <a href="#">Contact Us</a>
+                        <a href="#">Terms And Conditions</a>
+                    </div>
+                </section>
+            </div>
+        </footer>
+        <script src="/js/navigation-animation-mobile.js"></script>
+        <script src="/js/navigation-animation-desktop.js"></script>
+    </body>
+</html>
