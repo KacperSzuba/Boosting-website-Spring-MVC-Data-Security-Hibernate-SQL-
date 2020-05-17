@@ -369,7 +369,6 @@ section.login-form {
     height: 100%;
     width: 100%;
     font-family: 'Open Sans', sans-serif;
-
 }
 
 section.login-form div.wrap {
@@ -412,9 +411,7 @@ section.login-form div.wrap textarea.form-control {
     width: 90%;
     height: 40px;
     padding-left: 5%;
-    margin: 2.5% 0 5%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 2.5% auto;
     border: 1px solid black;
 }
 
@@ -430,6 +427,7 @@ section.login-form div.wrap textarea.form-control {
 .form-group {
     display: flex;
     flex-direction: column;
+    margin-bottom: 5%;
 }
 
 section.login-form div.wrap input.button {
@@ -448,6 +446,12 @@ section.login-form div.wrap input.button {
     background-color: white;
 }
 
+section.login-form div.wrap span.error {
+    font-size: 10px;
+    color: darkred;
+    margin-left: 5%;
+}
+
 @media (orientation: portrait) and (min-width: 768px) {
 
     section.login-form div.wrap {
@@ -459,6 +463,7 @@ section.login-form div.wrap input.button {
         width: 80%;
         height: 50px;
         font-size: 18px;
+        margin: 1% auto;
     }
 
     section.login-form div.wrap textarea.form-control {
@@ -468,6 +473,7 @@ section.login-form div.wrap input.button {
         max-width: 80%;
         min-height: 100px;
         max-height: 200px;
+        margin: 1% auto;
     }
 
     section.login-form div.wrap label {
@@ -495,6 +501,11 @@ section.login-form div.wrap input.button {
     section.login-form div.wrap p {
         padding: 7.5% 0 5%;
         font-size: 18px;
+    }
+
+    section.login-form div.wrap span.error {
+        font-size: 14px;
+        margin-left: 10%;
     }
 }
 
@@ -535,6 +546,11 @@ section.login-form div.wrap input.button {
 
     section.login-form div.wrap p {
         padding: 7.5% 0 5%;
+    }
+
+    section.login-form div.wrap span.error {
+        font-size: 10px;
+        margin-left: 7.5%;
     }
 }
 
@@ -586,6 +602,11 @@ section.login-form div.wrap input.button {
 
     section.login-form div.wrap input.form-control:focus {
         border: 1.5px solid #14a5eb;
+    }
+
+    section.login-form div.wrap span.error {
+        font-size: 14px;
+        margin-left: 7.5%;
     }
 }
 

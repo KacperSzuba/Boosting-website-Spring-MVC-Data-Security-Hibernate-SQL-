@@ -103,25 +103,25 @@
                     <div class="form-group">
                         <label for="exampleInputName">Name</label>
                         <input th:field="*{name}" type="text" class="form-control" id="exampleInputName" placeholder="Name">
+                        <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail">Email</label>
                         <input th:field="*{email}" type="email" class="form-control" id="exampleInputEmail" placeholder="Email">
+                        <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputSubject">Subject</label>
-                        <input th:field="*{subject}" type="text" class="form-control" id="exampleInputSubject"
-                               placeholder="Subject">
+                        <input th:field="*{subject}" type="text" class="form-control" id="exampleInputSubject" placeholder="Subject">
+                        <span class="error" th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}"></span>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputQuestion">Question</label>
-                        <textarea th:field="*{question}" type="text" class="form-control" id="exampleInputQuestion"
-                                  placeholder="Question"></textarea>
+                        <textarea th:field="*{question}" type="text" class="form-control" id="exampleInputQuestion" placeholder="Question"></textarea>
+                        <span class="error" th:if="${#fields.hasErrors('question')}" th:errors="*{question}"></span>
                     </div>
                     <input class="button" type="submit" value="Send message" />
                 </form>
-                <p class="register">Don't have an account yet? <a href="#">Click here</a> to create one and enjoy our
-                    Loyalty Program!</p>
             </div>
         </section>
         <footer>

@@ -3,6 +3,9 @@ package com.BoostingWebsite.contact;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @DynamicUpdate
@@ -12,13 +15,18 @@ public class Contact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(min = 2 ,message = "Name length should be at least 2 letters")
     private String name;
 
+    @NotEmpty(message = "E-mail cannot be empty")
+    @Email(message = "Invalid email")
     private String email;
 
+    @Size(min = 4 ,message = "Subject length should be at least 4 letters")
     private String subject;
 
     @Column(length = 1000)
+    @NotEmpty(message = "Question cannot be empty")
     private String question;
 
     public Contact(){ }
