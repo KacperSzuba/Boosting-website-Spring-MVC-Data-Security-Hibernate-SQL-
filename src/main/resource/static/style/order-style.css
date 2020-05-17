@@ -434,9 +434,7 @@ main.division select.custom-select {
 
 section.price select.custom-select {
     width: 75%;
-    display: flex;
-    flex-direction: column;
-    align-content: flex-end;
+    line-height: 35px;
 }
 
 section.price div.wrap {

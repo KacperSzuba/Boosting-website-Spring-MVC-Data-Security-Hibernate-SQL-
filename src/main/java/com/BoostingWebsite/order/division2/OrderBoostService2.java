@@ -1,22 +1,19 @@
 package com.BoostingWebsite.order.division2;
 
 import com.BoostingWebsite.account.user.ActualUser;
-import com.BoostingWebsite.account.user.User;
-import com.BoostingWebsite.account.user.exception.UserExistException;
 import com.BoostingWebsite.order.division.Tier;
 import com.BoostingWebsite.order.division2.entity.League;
 import com.BoostingWebsite.order.division2.repository.LeagueRepository;
 import com.BoostingWebsite.order.division2.entity.OrderBoost2;
 import com.BoostingWebsite.order.division2.repository.OrderBoostRepository2;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
 
 import java.util.List;
 
 @Service
 public class OrderBoostService2 {
 
-    private double sum2 = 0;
+    private double sum = 0;
 
     private OrderBoost2 orderBoost2;
 
@@ -51,7 +48,7 @@ public class OrderBoostService2 {
         this.orderBoost2.setAccountDetails(orderBoost2.getAccountDetails());
         this.orderBoost2.setNoteToBooster(orderBoost2.getNoteToBooster());
         this.orderBoost2.setPrice(calculatePrice());
-        sum2 = 0;
+        sum = 0;
     }
 
     void makeOrder(){
@@ -71,7 +68,7 @@ public class OrderBoostService2 {
                 calculatePriceFromWholeTier(tier);
             }
         }
-        return sum2;
+        return sum;
     }
 
     private void calculatePriceFromCurrentTier(Tier tier, int tierSize){
@@ -79,20 +76,20 @@ public class OrderBoostService2 {
             int currentDivision = Integer.parseInt(currentLeague().getDivision());
             for (int i = currentDivision; i >=1; i--) {
                 if(compareCurrentTiers(tier) && currentDivision == i){
-                    sum2 += currentLeague().getPrice();
+                    sum += currentLeague().getPrice();
                 }
                 else {
-                    sum2 += priceForLeague(tier,i);
+                    sum += priceForLeague(tier, i);
                 }
             }
         }
         else {
             for (int i = Integer.parseInt(currentLeague().getDivision()); i >Integer.parseInt(destinationLeague().getDivision()); i--) {
                 if(compareCurrentTiers(tier) && Integer.parseInt(currentLeague().getDivision())==i){
-                    sum2 += currentLeague().getPrice();
+                    sum += currentLeague().getPrice();
                 }
                 else {
-                    sum2 += priceForLeague(tier,i);
+                    sum += priceForLeague(tier, i);
                 }
             }
         }
@@ -100,13 +97,13 @@ public class OrderBoostService2 {
 
     private void calculatePriceFromDestinationTier(Tier tier){
         for (int i =4; i>Integer.parseInt(destinationLeague().getDivision());i--) {
-            sum2 += priceForLeague(tier,i);
+            sum += priceForLeague(tier, i);
         }
     }
 
     private void calculatePriceFromWholeTier(Tier tier){
         for (int i =4; i>=1;i--){
-            sum2 += priceForLeague(tier,i);
+            sum += priceForLeague(tier, i);
         }
     }
 
