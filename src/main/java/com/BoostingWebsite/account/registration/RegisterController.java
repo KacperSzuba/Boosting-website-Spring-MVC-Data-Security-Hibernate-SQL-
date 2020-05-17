@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.UUID;
 
+import static com.BoostingWebsite.account.validator.CreationAccountValidator.isConfirmPasswordIsValid;
+
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
@@ -36,19 +38,20 @@ public class RegisterController {
     }
 
     @PostMapping
-    public String register(@Valid @ModelAttribute("register") User user,@RequestParam("confirmPassword") String confirmPassword, BindingResult result, Model model) {
-        if (result.hasErrors()) {
+    public String register(@Valid @ModelAttribute("register") User user, BindingResult result, @RequestParam("confirmPassword") String confirmPassword, Model model) {
+        if (result.hasErrors() || isConfirmPasswordIsValid(confirmPassword)) {
+            model.addAttribute("confirmPasswordErrorMessage","Confirmation password length should be between 7 and 20 letters");
             model.addAttribute("message",userCreator.getUserRegistrationInformation());
             return "accountView/register";
         }
         else {
             if (userCreator.createAccount(user,confirmPassword)) {
                 model.addAttribute("confirmEmailMessage","Log in to the e-mail address provided and confirm your identity.");
-                emailConfirmation.confirmEmail(getAppUrl(),generateToken(),userRepository.findByUsername(user.getUsername()));
+                emailConfirmation.confirmEmail(getAppUrl(),generateToken(), userRepository.findByUsername(user.getUsername()));
                 return "accountView/login";
             }
             else {
-                model.addAttribute("message",userCreator.getUserRegistrationInformation());
+                model.addAttribute("message", userCreator.getUserRegistrationInformation());
                 return "accountView/register";
             }
         }

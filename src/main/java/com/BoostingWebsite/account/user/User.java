@@ -18,15 +18,17 @@ public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty(message = "Username cannot be empty")
-    @Size(min = 7,max = 20,message = "Username length should between 7 and 20 letters")
+
+    @Size(min = 7,max = 20,message = "Username length should be between 7 and 20 letters")
     private String username;
-    @NotEmpty(message = "Password cannot be empty")
-    @Size(min = 7,message = "Password length should be more than 7 letters")
+
+    @Size(min = 7,message = "Password length should be between 7 and 20 letters")
     private String password;
+
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean enabled;
-    @NotEmpty(message = "Email cannot be empty")
+
+    @NotEmpty(message = "E-mail cannot be empty")
     @Email(message = "Invalid email")
     private String email;
 

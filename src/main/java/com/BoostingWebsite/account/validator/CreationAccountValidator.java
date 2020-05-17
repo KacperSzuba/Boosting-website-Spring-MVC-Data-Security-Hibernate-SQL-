@@ -15,6 +15,10 @@ public class CreationAccountValidator {
         this.userRepository = userRepository;
     }
 
+    public static boolean isConfirmPasswordIsValid(String confirmPassword){
+        return confirmPassword.length() >= 7 && confirmPassword.length() <= 20;
+    }
+
     public boolean isAccountCreatedCorrectly(User user, String confirmPassword){
         this.user = user;
         return checkIfEmailExist() && checkIfUserExists() && checkIfPasswordsAreTheSame(confirmPassword);
