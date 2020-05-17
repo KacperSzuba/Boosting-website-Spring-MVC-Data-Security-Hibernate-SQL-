@@ -20,10 +20,10 @@ public class BoosterApplication {
 
     private String discord;
 
-    @NotEmpty
+    @NotEmpty(message = "E-mail cannot be empty")
     private String email;
 
-    @NotEmpty(message = "Is required")
+    @NotEmpty(message = "Opgg link cannot be empty")
     private String opgg;
 
     private Region region;
@@ -32,16 +32,16 @@ public class BoosterApplication {
 
     private String AverageNumberOfHoursPlayedDaily;
 
-    @NotNull(message = "Is required")
+    @NotNull(message = "Age cannot be empty")
     private Integer Age;
 
-    @NotEmpty(message = "Is required")
+    @NotEmpty(message = "Country cannot be empty")
     private String country;
 
-    @NotEmpty(message = "Is required")
+    @NotEmpty(message = "Best form of contact cannot be empty")
     private String bestFormOfContact;
 
-    @NotEmpty(message = "Is required")
+    @NotEmpty(message = "Your motivation cannot be empty")
     @Column(length = 2000)
     private String motivation;
 
