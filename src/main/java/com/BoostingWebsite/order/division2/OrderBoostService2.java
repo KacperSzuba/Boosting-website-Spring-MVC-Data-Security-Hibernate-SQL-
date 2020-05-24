@@ -21,24 +21,26 @@ public class OrderBoostService2 {
     private LeagueRepository leagueRepository;
     private OrderBoostRepository2 orderBoostRepository2;
 
-
     public OrderBoostService2(ActualUser actualUser, LeagueRepository leagueRepository, OrderBoostRepository2 orderBoostRepository2) {
         this.actualUser = actualUser;
         this.leagueRepository = leagueRepository;
         this.orderBoostRepository2 = orderBoostRepository2;
     }
 
-
     boolean isLeagueIsValid(OrderBoost2 orderBoost2){
-        League currentLeague = leagueRepository.findByTierAndDivisionAndPoints(orderBoost2.getCurrentLeague().getTier(), orderBoost2.getCurrentLeague().getDivision(), orderBoost2.getCurrentLeague().getPoints());
-        League destinationLeague = leagueRepository.findByTierAndDivisionAndPointsEquals(orderBoost2.getDestinationLeague().getTier(), orderBoost2.getDestinationLeague().getDivision(), "0-20");
+        League currentLeague = leagueRepository.findByTierAndDivisionAndPoints(orderBoost2.getCurrentLeague().getTier(), orderBoost2.getCurrentLeague().getDivision(),
+                orderBoost2.getCurrentLeague().getPoints());
+        League destinationLeague = leagueRepository.findByTierAndDivisionAndPointsEquals(orderBoost2.getDestinationLeague().getTier(),
+                orderBoost2.getDestinationLeague().getDivision(), "0-20");
         return currentLeague.getId() > destinationLeague.getId();
     }
 
     void setLeagues(OrderBoost2 orderBoost2){
         this.orderBoost2 = new OrderBoost2();
-        League currentLeague = leagueRepository.findByTierAndDivisionAndPoints(orderBoost2.getCurrentLeague().getTier(),orderBoost2.getCurrentLeague().getDivision(),orderBoost2.getCurrentLeague().getPoints());
-        League destinationLeague = leagueRepository.findByTierAndDivisionAndPoints(orderBoost2.getDestinationLeague().getTier(),orderBoost2.getDestinationLeague().getDivision(),"0-20");
+        League currentLeague = leagueRepository.findByTierAndDivisionAndPoints(orderBoost2.getCurrentLeague().getTier(), orderBoost2.getCurrentLeague().getDivision(),
+                orderBoost2.getCurrentLeague().getPoints());
+        League destinationLeague = leagueRepository.findByTierAndDivisionAndPoints(orderBoost2.getDestinationLeague().getTier(), orderBoost2.getDestinationLeague().getDivision(),
+                "0-20");
         this.orderBoost2.setCurrentLeague(currentLeague);
         this.orderBoost2.setDestinationLeague(destinationLeague);
     }
@@ -56,10 +58,10 @@ public class OrderBoostService2 {
     }
 
     private double calculatePrice(){
-        List<Tier> tiers = Tier.tiers(currentLeague().getTier(),destinationLeague().getTier());
+        List<Tier> tiers = Tier.tiers(currentLeague().getTier(), destinationLeague().getTier());
         for (Tier tier: tiers){
             if(compareCurrentTiers(tier)){
-                calculatePriceFromCurrentTier(tier,tiers.size());
+                calculatePriceFromCurrentTier(tier, tiers.size());
             }
             else if(compareDestinationTiers(tier)) {
                 calculatePriceFromDestinationTier(tier);
@@ -74,7 +76,7 @@ public class OrderBoostService2 {
     private void calculatePriceFromCurrentTier(Tier tier, int tierSize){
         if(tierSize>1) {
             int currentDivision = Integer.parseInt(currentLeague().getDivision());
-            for (int i = currentDivision; i >=1; i--) {
+            for (int i = currentDivision; i >= 1; i--) {
                 if(compareCurrentTiers(tier) && currentDivision == i){
                     sum += currentLeague().getPrice();
                 }
@@ -96,13 +98,13 @@ public class OrderBoostService2 {
     }
 
     private void calculatePriceFromDestinationTier(Tier tier){
-        for (int i =4; i>Integer.parseInt(destinationLeague().getDivision());i--) {
+        for (int i =4; i > Integer.parseInt(destinationLeague().getDivision()); i--) {
             sum += priceForLeague(tier, i);
         }
     }
 
     private void calculatePriceFromWholeTier(Tier tier){
-        for (int i =4; i>=1;i--){
+        for (int i =4; i>= 1; i--){
             sum += priceForLeague(tier, i);
         }
     }
@@ -116,7 +118,8 @@ public class OrderBoostService2 {
     }
 
     private League currentLeague(){
-        return leagueRepository.findByTierAndDivisionAndPoints(orderBoost2.getCurrentLeague().getTier(), orderBoost2.getCurrentLeague().getDivision(), orderBoost2.getCurrentLeague().getPoints());
+        return leagueRepository.findByTierAndDivisionAndPoints(orderBoost2.getCurrentLeague().getTier(), orderBoost2.getCurrentLeague().getDivision(),
+                orderBoost2.getCurrentLeague().getPoints());
     }
 
     private League destinationLeague(){
@@ -124,6 +127,6 @@ public class OrderBoostService2 {
     }
 
     private double priceForLeague(Tier tier,int division){
-        return leagueRepository.findByTierAndDivisionAndPoints(tier,String.valueOf(division),"0-20").getPrice();
+        return leagueRepository.findByTierAndDivisionAndPoints(tier, String.valueOf(division),"0-20").getPrice();
     }
 }

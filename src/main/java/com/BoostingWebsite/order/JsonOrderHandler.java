@@ -19,10 +19,10 @@ public class JsonOrderHandler {
         JSONArray jsonArray = new JSONArray();
         for (TierImage tierImage : tierImageRepository.findAll()) {
             JSONObject record = new JSONObject();
-            record.put("id",tierImage.getId());
-            record.put("img_source",tierImage.getImgSource());
-            record.put("tier_id",tierImage.getTier().getId());
-            record.put("division_id",tierImage.getDivision().getId());
+            record.put("id", tierImage.getId());
+            record.put("img_source", tierImage.getImgSource());
+            record.put("tier_id", tierImage.getTier().getId());
+            record.put("division_id", tierImage.getDivision().getId());
             jsonArray.add(record);
         }
         return jsonArray;

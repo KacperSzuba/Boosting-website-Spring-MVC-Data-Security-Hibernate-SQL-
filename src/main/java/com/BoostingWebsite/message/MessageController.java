@@ -14,6 +14,7 @@ public class MessageController {
     private final ActualUser actualUser;
     private final MessageRepository messageRepository;
     private final UserRepository userRepository;
+
     public MessageController(ActualUser actualUser, MessageRepository messageRepository, UserRepository userRepository) {
         this.actualUser = actualUser;
         this.messageRepository = messageRepository;
@@ -22,16 +23,16 @@ public class MessageController {
 
     @GetMapping
     public String listOfRecipients(Model model){
-        model.addAttribute("idOfActualUser",actualUser.getActualUser().getId());
-        model.addAttribute("recipients",messageRepository.listOfRecipients(actualUser.getActualUser().getId()));
+        model.addAttribute("idOfActualUser", actualUser.getActualUser().getId());
+        model.addAttribute("recipients", messageRepository.listOfRecipients(actualUser.getActualUser().getId()));
         return "messageView/messageRecipients";
     }
 
     @GetMapping("/{id}")
     public String newSingleConversation(@PathVariable("id") final Long id, Model model){
         Message message = new Message();
-        model.addAttribute("sendMessage",message);
-        model.addAttribute("id",id);
+        model.addAttribute("sendMessage", message);
+        model.addAttribute("id", id);
         messageRepository.list(id);
         return "messageView/singleConversation";
     }

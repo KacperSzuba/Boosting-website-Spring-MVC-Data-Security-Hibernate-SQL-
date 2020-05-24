@@ -25,9 +25,10 @@ public class LeagueOfLegendsAPIConnector {
     }
 
     private Map<String,JsonObject> retrieveSummonerLeague() throws IOException {
-        URL summonerLeague = new URL("https://"+region()+".api.riotgames.com/lol/league/v4/entries/by-summoner/"+ retrieveSummonerId()+"?api_key="+apiKey);
+        URL summonerLeague = new URL("https://" + region() + ".api.riotgames.com/lol/league/v4/entries/by-summoner/" + retrieveSummonerId() + "?api_key=" + apiKey);
         JsonArray jsonArray = (JsonArray) parser(summonerLeague);;
         Map<String,JsonObject> map = new HashMap<>();
+
         for (JsonElement jsonElement : jsonArray) {
             String key = removeQuotes(jsonElement.getAsJsonObject().get("queueType").toString());
             map.put(key,jsonElement.getAsJsonObject());
@@ -36,7 +37,7 @@ public class LeagueOfLegendsAPIConnector {
     }
 
     private String retrieveSummonerId() throws IOException {
-        URL summoner = new URL("https://"+region()+".api.riotgames.com/lol/summoner/v4/summoners/by-name/"+username+"?api_key="+apiKey);
+        URL summoner = new URL("https://" + region() + ".api.riotgames.com/lol/summoner/v4/summoners/by-name/" + username + "?api_key=" + apiKey);
         JsonObject jsonObject = (JsonObject) parser(summoner);
         String summonerId = jsonObject.get("id").toString();
         return removeQuotes(summonerId);
@@ -89,18 +90,18 @@ public class LeagueOfLegendsAPIConnector {
 
     private Map<Region,String> mapOfRegions(){
         Map<Region ,String> mapOfRegions = new TreeMap<>();
-        mapOfRegions.put(Region.EUW,"euw1");
-        mapOfRegions.put(Region.EUNE,"eun1");
-        mapOfRegions.put(Region.TR,"tr1");
+        mapOfRegions.put(Region.EUW, "euw1");
+        mapOfRegions.put(Region.EUNE, "eun1");
+        mapOfRegions.put(Region.TR, "tr1");
         return mapOfRegions;
     }
 
     private Map<String,String> mapOfDivisions(){
         Map<String,String> mapOfDivisions = new TreeMap<>();
-        mapOfDivisions.put("I","1");
-        mapOfDivisions.put("II","2");
-        mapOfDivisions.put("III","3");
-        mapOfDivisions.put("IV","4");
+        mapOfDivisions.put("I", "1");
+        mapOfDivisions.put("II", "2");
+        mapOfDivisions.put("III", "3");
+        mapOfDivisions.put("IV", "4");
         return mapOfDivisions;
     }
 

@@ -24,7 +24,7 @@ public class BoosterApplicationController {
     @GetMapping
     public String boosterApplicationPage(Model model){
         BoosterApplication boosterApplication = new BoosterApplication();
-        model.addAttribute("boosterApplication",boosterApplication);
+        model.addAttribute("boosterApplication", boosterApplication);
         model.addAttribute("regions", Region.values());
         return "boosterApplication/booster-application";
     }

@@ -26,9 +26,9 @@ public class OrderController3 {
 
     @GetMapping
     public String showOrderPage(Model model){
-        model.addAttribute("tiers",leagueRepository.findAllTiersOrderByIdDesc());
-        model.addAttribute("divisions",leagueRepository.findAllDivisions());
-        model.addAttribute("points",leagueRepository.findAllPoints());
+        model.addAttribute("tiers", leagueRepository.findAllTiersOrderByIdDesc());
+        model.addAttribute("divisions", leagueRepository.findAllDivisions());
+        model.addAttribute("points", leagueRepository.findAllPoints());
         model.addAttribute("regions", Region.values());
 
         OrderBoost2 orderBoost = new OrderBoost2();

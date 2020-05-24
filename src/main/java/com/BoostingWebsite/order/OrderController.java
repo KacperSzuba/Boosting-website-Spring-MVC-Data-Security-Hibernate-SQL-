@@ -25,7 +25,7 @@ public class OrderController {
     @GetMapping("/informationAboutDivision")
     public String informationAboutDivision(Model model){
         OrderBoost orderBoost = new OrderBoost();
-        model.addAttribute("orderBoost",orderBoost);
+        model.addAttribute("orderBoost", orderBoost);
         model.addAttribute("listOfRegions", Region.values());
         return "orderView/order";
     }

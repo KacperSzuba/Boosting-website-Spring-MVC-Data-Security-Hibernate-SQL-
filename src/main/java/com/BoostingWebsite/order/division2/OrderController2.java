@@ -27,21 +27,21 @@ public class OrderController2 {
 
     @GetMapping
     public String showOrderPage(Model model){
-        model.addAttribute("tiers",leagueRepository.findAllTiersOrderByIdDesc());
-        model.addAttribute("divisions",leagueRepository.findAllDivisions());
-        model.addAttribute("points",leagueRepository.findAllPoints());
+        model.addAttribute("tiers", leagueRepository.findAllTiersOrderByIdDesc());
+        model.addAttribute("divisions", leagueRepository.findAllDivisions());
+        model.addAttribute("points", leagueRepository.findAllPoints());
         OrderBoost2 orderBoost = new OrderBoost2();
 
-        model.addAttribute("orderBoost2",orderBoost);
-        model.addAttribute("incorrectLeagueChoice",incorrectLeagueChoice);
+        model.addAttribute("orderBoost2", orderBoost);
+        model.addAttribute("incorrectLeagueChoice", incorrectLeagueChoice);
         return "orderView2/order2";
     }
 
     @GetMapping("/league/information")
-    public String league(@ModelAttribute("orderBoost2")OrderBoost2 orderBoost2, Model model){
+    public String league(@ModelAttribute("orderBoost2") OrderBoost2 orderBoost2, Model model){
         if(orderBoostService2.isLeagueIsValid(orderBoost2)){
             orderBoostService2.setLeagues(orderBoost2);
-            model.addAttribute("orderBoost2",orderBoost2);
+            model.addAttribute("orderBoost2", orderBoost2);
             model.addAttribute("regions", Region.values());
             return "orderView2/order2_information_about_account";
         }

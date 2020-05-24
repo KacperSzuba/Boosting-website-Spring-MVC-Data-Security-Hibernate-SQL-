@@ -30,7 +30,7 @@ class BoosterService {
     }
 
     void addBoost(Long orderId){
-        leagueOfLegendsAPIConnector = new LeagueOfLegendsAPIConnector(getUsername(),getRegion());
+        leagueOfLegendsAPIConnector = new LeagueOfLegendsAPIConnector(getUsername(), getRegion());
         if(checkIfTheBoosterHasNoOrders()){
             orderBoostRepository.findFreeOrderBoosts(orderId, loggedInBooster());
             setMessage("You correct took order");

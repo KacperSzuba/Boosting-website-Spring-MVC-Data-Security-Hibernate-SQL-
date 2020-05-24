@@ -34,7 +34,7 @@ public class PasswordReminderController {
     public String remind(@RequestParam("id")Long id, @RequestParam("token") String token, Model model){
         String validatePasswordResetToken = passwordReminderToken.validateResetPasswordToken(id, token);
         if(validatePasswordResetToken != null){
-            model.addAttribute("token","Your token is "+validatePasswordResetToken);
+            model.addAttribute("token","Your token is "+ validatePasswordResetToken);
             return "accountView/login";
         }
         return "redirect:/account/reset/password";

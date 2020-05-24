@@ -14,6 +14,7 @@ import java.util.List;
 
 @Service
 class UserCreatorService {
+
     private String message;
     private User user;
 
@@ -48,7 +49,7 @@ class UserCreatorService {
     }
 
     private void tryToCreateAccount(String confirmPassword){
-        if (creationAccountValidator.isAccountCreatedCorrectly(this.user,confirmPassword)) {
+        if (creationAccountValidator.isAccountCreatedCorrectly(this.user, confirmPassword)) {
             UserRole userRole = userRoleRepository.getUserRole(RoleName.ROLE_USER);
             userRoleRepository.save(userRole);
             List<UserRole> roles = new ArrayList<>();

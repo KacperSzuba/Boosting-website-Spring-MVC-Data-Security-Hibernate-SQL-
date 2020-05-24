@@ -742,6 +742,7 @@ section.login-form div.wrap select.custom-select {
     width: 90%;
     height: 40px;
     padding-left: 5%;
+    padding-right: 5%;
     margin: 2.5% auto;
     border: 1px solid black;
 }

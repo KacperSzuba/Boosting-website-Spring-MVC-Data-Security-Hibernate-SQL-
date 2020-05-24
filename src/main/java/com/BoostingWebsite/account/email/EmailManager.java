@@ -21,20 +21,20 @@ class EmailManager {
 
     void changeEmail(String currentEmail, String email, String repeatEmail){
         try{
-            whetherEmailCanBeChanged(currentEmail,email,repeatEmail);
+            whetherEmailCanBeChanged(currentEmail, email, repeatEmail);
         }
         catch (DataMismatchException exception){
             setMessage(exception.getMessage());
         }
     }
 
-    private void whetherEmailCanBeChanged(String currentEmail,String email, String repeatEmail) throws DataMismatchException {
-        if(checkIfEmailEnteredMatchesCurrent(currentEmail) && checkIfEmailIsCorrect(email,repeatEmail) && checkIfEmailIsNotAlreadyInDatabase(currentEmail)){
+    private void whetherEmailCanBeChanged(String currentEmail, String email, String repeatEmail) throws DataMismatchException {
+        if(checkIfEmailEnteredMatchesCurrent(currentEmail) && checkIfEmailIsCorrect(email, repeatEmail) && checkIfEmailIsNotAlreadyInDatabase(currentEmail)){
             tryToChangeEmail(email);
         }
     }
 
-    private boolean checkIfEmailIsCorrect(String email,String repeatEmail) throws DataMismatchException {
+    private boolean checkIfEmailIsCorrect(String email, String repeatEmail) throws DataMismatchException {
         if (whetherTheEmailsAreTheSame(email, repeatEmail) && EmailValidator.validateEmail(email)) {
             return true;
         }
@@ -70,7 +70,7 @@ class EmailManager {
         return actualUser.getActualUser();
     }
 
-    private boolean whetherTheEmailsAreTheSame(String email,String repeatEmail){
+    private boolean whetherTheEmailsAreTheSame(String email, String repeatEmail){
         return email.equals(repeatEmail);
     }
 

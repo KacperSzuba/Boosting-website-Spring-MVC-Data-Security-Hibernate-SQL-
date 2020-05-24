@@ -53,10 +53,10 @@ class OrderService {
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("currentTierImageSource")) {
-                    cookieList.put("currentTierImageSource",tierImageRepository.findByImgSource(cookie.getValue()));
+                    cookieList.put("currentTierImageSource", tierImageRepository.findByImgSource(cookie.getValue()));
                 }
                 else if(cookie.getName().equals("destinationTierImageSource")){
-                    cookieList.put("destinationTierImageSource",tierImageRepository.findByImgSource(cookie.getValue()));
+                    cookieList.put("destinationTierImageSource", tierImageRepository.findByImgSource(cookie.getValue()));
                 }
             }
         }

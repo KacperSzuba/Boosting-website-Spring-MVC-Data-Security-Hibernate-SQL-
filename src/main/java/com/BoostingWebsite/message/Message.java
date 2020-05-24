@@ -14,14 +14,19 @@ public class Message implements Comparable<Message>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String message;
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="message_sender")
     private User author;
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="recipient_of_the_message")
     private User recipient;
+
     private LocalDateTime date;
+
     public Message(){
         this.date = LocalDateTime.now();
     }

@@ -63,7 +63,7 @@ class PasswordReminder {
     }
 
     private boolean checkIfPasswordsAreTheSameAndHaveRequiredLength() throws DataMismatchException {
-        if(isPasswordLengthSufficient(this.password) && whetherThePasswordsAreTheSame(this.password,this.confirmPassword)) {
+        if(isPasswordLengthSufficient(this.password) && whetherThePasswordsAreTheSame(this.password, this.confirmPassword)) {
             return true;
         }
         else {
@@ -78,7 +78,7 @@ class PasswordReminder {
             User user = user().get();
             UserToken userToken = userTokenRepository.findByUser(user).get();
             String token = userToken.getToken();
-            emailService.constructResetTokenEmail(getAppUrl(),token,user);
+            emailService.constructResetTokenEmail(getAppUrl(), token, user);
         }
     }
 

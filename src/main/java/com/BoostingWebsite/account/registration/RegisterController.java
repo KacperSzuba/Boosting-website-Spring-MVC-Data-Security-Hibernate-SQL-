@@ -16,13 +16,15 @@ import static com.BoostingWebsite.account.validator.CreationAccountValidator.isC
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
+
     private final UserCreatorService userCreator;
     private final UserRepository userRepository;
     private final EmailConfirmation emailConfirmation;
     private final HttpServletRequest request;
     private final EmailConfirmationToken emailConfirmationToken;
 
-    public RegisterController(UserCreatorService userCreator, UserRepository userRepository, EmailConfirmation emailConfirmation, HttpServletRequest request, EmailConfirmationToken emailConfirmationToken) {
+    public RegisterController(UserCreatorService userCreator, UserRepository userRepository, EmailConfirmation emailConfirmation, HttpServletRequest request,
+                              EmailConfirmationToken emailConfirmationToken) {
         this.userCreator = userCreator;
         this.userRepository = userRepository;
         this.emailConfirmation = emailConfirmation;
@@ -33,7 +35,7 @@ public class RegisterController {
     @GetMapping
     public String registerPage(Model model){
         User user = new User();
-        model.addAttribute("register",user);
+        model.addAttribute("register", user);
         return "accountView/register";
     }
 
@@ -41,13 +43,13 @@ public class RegisterController {
     public String register(@Valid @ModelAttribute("register") User user, BindingResult result, @RequestParam("confirmPassword") String confirmPassword, Model model) {
         if (result.hasErrors() || isConfirmPasswordIsValid(confirmPassword)) {
             model.addAttribute("confirmPasswordErrorMessage","Confirmation password length should be between 7 and 20 letters");
-            model.addAttribute("message",userCreator.getUserRegistrationInformation());
+            model.addAttribute("message", userCreator.getUserRegistrationInformation());
             return "accountView/register";
         }
         else {
             if (userCreator.createAccount(user,confirmPassword)) {
                 model.addAttribute("confirmEmailMessage","Log in to the e-mail address provided and confirm your identity.");
-                emailConfirmation.confirmEmail(getAppUrl(),generateToken(), userRepository.findByUsername(user.getUsername()));
+                emailConfirmation.confirmEmail(getAppUrl(), generateToken(), userRepository.findByUsername(user.getUsername()));
                 return "accountView/login";
             }
             else {
@@ -60,7 +62,7 @@ public class RegisterController {
     @GetMapping("/confirm")
     public String confirmEmail(@RequestParam("id")Long id, @RequestParam("token") String token){
         String confirmEmail = emailConfirmationToken.emailTokenConfirmation(id,token);
-        if(confirmEmail !=null){
+        if(confirmEmail != null){
             return "redirect:/login";
         }
         userRepository.changeUserEnabledStatement(id,true);

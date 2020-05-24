@@ -16,11 +16,11 @@ class JsonMessageHandler {
         JSONArray jsonArray = new JSONArray();
         for (Message message : messageRepository.list(id)) {
             JSONObject record = new JSONObject();
-            record.put("id",message.getId());
-            record.put("sendMessage",message.getMessage());
-            record.put("messageSender",message.getAuthor().getId());
-            record.put("recipientOfTheMessage",message.getRecipient().getId());
-            record.put("date",message.getDate().toString());
+            record.put("id", message.getId());
+            record.put("sendMessage", message.getMessage());
+            record.put("messageSender", message.getAuthor().getId());
+            record.put("recipientOfTheMessage", message.getRecipient().getId());
+            record.put("date", message.getDate().toString());
             jsonArray.add(record);
         }
         return jsonArray;

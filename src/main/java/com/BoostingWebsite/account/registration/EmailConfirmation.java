@@ -18,7 +18,7 @@ class EmailConfirmation {
 
     void confirmEmail(String contextPath, String token, User user) {
         String url = contextPath + "/register/confirm?id=" + user.getId() + "&token=" + token;
-        tokenRecorderComponent.saveOrUpdateToken(token,user);
+        tokenRecorderComponent.saveOrUpdateToken(token, user);
         emailService.sendEmail(user.getEmail(),"Confirm email", " \r\n" + url);
     }
 }

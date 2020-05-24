@@ -44,7 +44,7 @@ class PasswordManager {
     }
     
     private boolean checkIfPasswordsAreTheSameAndHaveRequiredLength() throws DataMismatchException {
-        if(isPasswordLengthSufficient(this.password) && whetherThePasswordsAreTheSame(this.password,this.confirmPassword)) {
+        if(isPasswordLengthSufficient(this.password) && whetherThePasswordsAreTheSame(this.password, this.confirmPassword)) {
             return true;
         }
         else {
@@ -54,7 +54,7 @@ class PasswordManager {
 
     private void tryToChangePassword(){
         userRepository.changePassword(loggedInUser().getId(),passwordEncoder.encode(this.password));
-        setMessage("Your new password is : "+this.password);
+        setMessage("Your new password is : " + this.password);
     }
 
     private User loggedInUser(){

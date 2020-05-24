@@ -22,7 +22,7 @@ class PasswordReminderToken {
     }
 
     String validateResetPasswordToken(Long id, String token){
-        String tempToken = tokenValidator.validateToken(id,token);
+        String tempToken = tokenValidator.validateToken(id, token);
         if (tempToken != null){
             return tempToken;
         }
