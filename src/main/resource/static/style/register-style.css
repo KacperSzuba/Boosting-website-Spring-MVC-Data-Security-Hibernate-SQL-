@@ -409,12 +409,26 @@ section.login-form div.wrap p a {
 }
 
 section.login-form div.wrap input.form-control {
-    width: 90%;
+    width: 100%;
     height: 40px;
     padding-left: 5%;
     padding-right: 5%;
-    margin: 2.5% auto;
     border: 1px solid black;
+}
+
+section.login-form div.wrap div.input{
+    width: 90%;
+    margin: 2.5% auto 5%;
+    position: relative;
+}
+
+section.login-form div.wrap span{
+    position: absolute;
+    right:5%;
+    bottom:50%;
+    font-size: 26px;
+    transform: translateY(50%);
+    cursor: pointer;
 }
 
 .form-group {
@@ -452,9 +466,12 @@ section.login-form div.wrap span.error {
     }
 
     section.login-form div.wrap input.form-control {
-        width: 80%;
         height: 50px;
         font-size: 18px;
+    }
+
+    section.login-form div.wrap div.input{
+        width: 80%;
         margin: 1% auto;
     }
 
@@ -496,8 +513,11 @@ section.login-form div.wrap span.error {
     }
 
     section.login-form div.wrap input.form-control {
-        width: 85%;
         height: 45px;
+    }
+
+    section.login-form div.wrap div.input{
+        width: 85%;
         margin: 1% auto;
     }
 

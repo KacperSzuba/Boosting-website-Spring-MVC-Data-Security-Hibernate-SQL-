@@ -7,7 +7,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Register</title>
-        <link type="text/css" rel="stylesheet" th:href="@{/fontawesome/css/all.css}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto&display=swap&subset=latin-ext"
               rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Dancing+Script:600&display=swap" rel="stylesheet">
@@ -103,22 +104,32 @@
             <form th:action="@{/register}" th:object="${register}"  method="post">
                 <div class="form-group">
                     <label for="exampleInputUsername">Username</label>
-                    <input th:field="*{username}"  type="text" class="form-control" id="exampleInputUsername" placeholder="Username">
+                    <div class="input">
+                        <input th:field="*{username}"  type="text" class="form-control" id="exampleInputUsername" placeholder="Username">
+                    </div>
                     <span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword">Password</label>
-                    <input th:field="*{password}" type="password" class="form-control" id="exampleInputPassword" placeholder="Password">
+                    <div class="input">
+                        <input th:field="*{password}" type="password" class="form-control password" id="exampleInputPassword" placeholder="Password">
+                        <span class="far fa-eye-slash password"></span>
+                    </div>
                     <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputConfirmPassword">Confirm Password</label>
-                    <input name="confirmPassword" type="password" class="form-control" id="exampleInputConfirmPassword" placeholder="Confirm Password">
+                    <div class="input">
+                        <input name="confirmPassword" type="password" class="form-control password" id="exampleInputConfirmPassword" placeholder="Confirm Password">
+                        <span class="far fa-eye-slash password"></span>
+                    </div>
                     <span class="error" th:text="${confirmPasswordErrorMessage}"></span>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail">E-mail</label>
-                    <input th:field="*{email}" type="email" class="form-control" id="exampleInputEmail" placeholder="E-mail">
+                    <div class="input">
+                        <input th:field="*{email}" type="email" class="form-control" id="exampleInputEmail" placeholder="E-mail">
+                    </div>
                     <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
                 </div>
                 <input class="button" type="submit" value="Register" />
@@ -148,5 +159,6 @@
     </footer>
     <script src="/js/navigation-animation-mobile.js"></script>
     <script src="/js/navigation-animation-desktop.js"></script>
+    <script src="../js/showOrHidePassword.js"></script>
     </body>
 </html>
