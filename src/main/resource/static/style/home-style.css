@@ -43,6 +43,39 @@ aside {
     transition: 0.3s linear;
 }
 
+.sub-menu{
+    position: absolute;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100vh;
+    background-color: #f8f8ff;
+    transition: 0.3s linear;
+    z-index: 10;
+}
+
+.show-sub-menu{
+    left: 0;
+}
+
+.back-to-main-menu a{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.back-to-main-menu{
+    position: relative;
+    width: 100%;
+}
+
+#account .fa-chevron-left{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+}
+
 aside nav {
     height: 100%;
     font-family: 'Open Sans', sans-serif;
@@ -55,6 +88,7 @@ aside nav ul {
     flex-direction: column;
     height: 100%;
     padding-top: 5vh;
+    padding-bottom: 5vh;
     padding-left: 5vw;
 }
 
@@ -64,12 +98,64 @@ aside nav ul li {
     line-height: 10vh;
 }
 
+#account {
+    line-height: 6vh;
+}
+
+#account a{
+    cursor: pointer;
+}
+
+#account p{
+    line-height: 12px;
+    font-size: 12px;
+}
+
+#account .icon-user{
+    position: relative;
+    width: 100%;
+}
+
+#account i{
+    position: absolute;
+    display: inline-block;
+    transform: translateY(50%);
+}
+
+#account i.fa-user{
+    top: 0;
+    left: 0;
+}
+
+#account i.fa-chevron-right{
+    top: 0;
+    left: 85%;
+}
+
+#account .height{
+    margin-left: 15%;
+}
+
+#logout{
+    margin-top: auto;
+}
+
 aside nav ul li a {
     display: flex;
     font-size: 3vh;
     text-decoration: none;
     color: #181819;
-    height: 100%;
+}
+
+aside nav ul li form a.height input {
+    background-color: #FF0800;
+    font-size: 2.5vh;
+    color: #f8f8ff;
+    border-radius: 25px;
+    border: 2px solid;
+    font-weight: 300;
+    font-family: 'Open Sans', sans-serif;
+    padding: 2% 4%
 }
 
 /* Burger icon change */
@@ -85,11 +171,6 @@ i.show {
 aside.show {
     left: 0;
 }
-
-
-
-
-
 
 .navigation {
     transition: 0.15s linear;
@@ -107,6 +188,18 @@ aside.show {
     height: 10vh;
 }
 
+@media (orientation: landscape) and (min-width: 560px) {
+    #account{
+        line-height: 10vh;
+    }
+}
+
+@media (orientation: portrait) and (min-width: 768px) {
+    aside nav ul li {
+        flex-basis: 8vh;
+        line-height: 8vh;
+    }
+}
 
 @media (orientation:landscape) and (max-width: 1023px) {
     aside nav ul li a {
@@ -115,8 +208,41 @@ aside.show {
 }
 
 @media(min-width:1024px) {
-    .burger {
+    .burger ,
+    #account i.fa-user{
         display: none;
+    }
+
+    #account .height{
+        margin: 0;
+    }
+
+    #account a:hover  ~ .sub-menu,
+    .sub-menu:hover{
+        display: block;
+    }
+
+    .sub-menu{
+        left: auto;
+        top: 10vh;
+        background-color: transparent;
+        width: 10vh;
+        display: none;
+        height: auto;
+    }
+
+    .sub-menu ul{
+        display: block;
+        width: 100%;
+    }
+
+    .sub-menu ul{
+        margin-bottom: 10%;
+    }
+
+    .sub-menu li a{
+        line-height: normal;
+        font-size: 14px;
     }
 
     aside {
@@ -177,7 +303,7 @@ aside.show {
     .border {
         position: absolute;
         top: 50%;
-        left: 0%;
+        left: 0;
         width: 100%;
         height: 2px;
         margin-top: 20px;
@@ -196,6 +322,18 @@ aside.show {
     .border div.white {
         background-color: #f8f8ff;
     }
+
+    .back-to-main-menu{
+        display: none;
+    }
+
+    #account i.fa-chevron-right{
+        display: none;
+    }
+
+    #account p{
+        display: none;
+    }
 }
 
 @media(min-width:1280px) {
@@ -209,7 +347,6 @@ aside.show {
         font-size: 22px;
     }
 }
-
 
 /* Header */
 
@@ -251,7 +388,7 @@ header a {
 
 .hide {
     opacity: 0;
-    left: 0%;
+    left: 0;
 }
 
 @media (orientation: portrait) and (min-width: 360px) {
@@ -327,7 +464,7 @@ header a {
 
     header p {
         font-size: 28px;
-        margin-bottom: 0%;
+        margin-bottom: 0;
     }
 
     header a {
@@ -701,10 +838,9 @@ body section.advantages p {
     .header-of-step {
         font-size: 20px;
         text-align: left;
-        margin: 0;
         padding: 0;
         border: none;
-        margin-bottom: 2.5%;
+        margin: 0 0 2.5%;
     }
 
     .description-of-step {
@@ -778,14 +914,13 @@ section.support {
     text-transform: uppercase;
     width: 75%;
     height: 50px;
-    margin: 0 auto;
     line-height: 50px;
     font-size: 20px;
     color: #181819;
     border-radius: 25px;
     border: 2px solid;
     text-align: center;
-    margin-bottom: 5%;
+    margin: 0 auto 5%;
     transition: 0.3s;
 }
 
