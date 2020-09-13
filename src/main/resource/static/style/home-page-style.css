@@ -1,0 +1,551 @@
+/* Section 1 - Advantages */
+
+body section {
+    display: flex;
+    width: 90%;
+    margin: 15% auto 0;
+    padding: 0 7.5%;
+    flex-direction: column;
+}
+
+body section h1 {
+    color: #181819;
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 5%;
+    padding-bottom: 5%;
+    border-bottom: 1px solid #14a5eb;
+    text-transform: uppercase;
+
+}
+
+body section p {
+    font-size: 18px;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+body section h2 {
+    font-size: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 2.5%;
+    padding-bottom: 2.5%;
+    border-bottom: 1px solid #14a5eb;
+}
+
+body section.advantages p {
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding-bottom: 2.5%;
+    margin-bottom: 2.5%;
+}
+
+.advantage img {
+    display: block;
+    width: 80%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0 auto 10%;
+}
+
+.advantage {
+    margin-bottom: 10%;
+}
+
+.advantages {
+    width: 100%;
+}
+
+@media (orientation: portrait) and (min-width: 375px) {
+    body section {
+        padding: 0 5%;
+    }
+
+    body section h1 {
+        font-size: 26px;
+    }
+
+    body section p {
+        font-size: 20px;
+    }
+
+    body section h2 {
+        font-size: 22px;
+    }
+
+    body section.advantages p {
+        font-size: 16px;
+    }
+}
+
+@media (orientation: portrait) and (min-width: 768px) {
+    body section h1 {
+        font-size: 34px;
+    }
+
+    body section p {
+        font-size: 26px;
+    }
+
+    body section h2 {
+        font-size: 28px;
+    }
+
+    body section.advantages p {
+        font-size: 22px;
+    }
+}
+
+@media (orientation: landscape) and (min-width: 550px) {
+    body section h1 {
+        font-size: 24px;
+    }
+
+    body section p {
+        font-size: 20px;
+    }
+
+    body section h2 {
+        font-size: 22px;
+    }
+
+    body section.advantages p {
+        font-size: 18px;
+    }
+}
+
+@media (orientation: landscape) and (min-width: 730px) {
+    body section h1 {
+        font-size: 30px;
+    }
+
+    body section p {
+        font-size: 22px;
+    }
+
+    body section h2 {
+        font-size: 28px;
+    }
+
+    body section.advantages p {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 1024px) {
+    body section {
+        flex-direction: column;
+        width: 100%;
+        margin: 5% 0 0;
+        padding: 5%;
+    }
+
+    .advantages {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .advantage {
+        flex-basis: 30%;
+    }
+
+    .wrap-image {
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .advantage img {
+        margin: 0;
+        width: 100%;
+        background-size: cover;
+    }
+
+    body section h1 {
+        font-size: 38px;
+    }
+
+    body section p {
+        font-size: 26px;
+    }
+
+    body section h2 {
+        font-size: 34px;
+        padding-bottom: 5%;
+        margin-bottom: 10%;
+    }
+}
+
+@media (min-width: 1300px) {
+    .wrap-image {
+        height: 350px;
+    }
+
+    body section {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .advantages {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+}
+
+@media (min-width: 1600px) {
+    body section {
+        width: 85%;
+        margin: 0 auto;
+    }
+
+    .advantages {
+        width: 85%;
+        margin: 0 auto;
+    }
+
+
+    .wrap-image {
+        height: 400px;
+    }
+
+    body section h2 {
+        font-size: 36px;
+    }
+
+    body section p {
+        font-size: 28px;
+    }
+
+    body section.advantages p {
+        font-size: 24px;
+    }
+}
+
+/* Section 2 - Zed graphics */
+
+.zed-graphics {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 1920px;
+    height: 40vh;
+    background-image: url(/images/others/zed.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center bottom;
+}
+
+/* Section 3 - Septs for order */
+
+.order-steps h1 {
+    border: none;
+}
+
+.number-of-step {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #14a5eb;
+    margin: 0 auto 5%;
+    line-height: 50px;
+    font-family: 'Dancing Script', cursive;
+    font-weight: 600;
+    color: white;
+    font-size: 30px;
+}
+
+.description-of-step {
+    margin-bottom: 15%;
+    font-size: 14px;
+}
+
+
+@media (orientation: portrait) and (min-width: 375px) {
+
+    .description-of-step {
+        font-size: 14px;
+    }
+}
+
+@media (orientation: portrait) and (min-width: 768px) {
+    .description-of-step {
+        font-size: 22px;
+    }
+}
+
+@media (orientation: landscape) and (min-width: 550px) {
+    .description-of-step {
+        font-size: 18px;
+    }
+}
+
+@media (orientation: landscape) and (min-width: 730px) {
+    .description-of-step {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 1024px) {
+
+    .order-steps h1 {
+        text-align: left;
+        padding-bottom: 2.5%;
+        width: 100%;
+        font-size: 28px;
+        border-bottom: 1px solid #14a5eb;
+    }
+
+    .steps {
+        margin: 0;
+        padding: 0;
+    }
+
+    .step {
+        width: 70%;
+        margin: 0 auto 2.5%;
+        padding: 0;
+        position: relative;
+    }
+
+    .text {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .number-of-step {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .header-of-step {
+        font-size: 20px;
+        text-align: left;
+        padding: 0;
+        border: none;
+        margin: 0 0 2.5%;
+    }
+
+    .description-of-step {
+        font-size: 16px;
+        text-align: left;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+/* Section 4 - Aatrox graphics */
+
+.aatrox-graphics {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 1920px;
+    height: 40vh;
+    background-image: url(/images/others/aatrox.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center bottom;
+}
+
+/* Section 5 - Support */
+
+section.support {
+    width: 100%;
+    max-width: 1920px;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+}
+
+.text h1 {
+    border: none;
+    margin-bottom: 2.5%;
+    padding: 0;
+    font-size: 18px;
+}
+
+.text h1:nth-last-of-type(1) {
+    margin-bottom: 5%;
+}
+
+.text h2 {
+    border: none;
+    margin-bottom: 2.5%;
+    padding: 0;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.text p {
+    font-size: 14px;
+    margin-bottom: 10%;
+    font-style: italic;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons a {
+    display: block;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 75%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    color: #181819;
+    border-radius: 25px;
+    border: 2px solid;
+    text-align: center;
+    margin: 0 auto 5%;
+    transition: 0.3s;
+}
+
+@media (orientation: portrait) and (min-width: 375px) {
+    .text h1 {
+        font-size: 20px;
+    }
+
+    .text h2 {
+        font-size: 18px;
+    }
+
+    .text p {
+        font-size: 16px;
+    }
+}
+
+@media (orientation: portrait) and (min-width: 768px) {
+    .text h1 {
+        font-size: 26px;
+    }
+
+    .text h2 {
+        font-size: 22px;
+    }
+
+    .text p {
+        font-size: 18px;
+    }
+
+    .buttons {
+        flex-direction: row;
+    }
+
+    .buttons a {
+        font-size: 24px;
+        flex-basis: 40%;
+    }
+}
+
+@media (orientation: landscape) and (min-width: 550px) {
+    .text h1 {
+        font-size: 20px;
+    }
+
+    .text h2 {
+        font-size: 18px;
+    }
+
+    .text p {
+        font-size: 16px;
+    }
+}
+
+@media (orientation: landscape) and (min-width: 730px) {
+    .text h1 {
+        font-size: 24px;
+    }
+
+    .text h2 {
+        font-size: 20px;
+    }
+
+    .text p {
+        font-size: 18px;
+    }
+
+    .buttons {
+        flex-direction: row;
+    }
+
+    .buttons a {
+        font-size: 22px;
+        flex-basis: 40%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .text h1 {
+        font-size: 26px;
+    }
+
+    .text h2 {
+        font-size: 22px;
+    }
+
+    .text p {
+        font-size: 20px;
+    }
+
+    .buttons a:hover {
+        background-color: #14a5eb;
+        color: #f8f8ff;
+        border: none;
+    }
+}
+
+@media (min-width: 1300px) {
+    .text h1 {
+        font-size: 30px;
+    }
+
+    .text h2 {
+        font-size: 24px;
+    }
+
+    .text p {
+        font-size: 20px;
+    }
+
+    .buttons a {
+        font-size: 24px;
+    }
+}
+
+@media (min-width: 1600px) {
+    .text h1 {
+        font-size: 32px;
+    }
+
+    .text h2 {
+        font-size: 26px;
+    }
+
+    .text p {
+        font-size: 22px;
+    }
+
+    .buttons a {
+        font-size: 30px;
+        height: 60px;
+        line-height: 60px;
+    }
+}
+
