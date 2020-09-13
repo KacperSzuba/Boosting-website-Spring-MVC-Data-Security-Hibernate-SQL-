@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+import java.time.LocalDate;
+
 import static com.BoostingWebsite.validator.EmailValidator.validateEmail;
 
 @Controller
@@ -34,6 +36,7 @@ public class ContactController {
         }
         else {
             if (validateEmail(contact.getEmail())) {
+                contact.setDate(LocalDate.now());
                 contactRepository.save(contact);
                 return "redirect:/";
             }

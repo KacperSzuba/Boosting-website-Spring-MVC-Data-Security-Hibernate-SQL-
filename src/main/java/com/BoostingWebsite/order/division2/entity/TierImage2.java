@@ -1,5 +1,6 @@
 package com.BoostingWebsite.order.division2.entity;
 
+import com.BoostingWebsite.order.division2.Division;
 import org.hibernate.annotations.Immutable;
 
 import javax.persistence.*;
@@ -15,6 +16,9 @@ public class TierImage2 {
     @Column(name = "img_source")
     private String imageSource;
 
+    @Enumerated(EnumType.STRING)
+    private Division division;
+
     public TierImage2() {
     }
 
@@ -26,4 +30,11 @@ public class TierImage2 {
         return imageSource;
     }
 
+    public Division getDivision() {
+        return division;
+    }
+
+    public void setDivision(Division division) {
+        this.division = division;
+    }
 }
