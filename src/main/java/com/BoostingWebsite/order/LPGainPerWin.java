@@ -1,4 +1,4 @@
-package com.BoostingWebsite.order.division2;
+package com.BoostingWebsite.order;
 
 public enum LPGainPerWin {
     LESS_THAN_15("Less than 15"),

@@ -1,4 +1,4 @@
-package com.BoostingWebsite.order.division2;
+package com.BoostingWebsite.order;
 
 public enum Division {
     Division_1("Division 1", 4),

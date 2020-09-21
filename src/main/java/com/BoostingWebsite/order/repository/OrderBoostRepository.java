@@ -1,12 +1,13 @@
-package com.BoostingWebsite.order;
+package com.BoostingWebsite.order.repository;
 
+import com.BoostingWebsite.account.user.User;
+import com.BoostingWebsite.order.entity.OrderBoost;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.transaction.annotation.Transactional;
-import com.BoostingWebsite.account.user.User;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,5 +36,4 @@ public interface OrderBoostRepository extends CrudRepository<OrderBoost,Long> {
 
     @Query(value = "select orderboost from OrderBoost orderboost where orderboost.whetherDone=true and orderboost.booster =:user")
     List<OrderBoost> findDoneOrderBoost(@Param("user") User user);
-
 }

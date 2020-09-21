@@ -1,4 +1,4 @@
-package com.BoostingWebsite.order.division2;
+package com.BoostingWebsite.order;
 
 public enum Points {
     ZERO_TO_NINETEEN("0-19"),

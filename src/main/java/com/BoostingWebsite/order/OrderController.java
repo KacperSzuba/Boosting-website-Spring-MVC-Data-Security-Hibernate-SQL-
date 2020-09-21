@@ -1,38 +1,54 @@
 package com.BoostingWebsite.order;
 
+import com.BoostingWebsite.order.entity.OrderBoost;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.BoostingWebsite.order.division.Region;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/order")
 public class OrderController {
 
-    private final OrderService orderService;
+    private OrderBoostService orderBoostService;
 
-    public OrderController(OrderService orderService) {
-        this.orderService = orderService;
+    public OrderController(OrderBoostService orderBoostService) {
+        this.orderBoostService = orderBoostService;
     }
 
-    @GetMapping("/")
-    public String showOrderPage(){
-        return "orderView/order_division";
-    }
+    @GetMapping
+    public String showOrderPage(Model model){
+        model.addAttribute("tiers", Tier.values());
+        model.addAttribute("divisions", Division.values());
+        model.addAttribute("points", Points.values());
+        model.addAttribute("regions", Region.values());
+        model.addAttribute("LPGainPerWin", LPGainPerWin.values());
 
-    @GetMapping("/informationAboutDivision")
-    public String informationAboutDivision(Model model){
         OrderBoost orderBoost = new OrderBoost();
-        model.addAttribute("orderBoost", orderBoost);
-        model.addAttribute("listOfRegions", Region.values());
-        return "orderView/order";
+        model.addAttribute("orderBoost2", orderBoost);
+        return "orderView/newOrder";
     }
 
-    @GetMapping("/informationAboutAccount")
-    public String informationAboutAccount(@ModelAttribute("orderBoost") OrderBoost orderBoost){
-      //  orderService.makeOrder(orderBoost);
-        return "orderView/order_result";
+    @RequestMapping("/account/information")
+    public String accountInformation(@Valid @ModelAttribute("orderBoost2") OrderBoost orderBoost, BindingResult result){
+        if(result.hasErrors()){
+            return "orderView/newOrder";
+        }
+        try {
+            if (orderBoostService.isLeagueIsValid(orderBoost)) {
+                orderBoostService.makeOrder(orderBoost);
+                return "redirect:/";
+            } else {
+                return "orderView/newOrder";
+            }
+        }
+        catch (NullPointerException ex){
+            ex.printStackTrace();
+            return "redirect:/login";
+        }
     }
 }

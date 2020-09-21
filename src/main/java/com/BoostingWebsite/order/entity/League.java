@@ -1,8 +1,8 @@
-package com.BoostingWebsite.order.division2.entity;
+package com.BoostingWebsite.order.entity;
 
-import com.BoostingWebsite.order.division2.Division;
-import com.BoostingWebsite.order.division2.Points;
-import com.BoostingWebsite.order.division2.Tier;
+import com.BoostingWebsite.order.Division;
+import com.BoostingWebsite.order.Points;
+import com.BoostingWebsite.order.Tier;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 

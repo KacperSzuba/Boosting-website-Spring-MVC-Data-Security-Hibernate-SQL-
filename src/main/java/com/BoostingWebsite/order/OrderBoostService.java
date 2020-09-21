@@ -1,41 +1,41 @@
-package com.BoostingWebsite.order.division2;
+package com.BoostingWebsite.order;
 
 import com.BoostingWebsite.account.user.ActualUser;
-import com.BoostingWebsite.order.division2.entity.OrderBoost2;
-import com.BoostingWebsite.order.division2.repository.LeagueRepository;
-import com.BoostingWebsite.order.division2.repository.OrderBoostRepository2;
+import com.BoostingWebsite.order.entity.OrderBoost;
+import com.BoostingWebsite.order.repository.LeagueRepository;
+import com.BoostingWebsite.order.repository.OrderBoostRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
 @Service
-public class OrderBoostService2 {
+public class OrderBoostService {
 
     private double sum = 0;
 
     private ActualUser actualUser;
     private LeagueRepository leagueRepository;
-    private OrderBoostRepository2 orderBoostRepository2;
+    private OrderBoostRepository orderBoostRepository;
 
-    public OrderBoostService2(ActualUser actualUser, LeagueRepository leagueRepository, OrderBoostRepository2 orderBoostRepository2) {
+    public OrderBoostService(ActualUser actualUser, LeagueRepository leagueRepository, OrderBoostRepository orderBoostRepository) {
         this.actualUser = actualUser;
         this.leagueRepository = leagueRepository;
-        this.orderBoostRepository2 = orderBoostRepository2;
+        this.orderBoostRepository = orderBoostRepository;
     }
 
-    boolean isLeagueIsValid(OrderBoost2 orderBoost2){
-        int priorityOfCurrentLeague = orderBoost2.getCurrentLeague().getTier().getPriority() + orderBoost2.getCurrentLeague().getDivision().getPriority();
-        int priorityOfDestinationLeague = orderBoost2.getDestinationLeague().getTier().getPriority() + orderBoost2.getDestinationLeague().getDivision().getPriority();
+    boolean isLeagueIsValid(OrderBoost orderBoost){
+        int priorityOfCurrentLeague = orderBoost.getCurrentLeague().getTier().getPriority() + orderBoost.getCurrentLeague().getDivision().getPriority();
+        int priorityOfDestinationLeague = orderBoost.getDestinationLeague().getTier().getPriority() + orderBoost.getDestinationLeague().getDivision().getPriority();
 
         return priorityOfDestinationLeague > priorityOfCurrentLeague;
     }
 
-    void makeOrder(OrderBoost2 orderBoost2){
-        orderBoost2.setDate(LocalDateTime.now());
-        orderBoost2.setUser(actualUser.getActualUser());
-        leagueRepository.save(orderBoost2.getCurrentLeague());
-        leagueRepository.save(orderBoost2.getDestinationLeague());
-        orderBoostRepository2.save(orderBoost2);
+    void makeOrder(OrderBoost orderBoost){
+        orderBoost.setDate(LocalDateTime.now());
+        orderBoost.setUser(actualUser.getActualUser());
+        leagueRepository.save(orderBoost.getCurrentLeague());
+        leagueRepository.save(orderBoost.getDestinationLeague());
+        orderBoostRepository.save(orderBoost);
     }
 /*
     private double calculatePrice(){

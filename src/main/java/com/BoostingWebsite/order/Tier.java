@@ -1,4 +1,4 @@
-package com.BoostingWebsite.order.division2;
+package com.BoostingWebsite.order;
 
 public enum Tier {
     IRON("Iron", 10),

@@ -1,12 +1,12 @@
 package com.BoostingWebsite.account.booster;
 
+import com.BoostingWebsite.order.entity.OrderBoost;
+import com.BoostingWebsite.order.repository.OrderBoostRepository;
 import org.springframework.stereotype.Service;
 import com.BoostingWebsite.account.user.ActualUser;
 import com.BoostingWebsite.LeagueOfLegendsAPIConnector;
-import com.BoostingWebsite.order.OrderBoost;
 import com.BoostingWebsite.account.user.User;
-import com.BoostingWebsite.order.division.Region;
-import com.BoostingWebsite.order.OrderBoostRepository;
+import com.BoostingWebsite.order.Region;
 
 import java.io.IOException;
 import java.util.List;
@@ -55,13 +55,13 @@ class BoosterService {
     }
 
     private boolean isDivisionsAreEqual() throws IOException {
-        String destinationDivision = findCurrentBoost().getDestinationDivision().toString();
+        String destinationDivision = findCurrentBoost().getDestinationLeague().getDivision().toString();
         String divisionFromApi = leagueOfLegendsAPIConnector.getActualSoloDuoDivision();
         return destinationDivision.equals(divisionFromApi);
     }
 
     private boolean isTiersAreEqual() throws IOException {
-        String destinationTier = findCurrentBoost().getDestinationTier().toString();
+        String destinationTier = findCurrentBoost().getDestinationLeague().getTier().toString();
         String tierFromApi = leagueOfLegendsAPIConnector.getActualSoloDuoTier();
         return destinationTier.equals(tierFromApi);
     }
@@ -83,11 +83,11 @@ class BoosterService {
     }
 
     private String getUsername(){
-        return findCurrentBoost().getLolUsername();
+        return findCurrentBoost().getAccountDetails().getLolUsername();
     }
 
     private Region getRegion(){
-        return findCurrentBoost().getRegion();
+        return findCurrentBoost().getAccountDetails().getRegion();
     }
 
     public String getMessage() {

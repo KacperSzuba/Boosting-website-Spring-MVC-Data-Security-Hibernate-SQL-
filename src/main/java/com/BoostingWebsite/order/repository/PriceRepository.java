@@ -1,7 +1,7 @@
-package com.BoostingWebsite.order.division.repository;
+package com.BoostingWebsite.order.repository;
 
+import com.BoostingWebsite.order.entity.Price;
 import org.springframework.data.repository.CrudRepository;
-import com.BoostingWebsite.order.division.entity.Price;
 
 public interface PriceRepository extends CrudRepository<Price,Long> {
 }

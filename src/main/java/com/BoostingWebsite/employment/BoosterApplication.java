@@ -1,6 +1,6 @@
 package com.BoostingWebsite.employment;
 
-import com.BoostingWebsite.order.division.Region;
+import com.BoostingWebsite.order.Region;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;

@@ -1,7 +1,7 @@
 package com.BoostingWebsite;
 
-import com.BoostingWebsite.order.division.Region;
-import com.BoostingWebsite.order.division.Tier;
+import com.BoostingWebsite.order.Region;
+import com.BoostingWebsite.order.Tier;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

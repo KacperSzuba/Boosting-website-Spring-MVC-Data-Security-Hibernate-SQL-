@@ -1,16 +1,16 @@
 package com.BoostingWebsite.account.admin;
 
 import com.BoostingWebsite.employment.BoosterApplicationRepository;
+import com.BoostingWebsite.order.entity.OrderBoost;
+import com.BoostingWebsite.order.repository.OrderBoostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import com.BoostingWebsite.order.OrderBoost;
 import com.BoostingWebsite.account.user.User;
 import com.BoostingWebsite.account.roles.RoleName;
-import com.BoostingWebsite.order.OrderBoostRepository;
 import com.BoostingWebsite.account.user.UserRepository;
 
 import java.util.List;

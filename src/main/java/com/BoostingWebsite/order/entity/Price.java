@@ -1,4 +1,4 @@
-package com.BoostingWebsite.order.division.entity;
+package com.BoostingWebsite.order.entity;
 
 import javax.persistence.*;
 

@@ -1,4 +1,4 @@
-package com.BoostingWebsite.order.division2.entity;
+package com.BoostingWebsite.order.entity;
 
 import com.BoostingWebsite.account.user.User;
 import org.hibernate.annotations.Type;
@@ -8,7 +8,8 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 
 @Entity
-public class OrderBoost2 {
+@Table(name = "orders_boost")
+public class OrderBoost {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,25 +51,25 @@ public class OrderBoost2 {
 
     private LocalDateTime date;
 
-    public OrderBoost2() {
+    public OrderBoost() {
     }
 
-    public OrderBoost2(OrderBoost2 orderBoost2){
-        this.id = orderBoost2.id;
-        this.noteToBooster = orderBoost2.noteToBooster;
-        this.whetherPaid = orderBoost2.whetherPaid;
-        this.whetherDone = orderBoost2.whetherDone;
-        this.price = orderBoost2.price;
-        this.currentLeague = orderBoost2.currentLeague;
-        this.destinationLeague = orderBoost2.destinationLeague;
-        this.accountDetails = orderBoost2.accountDetails;
-        this.user = orderBoost2.user;
-        this.booster = orderBoost2.booster;
+    public OrderBoost(OrderBoost orderBoost){
+        this.id = orderBoost.id;
+        this.noteToBooster = orderBoost.noteToBooster;
+        this.whetherPaid = orderBoost.whetherPaid;
+        this.whetherDone = orderBoost.whetherDone;
+        this.price = orderBoost.price;
+        this.currentLeague = orderBoost.currentLeague;
+        this.destinationLeague = orderBoost.destinationLeague;
+        this.accountDetails = orderBoost.accountDetails;
+        this.user = orderBoost.user;
+        this.booster = orderBoost.booster;
         this.date = LocalDateTime.now();
     }
 
-    public OrderBoost2(String noteToBooster, boolean whetherPaid, boolean whetherDone, double price, League currentLeague, League destinationLeague,
-                       AccountDetails accountDetails, User user, User booster) {
+    public OrderBoost(String noteToBooster, boolean whetherPaid, boolean whetherDone, double price, League currentLeague, League destinationLeague,
+                      AccountDetails accountDetails, User user, User booster) {
         this.noteToBooster = noteToBooster;
         this.whetherPaid = whetherPaid;
         this.whetherDone = whetherDone;

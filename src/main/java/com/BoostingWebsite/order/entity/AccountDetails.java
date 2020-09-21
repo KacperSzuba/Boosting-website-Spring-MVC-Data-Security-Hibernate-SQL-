@@ -1,6 +1,6 @@
-package com.BoostingWebsite.order.division2.entity;
+package com.BoostingWebsite.order.entity;
 
-import com.BoostingWebsite.order.division.Region;
+import com.BoostingWebsite.order.Region;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
