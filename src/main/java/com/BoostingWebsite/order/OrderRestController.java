@@ -12,9 +12,9 @@ public class OrderRestController {
         this.jsonOrderHandler = jsonOrderHandler;
     }
 
-    @GetMapping("/order/Order")
-    public String showOrderPage(){
-        return jsonOrderHandler.createJsonFile().toJSONString();
-    }
+ //   @GetMapping("/order/Order")
+//    public String showOrderPage(){
+ //       return jsonOrderHandler.createJsonFile().toJSONString();
+ //   }
 
 }

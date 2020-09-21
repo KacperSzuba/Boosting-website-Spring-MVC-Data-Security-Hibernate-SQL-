@@ -1,6 +1,8 @@
 package com.BoostingWebsite.order.division2.entity;
 
-import com.BoostingWebsite.order.division.Tier;
+import com.BoostingWebsite.order.division2.Division;
+import com.BoostingWebsite.order.division2.Points;
+import com.BoostingWebsite.order.division2.Tier;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -19,9 +21,11 @@ public class League {
     private Tier tier;
 
     @Column(name = "divisions")
-    private String division;
+    @Enumerated(EnumType.STRING)
+    private Division division;
 
-    private String points;
+    @Enumerated(EnumType.STRING)
+    private Points points;
 
     @Column(name = "prices")
     private double price;
@@ -31,7 +35,7 @@ public class League {
     public League() {
     }
 
-    public League(Tier tier, String division, String points, double price) {
+    public League(Tier tier, Division division, Points points, double price) {
         this.tier = tier;
         this.division = division;
         this.points = points;
@@ -50,19 +54,19 @@ public class League {
         this.tier = tier;
     }
 
-    public String getDivision() {
+    public Division getDivision() {
         return division;
     }
 
-    public void setDivision(String division) {
+    public void setDivision(Division division) {
         this.division = division;
     }
 
-    public String getPoints() {
+    public Points getPoints() {
         return points;
     }
 
-    public void setPoints(String points) {
+    public void setPoints(Points points) {
         this.points = points;
     }
 

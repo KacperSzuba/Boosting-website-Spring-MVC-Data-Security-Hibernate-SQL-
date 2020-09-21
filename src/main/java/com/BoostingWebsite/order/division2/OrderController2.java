@@ -40,7 +40,6 @@ public class OrderController2 {
     @GetMapping("/league/information")
     public String league(@ModelAttribute("orderBoost2") OrderBoost2 orderBoost2, Model model){
         if(orderBoostService2.isLeagueIsValid(orderBoost2)){
-            orderBoostService2.setLeagues(orderBoost2);
             model.addAttribute("orderBoost2", orderBoost2);
             model.addAttribute("regions", Region.values());
             return "orderView2/order2_information_about_account";
@@ -55,8 +54,7 @@ public class OrderController2 {
             model.addAttribute("regions", Region.values());
             return "orderView2/order2_information_about_account";
         }
-        orderBoostService2.setOrderInformation(orderBoost2);
-        orderBoostService2.makeOrder();
+        orderBoostService2.makeOrder(orderBoost2);
         return "redirect:/";
     }
 

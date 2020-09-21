@@ -1,17 +1,17 @@
 package com.BoostingWebsite.order.division2;
 
-public enum Division {
-    Division_1("Division 1", 4),
-    Division_2("Division 2", 3),
-    Division_3("Division 3", 2),
-    Division_4("Division 4", 1);
-
-    public final static String PLACEMENTS = "Placements";
+public enum Tier {
+    IRON("Iron", 10),
+    BRONZE("Bronze", 20),
+    SILVER("Silver", 30),
+    GOLD("Gold", 40),
+    PLATINUM("Platinum", 50),
+    DIAMOND("Diamond", 60);
 
     private String name;
     private int priority;
 
-    Division(String name, int priority){
+    Tier(String name, int priority){
         this.name = name;
         this.priority = priority;
     }

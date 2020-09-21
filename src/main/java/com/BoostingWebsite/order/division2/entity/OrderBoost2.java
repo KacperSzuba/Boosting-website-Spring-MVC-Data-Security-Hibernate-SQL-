@@ -36,24 +36,22 @@ public class OrderBoost2 {
     private League destinationLeague;
 
     @Valid
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="accounts_details_id")
     private AccountDetails accountDetails;
 
-    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name="users_id")
     private User user;
 
-    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name="boosters_id")
     private User booster;
 
     private LocalDateTime date;
 
-
     public OrderBoost2() {
     }
-
 
     public OrderBoost2(OrderBoost2 orderBoost2){
         this.id = orderBoost2.id;

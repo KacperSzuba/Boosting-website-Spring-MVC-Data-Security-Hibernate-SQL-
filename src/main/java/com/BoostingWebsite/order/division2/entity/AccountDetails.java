@@ -24,7 +24,6 @@ public class AccountDetails {
     @Column(name = "lol_password")
     private String lolPassword;
 
-
     @Enumerated(EnumType.STRING)
     private Region region;
 

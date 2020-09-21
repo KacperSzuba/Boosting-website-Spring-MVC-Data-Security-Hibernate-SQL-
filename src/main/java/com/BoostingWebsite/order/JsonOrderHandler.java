@@ -3,12 +3,10 @@ package com.BoostingWebsite.order;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Component;
-import com.BoostingWebsite.order.division.entity.TierImage;
-import com.BoostingWebsite.order.division.repository.TierImageRepository;
 
 @Component
 public class JsonOrderHandler {
-
+/*
     private final TierImageRepository tierImageRepository;
 
     public JsonOrderHandler(TierImageRepository tierImageRepository) {
@@ -27,4 +25,6 @@ public class JsonOrderHandler {
         }
         return jsonArray;
     }
+
+ */
 }

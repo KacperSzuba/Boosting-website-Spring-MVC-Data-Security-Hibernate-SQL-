@@ -1,11 +1,7 @@
 package com.BoostingWebsite.order;
 
-import com.BoostingWebsite.order.division.repository.DivisionRepository;
 import org.springframework.stereotype.Service;
 import com.BoostingWebsite.account.user.ActualUser;
-import com.BoostingWebsite.order.division.entity.TierImage;
-import com.BoostingWebsite.order.division.repository.TierImageRepository;
-import com.BoostingWebsite.order.division.repository.TierRepository;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +11,7 @@ import java.util.TreeMap;
 
 @Service
 class OrderService {
-
+/*
     private final ActualUser actualUser;
     private final OrderBoostRepository orderBoostRepository;
     private final TierImageRepository tierImageRepository;
@@ -62,4 +58,6 @@ class OrderService {
         }
         return cookieList;
     }
+
+ */
 }

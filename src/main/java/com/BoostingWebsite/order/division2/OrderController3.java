@@ -26,10 +26,11 @@ public class OrderController3 {
 
     @GetMapping
     public String showOrderPage(Model model){
-        model.addAttribute("tiers", leagueRepository.findAllTiersOrderByIdDesc());
-        model.addAttribute("divisions", leagueRepository.findAllDivisions());
-        model.addAttribute("points", leagueRepository.findAllPoints());
+        model.addAttribute("tiers", Tier.values());
+        model.addAttribute("divisions", Division.values());
+        model.addAttribute("points", Points.values());
         model.addAttribute("regions", Region.values());
+        model.addAttribute("LPGainPerWin", LPGainPerWin.values());
 
         OrderBoost2 orderBoost = new OrderBoost2();
         model.addAttribute("orderBoost2",orderBoost);
@@ -43,9 +44,7 @@ public class OrderController3 {
         }
         try {
             if (orderBoostService2.isLeagueIsValid(orderBoost2)) {
-                orderBoostService2.setLeagues(orderBoost2);
-                orderBoostService2.setOrderInformation(orderBoost2);
-                orderBoostService2.makeOrder();
+                orderBoostService2.makeOrder(orderBoost2);
                 return "redirect:/";
             } else {
                 return "orderView/newOrder";

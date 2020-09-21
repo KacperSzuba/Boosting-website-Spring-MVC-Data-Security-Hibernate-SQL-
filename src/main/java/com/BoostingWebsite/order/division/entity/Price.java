@@ -11,23 +11,11 @@ public class Price {
 
     private Integer price;
 
-    @ManyToOne
-    private Tier tier;
-
-    @ManyToOne
-    private Division division;
-
-    @ManyToOne
-    private DivisionPoints divisionPoints;
-
     public Price() {
     }
 
-    public Price(Integer price, Tier tier, Division division, DivisionPoints divisionPoints) {
+    public Price(Integer price) {
         this.price = price;
-        this.tier = tier;
-        this.division = division;
-        this.divisionPoints = divisionPoints;
     }
 
     public Long getId() {
@@ -40,30 +28,6 @@ public class Price {
 
     public void setPrice(Integer price) {
         this.price = price;
-    }
-
-    public Tier getTier() {
-        return tier;
-    }
-
-    public void setTier(Tier tier) {
-        this.tier = tier;
-    }
-
-    public Division getDivision() {
-        return division;
-    }
-
-    public void setDivision(Division division) {
-        this.division = division;
-    }
-
-    public DivisionPoints getDivisionPoints() {
-        return divisionPoints;
-    }
-
-    public void setDivisionPoints(DivisionPoints divisionPoints) {
-        this.divisionPoints = divisionPoints;
     }
 }
 

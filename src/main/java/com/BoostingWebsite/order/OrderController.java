@@ -32,7 +32,7 @@ public class OrderController {
 
     @GetMapping("/informationAboutAccount")
     public String informationAboutAccount(@ModelAttribute("orderBoost") OrderBoost orderBoost){
-        orderService.makeOrder(orderBoost);
+      //  orderService.makeOrder(orderBoost);
         return "orderView/order_result";
     }
 }

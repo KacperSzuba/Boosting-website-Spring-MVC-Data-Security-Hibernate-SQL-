@@ -158,6 +158,10 @@ main.division input.btn-sm {
     transition: 0.3s linear;
 }
 
+.error{
+    color: red;
+}
+
 @media (orientation: portrait) and (min-width: 375px) {
     main.division h2 {
         font-size: 26px;
@@ -254,10 +258,6 @@ main.division input.btn-sm {
         height: 40px;
     }
 
-    main.division section.price select.custom-select {
-        width: 50%;
-    }
-
     section.price div.wrap p.text,
     section.price div.wrap p.price {
         font-size: 16px;
@@ -304,6 +304,7 @@ main.division input.btn-sm {
 
     main.division input.btn-sm:hover {
         background-color: #14a5eb;
+        color: #F8F8F8;
     }
 }
 
@@ -314,6 +315,7 @@ main.division input.btn-sm {
 
     main.division section.price {
         right: 7.5%;
+        width: 25%;
     }
 }
 
@@ -323,6 +325,7 @@ main.division input.btn-sm {
     }
 
     main.division section.price {
-        right: 20%;
+        right: 10%;
+        width: 30%;
     }
 }

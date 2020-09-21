@@ -108,22 +108,22 @@
                     <div class="form-group">
                         <h3>Current Tier</h3>
                         <select class="custom-select" th:field="*{currentLeague.tier}" id="currentTier">
-                            <option th:each="currentTier : ${tiers}" th:value="${currentTier.tier}"
-                                    th:text="${currentTier.tier}"></option>
+                            <option th:each="currentTier : ${tiers}" th:value="${currentTier}"
+                                    th:text="${currentTier.name}"></option>
                         </select>
                     </div>
                     <div class="form-group">
                         <h3>Current Division</h3>
                         <select class="custom-select" th:field="*{currentLeague.division}" id="currentDivision">
-                            <option th:each="currentDivision : ${divisions}" th:value="${currentDivision.division}"
-                                    th:text="${currentDivision.division}"></option>
+                            <option th:each="currentDivision : ${divisions}" th:value="${currentDivision}"
+                                    th:text="${currentDivision.name}"></option>
                         </select>
                     </div>
                     <div class="form-group">
                         <h3>Current Points</h3>
                         <select class="custom-select" th:field="*{currentLeague.points}" id="currentPoints">
-                            <option th:each="currentPoints : ${points}" th:value="${currentPoints.points}"
-                                    th:text="${currentPoints.points}"></option>
+                            <option th:each="currentPoints : ${points}" th:value="${currentPoints}"
+                                    th:text="${currentPoints.name}"></option>
                         </select>
                     </div>
                 </section>
@@ -134,16 +134,16 @@
                     </div>
                     <div class="form-group">
                         <h3>Desired Tier</h3>
-                        <select class="custom-select" th:field="*{destinationLeague.tier}" id="destinationTier">
-                            <option th:each="destinationTier : ${tiers}" th:value="${destinationTier.tier}"
-                                    th:text="${destinationTier.tier}"></option>
+                        <select id="destinationTier" class="custom-select" th:field="*{destinationLeague.tier}">
+                            <option th:each="destinationTier : ${tiers}" th:value="${destinationTier}"
+                                    th:text="${destinationTier.name}"></option>
                         </select>
                     </div>
                     <div class="form-group">
                         <h3>Desired Division</h3>
-                        <select class="custom-select" th:field="*{destinationLeague.division}" id="destinationDivision">
-                            <option th:each="destinationDivision : ${divisions}" th:value="${destinationDivision.division}"
-                                    th:text="${destinationDivision.division}"></option>
+                        <select id="destinationDivision" class="custom-select" th:field="*{destinationLeague.division}">
+                            <option th:each="destinationDivision : ${divisions}" th:value="${destinationDivision}"
+                                    th:text="${destinationDivision.name}"></option>
                         </select>
                     </div>
                 </section>
@@ -173,14 +173,21 @@
                             </select>
                         </div>
                     </div>
+                    <div class="wrap">
+                        <h3 class="test">LP gain per win:</h3>
+                        <div class="form-group">
+                            <select id="LPGainPerWin" class="custom-select" >
+                                <option th:each="LP : ${LPGainPerWin}" th:value="${LP}" th:text="${LP.name}"></option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="wrap" id="division">
                         <h3>Solo Division Boost:</h3>
                         <div>
                             <p class="text">5 vs 5 Ranked Solo/Duo:</p>
                             <p class="price">60</p>
                         </div>
-                        <p class="text">Iron IV To Bronze IV</p>
-
+                        <p class="text resume-text"></p>
                     </div>
                     <div class="wrap">
                         <h3>Extras:</h3>
@@ -215,5 +222,7 @@
         </footer>
         <script src="/js/navigation-animation-mobile.js"></script>
         <script src="/js/navigation-animation-desktop.js"></script>
+        <script src="/js/image-swaping.js"></script>
+
     </body>
 </html>
