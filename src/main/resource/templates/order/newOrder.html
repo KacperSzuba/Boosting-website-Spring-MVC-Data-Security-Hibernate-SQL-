@@ -29,7 +29,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/order/">
+                            <a href="/order">
                                 <div class="height">Boosting</div>
                                 <div class="border">
                                     <div></div>
@@ -96,10 +96,10 @@
         </nav>
         <header>
             <p>We belive that we are able to provide each of you with the rank you deserved.</p>
-            <a href="/order/">Boost Me</a>
+            <a href="/order">Boost Me</a>
         </header>
         <main class="division">
-            <form th:action="@{/order3/account/information}" th:object="${orderBoost}" method="get">
+            <form th:action="@{/order/new}" th:object="${orderBoost}" method="get">
                 <section class="current">
                     <h2>Current Division</h2>
                     <div class="wrap-image">
@@ -107,21 +107,21 @@
                     </div>
                     <div class="form-group">
                         <h3>Current Tier</h3>
-                        <select class="custom-select" th:field="*{currentLeague.tier}" id="currentTier">
+                        <select id="currentTier" class="custom-select" th:field="*{currentLeague.tier}">
                             <option th:each="currentTier : ${tiers}" th:value="${currentTier}"
                                     th:text="${currentTier.name}"></option>
                         </select>
                     </div>
                     <div class="form-group">
                         <h3>Current Division</h3>
-                        <select class="custom-select" th:field="*{currentLeague.division}" id="currentDivision">
+                        <select id="currentDivision" class="custom-select" th:field="*{currentLeague.division}">
                             <option th:each="currentDivision : ${divisions}" th:value="${currentDivision}"
                                     th:text="${currentDivision.name}"></option>
                         </select>
                     </div>
                     <div class="form-group">
                         <h3>Current Points</h3>
-                        <select class="custom-select" th:field="*{currentLeague.points}" id="currentPoints">
+                        <select id="currentPoints" class="custom-select" th:field="*{currentLeague.points}">
                             <option th:each="currentPoints : ${points}" th:value="${currentPoints}"
                                     th:text="${currentPoints.name}"></option>
                         </select>
@@ -208,13 +208,13 @@
                 <section>
                     <div class="customer">
                         <h2>Customer</h2>
-                        <a href="#">Order Now</a>
-                        <a href="#">Join Our Team</a>
+                        <a href="/order">Order Now</a>
+                        <a href="/booster-application">Join Our Team</a>
                     </div>
                     <div class="pages">
                         <h2>Pages</h2>
                         <a href="#">F.A.Q.</a>
-                        <a href="#">Contact Us</a>
+                        <a href="/contact-us">Contact Us</a>
                         <a href="#">Terms And Conditions</a>
                     </div>
                 </section>

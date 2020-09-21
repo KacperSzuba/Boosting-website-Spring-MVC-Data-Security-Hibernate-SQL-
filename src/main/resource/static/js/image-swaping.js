@@ -11,13 +11,13 @@ const resumeText = document.querySelector('.resume-text');
 
 window.addEventListener('load', () => {
     let goldTier = desireTier[3];
-    let silverTier = desireTier[2];
-    // TODO Sprawdzić czy dla goldTier i silverTier działą przypisanie selected = true;
+    let silverTier = currentTier[2];
 
     goldTier.selected = true;
     silverTier.selected = true;
-    desireTierImg.src = imagePath(desireTier.value, desireDivision.value);
-    currentTierImg.src = imagePath(currentTier.value, currentDivision.value);
+
+    desireTierImg.src = imagePath(goldTier.value, desireDivision.value);
+    currentTierImg.src = imagePath(silverTier.value, currentDivision.value);
     setResumeText();
 });
 

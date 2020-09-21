@@ -29,21 +29,21 @@ public class OrderController {
         model.addAttribute("LPGainPerWin", LPGainPerWin.values());
 
         OrderBoost orderBoost = new OrderBoost();
-        model.addAttribute("orderBoost2", orderBoost);
-        return "orderView/newOrder";
+        model.addAttribute("orderBoost", orderBoost);
+        return "order/newOrder";
     }
 
-    @RequestMapping("/account/information")
-    public String accountInformation(@Valid @ModelAttribute("orderBoost2") OrderBoost orderBoost, BindingResult result){
+    @GetMapping("/new")
+    public String accountInformation(@Valid @ModelAttribute("orderBoost") OrderBoost orderBoost, BindingResult result){
         if(result.hasErrors()){
-            return "orderView/newOrder";
+            return "order/newOrder";
         }
         try {
             if (orderBoostService.isLeagueIsValid(orderBoost)) {
                 orderBoostService.makeOrder(orderBoost);
                 return "redirect:/";
             } else {
-                return "orderView/newOrder";
+                return "order/newOrder";
             }
         }
         catch (NullPointerException ex){
