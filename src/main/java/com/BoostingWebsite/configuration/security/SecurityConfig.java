@@ -33,10 +33,6 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http)throws Exception{
-        /*
-        TODO Jeżeli spróbuje złożyć zamówienie nie będąc zalogowanym to po zalogowaniu nie mogę tego zrobić bez przejścia na inną zakładkę i
-            ponownego wejścia na adres /order.
-         */
         http.authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/booster").hasRole("BOOSTER")

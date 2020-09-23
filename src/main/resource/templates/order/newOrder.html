@@ -99,7 +99,7 @@
             <a href="/order">Boost Me</a>
         </header>
         <main class="division">
-            <form th:action="@{/order/new}" th:object="${orderBoost}" method="get">
+            <form th:action="@{/order/new}" th:object="${orderBoost}" method="post">
                 <section class="current">
                     <h2>Current Division</h2>
                     <div class="wrap-image">
