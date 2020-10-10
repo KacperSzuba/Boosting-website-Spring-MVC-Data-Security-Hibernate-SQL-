@@ -75,11 +75,20 @@ function disableWrongTiers() {
         desireTier[i].disabled = i < currentTier.selectedIndex;
     }
 
-    if(isTiersAndDivisonAreEquals() || isDivisionEquals1()){
+    if((isTiersAndDivisonAreEquals() || isDivisionEquals1())){
         desireTier[currentTier.selectedIndex].disabled = true;
-        desireTier[currentTier.selectedIndex + 1].selected = true;
-        desireDivision[3].selected = true;
-        desireTierImg.src = imagePath(desireTier[currentTier.selectedIndex + 1].value, desireDivision[3].value);
+        if(maxDivision()){
+            currentDivision[0].disabled = true;
+            currentDivision[1].selected = true;
+
+            desireTier[currentTier.selectedIndex + 1].selected = true;
+            desireDivision[3].selected = true;
+        }
+        else {
+            desireTier[currentTier.selectedIndex + 1].selected = true;
+            desireDivision[3].selected = true;
+            desireTierImg.src = imagePath(desireTier[currentTier.selectedIndex + 1].value, desireDivision[3].value);
+        }
     }
     else if(isCurrentTierIsHigherThanDesired()){
         desireDivision[desireDivision.selectedIndex + 1].selected = true;
@@ -95,12 +104,16 @@ function disableWrongDivisions() {
     }
 }
 
+function maxDivision() {
+    return currentTier.selectedIndex === currentTier.length - 1 && currentDivision.selectedIndex === 0;
+}
+
 function isCurrentTierIsHigherThanDesired() {
     return currentTier.selectedIndex > desireTier.selectedIndex;
 }
 
 function isDivisionEquals1() {
-    return currentDivision.value == currentDivision[0].value;
+    return currentDivision.value === currentDivision[0].value;
 }
 
 function isTiersAndDivisonAreEquals() {
@@ -108,9 +121,9 @@ function isTiersAndDivisonAreEquals() {
 }
 
 function isTiersEquals() {
-    return currentTier.value == desireTier.value;
+    return currentTier.value === desireTier.value;
 }
 
 function isDivisionsEquals() {
-    return splitDivision(currentDivision.value) == splitDivision(desireDivision.value);
+    return splitDivision(currentDivision.value) === splitDivision(desireDivision.value);
 }
