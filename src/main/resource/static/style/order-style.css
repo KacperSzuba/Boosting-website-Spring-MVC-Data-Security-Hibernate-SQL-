@@ -37,7 +37,7 @@ main.division h2 {
 }
 
 main.division h3 {
-    padding-left: 0%;
+    padding-left: 0;
     font-size: 16px;
     text-align: left;
     text-transform: uppercase;
@@ -59,9 +59,7 @@ main.division section.account-info h3 {
 main.division select.custom-select {
     width: 90%;
     padding-left: 5%;
-    margin: 2.5% 0 5%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 2.5% auto 5%;
     border: 1px solid black;
     height: 35px;
     overflow: scroll;
@@ -123,9 +121,7 @@ main.division section.account-info input,
 main.division section.account-info textarea {
     width: 90%;
     padding-left: 5%;
-    margin: 2.5% 0 5%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 2.5% auto 5%;
     border: 1px solid black;
 }
 

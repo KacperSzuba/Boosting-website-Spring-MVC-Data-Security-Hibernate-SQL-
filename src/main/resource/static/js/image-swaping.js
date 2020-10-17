@@ -6,7 +6,7 @@ const currentTierImg = document.querySelector('.current .wrap-image img');
 const currentTier = document.querySelector('.current #currentTier');
 const currentDivision = document.querySelector('.current #currentDivision');
 
-const homeIMGURL = "http://localhost:8091/images";
+const homeIMGURL = `${window.location.protocol}//${window.location.host}/images`;
 const resumeText = document.querySelector('.resume-text');
 
 window.addEventListener('load', () => {
