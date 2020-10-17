@@ -15,34 +15,35 @@ window.addEventListener('load', () => {
 
     goldTier.selected = true;
     silverTier.selected = true;
+    currentDivision[0].selected = true;
+    desireDivision[0].selected = true;
 
-    desireTierImg.src = imagePath(goldTier.value, desireDivision.value);
-    currentTierImg.src = imagePath(silverTier.value, currentDivision.value);
     setResumeText();
     disableWrongTiersOrDivisions();
+    setImages();
 });
 
 desireTier.addEventListener('change', () => {
-    desireTierImg.src = imagePath(desireTier.value, desireDivision.value);
     setResumeText();
     disableWrongTiersOrDivisions();
+    setImages();
 });
 
 desireDivision.addEventListener('change', () => {
-    desireTierImg.src = imagePath(desireTier.value, desireDivision.value);
     setResumeText();
+    setImages();
 });
 
 currentTier.addEventListener('change', () => {
-    currentTierImg.src = imagePath(currentTier.value, currentDivision.value);
     setResumeText();
     disableWrongTiersOrDivisions();
+    setImages();
 });
 
 currentDivision.addEventListener('change', () => {
-    currentTierImg.src = imagePath(currentTier.value, currentDivision.value);
     setResumeText();
     disableWrongTiersOrDivisions();
+    setImages();
 });
 
 function setResumeText() {
@@ -50,7 +51,14 @@ function setResumeText() {
                             ${desireTier.value.toLowerCase().capitalize()} ${splitDivision(desireDivision.value)}`;
 }
 
-function imagePath(tier, division) {
+function setImages() {
+    desireTierImg.src = imagePath(desireTier.selectedIndex, desireDivision.selectedIndex);
+    currentTierImg.src = imagePath(currentTier.selectedIndex, currentDivision.selectedIndex);
+}
+
+function imagePath(tierIndex, divisionIndex) {
+    let tier = currentTier[tierIndex].value;
+    let division = currentDivision[divisionIndex].value;
     return `${homeIMGURL}/${tier}/${tier}${splitDivision(division)}.png`;
 }
 
@@ -72,36 +80,50 @@ function disableWrongTiersOrDivisions() {
 
 function disableWrongTiers() {
     for(let i = 0; i < currentTier.length; i++){
-        desireTier[i].disabled = i < currentTier.selectedIndex;
-    }
-
-    if((isTiersAndDivisonAreEquals() || isDivisionEquals1())){
-        desireTier[currentTier.selectedIndex].disabled = true;
-        if(maxDivision()){
-            currentDivision[0].disabled = true;
-            currentDivision[1].selected = true;
-
-            desireTier[currentTier.selectedIndex + 1].selected = true;
-            desireDivision[3].selected = true;
+        if(whetherCurrentDivisionIsMaximum()){
+            desireTier[i].disabled = i <= currentTier.selectedIndex;
         }
         else {
-            desireTier[currentTier.selectedIndex + 1].selected = true;
-            desireDivision[3].selected = true;
-            desireTierImg.src = imagePath(desireTier[currentTier.selectedIndex + 1].value, desireDivision[3].value);
+            desireTier[i].disabled = i < currentTier.selectedIndex;
         }
     }
+
+    if(maxDivision()){
+        desireTier[currentTier.selectedIndex].selected = true;
+        desireDivision[currentDivision.selectedIndex].selected = true;
+
+        currentDivision[currentDivision.selectedIndex].disabled = true;
+        currentDivision[currentDivision.selectedIndex + 1].selected = true;
+    }
+    else if(isTiersAndDivisionAreEquals()){
+        setSelectedTiersAndDivisions(true);
+    }
     else if(isCurrentTierIsHigherThanDesired()){
-        desireDivision[desireDivision.selectedIndex + 1].selected = true;
-        desireTierImg.src = imagePath(desireTier[desireTier.selectedIndex].value, desireDivision[desireDivision.selectedIndex + 1].value);
-        desireDivision[desireDivision.selectedIndex].disabled = true;
+        setSelectedTiersAndDivisions(false);
     }
 }
 
 function disableWrongDivisions() {
     for(let i = 0; i < currentDivision.length; i++){
         desireDivision[i].disabled = i >= currentDivision.selectedIndex;
+    }
+    desireDivision[currentDivision.selectedIndex - 1].selected = true;
+}
+
+function setSelectedTiersAndDivisions(disableDesireTier) {
+    if(whetherCurrentDivisionIsMaximum()) {
+        desireTier[currentTier.selectedIndex].disabled = disableDesireTier;
+        setDesireRankHigherAOneDivisionThanCurrent();
+    }
+    else{
+        desireTier[currentTier.selectedIndex].selected = true;
         desireDivision[currentDivision.selectedIndex - 1].selected = true;
     }
+}
+
+function setDesireRankHigherAOneDivisionThanCurrent() {
+    desireTier[currentTier.selectedIndex + 1].selected = true;
+    desireDivision[3].selected = true;
 }
 
 function maxDivision() {
@@ -112,18 +134,18 @@ function isCurrentTierIsHigherThanDesired() {
     return currentTier.selectedIndex > desireTier.selectedIndex;
 }
 
-function isDivisionEquals1() {
-    return currentDivision.value === currentDivision[0].value;
+function whetherCurrentDivisionIsMaximum() {
+    return currentDivision.selectedIndex === 0;
 }
 
-function isTiersAndDivisonAreEquals() {
+function isTiersAndDivisionAreEquals() {
     return isTiersEquals() && isDivisionsEquals();
 }
 
 function isTiersEquals() {
-    return currentTier.value === desireTier.value;
+    return currentTier.selectedIndex === desireTier.selectedIndex;
 }
 
 function isDivisionsEquals() {
-    return splitDivision(currentDivision.value) === splitDivision(desireDivision.value);
+    return currentDivision.selectedIndex === desireDivision.selectedIndex;
 }
