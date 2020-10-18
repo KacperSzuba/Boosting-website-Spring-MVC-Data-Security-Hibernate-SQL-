@@ -9,15 +9,16 @@ window.addEventListener('scroll', function () {
     if ((document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) && screenWidth >= 1024) {
         navigation.classList.add("nav-animation");
         aside.classList.add("aside");
-        for (var i = 0; i < link.length; i++) {
+        for (let i = 0; i < link.length; i++) {
             link[i].classList.add("color");
             link[i].classList.add("transparent");
             border[i].classList.add("white")
         }
-    } else {
+    }
+    else {
         navigation.classList.remove("nav-animation");
         aside.classList.remove("aside");
-        for (var i = 0; i < link.length; i++) {
+        for (let i = 0; i < link.length; i++) {
             link[i].classList.remove("color");
             link[i].classList.remove("transparent");
             border[i].classList.remove("white")

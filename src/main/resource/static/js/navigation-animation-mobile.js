@@ -16,10 +16,14 @@ burger.addEventListener('click', function () {
     header.classList.toggle("hide");
 });
 
-accountDescription.addEventListener('click', function () {
-    subMenu.classList.add("show-sub-menu");
-});
+if(accountDescription != null){
+    accountDescription.addEventListener('click', function () {
+        subMenu.classList.add("show-sub-menu");
+    });
+}
 
-hideSubMenu.addEventListener('click', function () {
-   subMenu.classList.remove("show-sub-menu");
-});
+if(hideSubMenu != null) {
+    hideSubMenu.addEventListener('click', function () {
+        subMenu.classList.remove("show-sub-menu");
+    });
+}

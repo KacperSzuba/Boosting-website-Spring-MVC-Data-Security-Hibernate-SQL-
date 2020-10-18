@@ -73,7 +73,6 @@ aside {
     position: absolute;
     top: 50%;
     left: 0;
-    transform: translateY(-50%);
 }
 
 aside nav {
@@ -121,21 +120,12 @@ aside nav ul li {
 #account i{
     position: absolute;
     display: inline-block;
-    transform: translateY(50%);
-}
-
-#account i.fa-user{
-    top: 0;
-    left: 0;
+    transform: translateY(-50%);
 }
 
 #account i.fa-chevron-right{
-    top: 0;
+    top: 50%;
     left: 85%;
-}
-
-#account .height{
-    margin-left: 15%;
 }
 
 #logout{
@@ -144,20 +134,21 @@ aside nav ul li {
 
 aside nav ul li a {
     display: flex;
-    font-size: 3vh;
+    font-size: 25px;
     text-decoration: none;
     color: #181819;
+    height: 100%;
+}
+aside nav ul li form{
+    height: 100%;
 }
 
 aside nav ul li form a.height input {
-    background-color: #FF0800;
-    font-size: 2.5vh;
-    color: #f8f8ff;
-    border-radius: 25px;
-    border: 2px solid;
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
     font-weight: 300;
     font-family: 'Open Sans', sans-serif;
-    padding: 2% 4%
 }
 
 /* Burger icon change */
@@ -172,6 +163,7 @@ i.show {
 
 aside.show {
     left: 0;
+    z-index: 1;
 }
 
 .navigation {
@@ -186,32 +178,31 @@ aside.show {
     color: #F8F8F8;
 }
 
-.aside {
-    height: 10vh;
-}
-
-@media (orientation: landscape) and (min-width: 560px) {
+@media (min-width: 560px) {
     #account{
         line-height: 10vh;
     }
 }
 
-@media (orientation: portrait) and (min-width: 768px) {
+@media (min-width: 768px) {
     aside nav ul li {
         flex-basis: 8vh;
         line-height: 8vh;
     }
 }
 
-@media (orientation:landscape) and (max-width: 1023px) {
+@media (max-width: 1023px) {
     aside nav ul li a {
-        font-size: 3vw;
+        font-size: 24px;
+    }
+
+    .back-to-main-menu{
+        color: #181819;
     }
 }
 
 @media(min-width:1024px) {
-    .burger ,
-    #account i.fa-user{
+    .burger{
         display: none;
     }
 
@@ -390,7 +381,8 @@ header a {
 
 .hide {
     opacity: 0;
-    left: 0;
+    left: 0%;
+    z-index: 0;
 }
 
 @media (orientation: portrait) and (min-width: 360px) {
@@ -428,14 +420,8 @@ header a {
 }
 
 @media (orientation: landscape) and (min-width: 560px) {
-    header {
-        top: 60%;
-    }
-
-
     header p {
         font-size: 24px;
-        margin-bottom: 15%;
     }
 
     header a {
@@ -444,13 +430,9 @@ header a {
 }
 
 @media (orientation: landscape) and (min-width: 800px) {
-    header {
-        top: 55%;
-    }
-
-
     header p {
         font-size: 26px;
+        width: 34%;
     }
 
     header a {
@@ -467,6 +449,7 @@ header a {
     header p {
         font-size: 28px;
         margin-bottom: 0;
+        width: 100%;
     }
 
     header a {
