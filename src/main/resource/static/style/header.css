@@ -8,7 +8,13 @@ body {
     font-family: 'Roboto', sans-serif;
     max-width: 1920px;
     margin: 0 auto;
+}
 
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
 }
 
 /* Navigation */
@@ -149,6 +155,7 @@ aside nav ul li form a.height input {
     font-size: 24px;
     font-weight: 300;
     font-family: 'Open Sans', sans-serif;
+    cursor: pointer;
 }
 
 /* Burger icon change */
@@ -202,6 +209,11 @@ aside.show {
 }
 
 @media(min-width:1024px) {
+    aside nav ul li form a.height input {
+        color: #F8F8F8;
+        font-size: unset;
+    }
+
     .burger{
         display: none;
     }
@@ -219,7 +231,7 @@ aside.show {
         left: auto;
         top: 10vh;
         background-color: transparent;
-        width: 10vh;
+        width: 10vw;
         display: none;
         height: auto;
     }
@@ -231,6 +243,10 @@ aside.show {
 
     .sub-menu ul{
         margin-bottom: 10%;
+    }
+
+    .sub-menu li{
+        margin: 10px 0;
     }
 
     .sub-menu li a{
@@ -331,7 +347,7 @@ aside.show {
 
 @media(min-width:1280px) {
     aside nav ul li a {
-        font-size: 20px;
+        font-size: 18px;
     }
 }
 
@@ -458,7 +474,8 @@ header a {
         transition: 0.3s linear;
     }
 
-    header a:hover {
+    header a:hover,
+    header a input:hover{
         background-color: #14a5eb;
         color: #f8f8ff;
         border: none;
