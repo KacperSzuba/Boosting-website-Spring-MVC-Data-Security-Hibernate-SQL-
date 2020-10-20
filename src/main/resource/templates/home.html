@@ -1,67 +1,226 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-
     <head>
-        <title>Title</title>
-        <link type="text/css" rel="stylesheet" th:href="@{/style/bootstrap.min.css}" />
-        <link type="text/css" rel="stylesheet" th:href="@{/style/drop-down-nav.css}" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+        <link type="text/css" rel="stylesheet" th:href="@{/fontawesome/css/all.css}">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto&display=swap&subset=latin-ext"
+              rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Dancing+Script:600&display=swap" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" th:href="@{/style/header.css}" />
+        <link type="text/css" rel="stylesheet" th:href="@{/style/home-page-style.css}" />
+        <link type="text/css" rel="stylesheet" th:href="@{/style/footer.css}" />
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarColor03">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/order/">Boosting</a>
-                    </li>
-                    <li class="nav-item" sec:authorize="${isAnonymous()}">
-                        <a class="nav-link" href="/login">Login</a>
-                    </li>
-                    <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
-                        <a class="nav-link dropbtn" href="/admin">Admin resources</a>
-                        <div class="dropdown-content">
-                            <a href="/admin/orders">List of orders</a>
-                            <a href="/admin/users">List of users</a>
-                            <a href="/admin/booster-candidates">Booster candidates</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropbtn" href="/boost" sec:authorize="hasRole('BOOSTER')">Booster resources</a>
-                        <div class="dropdown-content">
-                            <a href="/boost/orders">List of free orders</a>
-                            <a href="/boost/current">Current boost</a>
-                            <a href="/boost/completed">Done order boosts</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropbtn" href="#" sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')">Account</a>
-                        <div class="dropdown-content">
-                            <a href="/account/change/password">Change Password</a>
-                            <a href="/account/change/email">Change Email</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/message" sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')">Messages</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/booster-application">Booster application</a>
-                    </li>
-                </ul>
-                <div sec:authorize="${isFullyAuthenticated()}">
-                    <form th:action="@{/logout}" method="post">
-                    <input class="btn btn-primary btn-sm" type="submit" value="Logout" />
-                </form>
-                </div>
+        <nav class="background">
+            <aside>
+                <nav class="navigation">
+                    <ul id="main-menu">
+                        <li>
+                            <a href="/">
+                                <div class="height">Home</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/order">
+                                <div class="height">Boosting</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/booster-application">
+                                <div class="height">Join our team</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/contact-us">
+                                <div class="height">Contact us</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="height">F.A.Q</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li sec:authorize="${isAnonymous()}">
+                            <a href="/login">
+                                <div class="height">Login</div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li id="account" sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')">
+                            <a class="move-right">
+                                <div class="icon-user">
+                                    <div class="height">Account</div>
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                                <div class="border">
+                                    <div></div>
+                                </div>
+                            </a>
+                            <div class="sub-menu">
+                                <ul>
+                                    <li class="back-to-main-menu">
+                                        <a>Back</a>
+                                        <i class="fas fa-chevron-left"></i>
+                                    </li>
+                                    <li>
+                                        <a href="/account/change/password">Change password</a>
+                                    </li>
+                                    <li>
+                                        <a href="/account/change/email">Change email</a>
+                                    </li>
+                                    <li sec:authorize="${isFullyAuthenticated()}">
+                                        <form th:action="@{/logout}" method="post">
+                                            <a class="height">
+                                                <input  type="submit" value="Logout" />
+                                            </a>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+            <div class="burger">
+                <i class="fas fa-bars show"></i>
+                <i class="fas fa-times"></i>
             </div>
         </nav>
-    <h2>Home Page</h2>
+        <header>
+            <p>We belive that we are able to provide each of you with the rank you deserved.</p>
+            <a href="/order">Boost Me</a>
+        </header>
+        <section>
+            <h1>The best lol boosting experience</h1>
+            <p>Our boosting company is one of the oldest elo boosting websites in the world, fits the very high standards of service trusted by thousands of players worldwide.</p>
+            <section class="advantages">
+                <div class="advantage">
+                    <div class="wrap-image">
+                        <img src="/images/others/time.jpg" alt="order time">
+                    </div>
+                    <div class="text">
+                        <h2>fast order completion</h2>
+                        <p>We are working hard to make our customers happy! One division per day is our usual completion
+                            time
+                            for lol elo boost orders below Platinum 3 with at least 16 LP gain.</p>
+                    </div>
+                </div>
+                <div class="advantage">
+                    <div class="wrap-image">
+                        <img src="/images/others/Manners.jpg" alt="Courtesy and manners">
+                    </div>
+                    <div class="text">
+                        <h2>courtesy and manners</h2>
+                        <p>Our professional boosters are strictly instructed to avoid any confrontation with teammates. They
+                            also will never chat with anyone from your friend list without your approval, so your elo boost
+                            experience will not be spoiled.</p>
+                    </div>
+                </div>
+                <div class="advantage">
+                    <div class="wrap-image">
+                        <img src="/images/others/support.jpg" alt="Support">
+                    </div>
+                    <div class="text">
+                        <h2>everyday support</h2>
+                        <p>We are always ready to answer any questions which may appear and solve all possible problems.
+                            Our support agents work everyday to help you at any stage of the lol boosting process.</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <section class="zed-graphics"></section>
+        <section class="order-steps">
+            <h1>3 simple steps to place your order!</h1>
+            <div class="steps">
+                <div class="step">
+                    <p class="number-of-step">1</p>
+                    <div class="text">
+                        <h2 class="header-of-step">Choose the service you're desired for.</h2>
+                        <p class="description-of-step">As you already know, we offer ELO Boosting for Divisions, ELO
+                            Boosting
+                            for games won, and Placement Games.
+                            Remember to select all the options you are interested in (for example DUO with Booster).</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <p class="number-of-step">2</p>
+                    <div class="text">
+                        <h2 class="header-of-step">Enter data to your account league of legends.</h2>
+                        <p class="description-of-step">Remember to enter the correct data. After going to the next step
+                            (clicking the "Pay" button) you will still be able to check the correctness of the data, as they
+                            will be visible after going to the payment page.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <p class="number-of-step">3</p>
+                    <div class="text">
+                        <h2 class="header-of-step">Make payment and follow how our elo booster groems enemy team.</h2>
+                        <p class="description-of-step">After making the payment you will be taken to a page confirming
+                            registration of the order. Ideally, the system will now draw a booster that will accept your
+                            order
+                            and will start boosting your account as soon as possible.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="aatrox-graphics"></section>
+        <section class="support">
+            <div class="text">
+                <h1>You are not convinced to our offer ELO Boosting?</h1>
+                <h1>Maybe you have any questions?</h1>
+                <h2>We will gladly answer all your questions, explain, provide help or advise.</h2>
+                <p>Use the buttons below to learn more about our offer, see examples of our orders or contact us via the
+                    contact script.</p>
+            </div>
+            <div class="buttons">
+                <a href="#">F.A.Q</a>
+                <a href="/contact-us">Contact Us</a>
+            </div>
+        </section>
+        <footer>
+            <div class="wrap">
+                <div class="text">
+                    <h1>Boosting</h1>
+                </div>
+                <section>
+                    <div class="customer">
+                        <h2>Customer</h2>
+                        <a href="/order">Order Now</a>
+                        <a href="/booster-application">Join Our Team</a>
+                    </div>
+                    <div class="pages">
+                        <h2>Pages</h2>
+                        <a href="#">F.A.Q.</a>
+                        <a href="/contact-us">Contact Us</a>
+                        <a href="#">Terms And Conditions</a>
+                    </div>
+                </section>
+            </div>
+        </footer>
+
+        <script src="/js/navigation-animation-mobile.js"></script>
+        <script src="/js/navigation-animation-desktop.js"></script>
     </body>
 </html>
