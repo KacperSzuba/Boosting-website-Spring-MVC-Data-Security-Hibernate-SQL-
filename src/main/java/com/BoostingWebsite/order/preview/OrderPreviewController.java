@@ -11,7 +11,6 @@ public class OrderPreviewController {
 
     @GetMapping("/{id}")
     public String orderPreviewPage(@PathVariable Long id) {
-
         return "order/orderPreview";
     }
 

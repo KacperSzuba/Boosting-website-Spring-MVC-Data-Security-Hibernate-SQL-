@@ -1,0 +1,148 @@
+#order-preview{
+    background-color: #F6F6F6;
+    padding: 20% 10%;
+    height: 100%;
+    width: 100%;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#order{
+    padding: 5% 0;
+    background-color: white;
+    height: 100%;
+    border: 10px white solid;
+    border-radius: 10%;
+    margin-bottom: 15%;
+}
+
+#order h2,
+#order p{
+    text-align: center;
+}
+
+#order h2{
+    font-size: 24px;
+}
+
+#order .tiers p{
+    font-size: 16px;
+}
+
+#order p{
+    line-height: 40px;
+    font-size: 14px;
+}
+
+.image{
+    display: flex;
+    justify-content: center;
+}
+
+.tiers div{
+    margin-bottom: 5%;
+}
+
+.boosting-details div{
+    display: flex;
+    flex-direction: row;
+    padding: 0 1%;
+}
+
+.boosting-details div p{
+    display: flex;
+    flex-direction: column;
+}
+
+.boosting-details div p:nth-of-type(1){
+    flex-grow: 1;
+    text-align: left !important;
+}
+
+@media (min-width: 414px) {
+    .boosting-details div{
+        padding: 0 5%;
+    }
+}
+
+@media (min-width: 640px) {
+    #order-preview{
+        padding: 10%;
+    }
+
+    #order h2{
+        font-size: 28px;
+    }
+
+    #order .tiers p{
+        font-size: 18px;
+    }
+
+    #order p{
+        line-height: 50px;
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 768px) {
+    #order-preview{
+        padding: 15%;
+    }
+
+    #order h2{
+        font-size: 32px;
+    }
+
+    #order .tiers p{
+        font-size: 22px;
+    }
+
+    #order p{
+        line-height: 50px;
+        font-size: 18px;
+    }
+}
+
+@media (min-width: 1024px) {
+    #order{
+        width: 100%;
+    }
+
+    #order section{
+        width: 100%;
+        padding: 2% 3%;
+    }
+
+    .tiers{
+        display: flex;
+    }
+
+    .tiers div{
+        flex-grow: 1;
+    }
+
+    #order-preview{
+        padding: 10% 40% 5% 5%;
+    }
+
+    #order h2{
+        font-size: 28px;
+    }
+
+    #order p{
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 1600px) {
+    #order h2{
+        font-size: 32px;
+    }
+
+    #order p{
+        font-size: 22px;
+    }
+
+    #order .tiers p{
+        font-size: 24px;
+    }
+}
