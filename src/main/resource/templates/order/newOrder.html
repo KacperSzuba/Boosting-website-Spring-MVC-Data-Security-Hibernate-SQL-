@@ -108,10 +108,12 @@
                 <i class="fas fa-times"></i>
             </div>
         </nav>
-        <header>
+
+        <header id="order-header">
             <p>We believe that we are able to provide each of you with the rank you deserved.</p>
             <a href="/order">Boost Me</a>
         </header>
+
         <main class="division">
             <form th:action="@{/order/new}" th:object="${orderBoost}" method="post">
                 <section class="current">

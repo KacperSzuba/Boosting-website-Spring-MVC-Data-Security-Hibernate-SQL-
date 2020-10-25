@@ -39,7 +39,7 @@ nav.background {
     cursor: pointer;
 }
 
-aside {
+.background aside {
     position: fixed;
     bottom: 0;
     left: -250px;
@@ -359,7 +359,7 @@ aside.show {
 
 /* Header */
 
-header {
+#order-header {
     position: absolute;
     top: 80%;
     left: 50%;
@@ -371,7 +371,7 @@ header {
 
 }
 
-header p {
+#order-header p {
     font-size: 16px;
     text-align: center;
     color: #181819;
@@ -380,7 +380,7 @@ header p {
     margin: 0 auto;
 }
 
-header a {
+#order-header a {
     display: block;
     text-decoration: none;
     text-transform: uppercase;
@@ -397,37 +397,37 @@ header a {
 
 .hide {
     opacity: 0;
-    left: 0%;
+    left: 0;
     z-index: 0;
 }
 
 @media (orientation: portrait) and (min-width: 360px) {
-    header p {
+    #order-header p {
         font-size: 18px;
     }
 
-    header a {
+    #order-header a {
         font-size: 22px;
     }
 }
 
 @media (orientation: portrait) and (min-width: 414px) {
-    header p {
+    #order-header p {
         font-size: 20px;
     }
 
-    header a {
+    #order-header a {
         font-size: 24px;
     }
 }
 
 @media (orientation: portrait) and (min-width: 414px) {
-    header p {
+    #order-header p {
         font-size: 28px;
         width: 65%;
     }
 
-    header a {
+    #order-header a {
         height: 75px;
         line-height: 75px;
         font-size: 32px;
@@ -436,46 +436,46 @@ header a {
 }
 
 @media (orientation: landscape) and (min-width: 560px) {
-    header p {
+    #order-header p {
         font-size: 24px;
     }
 
-    header a {
+    #order-header a {
         font-size: 28px;
     }
 }
 
 @media (orientation: landscape) and (min-width: 800px) {
-    header p {
+    #order-header p {
         font-size: 26px;
         width: 34%;
     }
 
-    header a {
+    #order-header a {
         font-size: 30px;
     }
 }
 
 @media (min-width: 1024px) {
-    header {
+    #order-header {
         top: 80%;
         width: 45%;
     }
 
-    header p {
+    #order-header p {
         font-size: 28px;
         margin-bottom: 0;
         width: 100%;
     }
 
-    header a {
+    #order-header a {
         font-size: 32px;
         width: 50%;
         transition: 0.3s linear;
     }
 
-    header a:hover,
-    header a input:hover{
+    #order-header a:hover,
+    #order-header a input:hover{
         background-color: #14a5eb;
         color: #f8f8ff;
         border: none;
@@ -483,16 +483,16 @@ header a {
 }
 
 @media (min-width: 1600px) {
-    header {
+    #order-header {
         top: 80%;
         width: 35%;
     }
 
-    header p {
+    #order-header p {
         font-size: 32px;
     }
 
-    header a {
+    #order-header a {
         font-size: 36px;
         height: 75px;
         line-height: 75px;
@@ -500,7 +500,7 @@ header a {
         transition: 0.3s linear;
     }
 
-    header a:hover {
+    #order-header a:hover {
         background-color: #14a5eb;
         color: #f8f8ff;
         border: none;

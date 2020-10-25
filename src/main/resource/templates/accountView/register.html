@@ -16,6 +16,7 @@
         <link type="text/css" rel="stylesheet" th:href="@{/style/register-style.css}" />
         <link type="text/css" rel="stylesheet" th:href="@{/style/footer.css}" />
     </head>
+
     <body>
         <nav class="background">
             <aside>
@@ -109,72 +110,74 @@
                 <i class="fas fa-times"></i>
             </div>
         </nav>
-    <header>
-        <p>We belive that we are able to provide each of you with the rank you deserved.</p>
-        <a href="/order">Boost Me</a>
-    </header>
-    <p th:text="${message}"></p>
-    <section class="login-form">
-        <div class="wrap">
-            <h1>Create new account</h1>
-            <form th:action="@{/register}" th:object="${register}"  method="post">
-                <div class="form-group">
-                    <label for="exampleInputUsername">Username</label>
-                    <div class="input">
-                        <input th:field="*{username}"  type="text" class="form-control" id="exampleInputUsername" placeholder="Username">
+
+        <header id="order-header">
+            <p>We believe that we are able to provide each of you with the rank you deserved.</p>
+            <a href="/order">Boost Me</a>
+        </header>
+
+        <p th:text="${message}"></p>
+        <section class="login-form">
+            <div class="wrap">
+                <h1>Create new account</h1>
+                <form th:action="@{/register}" th:object="${register}"  method="post">
+                    <div class="form-group">
+                        <label for="exampleInputUsername">Username</label>
+                        <div class="input">
+                            <input th:field="*{username}"  type="text" class="form-control" id="exampleInputUsername" placeholder="Username">
+                        </div>
+                        <span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
                     </div>
-                    <span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword">Password</label>
-                    <div class="input">
-                        <input th:field="*{password}" type="password" class="form-control password" id="exampleInputPassword" placeholder="Password">
-                        <span class="far fa-eye-slash password"></span>
+                    <div class="form-group">
+                        <label for="exampleInputPassword">Password</label>
+                        <div class="input">
+                            <input th:field="*{password}" type="password" class="form-control password" id="exampleInputPassword" placeholder="Password">
+                            <span class="far fa-eye-slash password"></span>
+                        </div>
+                        <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
                     </div>
-                    <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputConfirmPassword">Confirm Password</label>
-                    <div class="input">
-                        <input name="confirmPassword" type="password" class="form-control password" id="exampleInputConfirmPassword" placeholder="Confirm Password">
-                        <span class="far fa-eye-slash password"></span>
+                    <div class="form-group">
+                        <label for="exampleInputConfirmPassword">Confirm Password</label>
+                        <div class="input">
+                            <input name="confirmPassword" type="password" class="form-control password" id="exampleInputConfirmPassword" placeholder="Confirm Password">
+                            <span class="far fa-eye-slash password"></span>
+                        </div>
+                        <span class="error" th:text="${confirmPasswordErrorMessage}"></span>
                     </div>
-                    <span class="error" th:text="${confirmPasswordErrorMessage}"></span>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail">E-mail</label>
-                    <div class="input">
-                        <input th:field="*{email}" type="email" class="form-control" id="exampleInputEmail" placeholder="E-mail">
+                    <div class="form-group">
+                        <label for="exampleInputEmail">E-mail</label>
+                        <div class="input">
+                            <input th:field="*{email}" type="email" class="form-control" id="exampleInputEmail" placeholder="E-mail">
+                        </div>
+                        <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
                     </div>
-                    <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-                </div>
-                <input class="button" type="submit" value="Register" />
-            </form>
-            <p class="login"> Already have an account? Click to <a href="/login">Sign In</a></p>
-        </div>
-    </section>
-    <footer>
-        <div class="wrap">
-            <div class="text">
-                <h1>Boosting</h1>
+                    <input class="button" type="submit" value="Register" />
+                </form>
+                <p class="login"> Already have an account? Click to <a href="/login">Sign In</a></p>
             </div>
-            <section>
-                <div class="customer">
-                    <h2>Customer</h2>
-                    <a href="/order">Order Now</a>
-                    <a href="/booster-application">Join Our Team</a>
+        </section>
+        <footer>
+            <div class="wrap">
+                <div class="text">
+                    <h1>Boosting</h1>
                 </div>
-                <div class="pages">
-                    <h2>Pages</h2>
-                    <a href="#">F.A.Q.</a>
-                    <a href="/contact-us">Contact Us</a>
-                    <a href="#">Terms And Conditions</a>
-                </div>
-            </section>
-        </div>
-    </footer>
-    <script src="/js/navigation-animation-mobile.js"></script>
-    <script src="/js/navigation-animation-desktop.js"></script>
-    <script src="../js/showOrHidePassword.js"></script>
+                <section>
+                    <div class="customer">
+                        <h2>Customer</h2>
+                        <a href="/order">Order Now</a>
+                        <a href="/booster-application">Join Our Team</a>
+                    </div>
+                    <div class="pages">
+                        <h2>Pages</h2>
+                        <a href="#">F.A.Q.</a>
+                        <a href="/contact-us">Contact Us</a>
+                        <a href="#">Terms And Conditions</a>
+                    </div>
+                </section>
+            </div>
+        </footer>
+        <script src="/js/navigation-animation-mobile.js"></script>
+        <script src="/js/navigation-animation-desktop.js"></script>
+        <script src="../js/showOrHidePassword.js"></script>
     </body>
 </html>

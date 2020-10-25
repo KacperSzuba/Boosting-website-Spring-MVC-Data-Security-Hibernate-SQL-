@@ -41,8 +41,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                         "/account/change/password/form",
                         "/account/change/email",
                         "/account/change/email/form",
-                        "/message/**",
-                        "/order/new").hasAnyRole("USER","ADMIN","BOOSTER")
+                        "/message/**").hasAnyRole("USER","ADMIN","BOOSTER")
                 .antMatchers("/account/updatePassword*",
                         "/account/reset/password").hasAuthority("CHANGE_PASSWORD_PRIVILEGE")
                 .antMatchers("/",
@@ -50,6 +49,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                         "/order",
                         "/account/remindPasswordPage",
                         "/css/**","/style/**","/static/**").permitAll()
+                .antMatchers("/order/**").hasAnyRole("USER", "BOOSTER")
                 .and()
                 .formLogin()
                 .loginPage("/login")
