@@ -20,7 +20,8 @@ public class LoginHistory {
     @ManyToOne
     private User user;
 
-    public LoginHistory() {}
+    public LoginHistory() {
+    }
 
     public LoginHistory(LocalDateTime date) {
         this.date = date;

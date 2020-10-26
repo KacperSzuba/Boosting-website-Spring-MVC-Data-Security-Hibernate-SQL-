@@ -11,7 +11,7 @@ public enum Tier {
     private String name;
     private int priority;
 
-    Tier(String name, int priority){
+    Tier(String name, int priority) {
         this.name = name;
         this.priority = priority;
     }

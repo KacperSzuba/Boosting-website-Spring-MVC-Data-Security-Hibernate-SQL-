@@ -16,14 +16,14 @@ public class Contact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 2 ,message = "Name length should be at least 2 letters")
+    @Size(min = 2, message = "Name length should be at least 2 letters")
     private String name;
 
     @NotEmpty(message = "E-mail cannot be empty")
     @Email(message = "Invalid email")
     private String email;
 
-    @Size(min = 4 ,message = "Subject length should be at least 4 letters")
+    @Size(min = 4, message = "Subject length should be at least 4 letters")
     private String subject;
 
     @Column(length = 1000)
@@ -32,7 +32,8 @@ public class Contact {
 
     private LocalDate date;
 
-    public Contact(){ }
+    public Contact() {
+    }
 
     public Contact(String name, String email, String subject, String question) {
         this.name = name;

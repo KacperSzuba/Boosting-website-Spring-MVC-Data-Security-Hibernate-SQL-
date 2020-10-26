@@ -8,7 +8,7 @@ public enum LPGainPerWin {
 
     private String name;
 
-    LPGainPerWin(String name){
+    LPGainPerWin(String name) {
         this.name = name;
     }
 

@@ -21,19 +21,19 @@ class AccountStatus {
         this.userRoleRepository = userRoleRepository;
     }
 
-    void banUser(Long userId){
-        userRepository.changeUserEnabledStatement(userId,false);
+    void banUser(Long userId) {
+        userRepository.changeUserEnabledStatement(userId, false);
     }
 
-    void unBanUser(Long userId){
-        userRepository.changeUserEnabledStatement(userId,true);
+    void unBanUser(Long userId) {
+        userRepository.changeUserEnabledStatement(userId, true);
     }
 
-    void deleteUser(Long userId){
+    void deleteUser(Long userId) {
         userRepository.deleteUser(userId);
     }
 
-    void changeTheRoleName(Long userId, RoleName roleName){
+    void changeTheRoleName(Long userId, RoleName roleName) {
         UserRole userRole = userRoleRepository.getUserRole(roleName);
         List<UserRole> roles = new ArrayList<>();
         roles.add(userRole);
@@ -42,8 +42,8 @@ class AccountStatus {
         userRepository.save(user);
     }
 
-    RoleName getCurrentUserRole(User user){
-       UserRole userRole = userRepository.getUserRole(user.getId());
-       return userRole.getRoleName();
+    RoleName getCurrentUserRole(User user) {
+        UserRole userRole = userRepository.getUserRole(user.getId());
+        return userRole.getRoleName();
     }
 }

@@ -39,7 +39,7 @@ nav.background {
     cursor: pointer;
 }
 
-.background aside {
+aside {
     position: fixed;
     bottom: 0;
     left: -250px;
@@ -49,7 +49,7 @@ nav.background {
     transition: 0.3s linear;
 }
 
-.sub-menu{
+.sub-menu {
     position: absolute;
     top: 0;
     left: -250px;
@@ -60,22 +60,22 @@ nav.background {
     z-index: 10;
 }
 
-.show-sub-menu{
+.show-sub-menu {
     left: 0;
 }
 
-.back-to-main-menu a{
+.back-to-main-menu a {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.back-to-main-menu{
+.back-to-main-menu {
     position: relative;
     width: 100%;
 }
 
-#account .fa-chevron-left{
+#account .fa-chevron-left {
     position: absolute;
     top: 50%;
     left: 0;
@@ -109,32 +109,32 @@ aside nav ul li {
     line-height: 6vh;
 }
 
-#account a{
+#account a {
     cursor: pointer;
 }
 
-#account p{
+#account p {
     line-height: 12px;
     font-size: 12px;
 }
 
-#account .icon-user{
+#account .icon-user {
     position: relative;
     width: 100%;
 }
 
-#account i{
+#account i {
     position: absolute;
     display: inline-block;
     transform: translateY(-50%);
 }
 
-#account i.fa-chevron-right{
+#account i.fa-chevron-right {
     top: 50%;
     left: 85%;
 }
 
-#logout{
+#logout {
     margin-top: auto;
 }
 
@@ -145,7 +145,8 @@ aside nav ul li a {
     color: #181819;
     height: 100%;
 }
-aside nav ul li form{
+
+aside nav ul li form {
     height: 100%;
 }
 
@@ -178,7 +179,8 @@ aside.show {
 }
 
 .nav-animation {
-    background-color: rgba(20, 165, 235, 0.85)
+    background-color: rgba(20, 165, 235, 0.85);
+    height: 10vh;
 }
 
 .color {
@@ -186,7 +188,7 @@ aside.show {
 }
 
 @media (min-width: 560px) {
-    #account{
+    #account {
         line-height: 10vh;
     }
 }
@@ -203,31 +205,31 @@ aside.show {
         font-size: 24px;
     }
 
-    .back-to-main-menu{
+    .back-to-main-menu {
         color: #181819;
     }
 }
 
-@media(min-width:1024px) {
+@media (min-width: 1024px) {
     aside nav ul li form a.height input {
         color: #F8F8F8;
         font-size: unset;
     }
 
-    .burger{
+    .burger {
         display: none;
     }
 
-    #account .height{
+    #account .height {
         margin: 0;
     }
 
-    #account a:hover  ~ .sub-menu,
-    .sub-menu:hover{
+    #account a:hover ~ .sub-menu,
+    .sub-menu:hover {
         display: block;
     }
 
-    .sub-menu{
+    .sub-menu {
         left: auto;
         top: 10vh;
         background-color: transparent;
@@ -236,20 +238,20 @@ aside.show {
         height: auto;
     }
 
-    .sub-menu ul{
+    .sub-menu ul {
         display: block;
         width: 100%;
     }
 
-    .sub-menu ul{
+    .sub-menu ul {
         margin-bottom: 10%;
     }
 
-    .sub-menu li{
+    .sub-menu li {
         margin: 10px 0;
     }
 
-    .sub-menu li a{
+    .sub-menu li a {
         line-height: normal;
         font-size: 14px;
     }
@@ -305,7 +307,7 @@ aside.show {
         color: #f8f8f8;
     }
 
-    aside nav ul li a:hover>div.border div {
+    aside nav ul li a:hover > div.border div {
         left: 0;
     }
 
@@ -332,26 +334,26 @@ aside.show {
         background-color: #f8f8ff;
     }
 
-    .back-to-main-menu{
+    .back-to-main-menu {
         display: none;
     }
 
-    #account i.fa-chevron-right{
+    #account i.fa-chevron-right {
         display: none;
     }
 
-    #account p{
+    #account p {
         display: none;
     }
 }
 
-@media(min-width:1280px) {
+@media (min-width: 1280px) {
     aside nav ul li a {
         font-size: 18px;
     }
 }
 
-@media(min-width:1600px) {
+@media (min-width: 1600px) {
     aside nav ul li a {
         font-size: 22px;
     }
@@ -359,7 +361,7 @@ aside.show {
 
 /* Header */
 
-#order-header {
+header {
     position: absolute;
     top: 80%;
     left: 50%;
@@ -371,7 +373,7 @@ aside.show {
 
 }
 
-#order-header p {
+header p {
     font-size: 16px;
     text-align: center;
     color: #181819;
@@ -380,7 +382,7 @@ aside.show {
     margin: 0 auto;
 }
 
-#order-header a {
+header a {
     display: block;
     text-decoration: none;
     text-transform: uppercase;
@@ -397,37 +399,37 @@ aside.show {
 
 .hide {
     opacity: 0;
-    left: 0;
+    left: 0%;
     z-index: 0;
 }
 
 @media (orientation: portrait) and (min-width: 360px) {
-    #order-header p {
+    header p {
         font-size: 18px;
     }
 
-    #order-header a {
+    header a {
         font-size: 22px;
     }
 }
 
 @media (orientation: portrait) and (min-width: 414px) {
-    #order-header p {
+    header p {
         font-size: 20px;
     }
 
-    #order-header a {
+    header a {
         font-size: 24px;
     }
 }
 
 @media (orientation: portrait) and (min-width: 414px) {
-    #order-header p {
+    header p {
         font-size: 28px;
         width: 65%;
     }
 
-    #order-header a {
+    header a {
         height: 75px;
         line-height: 75px;
         font-size: 32px;
@@ -436,46 +438,46 @@ aside.show {
 }
 
 @media (orientation: landscape) and (min-width: 560px) {
-    #order-header p {
+    header p {
         font-size: 24px;
     }
 
-    #order-header a {
+    header a {
         font-size: 28px;
     }
 }
 
 @media (orientation: landscape) and (min-width: 800px) {
-    #order-header p {
+    header p {
         font-size: 26px;
         width: 34%;
     }
 
-    #order-header a {
+    header a {
         font-size: 30px;
     }
 }
 
 @media (min-width: 1024px) {
-    #order-header {
+    header {
         top: 80%;
         width: 45%;
     }
 
-    #order-header p {
+    header p {
         font-size: 28px;
         margin-bottom: 0;
         width: 100%;
     }
 
-    #order-header a {
+    header a {
         font-size: 32px;
         width: 50%;
         transition: 0.3s linear;
     }
 
-    #order-header a:hover,
-    #order-header a input:hover{
+    header a:hover,
+    header a input:hover {
         background-color: #14a5eb;
         color: #f8f8ff;
         border: none;
@@ -483,16 +485,16 @@ aside.show {
 }
 
 @media (min-width: 1600px) {
-    #order-header {
+    header {
         top: 80%;
         width: 35%;
     }
 
-    #order-header p {
+    header p {
         font-size: 32px;
     }
 
-    #order-header a {
+    header a {
         font-size: 36px;
         height: 75px;
         line-height: 75px;
@@ -500,7 +502,7 @@ aside.show {
         transition: 0.3s linear;
     }
 
-    #order-header a:hover {
+    header a:hover {
         background-color: #14a5eb;
         color: #f8f8ff;
         border: none;

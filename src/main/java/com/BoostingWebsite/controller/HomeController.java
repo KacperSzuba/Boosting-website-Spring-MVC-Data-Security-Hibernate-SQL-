@@ -12,12 +12,12 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
 
     @GetMapping
-    public String showHomePage(){
+    public String showHomePage() {
         return "home";
     }
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request){
+    public String logout(HttpServletRequest request) {
         HttpSession httpSession = request.getSession();
         httpSession.invalidate();
         return "home";

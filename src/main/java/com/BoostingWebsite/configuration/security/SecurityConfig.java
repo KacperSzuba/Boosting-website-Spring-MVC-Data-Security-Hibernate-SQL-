@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig  extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
@@ -27,12 +27,12 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
     }
 
     @Override
-    protected void configure(HttpSecurity http)throws Exception{
+    protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/booster").hasRole("BOOSTER")
@@ -41,14 +41,14 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                         "/account/change/password/form",
                         "/account/change/email",
                         "/account/change/email/form",
-                        "/message/**").hasAnyRole("USER","ADMIN","BOOSTER")
+                        "/message/**").hasAnyRole("USER", "ADMIN", "BOOSTER")
                 .antMatchers("/account/updatePassword*",
                         "/account/reset/password").hasAuthority("CHANGE_PASSWORD_PRIVILEGE")
                 .antMatchers("/",
                         "/register",
                         "/order",
                         "/account/remindPasswordPage",
-                        "/css/**","/style/**","/static/**").permitAll()
+                        "/css/**", "/style/**", "/static/**").permitAll()
                 .antMatchers("/order/**").hasAnyRole("USER", "BOOSTER")
                 .and()
                 .formLogin()

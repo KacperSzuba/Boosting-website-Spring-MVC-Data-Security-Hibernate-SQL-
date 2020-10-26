@@ -15,22 +15,20 @@ public class TokenRecorder {
     public void saveOrUpdateToken(String token, User user) {
         if (checkIfUserHasTokenGenerated(user)) {
             saveToken(token, user);
-        }
-        else {
+        } else {
             updateToken(token, user);
         }
     }
 
     private void updateToken(String token, User user) {
-        tryToUpdateToken(token,user);
+        tryToUpdateToken(token, user);
     }
 
-    private void tryToUpdateToken(String token, User user){
-        try{
+    private void tryToUpdateToken(String token, User user) {
+        try {
             userTokenRepository.delete(userTokenRepository.findByUser(user).get());
             saveToken(token, user);
-        }
-        catch(Exception exception){
+        } catch (Exception exception) {
             exception.printStackTrace();
         }
     }
@@ -39,12 +37,11 @@ public class TokenRecorder {
         tryToSaveToken(token, user);
     }
 
-    private void tryToSaveToken(String token, User user){
-        try{
+    private void tryToSaveToken(String token, User user) {
+        try {
             UserToken userToken = new UserToken(token, user);
             userTokenRepository.save(userToken);
-        }
-        catch (Exception exception){
+        } catch (Exception exception) {
             exception.printStackTrace();
         }
     }

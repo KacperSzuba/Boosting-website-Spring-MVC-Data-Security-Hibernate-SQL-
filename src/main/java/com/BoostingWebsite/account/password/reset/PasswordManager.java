@@ -26,46 +26,43 @@ class PasswordManager {
         this.actualUser = actualUser;
     }
 
-    void changePassword(String currentPassword, String password, String confirmPassword){
+    void changePassword(String currentPassword, String password, String confirmPassword) {
         this.password = password;
         this.confirmPassword = confirmPassword;
         try {
             whetherPasswordCanBeChanged(currentPassword);
-        }
-        catch (DataMismatchException exception){
+        } catch (DataMismatchException exception) {
             setMessage(exception.getMessage());
         }
     }
 
     private void whetherPasswordCanBeChanged(String currentPassword) throws DataMismatchException {
-        if(checkIfPasswordEnteredMatchesCurrent(currentPassword) && checkIfPasswordsAreTheSameAndHaveRequiredLength()){
+        if (checkIfPasswordEnteredMatchesCurrent(currentPassword) && checkIfPasswordsAreTheSameAndHaveRequiredLength()) {
             tryToChangePassword();
         }
     }
-    
+
     private boolean checkIfPasswordsAreTheSameAndHaveRequiredLength() throws DataMismatchException {
-        if(isPasswordLengthSufficient(this.password) && whetherThePasswordsAreTheSame(this.password, this.confirmPassword)) {
+        if (isPasswordLengthSufficient(this.password) && whetherThePasswordsAreTheSame(this.password, this.confirmPassword)) {
             return true;
-        }
-        else {
+        } else {
             throw new DataMismatchException("Your password is too short or passwords are different");
         }
     }
 
-    private void tryToChangePassword(){
-        userRepository.changePassword(loggedInUser().getId(),passwordEncoder.encode(this.password));
+    private void tryToChangePassword() {
+        userRepository.changePassword(loggedInUser().getId(), passwordEncoder.encode(this.password));
         setMessage("Your new password is : " + this.password);
     }
 
-    private User loggedInUser(){
+    private User loggedInUser() {
         return actualUser.getActualUser();
     }
 
     private boolean checkIfPasswordEnteredMatchesCurrent(String currentPassword) throws DataMismatchException {
-        if(passwordEncoder.matches(currentPassword, loggedInUser().getPassword())){
+        if (passwordEncoder.matches(currentPassword, loggedInUser().getPassword())) {
             return true;
-        }
-        else {
+        } else {
             throw new DataMismatchException("The password you entered does not match the current one");
         }
     }

@@ -17,15 +17,15 @@ public class PasswordManagerController {
     }
 
     @GetMapping("/change/password")
-    public String showChangePasswordPage(){
+    public String showChangePasswordPage() {
         return "accountView/change-password";
     }
 
     @GetMapping("/change/password/form")
-    public String changePassword(@RequestParam("currentPassword")String currentPassword, @RequestParam ("password") String password,
-                                 @RequestParam("repeatPassword")String repeatPassword, Model model){
+    public String changePassword(@RequestParam("currentPassword") String currentPassword, @RequestParam("password") String password,
+                                 @RequestParam("repeatPassword") String repeatPassword, Model model) {
         passwordManager.changePassword(currentPassword, password, repeatPassword);
-        model.addAttribute("newPassword",passwordManager.getMessage());
+        model.addAttribute("newPassword", passwordManager.getMessage());
         return "accountView/change-password";
     }
 

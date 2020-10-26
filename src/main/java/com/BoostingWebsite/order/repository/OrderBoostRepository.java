@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-public interface OrderBoostRepository extends CrudRepository<OrderBoost,Long> {
+public interface OrderBoostRepository extends CrudRepository<OrderBoost, Long> {
     @Query(value = "select orderboost from OrderBoost orderboost where (orderboost.user =:user or orderboost.booster=:user) and orderboost.whetherDone=false")
     Optional<OrderBoost> findOrderBoostByUserOrBooster(@Param("user") User user);
 
@@ -22,12 +22,12 @@ public interface OrderBoostRepository extends CrudRepository<OrderBoost,Long> {
     Optional<OrderBoost> checkIfTheBoosterHasNoOrders(@Param("u") User u);
 
     @Query(value = "select orderboost from OrderBoost orderboost where orderboost.booster =:user and orderboost.whetherDone=false")
-    OrderBoost findCurrentBoost(@Param("user")User user);
+    OrderBoost findCurrentBoost(@Param("user") User user);
 
     @Transactional
     @Modifying
     @Query(value = "UPDATE OrderBoost orderboost SET orderboost.booster =:user where orderboost.id=:id")
-    void findFreeOrderBoosts(@Param("id") Long id, @Param("user")User user);
+    void findFreeOrderBoosts(@Param("id") Long id, @Param("user") User user);
 
     @Transactional
     @Modifying

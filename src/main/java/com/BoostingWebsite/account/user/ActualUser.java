@@ -16,7 +16,7 @@ public class ActualUser {
         this.request = request;
     }
 
-    public User getActualUser(){
+    public User getActualUser() {
         Principal principal = this.request.getUserPrincipal();
         return userRepository.findByUsername(principal.getName());
     }

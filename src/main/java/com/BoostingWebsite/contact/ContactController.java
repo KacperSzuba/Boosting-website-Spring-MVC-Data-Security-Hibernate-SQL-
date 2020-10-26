@@ -24,8 +24,8 @@ public class ContactController {
     }
 
     @GetMapping
-    public String showContactUsPage(Model model){
-        model.addAttribute("contact",new Contact());
+    public String showContactUsPage(Model model) {
+        model.addAttribute("contact", new Contact());
         return "contact-us";
     }
 
@@ -33,14 +33,12 @@ public class ContactController {
     public String send(@Valid @ModelAttribute("contact") Contact contact, BindingResult result) {
         if (result.hasErrors()) {
             return "contact-us";
-        }
-        else {
+        } else {
             if (validateEmail(contact.getEmail())) {
                 contact.setDate(LocalDate.now());
                 contactRepository.save(contact);
                 return "redirect:/";
-            }
-            else {
+            } else {
                 return "redirect:/contact-us";
             }
         }

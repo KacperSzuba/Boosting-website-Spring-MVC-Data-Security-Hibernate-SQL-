@@ -23,14 +23,14 @@ public class OrderBoostService {
         this.orderBoostRepository = orderBoostRepository;
     }
 
-    boolean isLeagueIsValid(OrderBoost orderBoost){
+    boolean isLeagueIsValid(OrderBoost orderBoost) {
         int priorityOfCurrentLeague = orderBoost.getCurrentLeague().getTier().getPriority() + orderBoost.getCurrentLeague().getDivision().getPriority();
         int priorityOfDestinationLeague = orderBoost.getDestinationLeague().getTier().getPriority() + orderBoost.getDestinationLeague().getDivision().getPriority();
 
         return priorityOfDestinationLeague > priorityOfCurrentLeague;
     }
 
-    void makeOrder(OrderBoost orderBoost){
+    void makeOrder(OrderBoost orderBoost) {
         orderBoost.setDate(LocalDateTime.now());
         orderBoost.setUser(actualUser.getActualUser());
         leagueRepository.save(orderBoost.getCurrentLeague());

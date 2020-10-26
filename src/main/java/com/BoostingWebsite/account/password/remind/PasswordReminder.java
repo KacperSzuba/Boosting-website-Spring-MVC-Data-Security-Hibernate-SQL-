@@ -48,8 +48,7 @@ class PasswordReminder {
         this.confirmPassword = confirmPassword;
         try {
             tryToResetPassword();
-        }
-        catch (DataMismatchException exception){
+        } catch (DataMismatchException exception) {
             exception.printStackTrace();
             setPasswordRemindMessage(exception.getMessage());
         }
@@ -63,10 +62,9 @@ class PasswordReminder {
     }
 
     private boolean checkIfPasswordsAreTheSameAndHaveRequiredLength() throws DataMismatchException {
-        if(isPasswordLengthSufficient(this.password) && whetherThePasswordsAreTheSame(this.password, this.confirmPassword)) {
+        if (isPasswordLengthSufficient(this.password) && whetherThePasswordsAreTheSame(this.password, this.confirmPassword)) {
             return true;
-        }
-        else {
+        } else {
             throw new DataMismatchException("Your password is too short or passwords are different");
         }
     }
@@ -74,7 +72,7 @@ class PasswordReminder {
     void remindPassword(String email) {
         this.email = email;
         if (whetherEmailIsInDatabase()) {
-            tokenRecorderClass.saveOrUpdateToken(getToken(),user().get());
+            tokenRecorderClass.saveOrUpdateToken(getToken(), user().get());
             User user = user().get();
             UserToken userToken = userTokenRepository.findByUser(user).get();
             String token = userToken.getToken();

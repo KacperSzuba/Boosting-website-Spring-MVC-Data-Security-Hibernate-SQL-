@@ -21,12 +21,11 @@ class PasswordReminderToken {
         this.userTokenRepository = userTokenRepository;
     }
 
-    String validateResetPasswordToken(Long id, String token){
+    String validateResetPasswordToken(Long id, String token) {
         String tempToken = tokenValidator.validateToken(id, token);
-        if (tempToken != null){
+        if (tempToken != null) {
             return tempToken;
-        }
-        else {
+        } else {
             User user = userTokenRepository.findByToken(token).getUser();
             Authentication auth = new UsernamePasswordAuthenticationToken(user, null, Collections.singletonList(
                     new SimpleGrantedAuthority("CHANGE_PASSWORD_PRIVILEGE")));

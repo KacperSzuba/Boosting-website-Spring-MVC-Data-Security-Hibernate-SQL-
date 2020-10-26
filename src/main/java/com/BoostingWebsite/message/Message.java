@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Entity
 @DynamicUpdate
 @Table(name = "messages")
-public class Message implements Comparable<Message>{
+public class Message implements Comparable<Message> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,16 +18,16 @@ public class Message implements Comparable<Message>{
     private String message;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="message_sender")
+    @JoinColumn(name = "message_sender")
     private User author;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="recipient_of_the_message")
+    @JoinColumn(name = "recipient_of_the_message")
     private User recipient;
 
     private LocalDateTime date;
 
-    public Message(){
+    public Message() {
         this.date = LocalDateTime.now();
     }
 
@@ -45,6 +45,7 @@ public class Message implements Comparable<Message>{
         this.recipient = copyMessage.recipient;
         this.date = LocalDateTime.now();
     }
+
     public Long getId() {
         return id;
     }

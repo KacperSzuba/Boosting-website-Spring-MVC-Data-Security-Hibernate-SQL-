@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface LeagueRepository extends CrudRepository<League,Long> {
+public interface LeagueRepository extends CrudRepository<League, Long> {
     @Query(value = "select league from League league group by league.tier order by league.id desc")
     List<League> findAllTiersOrderByIdDesc();
 

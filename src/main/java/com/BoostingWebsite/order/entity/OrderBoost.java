@@ -29,24 +29,24 @@ public class OrderBoost {
     private double price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="current_leagues_id")
+    @JoinColumn(name = "current_leagues_id")
     private League currentLeague;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="destination_leagues_id")
+    @JoinColumn(name = "destination_leagues_id")
     private League destinationLeague;
 
     @Valid
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name="accounts_details_id")
+    @JoinColumn(name = "accounts_details_id")
     private AccountDetails accountDetails;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name="users_id")
+    @JoinColumn(name = "users_id")
     private User user;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name="boosters_id")
+    @JoinColumn(name = "boosters_id")
     private User booster;
 
     private LocalDateTime date;
@@ -54,7 +54,7 @@ public class OrderBoost {
     public OrderBoost() {
     }
 
-    public OrderBoost(OrderBoost orderBoost){
+    public OrderBoost(OrderBoost orderBoost) {
         this.id = orderBoost.id;
         this.noteToBooster = orderBoost.noteToBooster;
         this.whetherPaid = orderBoost.whetherPaid;

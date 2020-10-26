@@ -66,56 +66,52 @@ function splitDivision(division) {
     return division.split('_')[1];
 }
 
-String.prototype.capitalize = function() {
+String.prototype.capitalize = function () {
     return this.charAt(0).toUpperCase() + this.slice(1);
 };
 
 function disableWrongTiersOrDivisions() {
     disableWrongTiers();
 
-    if(isTiersEquals()){
+    if (isTiersEquals()) {
         disableWrongDivisions();
     }
 }
 
 function disableWrongTiers() {
-    for(let i = 0; i < currentTier.length; i++){
-        if(whetherCurrentDivisionIsMaximum()){
+    for (let i = 0; i < currentTier.length; i++) {
+        if (whetherCurrentDivisionIsMaximum()) {
             desireTier[i].disabled = i <= currentTier.selectedIndex;
-        }
-        else {
+        } else {
             desireTier[i].disabled = i < currentTier.selectedIndex;
         }
     }
 
-    if(maxDivision()){
+    if (maxDivision()) {
         desireTier[currentTier.selectedIndex].selected = true;
         desireDivision[currentDivision.selectedIndex].selected = true;
 
         currentDivision[currentDivision.selectedIndex].disabled = true;
         currentDivision[currentDivision.selectedIndex + 1].selected = true;
-    }
-    else if(isTiersAndDivisionAreEquals()){
+    } else if (isTiersAndDivisionAreEquals()) {
         setSelectedTiersAndDivisions(true);
-    }
-    else if(isCurrentTierIsHigherThanDesired()){
+    } else if (isCurrentTierIsHigherThanDesired()) {
         setSelectedTiersAndDivisions(false);
     }
 }
 
 function disableWrongDivisions() {
-    for(let i = 0; i < currentDivision.length; i++){
+    for (let i = 0; i < currentDivision.length; i++) {
         desireDivision[i].disabled = i >= currentDivision.selectedIndex;
     }
     desireDivision[currentDivision.selectedIndex - 1].selected = true;
 }
 
 function setSelectedTiersAndDivisions(disableDesireTier) {
-    if(whetherCurrentDivisionIsMaximum()) {
+    if (whetherCurrentDivisionIsMaximum()) {
         desireTier[currentTier.selectedIndex].disabled = disableDesireTier;
         setDesireRankHigherAOneDivisionThanCurrent();
-    }
-    else{
+    } else {
         desireTier[currentTier.selectedIndex].selected = true;
         desireDivision[currentDivision.selectedIndex - 1].selected = true;
     }

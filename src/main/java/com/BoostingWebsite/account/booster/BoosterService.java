@@ -20,32 +20,30 @@ class BoosterService {
     private final ActualUser actualUser;
     private final OrderBoostRepository orderBoostRepository;
 
-    BoosterService(ActualUser actualUser,OrderBoostRepository orderBoostRepository){
+    BoosterService(ActualUser actualUser, OrderBoostRepository orderBoostRepository) {
         this.actualUser = actualUser;
         this.orderBoostRepository = orderBoostRepository;
     }
 
-    List<OrderBoost> findFreeOrderBoost(){
-       return orderBoostRepository.findOrderBoostByBoosterEqualsNull();
+    List<OrderBoost> findFreeOrderBoost() {
+        return orderBoostRepository.findOrderBoostByBoosterEqualsNull();
     }
 
-    void addBoost(Long orderId){
+    void addBoost(Long orderId) {
         leagueOfLegendsAPIConnector = new LeagueOfLegendsAPIConnector(getUsername(), getRegion());
-        if(checkIfTheBoosterHasNoOrders()){
+        if (checkIfTheBoosterHasNoOrders()) {
             orderBoostRepository.findFreeOrderBoosts(orderId, loggedInBooster());
             setMessage("You correct took order");
-        }
-        else {
+        } else {
             setMessage("You incorrect took order");
         }
     }
 
     void finishBoost() throws IOException {
-        if(whetherOrderIsCompleted()){
+        if (whetherOrderIsCompleted()) {
             orderBoostRepository.setOrderAsDone(findCurrentBoost().getId());
             setMessage("You have successfully completed boosting");
-        }
-        else {
+        } else {
             setMessage("You have not completed boosting correctly");
         }
     }
@@ -66,27 +64,27 @@ class BoosterService {
         return destinationTier.equals(tierFromApi);
     }
 
-    OrderBoost findCurrentBoost(){
+    OrderBoost findCurrentBoost() {
         return orderBoostRepository.findCurrentBoost(loggedInBooster());
     }
 
-    List<OrderBoost> listOfDoneOrderBoosts(){
+    List<OrderBoost> listOfDoneOrderBoosts() {
         return orderBoostRepository.findDoneOrderBoost(loggedInBooster());
     }
 
-    private boolean checkIfTheBoosterHasNoOrders(){
+    private boolean checkIfTheBoosterHasNoOrders() {
         return orderBoostRepository.checkIfTheBoosterHasNoOrders(loggedInBooster()).isEmpty();
     }
 
-    private User loggedInBooster(){
+    private User loggedInBooster() {
         return actualUser.getActualUser();
     }
 
-    private String getUsername(){
+    private String getUsername() {
         return findCurrentBoost().getAccountDetails().getLolUsername();
     }
 
-    private Region getRegion(){
+    private Region getRegion() {
         return findCurrentBoost().getAccountDetails().getRegion();
     }
 

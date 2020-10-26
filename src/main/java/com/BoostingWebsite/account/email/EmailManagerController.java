@@ -17,13 +17,13 @@ class EmailManagerController {
     }
 
     @GetMapping("/change/email")
-    public String emailChangePage(){
+    public String emailChangePage() {
         return "accountView/change-email";
     }
 
     @GetMapping("/change/email/form")
-    public String changeEmail(@RequestParam("currentEmail") String currentEmail, @RequestParam ("email") String email,
-                              @RequestParam("confirmEmail") String confirmEmail, Model model){
+    public String changeEmail(@RequestParam("currentEmail") String currentEmail, @RequestParam("email") String email,
+                              @RequestParam("confirmEmail") String confirmEmail, Model model) {
         emailChange.changeEmail(currentEmail, email, confirmEmail);
         model.addAttribute("newEmail", emailChange.getMessage());
         return "accountView/change-email";

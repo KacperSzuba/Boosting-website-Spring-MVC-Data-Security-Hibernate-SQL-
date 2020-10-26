@@ -52,16 +52,16 @@ section.login-form div.wrap input.form-control {
     border: 1px solid black;
 }
 
-section.login-form div.wrap div.input{
+section.login-form div.wrap div.input {
     width: 90%;
     margin: 2.5% auto 5%;
     position: relative;
 }
 
-section.login-form div.wrap span{
+section.login-form div.wrap span {
     position: absolute;
-    right:5%;
-    bottom:50%;
+    right: 5%;
+    bottom: 50%;
     font-size: 26px;
     transform: translateY(50%);
     cursor: pointer;
@@ -99,7 +99,7 @@ section.login-form div.wrap input.button {
         font-size: 18px;
     }
 
-    section.login-form div.wrap div.input{
+    section.login-form div.wrap div.input {
         width: 80%;
     }
 
@@ -136,7 +136,7 @@ section.login-form div.wrap input.button {
         height: 45px;
     }
 
-    section.login-form div.wrap div.input{
+    section.login-form div.wrap div.input {
         width: 85%;
     }
 

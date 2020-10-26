@@ -9,7 +9,7 @@ import com.BoostingWebsite.account.roles.UserRole;
 
 import java.util.Optional;
 
-public interface UserRepository extends CrudRepository<User,Long> {
+public interface UserRepository extends CrudRepository<User, Long> {
     User findByUsername(String username);
 
     boolean existsUserByEmail(String email);
@@ -17,6 +17,7 @@ public interface UserRepository extends CrudRepository<User,Long> {
     Optional<User> findByEmail(String email);
 
     boolean existsUserByUsername(String username);
+
     @Transactional
     @Modifying
     @Query(value = "UPDATE User u SET u.enabled =:enabled WHERE u.id=:id")
@@ -35,7 +36,7 @@ public interface UserRepository extends CrudRepository<User,Long> {
     @Transactional
     @Modifying
     @Query(value = "DELETE FROM User u WHERE u.id=:id")
-    void deleteUser(@Param("id")Long id);
+    void deleteUser(@Param("id") Long id);
 
     @Query(value = "SELECT u.roles FROM User u WHERE u.id = :id")
     UserRole getUserRole(@Param("id") Long id);

@@ -22,7 +22,7 @@ public class OrderController {
     }
 
     @GetMapping
-    public String showOrderPage(Model model){
+    public String showOrderPage(Model model) {
         model.addAttribute("tiers", Tier.values());
         model.addAttribute("divisions", Division.values());
         model.addAttribute("points", Points.values());
@@ -35,8 +35,8 @@ public class OrderController {
     }
 
     @PostMapping("/new")
-    public String accountInformation(@Valid @ModelAttribute("orderBoost") OrderBoost orderBoost, BindingResult result){
-        if(result.hasErrors()){
+    public String accountInformation(@Valid @ModelAttribute("orderBoost") OrderBoost orderBoost, BindingResult result) {
+        if (result.hasErrors()) {
             return "order/newOrder";
         }
         try {
@@ -46,8 +46,7 @@ public class OrderController {
             } else {
                 return "order/newOrder";
             }
-        }
-        catch (NullPointerException ex){
+        } catch (NullPointerException ex) {
             ex.printStackTrace();
             return "redirect:/login";
         }

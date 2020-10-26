@@ -10,7 +10,7 @@ public enum Points {
 
     private String name;
 
-    Points(String name){
+    Points(String name) {
         this.name = name;
     }
 

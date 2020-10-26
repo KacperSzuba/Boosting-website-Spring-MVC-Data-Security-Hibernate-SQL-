@@ -24,14 +24,15 @@ public class LeagueOfLegendsAPIConnector {
         this.region = region;
     }
 
-    private Map<String,JsonObject> retrieveSummonerLeague() throws IOException {
+    private Map<String, JsonObject> retrieveSummonerLeague() throws IOException {
         URL summonerLeague = new URL("https://" + region() + ".api.riotgames.com/lol/league/v4/entries/by-summoner/" + retrieveSummonerId() + "?api_key=" + apiKey);
-        JsonArray jsonArray = (JsonArray) parser(summonerLeague);;
-        Map<String,JsonObject> map = new HashMap<>();
+        JsonArray jsonArray = (JsonArray) parser(summonerLeague);
+
+        Map<String, JsonObject> map = new HashMap<>();
 
         for (JsonElement jsonElement : jsonArray) {
             String key = removeQuotes(jsonElement.getAsJsonObject().get("queueType").toString());
-            map.put(key,jsonElement.getAsJsonObject());
+            map.put(key, jsonElement.getAsJsonObject());
         }
         return map;
     }
@@ -48,6 +49,7 @@ public class LeagueOfLegendsAPIConnector {
         JsonParser parser = new JsonParser();
         return parser.parse(reader.readLine());
     }
+
     private JsonObject getJsonObject(String queueType) throws IOException {
         return retrieveSummonerLeague().get(queueType);
     }
@@ -76,7 +78,7 @@ public class LeagueOfLegendsAPIConnector {
     public String getActual5vs5Division() throws IOException {
         String division = getJsonObject("RANKED_FLEX_SR").get("rank").toString();
         String str = removeQuotes(division);
-        return  mapOfDivisions().get(str);
+        return mapOfDivisions().get(str);
     }
 
     public String getActual5vs5LeaguePoints() throws IOException {
@@ -84,20 +86,20 @@ public class LeagueOfLegendsAPIConnector {
         return removeQuotes(leaguePoints);
     }
 
-    private String removeQuotes(String text){
+    private String removeQuotes(String text) {
         return text.replace("\"", "");
     }
 
-    private Map<Region,String> mapOfRegions(){
-        Map<Region ,String> mapOfRegions = new TreeMap<>();
+    private Map<Region, String> mapOfRegions() {
+        Map<Region, String> mapOfRegions = new TreeMap<>();
         mapOfRegions.put(Region.EUW, "euw1");
         mapOfRegions.put(Region.EUNE, "eun1");
         mapOfRegions.put(Region.TR, "tr1");
         return mapOfRegions;
     }
 
-    private Map<String,String> mapOfDivisions(){
-        Map<String,String> mapOfDivisions = new TreeMap<>();
+    private Map<String, String> mapOfDivisions() {
+        Map<String, String> mapOfDivisions = new TreeMap<>();
         mapOfDivisions.put("I", "1");
         mapOfDivisions.put("II", "2");
         mapOfDivisions.put("III", "3");
@@ -105,7 +107,7 @@ public class LeagueOfLegendsAPIConnector {
         return mapOfDivisions;
     }
 
-    private String region(){
+    private String region() {
         return mapOfRegions().get(region);
     }
 }

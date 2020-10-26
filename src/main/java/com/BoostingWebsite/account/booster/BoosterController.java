@@ -25,18 +25,18 @@ class BoosterController {
     }
 
     @GetMapping
-    public String showBoosterPage(){
+    public String showBoosterPage() {
         return "boosterView/booster";
     }
 
     @GetMapping("/orders")
-    public ModelAndView listOfFreeOrders(){
+    public ModelAndView listOfFreeOrders() {
         List<OrderBoost> orders = boosterService.findFreeOrderBoost();
-        return new ModelAndView("boosterView/listOfFreeOrders","orders", orders);
+        return new ModelAndView("boosterView/listOfFreeOrders", "orders", orders);
     }
 
     @GetMapping("/order/{id}")
-    public String showOrderDetailsPage(@PathVariable("id")Long id, Model model){
+    public String showOrderDetailsPage(@PathVariable("id") Long id, Model model) {
         OrderBoost orderBoost = orderBoostRepository.findById(id).get();
         model.addAttribute("boostDetails", orderBoost);
         model.addAttribute("idOfBoost", id);
@@ -44,22 +44,22 @@ class BoosterController {
     }
 
     @GetMapping("/order/{id}/add")
-    public String addBoost(@PathVariable("id")Long id, Model model){
+    public String addBoost(@PathVariable("id") Long id, Model model) {
         boosterService.addBoost(id);
         model.addAttribute("addingBoostMessage", boosterService.getMessage());
         return "boosterView/booster";
     }
 
     @GetMapping("/current")
-    public ModelAndView currentBoost(){
+    public ModelAndView currentBoost() {
         OrderBoost currentOrderBoost = boosterService.findCurrentBoost();
-        return new ModelAndView("boosterView/currentBoost","currentOrderBoost", currentOrderBoost);
+        return new ModelAndView("boosterView/currentBoost", "currentOrderBoost", currentOrderBoost);
     }
 
     @GetMapping("/completed")
-    public ModelAndView listOfDoneOrderBoosts(){
+    public ModelAndView listOfDoneOrderBoosts() {
         List<OrderBoost> listOfDoneOrderBoosts = boosterService.listOfDoneOrderBoosts();
-        return new ModelAndView("boosterView/doneOrderBoosts","doneOrderBoosts", listOfDoneOrderBoosts);
+        return new ModelAndView("boosterView/doneOrderBoosts", "doneOrderBoosts", listOfDoneOrderBoosts);
     }
 
     @GetMapping("/current/finish")

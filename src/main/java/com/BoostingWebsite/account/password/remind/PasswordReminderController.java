@@ -20,36 +20,36 @@ public class PasswordReminderController {
     }
 
     @GetMapping("/remind/password")
-    public String remindPasswordPage(){
+    public String remindPasswordPage() {
         return "accountView/remind-password";
     }
 
     @GetMapping("/remind/password/form")
-    public String remindPassword(@RequestParam("email") String email){
+    public String remindPassword(@RequestParam("email") String email) {
         passwordReminder.remindPassword(email);
         return "accountView/remind-password";
     }
 
     @GetMapping("/remind/password/token")
-    public String remind(@RequestParam("id")Long id, @RequestParam("token") String token, Model model){
+    public String remind(@RequestParam("id") Long id, @RequestParam("token") String token, Model model) {
         String validatePasswordResetToken = passwordReminderToken.validateResetPasswordToken(id, token);
-        if(validatePasswordResetToken != null){
-            model.addAttribute("token","Your token is "+ validatePasswordResetToken);
+        if (validatePasswordResetToken != null) {
+            model.addAttribute("token", "Your token is " + validatePasswordResetToken);
             return "accountView/login";
         }
         return "redirect:/account/reset/password";
     }
 
     @GetMapping("/reset/password")
-    public String updatePassword(){
+    public String updatePassword() {
         return "accountView/update-password";
     }
 
     @PostMapping("/reset/password")
     public String resetPassword(@RequestParam("password") String password, @RequestParam("repeatPassword") String repeatPassword, Model model) {
         passwordReminder.resetPassword(password, repeatPassword);
-        if(passwordReminder.getPasswordRemindMessage() != null){
-            model.addAttribute("message",passwordReminder.getPasswordRemindMessage());
+        if (passwordReminder.getPasswordRemindMessage() != null) {
+            model.addAttribute("message", passwordReminder.getPasswordRemindMessage());
             return "accountView/update-password";
         }
         return "redirect:/login";

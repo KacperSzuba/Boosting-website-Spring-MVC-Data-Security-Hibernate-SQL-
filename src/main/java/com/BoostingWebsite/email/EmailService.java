@@ -15,20 +15,19 @@ public class EmailService {
     }
 
     public void sendEmail(String to, String subject, String content) {
-        tryToSendEmail(to,subject,content);
+        tryToSendEmail(to, subject, content);
     }
 
-    private void tryToSendEmail(String to, String subject, String content){
-       try{
-           SimpleMailMessage message = new SimpleMailMessage();
-           message.setTo(to);
-           message.setSubject(subject);
-           message.setText(content);
-           emailSender.send(message);
-       }
-       catch (Exception exception){
-           exception.printStackTrace();
-       }
+    private void tryToSendEmail(String to, String subject, String content) {
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(to);
+            message.setSubject(subject);
+            message.setText(content);
+            emailSender.send(message);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 
     public void constructResetTokenEmail(String contextPath, String token, User user) {

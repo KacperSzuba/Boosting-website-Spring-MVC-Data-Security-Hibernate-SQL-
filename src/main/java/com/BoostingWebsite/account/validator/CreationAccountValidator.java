@@ -15,41 +15,38 @@ public class CreationAccountValidator {
         this.userRepository = userRepository;
     }
 
-    public static boolean isConfirmPasswordIsValid(String confirmPassword){
+    public static boolean isConfirmPasswordIsValid(String confirmPassword) {
         return confirmPassword.length() >= 7 && confirmPassword.length() <= 20;
     }
 
-    public boolean isAccountCreatedCorrectly(User user, String confirmPassword){
+    public boolean isAccountCreatedCorrectly(User user, String confirmPassword) {
         this.user = user;
         return checkIfEmailExist() && checkIfUserExists() && checkIfPasswordsAreTheSame(confirmPassword);
     }
 
-    private boolean checkIfUserExists(){
+    private boolean checkIfUserExists() {
         boolean isUserExist = userRepository.existsUserByUsername(this.user.getUsername());
-        if(isUserExist){
+        if (isUserExist) {
             throw new IllegalArgumentException("User with this username already exist");
-        }
-        else {
+        } else {
             return true;
         }
     }
 
-    private boolean checkIfEmailExist(){
+    private boolean checkIfEmailExist() {
         boolean isEmailExist = userRepository.existsUserByEmail(this.user.getEmail());
-        if (isEmailExist){
+        if (isEmailExist) {
             throw new IllegalArgumentException("User with this email already exist");
-        }
-        else {
+        } else {
             return true;
         }
     }
 
-    private boolean checkIfPasswordsAreTheSame(String confirmPassword){
+    private boolean checkIfPasswordsAreTheSame(String confirmPassword) {
         boolean isPasswordsAreTheSame = user.getPassword().equals(confirmPassword);
-        if(isPasswordsAreTheSame){
+        if (isPasswordsAreTheSame) {
             return true;
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("Passwords don't match");
         }
     }

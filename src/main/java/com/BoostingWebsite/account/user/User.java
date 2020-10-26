@@ -14,15 +14,15 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User{
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 7,max = 20,message = "Username length should be between 7 and 20 letters")
+    @Size(min = 7, max = 20, message = "Username length should be between 7 and 20 letters")
     private String username;
 
-    @Size(min = 7,message = "Password length should be between 7 and 20 letters")
+    @Size(min = 7, message = "Password length should be between 7 and 20 letters")
     private String password;
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
@@ -39,9 +39,10 @@ public class User{
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<UserRole> roles;
 
-    public User(){}
+    public User() {
+    }
 
-    public User(String username, String password, boolean enabled,String email ,List<UserRole> roles) {
+    public User(String username, String password, boolean enabled, String email, List<UserRole> roles) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;

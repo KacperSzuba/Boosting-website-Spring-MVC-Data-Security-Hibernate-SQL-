@@ -30,25 +30,23 @@ class UserCreatorService {
         this.creationAccountValidator = creationAccountValidator;
     }
 
-    boolean createAccount(User user, String confirmPassword){
+    boolean createAccount(User user, String confirmPassword) {
         this.user = user;
         try {
             tryToCreateAccount(confirmPassword);
             return true;
-        }
-        catch (IllegalArgumentException exception){
+        } catch (IllegalArgumentException exception) {
             exception.printStackTrace();
             setUserRegistrationInformation(exception.getMessage());
             return false;
-        }
-        catch (Exception exception){
+        } catch (Exception exception) {
             exception.printStackTrace();
             setUserRegistrationInformation("Invalid registration");
             return false;
         }
     }
 
-    private void tryToCreateAccount(String confirmPassword){
+    private void tryToCreateAccount(String confirmPassword) {
         if (creationAccountValidator.isAccountCreatedCorrectly(this.user, confirmPassword)) {
             UserRole userRole = userRoleRepository.getUserRole(RoleName.ROLE_USER);
             userRoleRepository.save(userRole);
@@ -59,11 +57,11 @@ class UserCreatorService {
         }
     }
 
-    private void setUserRegistrationInformation(String message){
+    private void setUserRegistrationInformation(String message) {
         this.message = message;
     }
 
-    String getUserRegistrationInformation(){
+    String getUserRegistrationInformation() {
         return message;
     }
 }

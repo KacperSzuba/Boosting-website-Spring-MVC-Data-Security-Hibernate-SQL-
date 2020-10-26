@@ -16,13 +16,13 @@ burger.addEventListener('click', function () {
     header.classList.toggle("hide");
 });
 
-if(accountDescription != null){
+if (accountDescription != null) {
     accountDescription.addEventListener('click', function () {
         subMenu.classList.add("show-sub-menu");
     });
 }
 
-if(hideSubMenu != null) {
+if (hideSubMenu != null) {
     hideSubMenu.addEventListener('click', function () {
         subMenu.classList.remove("show-sub-menu");
     });
