@@ -3,7 +3,7 @@ const burger = document.querySelector('.burger');
 const iconBurger = document.querySelector(".fa-bars");
 const iconX = document.querySelector(".fa-times");
 const column = document.querySelector(".header-aside");
-const header = document.querySelector("header");
+const header = document.querySelector(".order-header");
 
 const accountDescription = document.querySelector("#account a");
 const subMenu = document.querySelector(".sub-menu");
