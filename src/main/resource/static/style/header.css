@@ -39,7 +39,7 @@ nav.background {
     cursor: pointer;
 }
 
-aside {
+.header-aside {
     position: fixed;
     bottom: 0;
     left: -250px;
@@ -81,7 +81,7 @@ aside {
     left: 0;
 }
 
-aside nav {
+.header-aside nav {
     height: 100%;
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
@@ -89,7 +89,7 @@ aside nav {
     margin: 0 auto;
 }
 
-aside nav ul {
+.header-aside nav ul {
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -99,7 +99,7 @@ aside nav ul {
     padding-left: 5vw;
 }
 
-aside nav ul li {
+.header-aside nav ul li {
     flex-basis: 10vh;
     width: 100%;
     line-height: 10vh;
@@ -138,7 +138,7 @@ aside nav ul li {
     margin-top: auto;
 }
 
-aside nav ul li a {
+.header-aside nav ul li a {
     display: flex;
     font-size: 25px;
     text-decoration: none;
@@ -146,11 +146,11 @@ aside nav ul li a {
     height: 100%;
 }
 
-aside nav ul li form {
+.header-aside nav ul li form {
     height: 100%;
 }
 
-aside nav ul li form a.height input {
+.header-aside nav ul li form a.height input {
     background-color: transparent;
     border: none;
     font-size: 24px;
@@ -169,7 +169,7 @@ i.show {
     display: block;
 }
 
-aside.show {
+.header-aside.show {
     left: 0;
     z-index: 1;
 }
@@ -180,7 +180,7 @@ aside.show {
 
 .nav-animation {
     background-color: rgba(20, 165, 235, 0.85);
-    height: 10vh;
+    height: 10vh !important;
 }
 
 .color {
@@ -194,14 +194,14 @@ aside.show {
 }
 
 @media (min-width: 768px) {
-    aside nav ul li {
+    .header-aside nav ul li {
         flex-basis: 8vh;
         line-height: 8vh;
     }
 }
 
 @media (max-width: 1023px) {
-    aside nav ul li a {
+    .header-aside nav ul li a {
         font-size: 24px;
     }
 
@@ -211,7 +211,7 @@ aside.show {
 }
 
 @media (min-width: 1024px) {
-    aside nav ul li form a.height input {
+    .header-aside nav ul li form a.height input {
         color: #F8F8F8;
         font-size: unset;
     }
@@ -256,7 +256,7 @@ aside.show {
         font-size: 14px;
     }
 
-    aside {
+    .header-aside {
         top: 0;
         left: 0;
         display: flex;
@@ -271,7 +271,7 @@ aside.show {
         width: 100%;
     }
 
-    aside nav ul {
+    .header-aside nav ul {
         flex-direction: row;
         padding: 0;
         margin: 0 auto;
@@ -279,7 +279,8 @@ aside.show {
         width: 60vw;
     }
 
-    aside nav ul li {
+
+     .header-aside nav ul li {
         display: flex;
         justify-content: center;
         flex-basis: 10vw;
@@ -287,7 +288,7 @@ aside.show {
         align-content: center;
     }
 
-    aside nav ul li a {
+    .header-aside nav ul li a {
         position: relative;
         font-size: 16px;
         color: #f8f8ff;
@@ -299,15 +300,15 @@ aside.show {
         transition: 0.15s linear;
     }
 
-    aside nav ul li a:hover {
+    .header-aside nav ul li a:hover {
         color: #14a5eb;
     }
 
-    aside nav ul li a.transparent:hover {
+    .header-aside nav ul li a.transparent:hover {
         color: #f8f8f8;
     }
 
-    aside nav ul li a:hover > div.border div {
+    .header-aside nav ul li a:hover > div.border div {
         left: 0;
     }
 
@@ -348,13 +349,13 @@ aside.show {
 }
 
 @media (min-width: 1280px) {
-    aside nav ul li a {
+    .header-aside nav ul li a {
         font-size: 18px;
     }
 }
 
 @media (min-width: 1600px) {
-    aside nav ul li a {
+    .header-aside nav ul li a {
         font-size: 22px;
     }
 }

@@ -1,5 +1,5 @@
 const navigation = document.querySelector(".navigation");
-const link = document.querySelectorAll("aside nav ul li a");
+const link = document.querySelectorAll(".header-aside nav ul li a");
 const border = document.querySelectorAll(".border div");
 
 const screenWidth = window.screen.width;
