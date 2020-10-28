@@ -74,7 +74,7 @@ footer div a {
         font-size: 40px;
     }
 
-    footer .wrap section {
+    .footer-navigation {
         padding: 0 5%;
     }
 
@@ -131,7 +131,7 @@ footer div a {
 
 
 @media (min-width: 1024px) {
-    footer .wrap section {
+    .footer-navigation {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -140,11 +140,11 @@ footer div a {
         margin: 5% 0 0;
     }
 
-    footer .wrap section .pages {
+    .footer-navigation .pages {
         flex-basis: 40%;
     }
 
-    footer .wrap section .customer {
+    .footer-navigation .customer {
         flex-basis: 40%;
     }
 
@@ -162,7 +162,7 @@ footer div a {
         margin-bottom: 5%;
     }
 
-    section {
+    .footer-navigation {
         width: 90%;
         margin: 0 auto;
     }
@@ -173,7 +173,7 @@ footer div a {
         margin-bottom: 10%;
     }
 
-    footer div.wrap section h2 {
+    .footer-navigation h2 {
         text-align: left;
     }
 
@@ -188,7 +188,7 @@ footer div a {
 }
 
 @media (min-width: 1300px) {
-    footer .wrap section {
+    .footer-navigation {
         width: 90%;
         margin: 0 auto;
     }
@@ -208,7 +208,7 @@ footer div a {
 
 @media (min-width: 1300px) {
 
-    footer .wrap section {
+    .footer-navigation {
         width: 85%;
     }
 

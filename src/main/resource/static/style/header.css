@@ -39,7 +39,8 @@ nav.background {
     cursor: pointer;
 }
 
-.header-aside {
+.header-aside,
+#sub-menu-wrap {
     position: fixed;
     bottom: 0;
     left: -250px;
@@ -49,19 +50,12 @@ nav.background {
     transition: 0.3s linear;
 }
 
-.sub-menu {
+#sub-menu {
     position: absolute;
-    top: 0;
-    left: -250px;
-    width: 250px;
-    height: 100vh;
-    background-color: #f8f8ff;
-    transition: 0.3s linear;
-    z-index: 10;
 }
 
 .show-sub-menu {
-    left: 0;
+    left: 0 !important;
 }
 
 .back-to-main-menu a {
@@ -81,15 +75,17 @@ nav.background {
     left: 0;
 }
 
-.header-aside nav {
+.navigation {
     height: 100%;
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
     max-width: 1920px;
     margin: 0 auto;
+    transition: 0.15s linear;
 }
 
-.header-aside nav ul {
+#main-menu,
+#sub-menu ul{
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -99,7 +95,7 @@ nav.background {
     padding-left: 5vw;
 }
 
-.header-aside nav ul li {
+#main-menu li {
     flex-basis: 10vh;
     width: 100%;
     line-height: 10vh;
@@ -118,11 +114,6 @@ nav.background {
     font-size: 12px;
 }
 
-#account .icon-user {
-    position: relative;
-    width: 100%;
-}
-
 #account i {
     position: absolute;
     display: inline-block;
@@ -138,7 +129,7 @@ nav.background {
     margin-top: auto;
 }
 
-.header-aside nav ul li a {
+#main-menu li a {
     display: flex;
     font-size: 25px;
     text-decoration: none;
@@ -146,11 +137,11 @@ nav.background {
     height: 100%;
 }
 
-.header-aside nav ul li form {
+#main-menu li form {
     height: 100%;
 }
 
-.header-aside nav ul li form a.height input {
+#main-menu li form a.height input {
     background-color: transparent;
     border: none;
     font-size: 24px;
@@ -174,10 +165,6 @@ i.show {
     z-index: 1;
 }
 
-.navigation {
-    transition: 0.15s linear;
-}
-
 .nav-animation {
     background-color: rgba(20, 165, 235, 0.85);
     height: 10vh !important;
@@ -187,6 +174,11 @@ i.show {
     color: #F8F8F8;
 }
 
+.account-wrap{
+    position: relative;
+    width: 100%;
+}
+
 @media (min-width: 560px) {
     #account {
         line-height: 10vh;
@@ -194,14 +186,14 @@ i.show {
 }
 
 @media (min-width: 768px) {
-    .header-aside nav ul li {
+     #main-menu li {
         flex-basis: 8vh;
         line-height: 8vh;
     }
 }
 
 @media (max-width: 1023px) {
-    .header-aside nav ul li a {
+    #main-menu li a {
         font-size: 24px;
     }
 
@@ -211,7 +203,7 @@ i.show {
 }
 
 @media (min-width: 1024px) {
-    .header-aside nav ul li form a.height input {
+     #main-menu li form a.height input {
         color: #F8F8F8;
         font-size: unset;
     }
@@ -224,12 +216,12 @@ i.show {
         margin: 0;
     }
 
-    #account a:hover ~ .sub-menu,
-    .sub-menu:hover {
+    #account a:hover ~ #sub-menu,
+    #sub-menu:hover {
         display: block;
     }
 
-    .sub-menu {
+    #sub-menu {
         left: auto;
         top: 10vh;
         background-color: transparent;
@@ -238,20 +230,20 @@ i.show {
         height: auto;
     }
 
-    .sub-menu ul {
+    #sub-menu ul {
         display: block;
         width: 100%;
     }
 
-    .sub-menu ul {
+    #sub-menu ul {
         margin-bottom: 10%;
     }
 
-    .sub-menu li {
+    #sub-menu li {
         margin: 10px 0;
     }
 
-    .sub-menu li a {
+    #sub-menu li a {
         line-height: normal;
         font-size: 14px;
     }
@@ -271,7 +263,7 @@ i.show {
         width: 100%;
     }
 
-    .header-aside nav ul {
+    #main-menu {
         flex-direction: row;
         padding: 0;
         margin: 0 auto;
@@ -280,7 +272,7 @@ i.show {
     }
 
 
-     .header-aside nav ul li {
+     #main-menu li {
         display: flex;
         justify-content: center;
         flex-basis: 10vw;
@@ -288,7 +280,7 @@ i.show {
         align-content: center;
     }
 
-    .header-aside nav ul li a {
+    #main-menu li a {
         position: relative;
         font-size: 16px;
         color: #f8f8ff;
@@ -300,15 +292,15 @@ i.show {
         transition: 0.15s linear;
     }
 
-    .header-aside nav ul li a:hover {
+    #main-menu li a:hover {
         color: #14a5eb;
     }
 
-    .header-aside nav ul li a.transparent:hover {
+    #main-menu li a.transparent:hover {
         color: #f8f8f8;
     }
 
-    .header-aside nav ul li a:hover > div.border div {
+    #main-menu li a:hover > div.border div {
         left: 0;
     }
 
@@ -339,7 +331,8 @@ i.show {
         display: none;
     }
 
-    #account i.fa-chevron-right {
+    #account i.fa-chevron-right,
+    #account i.fa-chevron-left{
         display: none;
     }
 
@@ -349,13 +342,13 @@ i.show {
 }
 
 @media (min-width: 1280px) {
-    .header-aside nav ul li a {
+    #main-menu li a {
         font-size: 18px;
     }
 }
 
 @media (min-width: 1600px) {
-    .header-aside nav ul li a {
+    #main-menu li a {
         font-size: 22px;
     }
 }
@@ -400,7 +393,7 @@ i.show {
 
 .hide {
     opacity: 0;
-    left: 0%;
+    left: 0;
     z-index: 0;
 }
 

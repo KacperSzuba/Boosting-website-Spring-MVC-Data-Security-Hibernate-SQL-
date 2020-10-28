@@ -6,7 +6,7 @@ const column = document.querySelector(".header-aside");
 const header = document.querySelector(".order-header");
 
 const accountDescription = document.querySelector("#account a");
-const subMenu = document.querySelector(".sub-menu");
+const subMenu = document.querySelector(".sub-menu-wrap");
 const hideSubMenu = document.querySelector(".back-to-main-menu");
 
 burger.addEventListener('click', function () {
@@ -14,6 +14,7 @@ burger.addEventListener('click', function () {
     iconX.classList.toggle("show");
     column.classList.toggle("show");
     header.classList.toggle("hide");
+    subMenu.classList.remove("show-sub-menu");
 });
 
 if (accountDescription != null) {
