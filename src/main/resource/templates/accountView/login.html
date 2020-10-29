@@ -21,91 +21,109 @@
             <aside class="header-aside">
                 <nav class="navigation">
                     <ul id="main-menu">
-                        <li>
-                            <a href="/">
+                        <li class="main-menu-li">
+                            <a href="/" class="main-menu-link">
                                 <div class="height">Home</div>
+
                                 <div class="border">
                                     <div></div>
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="/order">
+
+                        <li class="main-menu-li">
+                            <a href="/order" class="main-menu-link">
                                 <div class="height">Boosting</div>
+
                                 <div class="border">
                                     <div></div>
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="/booster-application">
+
+                        <li class="main-menu-li">
+                            <a href="/booster-application" class="main-menu-link">
                                 <div class="height">Join our team</div>
+
                                 <div class="border">
                                     <div></div>
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="/contact-us">
+
+                        <li class="main-menu-li">
+                            <a href="/contact-us" class="main-menu-link">
                                 <div class="height">Contact us</div>
+
                                 <div class="border">
                                     <div></div>
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
+
+                        <li class="main-menu-li">
+                            <a href="#" class="main-menu-link">
                                 <div class="height">F.A.Q</div>
+
                                 <div class="border">
                                     <div></div>
                                 </div>
                             </a>
                         </li>
-                        <li sec:authorize="${isAnonymous()}">
-                            <a href="/login">
+
+                        <li sec:authorize="${isAnonymous()}" class="main-menu-li">
+                            <a href="/login" class="main-menu-link">
                                 <div class="height">Login</div>
+
                                 <div class="border">
                                     <div></div>
                                 </div>
                             </a>
                         </li>
-                        <li id="account" sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')">
-                            <a class="move-right">
+
+                        <li id="account" sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')" class="main-menu-li">
+                            <a class="move-right main-menu-link">
                                 <div class="account-wrap">
                                     <div class="height">Account</div>
+
                                     <i class="fas fa-chevron-right"></i>
                                 </div>
+
                                 <div class="border">
                                     <div></div>
                                 </div>
                             </a>
+
                             <nav id="sub-menu-wrap" class="sub-menu-wrap">
-                                <div id="sub-menu" class="sub-menu">
-                                    <ul>
-                                        <li class="back-to-main-menu">
-                                            <a>Back</a>
-                                            <i class="fas fa-chevron-left"></i>
-                                        </li>
-                                        <li>
-                                            <a href="/account/change/password">Change password</a>
-                                        </li>
-                                        <li>
-                                            <a href="/account/change/email">Change email</a>
-                                        </li>
-                                        <li sec:authorize="${isFullyAuthenticated()}">
-                                            <form th:action="@{/logout}" method="post">
-                                                <a class="height">
-                                                    <input  type="submit" value="Logout" />
-                                                </a>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <ul id="sub-menu" class="sub-menu">
+                                    <li class="back-to-main-menu sub-menu-li">
+                                        <a class="sub-menu-link">Back</a>
+
+                                        <i class="fas fa-chevron-left"></i>
+                                    </li>
+
+                                    <li class="sub-menu-li">
+                                        <a href="/account/change/password" class="sub-menu-link">Change password</a>
+                                    </li>
+
+                                    <li class="sub-menu-li">
+                                        <a href="/account/change/email" class="sub-menu-link">Change email</a>
+                                    </li>
+
+                                    <li sec:authorize="${isFullyAuthenticated()}" class="sub-menu-li">
+                                        <form th:action="@{/logout}" method="post">
+                                            <a class="height sub-menu-link" >
+                                                <input  type="submit" value="Logout" />
+                                            </a>
+                                        </form>
+                                    </li>
+                                </ul>
                             </nav>
                         </li>
                     </ul>
                 </nav>
             </aside>
+
             <div class="burger">
                 <i class="fas fa-bars show"></i>
                 <i class="fas fa-times"></i>

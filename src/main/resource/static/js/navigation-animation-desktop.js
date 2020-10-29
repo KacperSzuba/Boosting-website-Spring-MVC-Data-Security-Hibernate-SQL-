@@ -11,7 +11,9 @@ window.addEventListener('scroll', function () {
         for (let i = 0; i < link.length; i++) {
             link[i].classList.add("color");
             link[i].classList.add("transparent");
-            border[i].classList.add("white")
+            if(border[i] !== undefined){
+                border[i].classList.add("white")
+            }
         }
     } else {
         navigation.classList.remove("nav-animation");
@@ -19,7 +21,41 @@ window.addEventListener('scroll', function () {
         for (let i = 0; i < link.length; i++) {
             link[i].classList.remove("color");
             link[i].classList.remove("transparent");
-            border[i].classList.remove("white")
+            if(border[i] !== undefined) {
+                border[i].classList.remove("white")
+            }
         }
     }
 });
+
+let timer;
+
+let onMouseOverSubmenu = function(){
+    clearTimeout(timer);
+    subMenu.classList.add("show-sub-menu-for-desktop");
+};
+
+let onMouseOutSubmenu = function(){
+    timer = setTimeout(function(){
+        subMenu.classList.remove("show-sub-menu-for-desktop");
+    }, 300);
+};
+
+let onMouseOverAccount = function(){
+    clearTimeout(timer);
+    subMenu.classList.add("show-sub-menu-for-desktop");
+};
+
+let onMouseOutAccount = function(){
+    timer = setTimeout(function(){
+        subMenu.classList.remove("show-sub-menu-for-desktop");
+    }, 300);
+};
+
+accountDescription.addEventListener('mouseenter', onMouseOverAccount);
+
+accountDescription.addEventListener('mouseleave', onMouseOutAccount);
+
+subMenu.addEventListener('mouseenter', onMouseOverSubmenu);
+
+subMenu.addEventListener('mouseleave', onMouseOutSubmenu);
