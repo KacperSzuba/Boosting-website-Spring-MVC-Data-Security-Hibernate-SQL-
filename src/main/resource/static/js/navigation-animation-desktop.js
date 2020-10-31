@@ -52,10 +52,14 @@ let onMouseOutAccount = function(){
     }, 300);
 };
 
-accountDescription.addEventListener('mouseenter', onMouseOverAccount);
+if(accountDescription != null){
+    accountDescription.addEventListener('mouseenter', onMouseOverAccount);
 
-accountDescription.addEventListener('mouseleave', onMouseOutAccount);
+    accountDescription.addEventListener('mouseleave', onMouseOutAccount);
+}
 
-subMenu.addEventListener('mouseenter', onMouseOverSubmenu);
-
-subMenu.addEventListener('mouseleave', onMouseOutSubmenu);
+if(subMenu != null){
+    subMenu.addEventListener('mouseenter', onMouseOverSubmenu);
+    
+    subMenu.addEventListener('mouseleave', onMouseOutSubmenu);
+}

@@ -1,3 +1,11 @@
+/* Clearfix */
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
 /* Section 1 - Order */
 
 #order-preview {
@@ -151,3 +159,131 @@
 
 /* Section 2 - Conversation */
 
+#conversation-name{
+    display: flex;
+    align-items: center;
+    background-color: rgba(20, 165, 235, 0.85);
+    color: #f8f8ff;
+}
+
+#conversation-user-icon{
+    flex-basis: 15vw;
+    text-align: center;
+}
+
+#conversation-user-icon i{
+    font-size: 25px;
+}
+
+#conversation-user-name{
+    width: 100%;
+}
+
+#conversation-user-name p{
+    margin: 1% 0 3% 0;
+}
+
+#messages{
+    height: 65vh;
+    border: 1px solid #B0B0B0;
+    padding: 3% 5%;
+    width: 100%;
+}
+
+#messages p {
+    width: max-content;
+    max-width: 75%;
+    border-radius: 25px;
+    text-align: left;
+    padding: 2% 6%;
+    margin: 2% 0;
+}
+
+.caller-message{
+    background-color: #F0F8FF;
+    color: rgba(20, 165, 235, 0.85);
+    float: left;
+}
+
+.your-message{
+    background-color: rgba(20, 165, 235, 0.85);
+    color: #f8f8ff;
+    float: right;
+}
+
+#reply{
+    position: relative;
+    border: 1px solid #B0B0B0;
+}
+
+#reply input{
+    width: 100%;
+    border: none;
+    height: 5vh;
+    padding: 5%;
+}
+
+#reply i{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    display: inline-block;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    font-size: 18px;
+}
+
+@media (orientation: landscape){
+    #conversation-user-icon i{
+        font-size: 30px;
+    }
+
+    #conversation-user-name p{
+        margin: 1% 0;
+    }
+
+    #messages{
+        height: 70%;
+        padding: 1% 3%;
+    }
+}
+
+@media (min-width: 1024px){
+    #order-preview{
+        display: flex;
+        justify-content: space-around;
+        padding: 10% 0 0;
+    }
+
+    #order{
+        flex-basis: 50vw;
+    }
+
+    #conversation{
+        flex-basis: 35vw;
+    }
+
+    #conversation-user-icon {
+        flex-basis: 10vw;
+    }
+
+    #messages {
+        height: 60%;
+    }
+}
+
+@media (min-width: 1280px){
+    #conversation{
+        flex-basis: 30vw;
+    }
+
+    #conversation-user-icon {
+        flex-basis: 5vw;
+    }
+}
+
+@media (min-width: 1600px){
+    #conversation{
+        flex-basis: 25vw;
+    }
+}

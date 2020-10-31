@@ -14,7 +14,10 @@ burger.addEventListener('click', function () {
     iconX.classList.toggle("show");
     column.classList.toggle("show");
     header.classList.toggle("hide");
-    subMenu.classList.remove("show-sub-menu");
+    
+    if(subMenu != null){
+        subMenu.classList.remove("show-sub-menu");
+    }
 });
 
 if (accountDescription != null && window.screen.width < 1024) {
