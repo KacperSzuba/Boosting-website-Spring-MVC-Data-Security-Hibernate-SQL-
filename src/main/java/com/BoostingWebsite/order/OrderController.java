@@ -29,8 +29,16 @@ public class OrderController {
         model.addAttribute("regions", Region.values());
         model.addAttribute("LPGainPerWin", LPGainPerWin.values());
 
+        try {
+            model.addAttribute("whetherUserHasOrder", orderBoostService.whetherUserHasOrder());
+        }
+        catch (NullPointerException ex){
+            return "redirect:/login";
+        }
+
         OrderBoost orderBoost = new OrderBoost();
         model.addAttribute("orderBoost", orderBoost);
+
         return "order/newOrder";
     }
 

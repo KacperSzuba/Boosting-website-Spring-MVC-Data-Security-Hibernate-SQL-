@@ -1,6 +1,6 @@
 package com.BoostingWebsite.order;
 
-import com.BoostingWebsite.account.user.ActualUser;
+import com.BoostingWebsite.account.user.ApplicationSession;
 import com.BoostingWebsite.order.entity.OrderBoost;
 import com.BoostingWebsite.order.repository.LeagueRepository;
 import com.BoostingWebsite.order.repository.OrderBoostRepository;
@@ -13,12 +13,12 @@ public class OrderBoostService {
 
     private double sum = 0;
 
-    private ActualUser actualUser;
+    private ApplicationSession applicationSession;
     private LeagueRepository leagueRepository;
     private OrderBoostRepository orderBoostRepository;
 
-    public OrderBoostService(ActualUser actualUser, LeagueRepository leagueRepository, OrderBoostRepository orderBoostRepository) {
-        this.actualUser = actualUser;
+    public OrderBoostService(ApplicationSession applicationSession, LeagueRepository leagueRepository, OrderBoostRepository orderBoostRepository) {
+        this.applicationSession = applicationSession;
         this.leagueRepository = leagueRepository;
         this.orderBoostRepository = orderBoostRepository;
     }
@@ -32,11 +32,16 @@ public class OrderBoostService {
 
     void makeOrder(OrderBoost orderBoost) {
         orderBoost.setDate(LocalDateTime.now());
-        orderBoost.setUser(actualUser.getActualUser());
+        orderBoost.setUser(applicationSession.getActualUser());
         leagueRepository.save(orderBoost.getCurrentLeague());
         leagueRepository.save(orderBoost.getDestinationLeague());
         orderBoostRepository.save(orderBoost);
     }
+
+    boolean whetherUserHasOrder(){
+        return orderBoostRepository.existsByBoosterOrUserAndWhetherDone(applicationSession.getActualUser(), applicationSession.getActualUser(), false);
+    }
+
 /*
     private double calculatePrice(){
         List<Tier> tiers = Tier.tiers(currentLeague().getTier(), destinationLeague().getTier());

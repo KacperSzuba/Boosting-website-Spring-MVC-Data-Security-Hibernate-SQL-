@@ -12,7 +12,4 @@ public interface MessageRepository extends CrudRepository<Message,Long> {
 
     @Query(value = "select messages from Message messages where messages.recipient.id =:id or messages.author.id =:id order by date asc")
     List<Message> list(@Param("id") Long id);
-
-
-
 }

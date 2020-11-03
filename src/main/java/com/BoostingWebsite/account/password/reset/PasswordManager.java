@@ -2,7 +2,7 @@ package com.BoostingWebsite.account.password.reset;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.BoostingWebsite.account.user.ActualUser;
+import com.BoostingWebsite.account.user.ApplicationSession;
 import com.BoostingWebsite.account.user.User;
 import com.BoostingWebsite.account.user.UserRepository;
 import com.BoostingWebsite.exceptions.DataMismatchException;
@@ -18,12 +18,12 @@ class PasswordManager {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
-    private final ActualUser actualUser;
+    private final ApplicationSession applicationSession;
 
-    PasswordManager(PasswordEncoder passwordEncoder, UserRepository userRepository, ActualUser actualUser) {
+    PasswordManager(PasswordEncoder passwordEncoder, UserRepository userRepository, ApplicationSession applicationSession) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
-        this.actualUser = actualUser;
+        this.applicationSession = applicationSession;
     }
 
     void changePassword(String currentPassword, String password, String confirmPassword) {
@@ -56,7 +56,7 @@ class PasswordManager {
     }
 
     private User loggedInUser() {
-        return actualUser.getActualUser();
+        return applicationSession.getActualUser();
     }
 
     private boolean checkIfPasswordEnteredMatchesCurrent(String currentPassword) throws DataMismatchException {

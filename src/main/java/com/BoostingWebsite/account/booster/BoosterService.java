@@ -3,7 +3,7 @@ package com.BoostingWebsite.account.booster;
 import com.BoostingWebsite.order.entity.OrderBoost;
 import com.BoostingWebsite.order.repository.OrderBoostRepository;
 import org.springframework.stereotype.Service;
-import com.BoostingWebsite.account.user.ActualUser;
+import com.BoostingWebsite.account.user.ApplicationSession;
 import com.BoostingWebsite.LeagueOfLegendsAPIConnector;
 import com.BoostingWebsite.account.user.User;
 import com.BoostingWebsite.order.Region;
@@ -17,11 +17,11 @@ class BoosterService {
 
     private LeagueOfLegendsAPIConnector leagueOfLegendsAPIConnector;
 
-    private final ActualUser actualUser;
+    private final ApplicationSession applicationSession;
     private final OrderBoostRepository orderBoostRepository;
 
-    BoosterService(ActualUser actualUser, OrderBoostRepository orderBoostRepository) {
-        this.actualUser = actualUser;
+    BoosterService(ApplicationSession applicationSession, OrderBoostRepository orderBoostRepository) {
+        this.applicationSession = applicationSession;
         this.orderBoostRepository = orderBoostRepository;
     }
 
@@ -77,7 +77,7 @@ class BoosterService {
     }
 
     private User loggedInBooster() {
-        return actualUser.getActualUser();
+        return applicationSession.getActualUser();
     }
 
     private String getUsername() {

@@ -1,7 +1,7 @@
 package com.BoostingWebsite.account.email;
 
 import org.springframework.stereotype.Service;
-import com.BoostingWebsite.account.user.ActualUser;
+import com.BoostingWebsite.account.user.ApplicationSession;
 import com.BoostingWebsite.account.user.User;
 import com.BoostingWebsite.account.user.UserRepository;
 import com.BoostingWebsite.validator.EmailValidator;
@@ -12,11 +12,11 @@ class EmailManager {
     private String message;
 
     private final UserRepository userRepository;
-    private final ActualUser actualUser;
+    private final ApplicationSession applicationSession;
 
-    EmailManager(UserRepository userRepository, ActualUser actualUser) {
+    EmailManager(UserRepository userRepository, ApplicationSession applicationSession) {
         this.userRepository = userRepository;
-        this.actualUser = actualUser;
+        this.applicationSession = applicationSession;
     }
 
     void changeEmail(String currentEmail, String email, String repeatEmail) {
@@ -63,7 +63,7 @@ class EmailManager {
     }
 
     private User loggedInUser() {
-        return actualUser.getActualUser();
+        return applicationSession.getActualUser();
     }
 
     private boolean whetherTheEmailsAreTheSame(String email, String repeatEmail) {

@@ -1,11 +1,13 @@
 package com.BoostingWebsite.order.entity;
 
 import com.BoostingWebsite.account.user.User;
+import com.BoostingWebsite.message.Message;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "orders_boost")
@@ -28,16 +30,16 @@ public class OrderBoost {
 
     private double price;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "current_leagues_id")
     private League currentLeague;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "destination_leagues_id")
     private League destinationLeague;
 
     @Valid
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "accounts_details_id")
     private AccountDetails accountDetails;
 
@@ -48,6 +50,13 @@ public class OrderBoost {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "boosters_id")
     private User booster;
+
+    @OneToMany(
+            mappedBy = "orderBoost",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Message> messages;
 
     private LocalDateTime date;
 
@@ -156,6 +165,14 @@ public class OrderBoost {
 
     public void setBooster(User booster) {
         this.booster = booster;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 
     public LocalDateTime getDate() {

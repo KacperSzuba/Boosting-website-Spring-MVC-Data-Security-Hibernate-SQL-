@@ -30,7 +30,7 @@
                             </a>
                         </li>
 
-                        <li class="main-menu-li">
+                        <li id="boosting" class="main-menu-li">
                             <a href="/order" class="main-menu-link">
                                 <div class="height">Boosting</div>
 
@@ -38,6 +38,24 @@
                                     <div></div>
                                 </div>
                             </a>
+
+                            <nav sec:authorize="hasAnyRole('USER','BOOSTER')" class="sub-menu-wrap">
+                                <ul class="sub-menu">
+                                    <li class="back-to-main-menu sub-menu-li">
+                                        <a class="sub-menu-link">Back</a>
+
+                                        <i class="fas fa-chevron-left"></i>
+                                    </li>
+
+                                    <li class="sub-menu-li">
+                                        <a href="/order/preview" class="sub-menu-link">Overview</a>
+                                    </li>
+
+                                    <li class="sub-menu-li">
+                                        <a class="sub-menu-link">History</a>
+                                    </li>
+                                </ul>
+                            </nav>
                         </li>
 
                         <li class="main-menu-li">
@@ -93,8 +111,8 @@
                                 </div>
                             </a>
 
-                            <nav id="sub-menu-wrap" class="sub-menu-wrap">
-                                <ul id="sub-menu" class="sub-menu">
+                            <nav class="sub-menu-wrap">
+                                <ul class="sub-menu">
                                     <li class="back-to-main-menu sub-menu-li">
                                         <a class="sub-menu-link">Back</a>
 
@@ -133,6 +151,10 @@
             <p>We believe that we are able to provide each of you with the rank you deserved.</p>
             <a href="/order">Boost Me</a>
         </header>
+
+        <section f>
+            <p class="error">You already have an order. Wait for its implementation and then place another order</p>
+        </section>
 
         <main class="division">
             <form th:action="@{/order/new}" th:object="${orderBoost}" method="post">
@@ -233,7 +255,7 @@
                         <p class="price">60</p>
                     </div>
                 </section>
-                <input class="btn-sm" type="submit" value="Place order" />
+                <input class="btn-sm" type="submit" th:disabled="${whetherUserHasOrder}" value="Place order" />
             </form>
         </main>
 
@@ -261,6 +283,5 @@
         <script src="/js/navigation-animation-mobile.js"></script>
         <script src="/js/navigation-animation-desktop.js"></script>
         <script src="/js/image-swaping.js"></script>
-
     </body>
 </html>

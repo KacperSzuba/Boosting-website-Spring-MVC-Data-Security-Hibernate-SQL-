@@ -6,12 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
 @Component
-public class ActualUser {
+public class ApplicationSession {
 
     private final UserRepository userRepository;
     private final HttpServletRequest request;
 
-    public ActualUser(UserRepository userRepository, HttpServletRequest request) {
+    public ApplicationSession(UserRepository userRepository, HttpServletRequest request) {
         this.userRepository = userRepository;
         this.request = request;
     }

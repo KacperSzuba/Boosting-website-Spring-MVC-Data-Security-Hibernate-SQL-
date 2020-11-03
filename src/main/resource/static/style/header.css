@@ -40,7 +40,7 @@ nav.background {
 }
 
 .header-aside,
-#sub-menu-wrap {
+.sub-menu-wrap {
     position: fixed;
     bottom: 0;
     left: -250px;
@@ -50,7 +50,7 @@ nav.background {
     transition: 0.3s linear;
 }
 
-#sub-menu {
+.sub-menu {
     position: absolute;
 }
 
@@ -85,7 +85,7 @@ nav.background {
 }
 
 #main-menu,
-#sub-menu {
+.sub-menu {
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -106,7 +106,8 @@ nav.background {
     line-height: 6vh;
 }
 
-#account a {
+#account a,
+#boosting a{
     cursor: pointer;
 }
 
@@ -221,7 +222,7 @@ i.show {
         margin: 0;
     }
 
-    #sub-menu-wrap {
+    .sub-menu-wrap {
         position: fixed;
         top: 15vh;
         width: 200px;
@@ -238,7 +239,7 @@ i.show {
         display: block !important;
     }
 
-    #sub-menu {
+    .sub-menu {
         padding: 0;
         width: 100%;
     }
@@ -365,7 +366,7 @@ i.show {
         font-size: 18px;
     }
 
-    #sub-menu-wrap {
+    .sub-menu-wrap {
         width: 225px;
     }
 }
@@ -377,7 +378,7 @@ i.show {
         font-size: 22px;
     }
 
-    #sub-menu-wrap {
+    .sub-menu-wrap {
         width: 250px;
     }
 }

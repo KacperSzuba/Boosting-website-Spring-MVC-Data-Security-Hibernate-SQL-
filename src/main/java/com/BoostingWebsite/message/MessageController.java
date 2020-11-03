@@ -1,6 +1,6 @@
 package com.BoostingWebsite.message;
 
-import com.BoostingWebsite.account.user.ActualUser;
+import com.BoostingWebsite.account.user.ApplicationSession;
 import com.BoostingWebsite.account.user.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/message")
 public class MessageController {
 
-    private final ActualUser actualUser;
+    private final ApplicationSession applicationSession;
     private final MessageRepository messageRepository;
     private final UserRepository userRepository;
 
-    public MessageController(ActualUser actualUser, MessageRepository messageRepository, UserRepository userRepository) {
-        this.actualUser = actualUser;
+    public MessageController(ApplicationSession applicationSession, MessageRepository messageRepository, UserRepository userRepository) {
+        this.applicationSession = applicationSession;
         this.messageRepository = messageRepository;
         this.userRepository = userRepository;
     }
 
     @GetMapping
     public String listOfRecipients(Model model){
-        model.addAttribute("idOfActualUser", actualUser.getActualUser().getId());
-        model.addAttribute("recipients", messageRepository.listOfRecipients(actualUser.getActualUser().getId()));
+        model.addAttribute("idOfActualUser", applicationSession.getActualUser().getId());
+        model.addAttribute("recipients", messageRepository.listOfRecipients(applicationSession.getActualUser().getId()));
         return "messageView/messageRecipients";
     }
 
@@ -40,7 +40,7 @@ public class MessageController {
 
     @PostMapping("/{id}")
     public String newSingleConversation2(@PathVariable("id") final Long id, @ModelAttribute("sendMessage") Message message){
-        messageRepository.save(new Message(message.getMessage(), actualUser.getActualUser(), userRepository.findById(id).get()));
+        messageRepository.save(new Message(message.getMessage(), applicationSession.getActualUser(), userRepository.findById(id).get()));
         return "redirect:/message/{id}";
     }
 

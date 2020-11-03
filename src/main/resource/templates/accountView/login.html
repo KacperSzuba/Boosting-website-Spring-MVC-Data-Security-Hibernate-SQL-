@@ -31,7 +31,7 @@
                             </a>
                         </li>
 
-                        <li class="main-menu-li">
+                        <li id="boosting" class="main-menu-li">
                             <a href="/order" class="main-menu-link">
                                 <div class="height">Boosting</div>
 
@@ -39,6 +39,24 @@
                                     <div></div>
                                 </div>
                             </a>
+
+                            <nav sec:authorize="hasAnyRole('USER','BOOSTER')" class="sub-menu-wrap">
+                                <ul class="sub-menu">
+                                    <li class="back-to-main-menu sub-menu-li">
+                                        <a class="sub-menu-link">Back</a>
+
+                                        <i class="fas fa-chevron-left"></i>
+                                    </li>
+
+                                    <li class="sub-menu-li">
+                                        <a href="/order/preview" class="sub-menu-link">Overview</a>
+                                    </li>
+
+                                    <li class="sub-menu-li">
+                                        <a class="sub-menu-link">History</a>
+                                    </li>
+                                </ul>
+                            </nav>
                         </li>
 
                         <li class="main-menu-li">
@@ -94,8 +112,8 @@
                                 </div>
                             </a>
 
-                            <nav id="sub-menu-wrap" class="sub-menu-wrap">
-                                <ul id="sub-menu" class="sub-menu">
+                            <nav class="sub-menu-wrap">
+                                <ul class="sub-menu">
                                     <li class="back-to-main-menu sub-menu-li">
                                         <a class="sub-menu-link">Back</a>
 

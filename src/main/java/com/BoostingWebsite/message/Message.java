@@ -1,13 +1,13 @@
 package com.BoostingWebsite.message;
 
 import com.BoostingWebsite.account.user.User;
+import com.BoostingWebsite.order.entity.OrderBoost;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@DynamicUpdate
 @Table(name = "messages")
 public class Message implements Comparable<Message> {
 
@@ -27,6 +27,9 @@ public class Message implements Comparable<Message> {
 
     private LocalDateTime date;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private OrderBoost orderBoost;
+
     public Message() {
         this.date = LocalDateTime.now();
     }
@@ -45,6 +48,10 @@ public class Message implements Comparable<Message> {
         this.recipient = copyMessage.recipient;
         this.date = LocalDateTime.now();
     }
+
+   public void setId(Long id){
+        this.id = id;
+   }
 
     public Long getId() {
         return id;
@@ -76,6 +83,14 @@ public class Message implements Comparable<Message> {
 
     LocalDateTime getDate() {
         return date;
+    }
+
+    public OrderBoost getOrderBoost() {
+        return orderBoost;
+    }
+
+    public void setOrderBoost(OrderBoost orderBoost) {
+        this.orderBoost = orderBoost;
     }
 
     @Override
