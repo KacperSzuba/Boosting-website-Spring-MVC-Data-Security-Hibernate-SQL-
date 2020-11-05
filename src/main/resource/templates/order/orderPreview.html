@@ -153,9 +153,11 @@
             <a href="/order">Boost Me</a>
         </header>
 
-        <section th:if="${orderBoost.id == null}" id="order-not-available">
-            <p>You do not have any ongoing orders</p>
-        </section>
+        <main id="order-not-available">
+            <section th:if="${orderBoost.id == null}">
+                <p>You do not have any ongoing orders</p>
+            </section>
+        </main>
 
         <main th:if="${orderBoost.id != null}" id="order-preview">
             <section id="order">
@@ -235,49 +237,56 @@
 
                     <div id="conversation-user-name">
                         <p>Message booster</p>
-                        <p th:if="${orderBoost.booster != null}" th:text="${orderBoost.booster.username}"></p>
+                        <p id="recipient-name" th:if="${orderBoost.booster != null}" th:text="${orderBoost.booster.username}"></p>
                     </div>
                 </header>
 
                 <main id="messages" >
-                    <div th:each="message: ${orderBoost.messages}" class="clearfix">
-                        <p th:text="${message.message}" class="caller-message"></p>
+                    <div th:each="message: ${messages}" class="clearfix">
+                        <p th:text="${message.content}" class="caller-message"></p>
                     </div>
-                </main>
+                 </main>
 
-                <section id="reply">
-                    <form id="messageForm" name="messageForm" nameForm="messageForm" method="post">
+                 <section id="reply">
+                     <form id="messageForm" name="messageForm" method="post">
+                         <input id="message" placeholder="Your message..."/>
 
-                    </form>
-                    <input id="message" placeholder="Your message"/>
-                    <i class="fas fa-reply"></i>
-                    <button type="submit" >Send</button>
-                </section>
-            </aside>
-        </main>
+                         <i class="fas fa-reply"></i>
 
-        <footer>
-            <div class="wrap">
-                <div class="text">
-                    <h1>Boosting</h1>
-                </div>
-                <nav class="footer-navigation">
-                    <div class="customer">
-                        <h2>Customer</h2>
-                        <a href="/order">Order Now</a>
-                        <a href="/booster-application">Join Our Team</a>
-                    </div>
-                    <div class="pages">
-                        <h2>Pages</h2>
-                        <a href="#">F.A.Q.</a>
-                        <a href="/contact-us">Contact Us</a>
-                        <a href="#">Terms And Conditions</a>
-                    </div>
-                </nav>
-            </div>
-        </footer>
+                         <button type="submit" >Send</button>
+                     </form>
+                 </section>
+             </aside>
+         </main>
 
-        <script src="/js/navigation-animation-mobile.js"></script>
-        <script src="/js/navigation-animation-desktop.js"></script>
-    </body>
-</html>
+         <footer>
+             <div class="wrap">
+                 <div class="text">
+                     <h1>Boosting</h1>
+                 </div>
+
+                 <nav class="footer-navigation">
+                     <div class="customer">
+                         <h2>Customer</h2>
+                         <a href="/order">Order Now</a>
+                         <a href="/booster-application">Join Our Team</a>
+                     </div>
+
+                     <div class="pages">
+                         <h2>Pages</h2>
+                         <a href="#">F.A.Q.</a>
+                         <a href="/contact-us">Contact Us</a>
+                         <a href="#">Terms And Conditions</a>
+                     </div>
+                 </nav>
+             </div>
+         </footer>
+
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+         <script src="/js/chat.js"></script>
+         <script src="/js/navigation-animation-mobile.js"></script>
+         <script src="/js/navigation-animation-desktop.js"></script>
+     </body>
+ </html>

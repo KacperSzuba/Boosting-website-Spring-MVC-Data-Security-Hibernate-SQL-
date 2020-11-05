@@ -195,6 +195,10 @@ i.show {
         flex-basis: 8vh;
         line-height: 8vh;
     }
+
+    .order-header {
+        top: 70%;
+    }
 }
 
 @media (max-width: 1023px) {
