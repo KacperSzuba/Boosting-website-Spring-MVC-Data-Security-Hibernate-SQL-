@@ -6,18 +6,18 @@ window.addEventListener('load', connect, true);
 dialogueForm.addEventListener('submit', sendMessage, true);
 
 let stompClient = null;
-let name = '1234user';
 
 function connect(event) {
     let socket = new SockJS('/websocketApp');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, connectionSuccess);
-
     event.preventDefault();
 }
 
 function connectionSuccess() {
+    console.log('connection succes');
     stompClient.subscribe('/topic/javainuse', onMessageReceived);
+    console.log('connection succes');
 }
 
 function sendMessage(event) {
@@ -25,7 +25,8 @@ function sendMessage(event) {
 
     if (messageContent && stompClient) {
         let chatMessage = {
-            senderName : name,
+            recipientName : document.querySelector('#recipient-name p').textContent,
+            senderName : document.querySelector('#recipient-name p').textContent,
             content : document.querySelector('#message').value
         };
 

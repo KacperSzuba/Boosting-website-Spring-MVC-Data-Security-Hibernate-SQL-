@@ -209,6 +209,7 @@ i.show {
 
     .back-to-main-menu {
         color: #181819;
+        cursor: pointer;
     }
 }
 
@@ -408,6 +409,7 @@ i.show {
     padding-bottom: 20px;
     width: 75%;
     margin: 0 auto;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
 .order-header a {

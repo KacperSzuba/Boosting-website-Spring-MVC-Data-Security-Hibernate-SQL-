@@ -9,7 +9,7 @@ const accountDescription = document.querySelector("#account a");
 const boostingDescription = document.querySelector("#boosting a");
 const subMenuAccount = document.querySelector("#account .sub-menu-wrap");
 const subMenuBoosting = document.querySelector("#boosting .sub-menu-wrap");
-const hideSubMenu = document.querySelector(".back-to-main-menu");
+const hideSubMenu = document.querySelectorAll(".back-to-main-menu");
 
 burger.addEventListener('click', function () {
     iconBurger.classList.toggle("show");
@@ -39,8 +39,9 @@ if (boostingDescription != null && window.screen.width < 1024) {
 }
 
 if (hideSubMenu != null && window.screen.width < 1024) {
-    hideSubMenu.addEventListener('click', function () {
-        subMenuAccount.classList.add("show-sub-menu");
+    hideSubMenu.forEach(subMenu => subMenu.addEventListener('click', function () {
+        console.log(subMenu);
+        subMenuAccount.classList.remove("show-sub-menu");
         subMenuBoosting.classList.remove("show-sub-menu");
-    });
+    }));
 }

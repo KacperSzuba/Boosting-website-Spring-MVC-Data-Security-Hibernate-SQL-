@@ -159,8 +159,9 @@
             </section>
         </main>
 
-        <main th:if="${orderBoost.id != null}" id="order-preview">
+        <main id="order-preview" th:if="${orderBoost.id != null}">
             <section id="order">
+                <h1 id="buyers-username"><span th:text="${username}"></span> order</h1>
                 <section class="tiers">
                     <div class="started-tier">
                         <h2>Started tier</h2>
@@ -228,8 +229,7 @@
                 </section>
             </section>
 
-        <!--    <aside th:if="${orderBoost.booster != null}" id="conversation"> -->
-            <aside id="conversation">
+            <aside id="conversation" th:if="${orderBoost.booster != null}">
                 <header id="conversation-name">
                     <div id="conversation-user-icon">
                         <i class="far fa-user-circle"></i>
@@ -237,23 +237,24 @@
 
                     <div id="conversation-user-name">
                         <p>Message booster</p>
-                        <p id="recipient-name" th:if="${orderBoost.booster != null}" th:text="${orderBoost.booster.username}"></p>
+                        <div id="recipient-name">
+                            <p th:if="${orderBoost.booster.username != username}" th:text="${orderBoost.booster.username}"></p>
+                            <p th:if="${orderBoost.user.username != username}" th:text="${orderBoost.user.username}"></p>
+                        </div>
                     </div>
                 </header>
 
-                <main id="messages" >
+                <main id="messages">
                     <div th:each="message: ${messages}" class="clearfix">
-                        <p th:text="${message.content}" class="caller-message"></p>
+                        <p th:if="${message.senderName != username}" th:text="${message.content}" class="caller-message"></p>
+                        <p th:if="${message.recipientName != username}" th:text="${message.content}" class="your-message"></p>
                     </div>
                  </main>
 
                  <section id="reply">
                      <form id="messageForm" name="messageForm" method="post">
                          <input id="message" placeholder="Your message..."/>
-
-                         <i class="fas fa-reply"></i>
-
-                         <button type="submit" >Send</button>
+                         <button type="submit" ><i class="fas fa-reply"></i></button>
                      </form>
                  </section>
              </aside>

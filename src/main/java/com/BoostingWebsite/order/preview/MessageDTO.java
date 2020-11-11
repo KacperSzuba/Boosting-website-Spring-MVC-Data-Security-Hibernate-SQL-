@@ -34,4 +34,13 @@ public class MessageDTO {
     public void setRecipientName(String recipientName) {
         this.recipientName = recipientName;
     }
+
+    @Override
+    public String toString() {
+        return "MessageDTO{" +
+                "content='" + content + '\'' +
+                ", senderName='" + senderName + '\'' +
+                ", recipientName='" + recipientName + '\'' +
+                '}';
+    }
 }

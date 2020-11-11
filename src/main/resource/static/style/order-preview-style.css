@@ -6,7 +6,16 @@
     display: table;
 }
 
+#reply .fa-reply{
+    display: inline-block;
+}
+
 /* Section 1 - Order */
+
+#reply button{
+    background-color: transparent;
+    border: none;
+}
 
 #order-preview {
     background-color: #F6F6F6;
@@ -17,7 +26,7 @@
 }
 
 #order {
-    padding: 5% 0;
+    padding: 1% 0;
     background-color: white;
     height: 100%;
     border: 10px white solid;
@@ -31,7 +40,7 @@
 }
 
 #order h2 {
-    font-size: 24px;
+    font-size: 22px;
 }
 
 #order .tiers p {
@@ -68,6 +77,11 @@
     text-align: left !important;
 }
 
+#buyers-username{
+    padding: 5% 0 10%;
+    text-align: center;
+}
+
 @media (min-width: 414px) {
     .boosting-details div {
         padding: 0 5%;
@@ -91,6 +105,10 @@
         line-height: 50px;
         font-size: 16px;
     }
+
+    #buyers-username{
+        font-size: 36px;
+    }
 }
 
 @media (min-width: 768px) {
@@ -99,7 +117,7 @@
     }
 
     #order h2 {
-        font-size: 32px;
+        font-size: 30px;
     }
 
     #order .tiers p {
@@ -229,7 +247,7 @@
     padding: 5%;
 }
 
-#reply i{
+#reply button{
     position: absolute;
     right: 0;
     top: 50%;
@@ -301,7 +319,6 @@
 
 #order-not-available{
     background-color: #F6F6F6;
-    padding: 20% 10%;
     height: 100%;
     width: 100%;
 }

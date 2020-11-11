@@ -1,13 +1,13 @@
 package com.BoostingWebsite.order.preview;
 
-import com.BoostingWebsite.message.Message;
+import com.BoostingWebsite.account.user.ApplicationSession;
 import com.BoostingWebsite.order.entity.OrderBoost;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class OrderPreviewController {
 
     private final OrderPreviewService orderPreviewService;
+    private final ApplicationSession applicationSession;
 
-    public OrderPreviewController(OrderPreviewService orderPreviewService) {
+    public OrderPreviewController(OrderPreviewService orderPreviewService, ApplicationSession applicationSession) {
         this.orderPreviewService = orderPreviewService;
+        this.applicationSession = applicationSession;
     }
 
     @GetMapping
@@ -27,6 +29,7 @@ public class OrderPreviewController {
         try{
             model.addAttribute("orderBoost", orderPreviewService.getOrderBoost());
             model.addAttribute("messages", orderPreviewService.getExistingChatMessages());
+            model.addAttribute("username", applicationSession.getActualUser().getUsername());
         }
         catch (OrderBoostNotFoundException ex){
             model.addAttribute("orderBoost", new OrderBoost());
@@ -46,7 +49,7 @@ public class OrderPreviewController {
     @MessageMapping("/chat.newUser")
     @SendTo("/topic/javainuse")
     public MessageDTO addUser(@Payload MessageDTO messageDTO, SimpMessageHeaderAccessor headerAccessor) {
-        headerAccessor.getSessionAttributes().put("senderName", messageDTO.getSenderName());
+        //headerAccessor.getSessionAttributes().put("senderName", messageDTO.getSenderName());
         return messageDTO;
     }
 }

@@ -28,74 +28,76 @@ window.addEventListener('scroll', function () {
     }
 });
 
-let timer;
+if(screenWidth >= 1024) {
+    let timer;
 
-let onMouseOverSubmenu = function(){
-    clearTimeout(timer);
-    subMenuAccount.classList.add("show-sub-menu-for-desktop");
-};
+    let onMouseOverSubmenu = function () {
+        clearTimeout(timer);
+        subMenuAccount.classList.add("show-sub-menu-for-desktop");
+    };
 
-let onMouseOutSubmenu = function(){
-    timer = setTimeout(function(){
-        subMenuAccount.classList.remove("show-sub-menu-for-desktop");
-    }, 300);
-};
+    let onMouseOutSubmenu = function () {
+        timer = setTimeout(function () {
+            subMenuAccount.classList.remove("show-sub-menu-for-desktop");
+        }, 300);
+    };
 
-let onMouseOverAccount = function(){
-    clearTimeout(timer);
-    subMenuAccount.classList.add("show-sub-menu-for-desktop");
-};
+    let onMouseOverAccount = function () {
+        clearTimeout(timer);
+        subMenuAccount.classList.add("show-sub-menu-for-desktop");
+    };
 
-let onMouseOutAccount = function(){
-    timer = setTimeout(function(){
-        subMenuAccount.classList.remove("show-sub-menu-for-desktop");
-    }, 300);
-};
+    let onMouseOutAccount = function () {
+        timer = setTimeout(function () {
+            subMenuAccount.classList.remove("show-sub-menu-for-desktop");
+        }, 300);
+    };
 
-let boostingTimer;
+    let boostingTimer;
 
-let onMouseOverSubmenuBoosting = function(){
-    clearTimeout(boostingTimer);
-    subMenuBoosting.classList.add("show-sub-menu-for-desktop");
-};
+    let onMouseOverSubmenuBoosting = function () {
+        clearTimeout(boostingTimer);
+        subMenuBoosting.classList.add("show-sub-menu-for-desktop");
+    };
 
-let onMouseOutSubmenuBoosting = function(){
-    boostingTimer = setTimeout(function(){
-        subMenuBoosting.classList.remove("show-sub-menu-for-desktop");
-    }, 300);
-};
+    let onMouseOutSubmenuBoosting = function () {
+        boostingTimer = setTimeout(function () {
+            subMenuBoosting.classList.remove("show-sub-menu-for-desktop");
+        }, 300);
+    };
 
-let onMouseOverBoosting= function(){
-    clearTimeout(boostingTimer);
-    subMenuBoosting.classList.add("show-sub-menu-for-desktop");
-};
+    let onMouseOverBoosting = function () {
+        clearTimeout(boostingTimer);
+        subMenuBoosting.classList.add("show-sub-menu-for-desktop");
+    };
 
-let onMouseOutBoosting = function(){
-    boostingTimer = setTimeout(function(){
-        subMenuBoosting.classList.remove("show-sub-menu-for-desktop");
-    }, 300);
-};
+    let onMouseOutBoosting = function () {
+        boostingTimer = setTimeout(function () {
+            subMenuBoosting.classList.remove("show-sub-menu-for-desktop");
+        }, 300);
+    };
 
-if(accountDescription != null){
-    accountDescription.addEventListener('mouseenter', onMouseOverAccount);
+    if (accountDescription != null) {
+        accountDescription.addEventListener('mouseenter', onMouseOverAccount);
 
-    accountDescription.addEventListener('mouseleave', onMouseOutAccount);
-}
+        accountDescription.addEventListener('mouseleave', onMouseOutAccount);
+    }
 
-if(boostingDescription != null){
-    boostingDescription.addEventListener('mouseenter', onMouseOverBoosting);
+    if (boostingDescription != null) {
+        boostingDescription.addEventListener('mouseenter', onMouseOverBoosting);
 
-    boostingDescription.addEventListener('mouseleave', onMouseOutBoosting);
-}
+        boostingDescription.addEventListener('mouseleave', onMouseOutBoosting);
+    }
 
-if(subMenuAccount != null){
-    subMenuAccount.addEventListener('mouseenter', onMouseOverSubmenu);
+    if (subMenuAccount != null) {
+        subMenuAccount.addEventListener('mouseenter', onMouseOverSubmenu);
 
-    subMenuAccount.addEventListener('mouseleave', onMouseOutSubmenu);
-}
+        subMenuAccount.addEventListener('mouseleave', onMouseOutSubmenu);
+    }
 
-if(subMenuBoosting != null){
-    subMenuBoosting.addEventListener('mouseenter', onMouseOverSubmenuBoosting);
+    if (subMenuBoosting != null) {
+        subMenuBoosting.addEventListener('mouseenter', onMouseOverSubmenuBoosting);
 
-    subMenuBoosting.addEventListener('mouseleave', onMouseOutSubmenuBoosting);
+        subMenuBoosting.addEventListener('mouseleave', onMouseOutSubmenuBoosting);
+    }
 }

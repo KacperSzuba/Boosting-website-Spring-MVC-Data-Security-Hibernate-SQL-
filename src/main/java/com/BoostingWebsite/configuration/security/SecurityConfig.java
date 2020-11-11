@@ -14,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
     private final UserDetailsService userDetailsService;
 
     public SecurityConfig(@Qualifier("userRepositoryUserDetailsService") UserDetailsService userDetailsService) {
@@ -49,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/order",
                         "/account/remindPasswordPage",
                         "/css/**", "/style/**", "/static/**").permitAll()
-                .antMatchers("/order/**").hasAnyRole("USER", "BOOSTER")
+               .antMatchers("/order/**").hasAnyRole("USER", "BOOSTER")
                 .and()
                 .formLogin()
                 .loginPage("/login")
