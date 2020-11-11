@@ -153,6 +153,12 @@
             <a href="/order">Boost Me</a>
         </header>
 
+        <div id="login-notification" class="notification">
+            <span class="close-button">&times;</span>
+            <h3>Info!</h3>
+            <p>Blue often indicates a neutral informative change or action.</p>
+        </div>
+
         <main id="order-not-available">
             <section th:if="${orderBoost.id == null}">
                 <p>You do not have any ongoing orders</p>
@@ -289,5 +295,6 @@
          <script src="/js/chat.js"></script>
          <script src="/js/navigation-animation-mobile.js"></script>
          <script src="/js/navigation-animation-desktop.js"></script>
+         <script src="/js/notifications.js"></script>
      </body>
  </html>

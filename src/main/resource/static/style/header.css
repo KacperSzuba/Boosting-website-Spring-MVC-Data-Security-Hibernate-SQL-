@@ -538,3 +538,32 @@ i.show {
         border: none;
     }
 }
+
+/* Notifications */
+
+.notification{
+    position: fixed;
+    top: 15vh;
+    right: 3vw;
+    background-color: #007bff;
+    z-index: 100;
+    padding: 15px 20px 10px;
+    display: none;
+}
+
+.notification .close-button{
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 30px;
+    transform: translateY(-25%);
+    cursor: pointer;
+}
+
+.notification h3{
+    text-align: right;
+}
+
+.show{
+    display: block;
+}
