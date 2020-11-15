@@ -167,7 +167,7 @@
 
         <main id="order-preview" th:if="${orderBoost.id != null}">
             <section id="order">
-                <h1 id="buyers-username"><span th:text="${username}"></span> order</h1>
+                <h1><span id="buyers-username" th:text="${username}"></span> order</h1>
                 <section class="tiers">
                     <div class="started-tier">
                         <h2>Started tier</h2>
@@ -242,7 +242,9 @@
                     </div>
 
                     <div id="conversation-user-name">
-                        <p>Message booster</p>
+                        <p th:if="${orderBoost.booster.username != username}">Message booster</p>
+                        <p th:if="${orderBoost.user.username != username}">Message client</p>
+
                         <div id="recipient-name">
                             <p th:if="${orderBoost.booster.username != username}" th:text="${orderBoost.booster.username}"></p>
                             <p th:if="${orderBoost.user.username != username}" th:text="${orderBoost.user.username}"></p>

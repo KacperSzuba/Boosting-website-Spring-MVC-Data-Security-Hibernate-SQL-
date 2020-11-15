@@ -6,6 +6,8 @@ window.addEventListener('load', connect, true);
 dialogueForm.addEventListener('submit', sendMessage, true);
 
 let stompClient = null;
+let recipientName = document.querySelector('#recipient-name p').textContent;
+let senderName = recipientName === document.querySelector('#booster-name p:nth-last-of-type(1)').textContent ? document.querySelector('#buyers-username').textContent : document.querySelector('#booster-name p:nth-last-of-type(1)').textContent;
 
 function connect(event) {
     let socket = new SockJS('/websocketApp');
@@ -15,9 +17,7 @@ function connect(event) {
 }
 
 function connectionSuccess() {
-    console.log('connection succes');
     stompClient.subscribe('/topic/javainuse', onMessageReceived);
-    console.log('connection succes');
 }
 
 function sendMessage(event) {
@@ -25,8 +25,8 @@ function sendMessage(event) {
 
     if (messageContent && stompClient) {
         let chatMessage = {
-            recipientName : document.querySelector('#recipient-name p').textContent,
-            senderName : document.querySelector('#recipient-name p').textContent,
+            recipientName : recipientName,
+            senderName : senderName,
             content : document.querySelector('#message').value
         };
 
@@ -46,10 +46,10 @@ function onMessageReceived(payload) {
 
     messageElement.classList.add('your-message');
 
-    let usernameElement = document.createElement('span');
-    let usernameText = document.createTextNode(message.senderName);
-    usernameElement.appendChild(usernameText);
-    messageElement.appendChild(usernameElement);
+   // let usernameElement = document.createElement('span');
+   // let usernameText = document.createTextNode(message.senderName);
+   // usernameElement.appendChild(usernameText);
+   // messageElement.appendChild(usernameElement);
 
     let textElement = document.createElement('p');
     let messageText = document.createTextNode(message.content);
