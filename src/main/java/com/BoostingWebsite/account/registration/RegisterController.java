@@ -36,7 +36,7 @@ public class RegisterController {
     public String registerPage(Model model) {
         User user = new User();
         model.addAttribute("register", user);
-        return "accountView/register";
+        return "account/register";
     }
 
     @PostMapping
@@ -44,15 +44,15 @@ public class RegisterController {
         if (result.hasErrors() || isConfirmPasswordIsValid(confirmPassword)) {
             model.addAttribute("confirmPasswordErrorMessage", "Confirmation password length should be between 7 and 20 letters");
             model.addAttribute("message", userCreator.getUserRegistrationInformation());
-            return "accountView/register";
+            return "account/register";
         } else {
             if (userCreator.createAccount(user, confirmPassword)) {
                 model.addAttribute("confirmEmailMessage", "Log in to the e-mail address provided and confirm your identity.");
                 emailConfirmation.confirmEmail(getAppUrl(), generateToken(), userRepository.findByUsername(user.getUsername()));
-                return "accountView/login";
+                return "account/login";
             } else {
                 model.addAttribute("message", userCreator.getUserRegistrationInformation());
-                return "accountView/register";
+                return "account/register";
             }
         }
     }
@@ -74,5 +74,4 @@ public class RegisterController {
     private String generateToken() {
         return UUID.randomUUID().toString();
     }
-
 }

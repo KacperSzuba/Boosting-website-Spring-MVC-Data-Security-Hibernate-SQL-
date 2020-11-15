@@ -33,7 +33,7 @@ public class BoosterApplication {
     private String AverageNumberOfHoursPlayedDaily;
 
     @NotNull(message = "Age cannot be empty")
-    private Integer Age;
+    private Integer age;
 
     @NotEmpty(message = "Country cannot be empty")
     private String country;
@@ -45,21 +45,7 @@ public class BoosterApplication {
     @Column(length = 2000)
     private String motivation;
 
-    BoosterApplication() {
-    }
-
-    public BoosterApplication(String skype, String discord, String email, String opgg, Region region, String leagueRank, Integer age,
-                              String country, String bestFormOfContact, String motivation) {
-        this.skype = skype;
-        this.discord = discord;
-        this.email = email;
-        this.opgg = opgg;
-        this.region = region;
-        this.leagueRank = leagueRank;
-        Age = age;
-        this.country = country;
-        this.bestFormOfContact = bestFormOfContact;
-        this.motivation = motivation;
+    public BoosterApplication() {
     }
 
     public Long getId() {
@@ -123,11 +109,11 @@ public class BoosterApplication {
     }
 
     public Integer getAge() {
-        return Age;
+        return age;
     }
 
     public void setAge(Integer age) {
-        Age = age;
+        this.age = age;
     }
 
     public String getCountry() {
@@ -165,7 +151,7 @@ public class BoosterApplication {
                 ", region=" + region +
                 ", tier='" + leagueRank + '\'' +
                 ", AverageNumberOfHoursPlayedDaily='" + AverageNumberOfHoursPlayedDaily + '\'' +
-                ", Age=" + Age +
+                ", Age=" + age +
                 ", country='" + country + '\'' +
                 ", bestFormOfContact='" + bestFormOfContact + '\'' +
                 ", motivation=" + motivation +

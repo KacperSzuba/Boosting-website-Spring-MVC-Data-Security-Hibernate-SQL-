@@ -6,15 +6,17 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login page</title>
-        <link type="text/css" rel="stylesheet" th:href="@{/fontawesome/css/all.css}">
+        <title>Register</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto&display=swap&subset=latin-ext"
               rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Dancing+Script:600&display=swap" rel="stylesheet">
         <link type="text/css" rel="stylesheet" th:href="@{/style/header.css}" />
-        <link type="text/css" rel="stylesheet" th:href="@{/style/change-email-style.css}" />
+        <link type="text/css" rel="stylesheet" th:href="@{/style/account/register-style.css}" />
         <link type="text/css" rel="stylesheet" th:href="@{/style/footer.css}" />
     </head>
+
     <body>
         <nav class="background">
             <aside class="header-aside">
@@ -151,26 +153,51 @@
             <p>We believe that we are able to provide each of you with the rank you deserved.</p>
             <a href="/order">Boost Me</a>
         </header>
+
+        <div id="register-notification" class="notification">
+            <span class="close-button">&times;</span>
+            <h3>Info!</h3>
+            <p>Blue often indicates a neutral informative change or action.</p>
+        </div>
+
+        <p th:text="${message}"></p>
         <section class="login-form">
             <div class="wrap">
-                <h1>Change Email</h1>
-                <form th:action="@{/account/change/email/form}" method="get">
+                <h1>Create new account</h1>
+                <form th:action="@{/register}" th:object="${register}"  method="post">
                     <div class="form-group">
-                        <label for="currentEmail">Current email</label>
-                        <input name="currentEmail" type="email" class="form-control" placeholder="Current email"
-                               id="currentEmail">
+                        <label for="exampleInputUsername">Username</label>
+                        <div class="input">
+                            <input th:field="*{username}"  type="text" class="form-control" id="exampleInputUsername" placeholder="Username">
+                        </div>
+                        <span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input name="email" type="email" class="form-control" placeholder="Email" id="email">
+                        <label for="exampleInputPassword">Password</label>
+                        <div class="input">
+                            <input th:field="*{password}" type="password" class="form-control password" id="exampleInputPassword" placeholder="Password">
+                            <span class="far fa-eye-slash password"></span>
+                        </div>
+                        <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
                     </div>
                     <div class="form-group">
-                        <label for="repeatEmail">Repeat email</label>
-                        <input name="confirmEmail" type="email" class="form-control" placeholder="Repeat Email"
-                               id="repeatEmail">
+                        <label for="exampleInputConfirmPassword">Confirm Password</label>
+                        <div class="input">
+                            <input name="confirmPassword" type="password" class="form-control password" id="exampleInputConfirmPassword" placeholder="Confirm Password">
+                            <span class="far fa-eye-slash password"></span>
+                        </div>
+                        <span class="error" th:text="${confirmPasswordErrorMessage}"></span>
                     </div>
-                    <input class="button" type="submit" value="Change email" />
+                    <div class="form-group">
+                        <label for="exampleInputEmail">E-mail</label>
+                        <div class="input">
+                            <input th:field="*{email}" type="email" class="form-control" id="exampleInputEmail" placeholder="E-mail">
+                        </div>
+                        <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                    </div>
+                    <input class="button" type="submit" value="Register" />
                 </form>
+                <p class="login"> Already have an account? Click to <a href="/login">Sign In</a></p>
             </div>
         </section>
 
@@ -195,7 +222,9 @@
             </div>
         </footer>
 
-        <script src="/js/navigation-animation-mobile.js"></script>
-        <script src="/js/navigation-animation-desktop.js"></script>
+        <script src="/js/navigation/navigation-animation-mobile.js"></script>
+        <script src="/js/navigation/navigation-animation-desktop.js"></script>
+        <script src="../js/showOrHidePassword.js"></script>
+        <script src="/js/notifications.js"></script>
     </body>
 </html>

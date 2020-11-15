@@ -6,14 +6,13 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login</title>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css">
+        <title>Login page</title>
+        <link type="text/css" rel="stylesheet" th:href="@{/fontawesome/css/all.css}">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto&display=swap&subset=latin-ext"
               rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Dancing+Script:600&display=swap" rel="stylesheet">
         <link type="text/css" rel="stylesheet" th:href="@{/style/header.css}" />
-        <link type="text/css" rel="stylesheet" th:href="@{/style/login-style.css}" />
+        <link type="text/css" rel="stylesheet" th:href="@{/style/account/change-email-style.css}" />
         <link type="text/css" rel="stylesheet" th:href="@{/style/footer.css}" />
     </head>
     <body>
@@ -152,37 +151,26 @@
             <p>We believe that we are able to provide each of you with the rank you deserved.</p>
             <a href="/order">Boost Me</a>
         </header>
-        <div th:if="${token != null}" class="alert alert-dismissible alert-warning">
-            <h4 class="alert-heading">Warning!</h4>
-            <p class="mb-0" th:text="${token}"></p>
-        </div>
-        <div th:if="${confirmEmailMessage != null}" class="alert alert-dismissible alert-primary">
-            <p th:text="${confirmEmailMessage}"></p>
-        </div>
-        <div class="alert alert-dismissible alert-primary" sec:authorize="hasAuthority('CONFIRMATION_EMAIL_PRIVILEGE')">
-            <p>Your account has been activated</p>
-        </div>
         <section class="login-form">
             <div class="wrap">
-                <h1>Account Login</h1>
-                <form th:action="@{/authenticateTheUser}" method="POST">
+                <h1>Change Email</h1>
+                <form th:action="@{/account/change/email/form}" method="get">
                     <div class="form-group">
-                        <label for="exampleInputUsername">E-mail Address or Username</label>
-                        <div class="input">
-                        <input id="exampleInputUsername" name="username" type="text" class="form-control" placeholder="Login">
-                        </div>
+                        <label for="currentEmail">Current email</label>
+                        <input name="currentEmail" type="email" class="form-control" placeholder="Current email"
+                               id="currentEmail">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword">Password</label>
-                        <div class="input">
-                        <input id="exampleInputPassword" name="password" type="password" class="form-control password" placeholder="Password">
-                            <span class="far fa-eye-slash password"></span>
-                        </div>
+                        <label for="email">Email</label>
+                        <input name="email" type="email" class="form-control" placeholder="Email" id="email">
                     </div>
-                    <input id="login-button" class="button" type="submit" value="Login" />
+                    <div class="form-group">
+                        <label for="repeatEmail">Repeat email</label>
+                        <input name="confirmEmail" type="email" class="form-control" placeholder="Repeat Email"
+                               id="repeatEmail">
+                    </div>
+                    <input class="button" type="submit" value="Change email" />
                 </form>
-                <p class="register">Don't have an account yet? <a href="/register">Click here</a> to create one and enjoy our Loyalty Program!</p>
-                <p>Do not you remember the password? <a href="/account/remind/password">Click here</a> to remember them.</p>
             </div>
         </section>
 
@@ -207,9 +195,7 @@
             </div>
         </footer>
 
-        <script src="../js/navigation-animation-mobile.js"></script>
-        <script src="../js/navigation-animation-desktop.js"></script>
-        <script src="../js/showOrHidePassword.js"></script>
-        <script src="/js/notifications.js"></script>
+        <script src="/js/navigation/navigation-animation-mobile.js"></script>
+        <script src="/js/navigation/navigation-animation-desktop.js"></script>
     </body>
 </html>

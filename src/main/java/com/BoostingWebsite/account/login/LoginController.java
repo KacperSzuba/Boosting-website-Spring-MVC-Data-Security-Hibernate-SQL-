@@ -10,7 +10,7 @@ public class LoginController {
 
     @GetMapping
     public String showMyLoginPage() {
-        return "accountView/login";
+        return "account/login";
     }
 
 }

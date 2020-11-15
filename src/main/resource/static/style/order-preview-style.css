@@ -211,7 +211,8 @@
     width: 100%;
 }
 
-#messages p {
+#messages p ,
+#messages li{
     width: max-content;
     max-width: 75%;
     border-radius: 25px;

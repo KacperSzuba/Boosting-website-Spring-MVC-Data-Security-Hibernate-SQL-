@@ -13,7 +13,7 @@
         <link href="https://fonts.googleapis.com/css?family=Dancing+Script:600&display=swap" rel="stylesheet">
 
         <link type="text/css" rel="stylesheet" th:href="@{/style/header.css}" />
-        <link type="text/css" rel="stylesheet" th:href="@{/style/order-preview-style.css}" />
+        <link type="text/css" rel="stylesheet" th:href="@{/static/style/order-preview-style.css}" />
         <link type="text/css" rel="stylesheet" th:href="@{/style/footer.css}" />
     </head>
     <body>
@@ -257,6 +257,10 @@
                         <p th:if="${message.senderName != username}" th:text="${message.content}" class="caller-message"></p>
                         <p th:if="${message.recipientName != username}" th:text="${message.content}" class="your-message"></p>
                     </div>
+                    <ul th:each="message: ${messages}" class="clearfix">
+                        <li th:if="${message.senderName != username}" th:text="${message.content}" class="caller-message"></li>
+                        <li th:if="${message.recipientName != username}" th:text="${message.content}" class="your-message"></li>
+                    </ul>
                  </main>
 
                  <section id="reply">
@@ -295,8 +299,8 @@
          <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
          <script src="/js/chat.js"></script>
-         <script src="/js/navigation-animation-mobile.js"></script>
-         <script src="/js/navigation-animation-desktop.js"></script>
+        <script src="/js/navigation/navigation-animation-mobile.js"></script>
+        <script src="/js/navigation/navigation-animation-desktop.js"></script>
          <script src="/js/notifications.js"></script>
      </body>
  </html>
