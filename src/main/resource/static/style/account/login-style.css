@@ -1,5 +1,15 @@
 /* Section 1 - Login form */
 
+#login-error{
+    text-align: center;
+    background-color: red;
+    padding: 5%;
+    margin: 0 auto 10%;
+    color: white;
+    width: 100%;
+    border-radius: 25px;
+}
+
 section.login-form {
     background-color: #F6F6F6;
     padding: 20% 10%;
@@ -88,7 +98,48 @@ section.login-form div.wrap input.button {
     background-color: white;
 }
 
+@media (orientation: landscape) and (min-width: 550px) {
+    #login-error{
+        width: 75%;
+    }
+
+    section.login-form div.wrap input.form-control {
+        height: 45px;
+    }
+
+    section.login-form div.wrap div.input {
+        width: 85%;
+    }
+
+    section.login-form div.wrap label {
+        margin-left: 7.5%;
+    }
+
+    section.login-form {
+        padding: 10% 5%;
+    }
+
+    section.login-form div.wrap h1 {
+        padding: 5% 0;
+    }
+
+    section.login-form div.wrap input.button {
+        margin: 5% auto 0;
+        width: 70%;
+    }
+
+    section.login-form div.wrap p {
+        padding: 7.5% 0 5%;
+    }
+}
+
 @media (orientation: portrait) and (min-width: 768px) {
+    #login-error{
+        width: 75%;
+        padding: 3%;
+        margin: 0 auto 5%;
+        font-size: 18px;
+    }
 
     section.login-form div.wrap {
         padding: 2.5% 5%;
@@ -129,40 +180,12 @@ section.login-form div.wrap input.button {
     }
 }
 
-
-@media (orientation: landscape) and (min-width: 550px) {
-
-    section.login-form div.wrap input.form-control {
-        height: 45px;
-    }
-
-    section.login-form div.wrap div.input {
-        width: 85%;
-    }
-
-    section.login-form div.wrap label {
-        margin-left: 7.5%;
-    }
-
-    section.login-form {
-        padding: 10% 5%;
-    }
-
-    section.login-form div.wrap h1 {
-        padding: 5% 0;
-    }
-
-    section.login-form div.wrap input.button {
-        margin: 5% auto 0;
-        width: 70%;
-    }
-
-    section.login-form div.wrap p {
-        padding: 7.5% 0 5%;
-    }
-}
-
 @media (min-width: 1024px) {
+
+    #login-error{
+        width: 85%;
+        font-size: 16px;
+    }
 
     section.login-form div.wrap p a:hover {
         border: none;
@@ -181,7 +204,7 @@ section.login-form div.wrap input.button {
     }
 
     section.login-form {
-        padding: 5% 15%;
+        padding: 5% 25%;
     }
 
     section.login-form div.wrap input.button {
@@ -219,7 +242,7 @@ section.login-form div.wrap input.button {
     }
 
     section.login-form {
-        padding: 5% 25%;
+        padding: 5% 30%;
     }
 
     section.login-form div.wrap input.form-control {
@@ -228,11 +251,5 @@ section.login-form div.wrap input.button {
 
     section.login-form div.wrap input.button {
         font-size: 30px;
-    }
-}
-
-@media (min-width: 1300px) {
-    section.login-form {
-        padding: 5% 30%;
     }
 }
