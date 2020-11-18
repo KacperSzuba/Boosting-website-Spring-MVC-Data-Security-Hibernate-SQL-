@@ -1,4 +1,4 @@
-package com.BoostingWebsite;
+package com.BoostingWebsite.api;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

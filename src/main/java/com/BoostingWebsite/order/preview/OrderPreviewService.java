@@ -1,13 +1,12 @@
 package com.BoostingWebsite.order.preview;
 
-import com.BoostingWebsite.LeagueOfLegendsAPIConnector;
+import com.BoostingWebsite.api.LeagueOfLegendsAPIConnector;
 import com.BoostingWebsite.account.user.ApplicationSession;
 import com.BoostingWebsite.account.user.User;
 import com.BoostingWebsite.account.user.UserRepository;
 import com.BoostingWebsite.message.Message;
 import com.BoostingWebsite.message.MessageRepository;
 import com.BoostingWebsite.order.Division;
-import com.BoostingWebsite.order.Points;
 import com.BoostingWebsite.order.Region;
 import com.BoostingWebsite.order.Tier;
 import com.BoostingWebsite.order.entity.League;

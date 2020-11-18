@@ -1,8 +1,6 @@
 package com.BoostingWebsite.order;
 
-import com.BoostingWebsite.LeagueOfLegendsAPIConnector;
 import com.BoostingWebsite.account.user.ApplicationSession;
-import com.BoostingWebsite.order.entity.League;
 import com.BoostingWebsite.order.entity.OrderBoost;
 import com.BoostingWebsite.order.repository.LeagueRepository;
 import com.BoostingWebsite.order.repository.OrderBoostRepository;

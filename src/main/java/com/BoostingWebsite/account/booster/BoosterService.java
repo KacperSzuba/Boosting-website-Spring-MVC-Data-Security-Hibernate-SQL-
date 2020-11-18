@@ -4,7 +4,7 @@ import com.BoostingWebsite.order.entity.OrderBoost;
 import com.BoostingWebsite.order.repository.OrderBoostRepository;
 import org.springframework.stereotype.Service;
 import com.BoostingWebsite.account.user.ApplicationSession;
-import com.BoostingWebsite.LeagueOfLegendsAPIConnector;
+import com.BoostingWebsite.api.LeagueOfLegendsAPIConnector;
 import com.BoostingWebsite.account.user.User;
 import com.BoostingWebsite.order.Region;
 

@@ -53,51 +53,49 @@ if(screenWidth >= 1024) {
         }, 300);
     };
 
-    let boostingTimer;
+    if (accountDescription != null) {
+        accountDescription.addEventListener('mouseenter', onMouseOverAccount);
+        accountDescription.addEventListener('mouseleave', onMouseOutAccount);
+    }
+
+    if (subMenuAccount != null) {
+        subMenuAccount.addEventListener('mouseenter', onMouseOverSubmenu);
+        subMenuAccount.addEventListener('mouseleave', onMouseOutSubmenu);
+    }
+}
+
+if(screenWidth >= 1024 && subMenuBoosting != null) {
+    let timer;
 
     let onMouseOverSubmenuBoosting = function () {
-        clearTimeout(boostingTimer);
+        clearTimeout(timer);
         subMenuBoosting.classList.add("show-sub-menu-for-desktop");
     };
 
     let onMouseOutSubmenuBoosting = function () {
-        boostingTimer = setTimeout(function () {
+        timer = setTimeout(function () {
             subMenuBoosting.classList.remove("show-sub-menu-for-desktop");
         }, 300);
     };
 
     let onMouseOverBoosting = function () {
-        clearTimeout(boostingTimer);
+        clearTimeout(timer);
         subMenuBoosting.classList.add("show-sub-menu-for-desktop");
     };
 
     let onMouseOutBoosting = function () {
-        boostingTimer = setTimeout(function () {
+        timer = setTimeout(function () {
             subMenuBoosting.classList.remove("show-sub-menu-for-desktop");
         }, 300);
     };
 
-    if (accountDescription != null) {
-        accountDescription.addEventListener('mouseenter', onMouseOverAccount);
-
-        accountDescription.addEventListener('mouseleave', onMouseOutAccount);
-    }
-
     if (boostingDescription != null) {
         boostingDescription.addEventListener('mouseenter', onMouseOverBoosting);
-
         boostingDescription.addEventListener('mouseleave', onMouseOutBoosting);
-    }
-
-    if (subMenuAccount != null) {
-        subMenuAccount.addEventListener('mouseenter', onMouseOverSubmenu);
-
-        subMenuAccount.addEventListener('mouseleave', onMouseOutSubmenu);
     }
 
     if (subMenuBoosting != null) {
         subMenuBoosting.addEventListener('mouseenter', onMouseOverSubmenuBoosting);
-
         subMenuBoosting.addEventListener('mouseleave', onMouseOutSubmenuBoosting);
     }
 }
