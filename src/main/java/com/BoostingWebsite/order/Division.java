@@ -1,10 +1,10 @@
 package com.BoostingWebsite.order;
 
 public enum Division {
-    Division_1("Division 1", 4),
-    Division_2("Division 2", 3),
-    Division_3("Division 3", 2),
-    Division_4("Division 4", 1);
+    Division_1("I", 4),
+    Division_2("II", 3),
+    Division_3("III", 2),
+    Division_4("IV", 1);
 
     public final static String PLACEMENTS = "Placements";
 

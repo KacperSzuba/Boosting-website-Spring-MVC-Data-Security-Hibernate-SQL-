@@ -13,9 +13,9 @@ public class OrderBoostService {
 
     private double sum = 0;
 
-    private ApplicationSession applicationSession;
-    private LeagueRepository leagueRepository;
-    private OrderBoostRepository orderBoostRepository;
+    private final ApplicationSession applicationSession;
+    private final LeagueRepository leagueRepository;
+    private final OrderBoostRepository orderBoostRepository;
 
     public OrderBoostService(ApplicationSession applicationSession, LeagueRepository leagueRepository, OrderBoostRepository orderBoostRepository) {
         this.applicationSession = applicationSession;

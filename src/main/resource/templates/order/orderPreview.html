@@ -167,7 +167,7 @@
 
         <main id="order-preview" th:if="${orderBoost.id != null}">
             <section id="order">
-                <h1><span id="buyers-username" th:text="${username}"></span> order</h1>
+                <h1><span id="buyers-username" th:text="${orderBoost.user.username}"></span> order</h1>
                 <section class="tiers">
                     <div class="started-tier">
                         <h2>Started tier</h2>
@@ -176,7 +176,10 @@
                             <img src="../images/Silver/Silver1.png" alt="Started tier image">
                         </div>
 
-                        <p class="tier-division">Silver I</p>
+                        <p class="tier-division">
+                            <span th:text="${orderBoost.currentLeague.tier.name} + ' '"></span>
+                            <span th:text=" ${orderBoost.currentLeague.division.name}"></span>
+                        </p>
                     </div>
 
                     <div class="current-tier">
@@ -196,7 +199,10 @@
                             <img src="../images/Platinum/Platinum1.png" alt="Desire tier image">
                         </div>
 
-                        <p class="tier-division">Platinum I</p>
+                        <p class="tier-division">
+                            <span th:text="${orderBoost.destinationLeague.tier.name} + ' '"></span>
+                            <span th:text=" ${orderBoost.destinationLeague.division.name}"></span>
+                        </p>
                     </div>
                 </section>
 
@@ -253,10 +259,6 @@
                 </header>
 
                 <main id="messages">
-                    <div th:each="message: ${messages}" class="clearfix">
-                        <p th:if="${message.senderName != username}" th:text="${message.content}" class="caller-message"></p>
-                        <p th:if="${message.recipientName != username}" th:text="${message.content}" class="your-message"></p>
-                    </div>
                     <ul th:each="message: ${messages}" class="clearfix">
                         <li th:if="${message.senderName != username}" th:text="${message.content}" class="caller-message"></li>
                         <li th:if="${message.recipientName != username}" th:text="${message.content}" class="your-message"></li>
@@ -301,6 +303,9 @@
          <script src="/js/chat.js"></script>
         <script src="/js/navigation/navigation-animation-mobile.js"></script>
         <script src="/js/navigation/navigation-animation-desktop.js"></script>
-         <script src="/js/notifications.js"></script>
-     </body>
+        <script src="/js/notifications.js"></script>
+        <script src="/js/image-swaping.js"></script>
+        <script src="/js/order/image-displaying.js"></script>
+
+    </body>
  </html>

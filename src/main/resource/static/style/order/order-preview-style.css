@@ -177,6 +177,10 @@
 
 /* Section 2 - Conversation */
 
+#order h1{
+    text-align: center;
+}
+
 #conversation-name{
     display: flex;
     align-items: center;

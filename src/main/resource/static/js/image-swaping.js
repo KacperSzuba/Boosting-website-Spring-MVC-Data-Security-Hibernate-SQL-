@@ -47,8 +47,8 @@ currentDivision.addEventListener('change', () => {
 });
 
 function setResumeText() {
-    resumeText.innerHTML = `${currentTier.value.toLowerCase().capitalize()} ${splitDivision(currentDivision.value)} to
-                            ${desireTier.value.toLowerCase().capitalize()} ${splitDivision(desireDivision.value)}`;
+    resumeText.innerHTML = `${currentTier.value.toLowerCase().capitalize()} ${convertDivision(currentDivision.value)} to
+                            ${desireTier.value.toLowerCase().capitalize()} ${convertDivision(desireDivision.value)}`;
 }
 
 function setImages() {
@@ -59,11 +59,20 @@ function setImages() {
 function imagePath(tierIndex, divisionIndex) {
     let tier = currentTier[tierIndex].value;
     let division = currentDivision[divisionIndex].value;
-    return `${homeIMGURL}/${tier}/${tier}${splitDivision(division)}.png`;
+    return `${homeIMGURL}/${tier}/${tier}${convertDivision(division)}.png`;
 }
 
-function splitDivision(division) {
-    return division.split('_')[1];
+function convertDivision(division) {
+    switch (division) {
+        case 'I':
+            return 1;
+        case 'II':
+            return 2;
+        case 'III':
+            return 3;
+        case 'IV':
+            return 4;
+    }
 }
 
 String.prototype.capitalize = function () {
