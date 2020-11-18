@@ -173,7 +173,7 @@
                         <h2>Started tier</h2>
 
                         <div class="image">
-                            <img src="../images/Silver/Silver1.png" alt="Started tier image">
+                            <img alt="Started tier image">
                         </div>
 
                         <p class="tier-division">
@@ -186,17 +186,21 @@
                         <h2>Current tier</h2>
 
                         <div class="image">
-                            <img src="../images/Gold/Gold1.png" alt="Current tier image">
+                            <img alt="Current tier image">
                         </div>
 
-                        <p class="tier-division">Gold I <span id="league-points">30 LP</span></p>
+                        <p class="tier-division">
+                            <span th:text="${currentLeague.tier.name} + ' '"></span>
+                            <span th:text="${currentLeague.division.name} + ' '"></span>
+                            <span th:text="${currentLeague.leaguePoints} + ' LP'"></span>
+                        </p>
                     </div>
 
                     <div class="desire-tier">
                         <h2>Desire tier</h2>
 
                         <div class="image">
-                            <img src="../images/Platinum/Platinum1.png" alt="Desire tier image">
+                            <img alt="Desire tier image">
                         </div>
 
                         <p class="tier-division">
@@ -225,7 +229,7 @@
 
                         <div id="order-status">
                             <p>Order status</p>
-                            <p>Preparing</p>
+                            <p th:text="${orderBoost.status.name}"></p>
                         </div>
 
                         <div id="date-of-purchase">

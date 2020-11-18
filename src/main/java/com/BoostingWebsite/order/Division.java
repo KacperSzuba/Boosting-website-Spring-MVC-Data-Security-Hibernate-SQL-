@@ -16,6 +16,16 @@ public enum Division {
         this.priority = priority;
     }
 
+    public static Division getDivision(String name){
+        switch (name) {
+            case "I": return Division.Division_1;
+            case "II": return Division.Division_2;
+            case "III": return Division.Division_3;
+            case "IV": return Division.Division_4;
+            default: throw new IllegalArgumentException(name);
+        }
+    }
+
     public String getName() {
         return name;
     }

@@ -12,20 +12,36 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class LeagueOfLegendsAPIConnector {
-    private Region region;
-    private String username;
-    private final String apiKey = "RGAPI-2e792391-d5c3-47cf-9d2f-ad41dbcf81b5";
+    private final String region;
+    private final String username;
+    private final String summonerId;
+    private final String apiKey = "RGAPI-2fd9dfa6-9de8-4f28-bee8-f70fb955ea38";
 
     public LeagueOfLegendsAPIConnector(String username, Region region) {
         this.username = username;
-        this.region = region;
+        this.region = region.getValue();
+        summonerId = retrieveSummonerId();
+    }
+
+    private String retrieveSummonerId(){
+        String summonerId;
+        try {
+            URL summoner = new URL("https://" + region + ".api.riotgames.com/lol/summoner/v4/summoners/by-name/" + username + "?api_key=" + apiKey);
+            JsonObject jsonObject = (JsonObject) parser(summoner);
+            summonerId = jsonObject.get("id").toString();
+
+            return removeQuotes(summonerId);
+        } catch (IOException e) {
+            e.printStackTrace();
+
+            throw new SummonerNotFoundException();
+        }
     }
 
     private Map<String, JsonObject> retrieveSummonerLeague() throws IOException {
-        URL summonerLeague = new URL("https://" + region() + ".api.riotgames.com/lol/league/v4/entries/by-summoner/" + retrieveSummonerId() + "?api_key=" + apiKey);
+        URL summonerLeague = new URL("https://" + region + ".api.riotgames.com/lol/league/v4/entries/by-summoner/" + summonerId + "?api_key=" + apiKey);
         JsonArray jsonArray = (JsonArray) parser(summonerLeague);
 
         Map<String, JsonObject> map = new HashMap<>();
@@ -35,13 +51,6 @@ public class LeagueOfLegendsAPIConnector {
             map.put(key, jsonElement.getAsJsonObject());
         }
         return map;
-    }
-
-    private String retrieveSummonerId() throws IOException {
-        URL summoner = new URL("https://" + region() + ".api.riotgames.com/lol/summoner/v4/summoners/by-name/" + username + "?api_key=" + apiKey);
-        JsonObject jsonObject = (JsonObject) parser(summoner);
-        String summonerId = jsonObject.get("id").toString();
-        return removeQuotes(summonerId);
     }
 
     private Object parser(URL url) throws IOException {
@@ -61,8 +70,7 @@ public class LeagueOfLegendsAPIConnector {
 
     public String getActualSoloDuoDivision() throws IOException {
         String division = getJsonObject("RANKED_SOLO_5x5").get("rank").toString();
-        String str = removeQuotes(division);
-        return mapOfDivisions().get(str);
+        return removeQuotes(division);
     }
 
     public String getActualSoloDuoLeaguePoints() throws IOException {
@@ -77,8 +85,7 @@ public class LeagueOfLegendsAPIConnector {
 
     public String getActual5vs5Division() throws IOException {
         String division = getJsonObject("RANKED_FLEX_SR").get("rank").toString();
-        String str = removeQuotes(division);
-        return mapOfDivisions().get(str);
+        return removeQuotes(division);
     }
 
     public String getActual5vs5LeaguePoints() throws IOException {
@@ -86,28 +93,7 @@ public class LeagueOfLegendsAPIConnector {
         return removeQuotes(leaguePoints);
     }
 
-    private String removeQuotes(String text) {
+    private static String removeQuotes(String text) {
         return text.replace("\"", "");
-    }
-
-    private Map<Region, String> mapOfRegions() {
-        Map<Region, String> mapOfRegions = new TreeMap<>();
-        mapOfRegions.put(Region.EUW, "euw1");
-        mapOfRegions.put(Region.EUNE, "eun1");
-        mapOfRegions.put(Region.TR, "tr1");
-        return mapOfRegions;
-    }
-
-    private Map<String, String> mapOfDivisions() {
-        Map<String, String> mapOfDivisions = new TreeMap<>();
-        mapOfDivisions.put("I", "1");
-        mapOfDivisions.put("II", "2");
-        mapOfDivisions.put("III", "3");
-        mapOfDivisions.put("IV", "4");
-        return mapOfDivisions;
-    }
-
-    private String region() {
-        return mapOfRegions().get(region);
     }
 }

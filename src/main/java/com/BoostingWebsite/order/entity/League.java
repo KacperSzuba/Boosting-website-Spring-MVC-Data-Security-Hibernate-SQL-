@@ -32,6 +32,9 @@ public class League {
 
     private String currency;
 
+    @Transient
+    private int leaguePoints;
+
     public League() {
     }
 
@@ -40,6 +43,12 @@ public class League {
         this.division = division;
         this.points = points;
         this.price = price;
+    }
+
+    public League(Tier tier, Division division, int leaguePoints) {
+        this.tier = tier;
+        this.division = division;
+        this.leaguePoints = leaguePoints;
     }
 
     public Long getId() {
@@ -84,6 +93,14 @@ public class League {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public int getLeaguePoints() {
+        return leaguePoints;
+    }
+
+    public void setLeaguePoints(int leaguePoints) {
+        this.leaguePoints = leaguePoints;
     }
 
     @Override

@@ -1,14 +1,21 @@
 package com.BoostingWebsite.order.preview;
 
+import com.BoostingWebsite.LeagueOfLegendsAPIConnector;
 import com.BoostingWebsite.account.user.ApplicationSession;
 import com.BoostingWebsite.account.user.User;
 import com.BoostingWebsite.account.user.UserRepository;
 import com.BoostingWebsite.message.Message;
 import com.BoostingWebsite.message.MessageRepository;
+import com.BoostingWebsite.order.Division;
+import com.BoostingWebsite.order.Points;
+import com.BoostingWebsite.order.Region;
+import com.BoostingWebsite.order.Tier;
+import com.BoostingWebsite.order.entity.League;
 import com.BoostingWebsite.order.entity.OrderBoost;
 import com.BoostingWebsite.order.repository.OrderBoostRepository;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -42,5 +49,18 @@ public class OrderPreviewService {
         List<Message> chatMessages = messageRepository.getChatMessages(getOrderBoost().getUser().getId(), getOrderBoost().getBooster().getId());
 
         return ChatMessageMapper.mapMessagesToChatDTOs(chatMessages);
+    }
+
+    public League getCurrentLeague() throws OrderBoostNotFoundException, IOException {
+        String username = getOrderBoost().getAccountDetails().getLolUsername();
+        Region region = getOrderBoost().getAccountDetails().getRegion();
+
+        LeagueOfLegendsAPIConnector leagueOfLegendsAPIConnector = new LeagueOfLegendsAPIConnector(username, region);
+
+        Tier tier = Tier.valueOf(leagueOfLegendsAPIConnector.getActualSoloDuoTier());
+        Division division = Division.getDivision(leagueOfLegendsAPIConnector.getActualSoloDuoDivision());
+        int leaguePoints = Integer.parseInt(leagueOfLegendsAPIConnector.getActualSoloDuoLeaguePoints());
+
+        return new League(tier, division, leaguePoints);
     }
 }

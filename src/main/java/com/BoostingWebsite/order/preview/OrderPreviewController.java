@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.IOException;
+
 @Controller
 @RequestMapping("/order/preview")
 public class OrderPreviewController {
@@ -30,8 +32,9 @@ public class OrderPreviewController {
             model.addAttribute("orderBoost", orderPreviewService.getOrderBoost());
             model.addAttribute("messages", orderPreviewService.getExistingChatMessages());
             model.addAttribute("username", applicationSession.getActualUser().getUsername());
+            model.addAttribute("currentLeague", orderPreviewService.getCurrentLeague());
         }
-        catch (OrderBoostNotFoundException ex){
+        catch (OrderBoostNotFoundException | IOException ex){
             model.addAttribute("orderBoost", new OrderBoost());
             ex.getStackTrace();
         }

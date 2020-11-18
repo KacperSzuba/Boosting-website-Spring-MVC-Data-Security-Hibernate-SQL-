@@ -12,7 +12,6 @@ class ChatMessageMapper {
         for(Message chatMessage : chatMessages) {
             messageDTOS.add(new MessageDTO(chatMessage.getMessage(), chatMessage.getAuthor().getUsername(), chatMessage.getRecipient().getUsername()));
         }
-        System.out.println(messageDTOS);
         return messageDTOS;
     }
 }

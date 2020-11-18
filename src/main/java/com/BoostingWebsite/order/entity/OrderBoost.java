@@ -51,6 +51,13 @@ public class OrderBoost {
     @JoinColumn(name = "boosters_id")
     private User booster;
 
+    @Enumerated(EnumType.STRING)
+    private EnumOrderStatus status;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @OneToMany(
             mappedBy = "orderBoost",
             cascade = CascadeType.ALL,
@@ -181,6 +188,14 @@ public class OrderBoost {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public EnumOrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(EnumOrderStatus status) {
+        this.status = status;
     }
 
     @Override
