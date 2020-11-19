@@ -48,7 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/order",
                         "/account/remindPasswordPage",
                         "/css/**", "/style/**", "/static/**").permitAll()
-               .antMatchers("/order/**").hasAnyRole("USER", "BOOSTER")
+                //.antMatchers("/order/**").hasAnyRole("USER", "BOOSTER")
+                .antMatchers("/order/**").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")

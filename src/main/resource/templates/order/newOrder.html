@@ -152,9 +152,11 @@
             <a href="/order">Boost Me</a>
         </header>
 
-        <section f>
-            <p class="error">You already have an order. Wait for its implementation and then place another order</p>
-        </section>
+        <div th:if="${orderBoost != null}" id="login-notification" class="notification notification-error">
+            <span class="close-button">&times;</span>
+            <h3>Info!</h3>
+            <p>You already have an order. Wait for its implementation and then place another order</p>
+        </div>
 
         <main class="division">
             <form th:action="@{/order/new}" th:object="${orderBoost}" method="post">
@@ -283,5 +285,6 @@
         <script src="/js/navigation/navigation-animation-mobile.js"></script>
         <script src="/js/navigation/navigation-animation-desktop.js"></script>
         <script src="/js/image-swaping.js"></script>
+        <script src="/js/notifications.js"></script>
     </body>
 </html>

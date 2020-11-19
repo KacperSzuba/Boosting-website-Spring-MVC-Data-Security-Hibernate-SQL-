@@ -23,6 +23,13 @@ if(localStorage.getItem('login-notification')){
 
     localStorage.removeItem('local-notification');
 }
+
 closeButton.addEventListener('click', function () {
-    loginNotification.classList.remove("show");
+    loginNotification.style.display = "none";
 });
+
+let timer;
+
+timer = setTimeout(function () {
+    loginNotification.style.display = "none";
+}, 10000);

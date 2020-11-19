@@ -154,10 +154,6 @@ main.division input.btn-sm {
     transition: 0.3s linear;
 }
 
-.error {
-    color: red;
-}
-
 @media (orientation: portrait) and (min-width: 375px) {
     main.division h2 {
         font-size: 26px;

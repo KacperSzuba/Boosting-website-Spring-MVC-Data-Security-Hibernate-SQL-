@@ -548,7 +548,6 @@ i.show {
     background-color: #007bff;
     z-index: 100;
     padding: 15px 20px 10px;
-    display: none;
 }
 
 .notification .close-button{
@@ -558,6 +557,11 @@ i.show {
     font-size: 30px;
     transform: translateY(-25%);
     cursor: pointer;
+}
+
+.notification-error{
+    background-color: red;
+    color: white;
 }
 
 .notification h3{

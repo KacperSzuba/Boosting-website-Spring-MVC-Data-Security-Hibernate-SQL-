@@ -47,18 +47,18 @@ currentDivision.addEventListener('change', () => {
 });
 
 function setResumeText() {
-    resumeText.innerHTML = `${currentTier.value.toLowerCase().capitalize()} ${convertDivision(currentDivision.value)} to
-                            ${desireTier.value.toLowerCase().capitalize()} ${convertDivision(desireDivision.value)}`;
+    resumeText.innerHTML = `${currentTier.value.toLowerCase().capitalize()} ${convertDivision(currentDivision.options[currentDivision.selectedIndex].text)} to
+                            ${desireTier.value.toLowerCase().capitalize()} ${convertDivision(desireDivision.options[desireDivision.selectedIndex].text)}`;
 }
 
 function setImages() {
-    desireTierImg.src = imagePath(desireTier.selectedIndex, desireDivision.selectedIndex);
-    currentTierImg.src = imagePath(currentTier.selectedIndex, currentDivision.selectedIndex);
+    console.log(desireDivision.options[desireDivision.selectedIndex].text)
+    desireTierImg.src = imagePath(desireTier.selectedIndex, desireDivision.options[desireDivision.selectedIndex].text);
+    currentTierImg.src = imagePath(currentTier.selectedIndex, currentDivision.options[currentDivision.selectedIndex].text);
 }
 
-function imagePath(tierIndex, divisionIndex) {
+function imagePath(tierIndex, division) {
     let tier = currentTier[tierIndex].value;
-    let division = currentDivision[divisionIndex].value;
     return `${homeIMGURL}/${tier}/${tier}${convertDivision(division)}.png`;
 }
 
