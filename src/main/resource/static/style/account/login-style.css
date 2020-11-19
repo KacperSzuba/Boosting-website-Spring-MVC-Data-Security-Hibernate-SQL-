@@ -64,13 +64,34 @@ section.login-form div.wrap input.form-control {
     height: 40px;
     padding-left: 5%;
     padding-right: 5%;
-    border: 1px solid black;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    color: black;
+    background: transparent;
 }
 
-section.login-form div.wrap div.input {
-    width: 90%;
-    margin: 2.5% auto 5%;
-    position: relative;
+.form-group label{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 14px 0;
+    font-size: 16px;
+    color: black;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.form-group input:focus ~ label,
+.form-group input:valid ~ label{
+    top: -20px;
+    left: 0;
+    color: #03e9f4;
+    font-size: 10px;
+}
+
+.form-group input:focus{
+    border-bottom: 1px solid #14a5eb !important;
 }
 
 section.login-form div.wrap span {
@@ -85,6 +106,8 @@ section.login-form div.wrap span {
 .form-group {
     display: flex;
     flex-direction: column;
+    position: relative;
+    margin: 4% 0;
 }
 
 section.login-form div.wrap input.button {
@@ -110,14 +133,6 @@ section.login-form div.wrap input.button {
 
     section.login-form div.wrap input.form-control {
         height: 45px;
-    }
-
-    section.login-form div.wrap div.input {
-        width: 85%;
-    }
-
-    section.login-form div.wrap label {
-        margin-left: 7.5%;
     }
 
     section.login-form {
@@ -153,10 +168,6 @@ section.login-form div.wrap input.button {
     section.login-form div.wrap input.form-control {
         height: 50px;
         font-size: 18px;
-    }
-
-    section.login-form div.wrap div.input {
-        width: 80%;
     }
 
     section.login-form div.wrap label {
@@ -234,10 +245,6 @@ section.login-form div.wrap input.button {
         margin: 1.25% auto 2.5%;
         font-size: 18px;
         transition: 0.2s linear;
-    }
-
-    section.login-form div.wrap input.form-control:focus {
-        border: 1.5px solid #14a5eb;
     }
 }
 
