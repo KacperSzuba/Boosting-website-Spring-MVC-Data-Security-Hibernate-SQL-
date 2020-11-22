@@ -1,12 +1,15 @@
 /* Section 1 - Register form */
 
+.capslockDetectedMessage{
+    color: red;
+}
+
 section.login-form {
     background-color: #F6F6F6;
     padding: 20% 10%;
     height: 100%;
     width: 100%;
     font-family: 'Open Sans', sans-serif;
-
 }
 
 section.login-form div.wrap {
@@ -25,11 +28,6 @@ section.login-form div.wrap h1 {
     padding: 10% 0;
 }
 
-section.login-form div.wrap label {
-    font-size: 14px;
-    margin-left: 5%;
-}
-
 section.login-form div.wrap p {
     font-size: 14px;
     text-align: center;
@@ -44,20 +42,6 @@ section.login-form div.wrap p a {
     margin: 0 1%;
 }
 
-section.login-form div.wrap input.form-control {
-    width: 100%;
-    height: 40px;
-    padding-left: 5%;
-    padding-right: 5%;
-    border: 1px solid black;
-}
-
-section.login-form div.wrap div.input {
-    width: 90%;
-    margin: 2.5% auto 5%;
-    position: relative;
-}
-
 section.login-form div.wrap span {
     position: absolute;
     right: 5%;
@@ -65,12 +49,6 @@ section.login-form div.wrap span {
     font-size: 26px;
     transform: translateY(50%);
     cursor: pointer;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 5%;
 }
 
 section.login-form div.wrap input.button {
@@ -101,21 +79,6 @@ section.login-form div.wrap span.error {
         padding: 2.5% 5%;
     }
 
-    section.login-form div.wrap input.form-control {
-        height: 50px;
-        font-size: 18px;
-    }
-
-    section.login-form div.wrap div.input {
-        width: 80%;
-        margin: 1% auto;
-    }
-
-    section.login-form div.wrap label {
-        margin-left: 10%;
-        font-size: 18px;
-    }
-
     section.login-form {
         padding: 10% 5%;
     }
@@ -144,23 +107,6 @@ section.login-form div.wrap span.error {
 
 
 @media (orientation: landscape) and (min-width: 550px) {
-    .form-group {
-        margin-bottom: 2.5%;
-    }
-
-    section.login-form div.wrap input.form-control {
-        height: 45px;
-    }
-
-    section.login-form div.wrap div.input {
-        width: 85%;
-        margin: 1% auto;
-    }
-
-    section.login-form div.wrap label {
-        margin-left: 7.5%;
-    }
-
     section.login-form {
         padding: 10% 5%;
     }
@@ -198,10 +144,6 @@ section.login-form div.wrap span.error {
         font-size: 18px;
     }
 
-    section.login-form div.wrap label {
-        font-size: 18px;
-    }
-
     section.login-form {
         padding: 5% 15%;
     }
@@ -224,15 +166,6 @@ section.login-form div.wrap span.error {
         padding: 2.5% 10%;
     }
 
-    section.login-form div.wrap input.form-control {
-        font-size: 18px;
-        transition: 0.2s linear;
-    }
-
-    section.login-form div.wrap input.form-control:focus {
-        border: 1.5px solid #14a5eb;
-    }
-
     section.login-form div.wrap span.error {
         font-size: 14px;
         margin-left: 7.5%;
@@ -246,10 +179,6 @@ section.login-form div.wrap span.error {
 
     section.login-form {
         padding: 5% 25%;
-    }
-
-    section.login-form div.wrap input.form-control {
-        font-size: 20px;
     }
 
     section.login-form div.wrap input.button {

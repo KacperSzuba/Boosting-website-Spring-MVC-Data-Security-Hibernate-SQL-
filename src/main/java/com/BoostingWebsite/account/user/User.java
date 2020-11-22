@@ -39,6 +39,9 @@ public class User {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<UserRole> roles;
 
+    @Transient
+    private String creationErrorMessage;
+
     public User() {
     }
 
@@ -96,6 +99,14 @@ public class User {
 
     public List<LoginHistory> getLoginHistory() {
         return loginHistory;
+    }
+
+    public String getCreationErrorMessage() {
+        return creationErrorMessage;
+    }
+
+    public void setCreationErrorMessage(String creationErrorMessage) {
+        this.creationErrorMessage = creationErrorMessage;
     }
 
     @Override

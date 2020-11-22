@@ -12,6 +12,7 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto&display=swap&subset=latin-ext"
               rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Dancing+Script:600&display=swap" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" th:href="@{/style/utils/form-style.css}" />
         <link type="text/css" rel="stylesheet" th:href="@{/style/utils/header.css}" />
         <link type="text/css" rel="stylesheet" th:href="@{/style/account/register-style.css}" />
         <link type="text/css" rel="stylesheet" th:href="@{/style/utils/footer.css}" />
@@ -154,49 +155,43 @@
             <a href="/order">Boost Me</a>
         </header>
 
-        <div id="register-notification" class="notification">
-            <span class="close-button">&times;</span>
-            <h3>Info!</h3>
-            <p>Blue often indicates a neutral informative change or action.</p>
-        </div>
-
-        <p th:text="${message}"></p>
+        <p th:if="${user.getCreationErrorMessage() != null}" th:text="${user.getCreationErrorMessage()}"></p>
         <section class="login-form">
             <div class="wrap">
                 <h1>Create new account</h1>
-                <form th:action="@{/register}" th:object="${register}"  method="post">
+
+                <form th:action="@{/register}" th:object="${user}"  method="post">
                     <div class="form-group">
-                        <label for="exampleInputUsername">Username</label>
-                        <div class="input">
-                            <input th:field="*{username}"  type="text" class="form-control" id="exampleInputUsername" placeholder="Username">
-                        </div>
-                        <span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+                        <input id="username" th:field="*{username}" type="text" class="form-control" required="">
+                        <label for="username">Username</label>
+                        <p class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
                     </div>
+
                     <div class="form-group">
-                        <label for="exampleInputPassword">Password</label>
-                        <div class="input">
-                            <input th:field="*{password}" type="password" class="form-control password" id="exampleInputPassword" placeholder="Password">
-                            <span class="far fa-eye-slash password"></span>
-                        </div>
-                        <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                        <input id="password" th:field="*{password}" type="password" class="form-control password" required="">
+                        <label for="password">Password</label>
+                        <span class="far fa-eye-slash password"></span>
+                        <p class="capslockDetectedMessage">Caps lock is ON!</p>
+                        <p class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
                     </div>
+
                     <div class="form-group">
-                        <label for="exampleInputConfirmPassword">Confirm Password</label>
-                        <div class="input">
-                            <input name="confirmPassword" type="password" class="form-control password" id="exampleInputConfirmPassword" placeholder="Confirm Password">
-                            <span class="far fa-eye-slash password"></span>
-                        </div>
-                        <span class="error" th:text="${confirmPasswordErrorMessage}"></span>
+                        <input id="confirmPassword" name="confirmPassword" type="password" class="form-control password" required="">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <span class="far fa-eye-slash password"></span>
+                        <p class="capslockDetectedMessage">Caps lock is ON!</p>
+                    <!--<p class="error" th:text="${confirmPasswordErrorMessage}"></p> -->
                     </div>
+
                     <div class="form-group">
-                        <label for="exampleInputEmail">E-mail</label>
-                        <div class="input">
-                            <input th:field="*{email}" type="email" class="form-control" id="exampleInputEmail" placeholder="E-mail">
-                        </div>
-                        <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                        <input id="email" th:field="*{email}" type="text" class="form-control" required="">
+                        <label for="email">E-mail</label>
+                        <p class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
                     </div>
+
                     <input class="button" type="submit" value="Register" />
                 </form>
+
                 <p class="login"> Already have an account? Click to <a href="/login">Sign In</a></p>
             </div>
         </section>
@@ -224,7 +219,7 @@
 
         <script src="/js/navigation/navigation-animation-mobile.js"></script>
         <script src="/js/navigation/navigation-animation-desktop.js"></script>
-        <script src="../js/showOrHidePassword.js"></script>
-        <script src="/js/notifications.js"></script>
+        <script src="/js/showOrHidePassword.js"></script>
+        <script src="/js/account/capslock-detector.js"></script>
     </body>
 </html>

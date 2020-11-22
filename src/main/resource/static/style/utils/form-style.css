@@ -1,0 +1,52 @@
+.form-group {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: 5% auto;
+}
+
+section.login-form div.wrap input.form-control {
+    width: 100%;
+    height: 40px;
+    padding-left: 5%;
+    padding-right: 5%;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    color: black;
+    background: transparent;
+}
+
+.form-group label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px !important;
+    color: black;
+    pointer-events: none;
+    transition: .5s;
+}
+
+section.login-form div.wrap label {
+    font-size: 14px;
+    margin-left: 5%;
+}
+
+.form-control:focus ~ label,
+.form-control:valid ~ label{
+    top: -20px;
+    left: 0;
+    color: rgba(20, 165, 235, 0.85);
+    font-size: 12px !important;
+}
+
+.form-group input:focus{
+    border-bottom: 1px solid #14a5eb !important;
+}
+
+@media (min-width: 768px) {
+    .form-group {
+        width: 80%;
+    }
+}

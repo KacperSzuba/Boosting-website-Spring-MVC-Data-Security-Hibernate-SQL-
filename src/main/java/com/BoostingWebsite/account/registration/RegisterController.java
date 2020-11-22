@@ -35,15 +35,14 @@ public class RegisterController {
     @GetMapping
     public String registerPage(Model model) {
         User user = new User();
-        model.addAttribute("register", user);
+        model.addAttribute("user", user);
         return "account/register";
     }
 
     @PostMapping
-    public String register(@Valid @ModelAttribute("register") User user, BindingResult result, @RequestParam("confirmPassword") String confirmPassword, Model model) {
+    public String register(@Valid @ModelAttribute("user") User user, BindingResult result, @RequestParam("confirmPassword") String confirmPassword, Model model) {
         if (result.hasErrors() || isConfirmPasswordIsValid(confirmPassword)) {
             model.addAttribute("confirmPasswordErrorMessage", "Confirmation password length should be between 7 and 20 letters");
-            model.addAttribute("message", userCreator.getUserRegistrationInformation());
             return "account/register";
         } else {
             if (userCreator.createAccount(user, confirmPassword)) {
@@ -51,7 +50,6 @@ public class RegisterController {
                 emailConfirmation.confirmEmail(getAppUrl(), generateToken(), userRepository.findByUsername(user.getUsername()));
                 return "account/login";
             } else {
-                model.addAttribute("message", userCreator.getUserRegistrationInformation());
                 return "account/register";
             }
         }

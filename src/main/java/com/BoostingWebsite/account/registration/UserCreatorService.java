@@ -14,8 +14,6 @@ import java.util.List;
 
 @Service
 class UserCreatorService {
-
-    private String message;
     private User user;
 
     private final PasswordEncoder passwordEncoder;
@@ -35,13 +33,9 @@ class UserCreatorService {
         try {
             tryToCreateAccount(confirmPassword);
             return true;
-        } catch (IllegalArgumentException exception) {
-            exception.printStackTrace();
-            setUserRegistrationInformation(exception.getMessage());
-            return false;
         } catch (Exception exception) {
             exception.printStackTrace();
-            setUserRegistrationInformation("Invalid registration");
+            user.setCreationErrorMessage("Invalid registration");
             return false;
         }
     }
@@ -55,13 +49,5 @@ class UserCreatorService {
             String password = passwordEncoder.encode(this.user.getPassword());
             userRepository.save(new User(this.user.getUsername(), password, false, this.user.getEmail(), roles));
         }
-    }
-
-    private void setUserRegistrationInformation(String message) {
-        this.message = message;
-    }
-
-    String getUserRegistrationInformation() {
-        return message;
     }
 }
