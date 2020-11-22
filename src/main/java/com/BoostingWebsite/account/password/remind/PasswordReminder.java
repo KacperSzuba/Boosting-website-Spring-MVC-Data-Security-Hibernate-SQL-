@@ -7,7 +7,7 @@ import com.BoostingWebsite.account.user.User;
 import com.BoostingWebsite.account.user.UserRepository;
 import com.BoostingWebsite.email.EmailService;
 import com.BoostingWebsite.exceptions.DataMismatchException;
-import com.BoostingWebsite.validator.EmailValidator;
+import com.BoostingWebsite.utils.EmailValidator;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

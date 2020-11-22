@@ -11,7 +11,7 @@ import javax.validation.Valid;
 
 import java.time.LocalDate;
 
-import static com.BoostingWebsite.validator.EmailValidator.validateEmail;
+import static com.BoostingWebsite.utils.EmailValidator.validateEmail;
 
 @Controller
 @RequestMapping("/contact-us")

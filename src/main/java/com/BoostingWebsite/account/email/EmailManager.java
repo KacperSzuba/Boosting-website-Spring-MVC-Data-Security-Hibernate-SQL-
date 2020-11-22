@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import com.BoostingWebsite.account.user.ApplicationSession;
 import com.BoostingWebsite.account.user.User;
 import com.BoostingWebsite.account.user.UserRepository;
-import com.BoostingWebsite.validator.EmailValidator;
+import com.BoostingWebsite.utils.EmailValidator;
 import com.BoostingWebsite.exceptions.DataMismatchException;
 
 @Service

@@ -1,7 +1,5 @@
 package com.BoostingWebsite.order.preview;
 
-import com.BoostingWebsite.message.Message;
-
 import java.util.ArrayList;
 import java.util.List;
 

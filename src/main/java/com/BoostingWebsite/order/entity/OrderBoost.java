@@ -1,7 +1,7 @@
 package com.BoostingWebsite.order.entity;
 
 import com.BoostingWebsite.account.user.User;
-import com.BoostingWebsite.message.Message;
+import com.BoostingWebsite.order.preview.Message;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
