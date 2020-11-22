@@ -5,7 +5,8 @@
     margin: 5% auto;
 }
 
-section.login-form div.wrap input.form-control {
+section.login-form div.wrap input.form-control,
+section.login-form div.wrap textarea.form-control{
     width: 100%;
     height: 40px;
     padding-left: 5%;
@@ -15,6 +16,13 @@ section.login-form div.wrap input.form-control {
     outline: none;
     color: black;
     background: transparent;
+}
+
+section.login-form div.wrap textarea.form-control{
+    resize: none;
+    height: 150px;
+    padding: 5%;
+    margin: 0 2%;
 }
 
 .form-group label {
