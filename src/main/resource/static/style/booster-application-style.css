@@ -355,21 +355,6 @@ section.login-form div.wrap p a {
     margin: 0 1%;
 }
 
-section.login-form div.wrap select.custom-select {
-    width: 90%;
-    height: 40px;
-    padding-left: 5%;
-    padding-right: 5%;
-    margin: 2.5% auto;
-    border: 1px solid black;
-}
-
-section.login-form div.wrap select.custom-select {
-    height: 55px;
-    overflow: scroll;
-    font-size: 18px;
-}
-
 section.login-form div.wrap input.button {
     display: block;
     text-decoration: none;
@@ -396,19 +381,6 @@ section.login-form div.wrap span.error {
 
     section.login-form div.wrap {
         padding: 2.5% 5%;
-    }
-
-    section.login-form div.wrap select.custom-select {
-        width: 80%;
-        max-width: 80%;
-        height: 50px;
-        font-size: 18px;
-    }
-
-    section.login-form div.wrap select.custom-select {
-        height: 65px;
-        overflow: scroll;
-        font-size: 24px;
     }
 
     section.login-form {
@@ -438,16 +410,6 @@ section.login-form div.wrap span.error {
 }
 
 @media (orientation: landscape) and (min-width: 550px) {
-
-    section.login-form div.wrap select.custom-select {
-        width: 85%;
-        height: 45px;
-    }
-
-    section.login-form div.wrap select.custom-select {
-        height: 60px;
-    }
-
     section.login-form {
         padding: 10% 5%;
     }
