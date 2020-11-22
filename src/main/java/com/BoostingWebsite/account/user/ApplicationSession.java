@@ -1,5 +1,7 @@
 package com.BoostingWebsite.account.user;
 
+import com.BoostingWebsite.account.roles.RoleName;
+import com.BoostingWebsite.account.roles.UserRole;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,5 +21,10 @@ public class ApplicationSession {
     public User getActualUser() {
         Principal principal = this.request.getUserPrincipal();
         return userRepository.findByUsername(principal.getName());
+    }
+
+    public RoleName getCurrentUserRole(User user) {
+        UserRole userRole = userRepository.getUserRole(user.getId());
+        return userRole.getRoleName();
     }
 }
