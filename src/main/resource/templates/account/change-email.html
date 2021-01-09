@@ -6,13 +6,12 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login page</title>
+        <title>Change email</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto&display=swap&subset=latin-ext"
-              rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto&display=swap&subset=latin-ext" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Dancing+Script:600&display=swap" rel="stylesheet">
-
+        <link type="text/css" rel="stylesheet" th:href="@{/style/utils/form-style.css}" />
         <link type="text/css" rel="stylesheet" th:href="@{/style/account/change-email.css}" />
     </head>
     <body>
@@ -156,19 +155,20 @@
                 <h1>Change Email</h1>
                 <form th:action="@{/account/change/email/form}" method="get">
                     <div class="form-group">
+                        <input id="currentEmail" name="currentEmail" type="email" class="form-control" required="">
                         <label for="currentEmail">Current email</label>
-                        <input name="currentEmail" type="email" class="form-control" placeholder="Current email"
-                               id="currentEmail">
                     </div>
+
                     <div class="form-group">
+                        <input id="email" name="email" type="email" class="form-control" required="">
                         <label for="email">Email</label>
-                        <input name="email" type="email" class="form-control" placeholder="Email" id="email">
                     </div>
+
                     <div class="form-group">
+                        <input id="repeatEmail" name="confirmEmail" type="email" class="form-control" required="">
                         <label for="repeatEmail">Repeat email</label>
-                        <input name="confirmEmail" type="email" class="form-control" placeholder="Repeat Email"
-                               id="repeatEmail">
                     </div>
+
                     <input class="button" type="submit" value="Change email" />
                 </form>
             </div>
@@ -179,12 +179,14 @@
                 <div class="text">
                     <h1>Boosting</h1>
                 </div>
+
                 <nav class="footer-navigation">
                     <div class="customer">
                         <h2>Customer</h2>
                         <a href="/order">Order Now</a>
                         <a href="/booster-application">Join Our Team</a>
                     </div>
+
                     <div class="pages">
                         <h2>Pages</h2>
                         <a href="#">F.A.Q.</a>

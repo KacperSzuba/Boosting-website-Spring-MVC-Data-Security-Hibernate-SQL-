@@ -24,10 +24,6 @@
       }
     }
 
-    & input.form-control {
-      @include form-control;
-    }
-
     & input.button{
       @include button;
     }
@@ -44,12 +40,6 @@
 
     & div.wrap {
       padding: 2.5% 5%;
-
-      & input.form-control {
-        width: 80%;
-        height: 50px;
-        font-size: 18px;
-      }
 
       & label {
         margin-left: 10%;
@@ -75,11 +65,6 @@
     padding: 10% 5%;
 
     & div.wrap{
-      & input.form-control {
-        width: 85%;
-        height: 45px;
-      }
-
       & label {
         margin-left: 7.5%;
       }
@@ -121,16 +106,6 @@
       & input.button:hover {
         @include button-hover;
       }
-
-      & input.form-control {
-        margin: 1.25% auto 2.5%;
-        font-size: 18px;
-        transition: 0.2s linear;
-
-        &:focus {
-          border: 1.5px solid $blue-color;
-        }
-      }
     }
   }
 }
@@ -142,10 +117,6 @@
     & div.wrap{
       & h1 {
         font-size: 32px;
-      }
-
-      & input.form-control {
-        font-size: 20px;
       }
     }
   }
