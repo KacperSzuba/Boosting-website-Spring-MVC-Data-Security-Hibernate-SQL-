@@ -1,0 +1,175 @@
+@import "../utils/utils" , "../utils/header", "../utils/footer";
+
+/* Section 1 - Login form */
+
+#login-error{
+  text-align: center;
+  background-color: red;
+  padding: 5%;
+  margin: 0 auto 10%;
+  color: white;
+  width: 100%;
+  border-radius: 25px;
+  display: none;
+}
+
+.capslockDetectedMessage{
+  color: red;
+  display: none;
+}
+
+.show-login-error{
+  display: block !important;
+}
+
+.login-form {
+  background-color: $white-background-color;
+  padding: 20% 10%;
+  height: 100%;
+  width: 100%;
+  font-family: $open-sans;
+
+  & div.wrap{
+    padding: 5% 10%;
+    background-color: white;
+    height: 100%;
+    border: 10px white solid;
+    border-radius: 10%;
+
+    & h1{
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 20px;
+      text-align: center;
+      padding: 10% 0;
+    }
+
+    & p{
+      font-size: 14px;
+      text-align: center;
+      padding: 15% 0 10%;
+
+      & a{
+        text-decoration: none;
+        color: $blue-color;
+        border-bottom: 1px solid $blue-color;
+        letter-spacing: 0.5px;
+        margin: 0 1%;
+      }
+    }
+
+    & span{
+      position: absolute;
+      right: 5%;
+      bottom: 50%;
+      font-size: 26px;
+      transform: translateY(50%);
+      cursor: pointer;
+    }
+
+    & input.button{
+      @include button;
+    }
+  }
+}
+
+@media (orientation: landscape) and (min-width: 550px) {
+  #login-error{
+    width: 75%;
+  }
+
+  .login-form {
+    padding: 10% 5%;
+
+    & div.wrap{
+      & h1{
+        padding: 5% 0;
+      }
+
+      & p{
+        padding: 7.5% 0 5%;
+      }
+    }
+  }
+}
+
+@media (orientation: portrait) and (min-width: 768px) {
+  #login-error{
+    width: 75%;
+    padding: 3%;
+    margin: 0 auto 5%;
+    font-size: 18px;
+  }
+
+  .login-form {
+    padding: 10% 5%;
+
+    & div.wrap{
+      padding: 2.5% 5%;
+
+      & h1{
+        padding: 5% 0;
+        font-size: 26px;
+      }
+
+      & p{
+        padding: 7.5% 0 5%;
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  #login-error{
+    width: 85%;
+    font-size: 16px;
+  }
+
+  .login-form {
+    padding: 5% 25%;
+
+    & div.wrap{
+      padding: 2.5% 10%;
+
+      & h1{
+        font-size: 28px;
+      }
+
+      & p{
+        font-size: 18px;
+
+        & a:hover{
+          border: none;
+        }
+      }
+
+      & input.button {
+        margin: 2.5% auto 0;
+        width: 60%;
+        font-size: 26px;
+        transition: 0.3s linear;
+      }
+
+      & input.button:hover {
+        @include button-hover;
+      }
+    }
+  }
+}
+
+@media (min-width: 1300px) {
+  .login-form {
+    padding: 5% 30%;
+
+    & div.wrap{
+      & h1{
+        font-size: 32px;
+      }
+
+      & input.button {
+        font-size: 30px;
+      }
+    }
+  }
+}

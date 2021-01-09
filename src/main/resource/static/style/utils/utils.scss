@@ -1,0 +1,116 @@
+$white-color: #f8f8ff;
+$white-background-color: #f6f6f6;
+$blue-color: #14a5eb;
+$blue-color-header: rgba(20, 165, 235, 0.85);
+$black-color: #181819;
+$gray-color: #4d4d4d;
+$roboto: 'Roboto', sans-serif;
+$open-sans: 'Open Sans', sans-serif;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@mixin window-basic-settings($font-family) {
+  font-family: $font-family;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+body {
+  @include window-basic-settings($roboto);
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+@mixin show{
+  display: block !important;
+}
+
+@mixin hide{
+  display: none !important;
+}
+
+@mixin position-settings($position, $top, $left){
+  position: $position;
+  top: $top;
+  left: $left;
+}
+
+@mixin size($width, $height){
+  width: $width;
+  height: $height;
+}
+
+@mixin display-flex-column{
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin cart($padding){
+  padding: $padding;
+  background-color: white;
+  height: 100%;
+  border: 10px white solid;
+  border-radius: 10%;
+  margin-bottom: 5%;
+}
+
+@mixin main{
+  background-color: $white-background-color;
+  padding: 20% 10%;
+  height: 100%;
+  width: 100%;
+  font-family: $open-sans;
+}
+
+@mixin wrap{
+  padding: 5% 10%;
+  background-color: white;
+  height: 100%;
+  border: 10px white solid;
+  border-radius: 10%;
+}
+
+@mixin h1{
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 20px;
+  text-align: center;
+  padding: 10% 0;
+}
+
+@mixin label{
+  font-size: 14px;
+  margin-left: 5%;
+}
+
+@mixin p{
+  font-size: 14px;
+  text-align: center;
+  padding: 15% 0 10%;
+}
+
+@mixin a{
+  text-decoration: none;
+  color: $blue-color;
+  border-bottom: 1px solid $blue-color;
+  letter-spacing: 0.5px;
+  margin: 0 1%;
+}
+
+@mixin form-control{
+  width: 90%;
+  height: 40px;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin: 2.5% auto 5%;
+  border: 1px solid black;
+}

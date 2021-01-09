@@ -5,9 +5,9 @@
     margin: 5% auto;
 }
 
-section.login-form div.wrap input.form-control,
-section.login-form div.wrap textarea.form-control,
-section.login-form div.wrap select.custom-select{
+input.form-control,
+textarea.form-control,
+select.custom-select{
     width: 100%;
     height: 40px;
     padding-left: 5%;
@@ -19,7 +19,7 @@ section.login-form div.wrap select.custom-select{
     background: transparent;
 }
 
-section.login-form div.wrap textarea.form-control{
+textarea.form-control{
     resize: none;
     height: 150px;
     padding: 5%;
@@ -36,7 +36,7 @@ section.login-form div.wrap textarea.form-control{
     transition: .5s;
 }
 
-section.login-form div.wrap label {
+div.wrap label {
     font-size: 14px;
     margin-left: 5%;
 }
@@ -49,7 +49,8 @@ section.login-form div.wrap label {
     font-size: 12px !important;
 }
 
-.form-group input:focus{
+.form-group input:focus,
+.form-group textarea:focus{
     border-bottom: 1px solid #14a5eb !important;
 }
 

@@ -21,13 +21,13 @@ public class PasswordReminderController {
 
     @GetMapping("/remind/password")
     public String remindPasswordPage() {
-        return "accountView/remind-password";
+        return "account/remind-password";
     }
 
     @GetMapping("/remind/password/form")
     public String remindPassword(@RequestParam("email") String email) {
         passwordReminder.remindPassword(email);
-        return "accountView/remind-password";
+        return "account/remind-password";
     }
 
     @GetMapping("/remind/password/token")
@@ -42,7 +42,7 @@ public class PasswordReminderController {
 
     @GetMapping("/reset/password")
     public String updatePassword() {
-        return "accountView/update-password";
+        return "account/update-password";
     }
 
     @PostMapping("/reset/password")
@@ -50,7 +50,7 @@ public class PasswordReminderController {
         passwordReminder.resetPassword(password, repeatPassword);
         if (passwordReminder.getPasswordRemindMessage() != null) {
             model.addAttribute("message", passwordReminder.getPasswordRemindMessage());
-            return "accountView/update-password";
+            return "account/update-password";
         }
         return "redirect:/login";
     }

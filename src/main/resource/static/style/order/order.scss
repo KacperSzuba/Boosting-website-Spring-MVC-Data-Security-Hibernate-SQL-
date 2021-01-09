@@ -1,0 +1,230 @@
+@import "../utils/utils" , "../utils/header", "../utils/footer";
+
+/* main - order */
+
+.division {
+  @include main;
+
+  & input.btn-sm {
+    @include button;
+  }
+
+  & section {
+    padding: 5% 0;
+    background-color: white;
+    height: 100%;
+    border: 10px white solid;
+    border-radius: 10%;
+    margin-bottom: 15%;
+
+    & div.wrap-image{
+      display: flex;
+      justify-content: center;
+    }
+
+    &.current h3,
+    &.desired h3,
+    &.account-info h3 {
+      margin-left: 5%;
+    }
+  }
+
+  & h2 {
+    @include h1;
+  }
+
+  & h3 {
+    padding-left: 0;
+    font-size: 16px;
+    text-align: left;
+    text-transform: uppercase;
+    line-height: 40px;
+
+    & .server,
+    & .lp-gain{
+      @include display-flex-column;
+      justify-content: space-around;
+    }
+  }
+}
+
+#division {
+  flex-direction: column;
+}
+
+.price{
+  &div.wrap{
+    display: flex;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-bottom: 7.5%;
+
+    & p.price {
+      line-height: 40px;
+      width: 25%;
+      text-align: right;
+    }
+
+    & div {
+      display: flex;
+    }
+
+    & p.text {
+      flex-direction: row;
+      width: 75%;
+      line-height: 40px;
+      font-size: 14px;
+    }
+
+    & .total-price {
+      width: 75%;
+    }
+  }
+
+  & h2 {
+    padding: 2.5% 0 20%;
+  }
+}
+
+@media (orientation: portrait) and (min-width: 375px) {
+  .division {
+    & h2 {
+      font-size: 26px;
+      padding: 2.5% 0 10% 0;
+    }
+    & h3 {
+      font-size: 20px;
+    }
+
+    & div.wrap p.text,
+    & div.wrap p.price {
+      font-size: 16px;
+    }
+  }
+}
+
+@media (orientation: portrait) and (min-width: 768px) {
+  .division{
+    padding: 10% 15%;
+
+    & h2 {
+      font-size: 34px;
+      padding: 2.5% 0 10% 0;
+    }
+
+    & h3 {
+      font-size: 26px;
+    }
+
+    & .current h3,
+    & .desired h3,
+    & .account-info h3 {
+      margin-left: 20%;
+    }
+
+    & .price h2 {
+      padding: 2.5% 0 15%;
+    }
+  }
+
+  p.text,
+  p.price {
+    font-size: 22px;
+  }
+}
+
+@media (orientation: landscape) and (min-width: 550px) {
+  .division{
+    padding: 15% 10% 5%;
+
+    & section{
+      padding: 5% 2.5%;
+    }
+
+    & .price h2 {
+      font-size: 24px;
+    }
+
+    & h3 {
+      font-size: 18px;
+    }
+
+    & .current h2,
+    & .desired h2,
+    & .account-info h2 {
+      padding: 2.5% 0 5%;
+    }
+
+    & .current h3,
+    & .desired h3,
+    & .account-info h3 {
+      margin-left: 12.5%;
+    }
+  }
+
+  p.text,
+  p.price {
+    font-size: 16px;
+  }
+}
+
+@media (orientation: landscape) and (min-width: 730px) {
+  .division{
+    padding: 12.5% 15% 5%;
+
+    & h2 {
+      font-size: 28px;
+    }
+
+    & h3 {
+      font-size: 22px;
+    }
+  }
+
+  p.text,
+  p.price {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .division {
+    padding: 12.5% 40% 5% 10%;
+    position: relative;
+
+    & .price {
+      position: absolute;
+      top: 0;
+      margin-top: 12.5%;
+      right: 2.5%;
+      width: auto;
+      height: auto;
+    }
+
+    & input.btn-sm:hover {
+      @include button-hover;
+    }
+  }
+}
+
+@media (min-width: 1300px) {
+  .division {
+    padding: 12.5% 50% 5% 5%;
+
+    & .price {
+      right: 7.5%;
+      width: 25%;
+    }
+  }
+}
+
+@media (min-width: 1600px) {
+  .division {
+    padding: 12.5% 55% 5% 5%;
+
+    & .price {
+      right: 10%;
+      width: 30%;
+    }
+  }
+}

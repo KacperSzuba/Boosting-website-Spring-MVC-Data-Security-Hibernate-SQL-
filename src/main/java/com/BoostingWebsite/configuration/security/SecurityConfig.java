@@ -33,10 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/booster").hasRole("BOOSTER")
-                .antMatchers(
-                        "/account/change/password",
+                .antMatchers("/account/change/password",
                         "/account/change/password/form",
                         "/account/change/email",
                         "/account/change/email/form",
@@ -45,11 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/account/reset/password").hasAuthority("CHANGE_PASSWORD_PRIVILEGE")
                 .antMatchers("/",
                         "/register",
-                        "/order",
                         "/account/remindPasswordPage",
                         "/css/**", "/style/**", "/static/**").permitAll()
-                //.antMatchers("/order/**").hasAnyRole("USER", "BOOSTER")
-                .antMatchers("/order/**").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")

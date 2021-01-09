@@ -1,0 +1,450 @@
+@import "../utils/utils" , "../utils/header", "../utils/footer";
+
+/* Section 1 -Advantages */
+
+.requirements h2::after,
+.requirements h3::after{
+  content: "";
+  display: block;
+  height: 1px;
+  background-color: $blue-color;
+  margin-bottom: 5%;
+}
+
+.advantages {
+  @include display-flex-column;
+  margin: 0 auto;
+  padding: 15% 7.5% 0;
+  background-color: $white-background-color;
+
+  & .advantage {
+    @include cart(2%);
+
+    & .wrap-image {
+      width: 90%;
+      margin: 0 auto;
+
+      & img {
+        display: block;
+        width: 80%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 5% auto 10%;
+      }
+    }
+
+    & .text p {
+      text-align: center;
+      font-size: 14px;
+      letter-spacing: 1px;
+      padding-bottom: 2.5%;
+      margin-bottom: 2.5%;
+      font-style: italic;
+      font-family: $open-sans;
+      font-weight: 300;
+    }
+  }
+}
+
+.text {
+  @include display-flex-column;
+
+  & h2 {
+    border: none;
+    margin-bottom: 2.5%;
+    padding: 0;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
+
+@media (orientation: portrait) and (min-width: 768px) {
+  .advantages {
+    padding: 15% 5% 0;
+
+    & .advantage {
+      padding: 0 5%;
+
+      & .text p {
+        font-size: 22px;
+      }
+    }
+  }
+
+  .text h2 {
+    font-size: 22px;
+  }
+}
+
+@media (orientation: landscape) and (min-width: 550px) {
+  .text h2 {
+    font-size: 18px;
+  }
+
+  .advantages .advantage .text p {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .advantages {
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+    padding-top: 10%;
+
+    & .advantage {
+      flex-basis: 45%;
+
+      & .text p {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .text h2 {
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .advantages {
+    padding: 5% 2.5% 0;
+
+    & .advantage {
+      flex-basis: 22.5%;
+      margin-bottom: 2.5%;
+    }
+  }
+}
+
+/* Section 2 - Requirements */
+
+.requirements {
+  width: 100%;
+  background-color: $white-background-color;
+  padding: 15% 7.5% 5%;
+
+  & h1 {
+    font-size: 20px;
+    text-transform: uppercase;
+    border-bottom: 1px solid $blue-color;
+    padding-bottom: 1%;
+    margin-bottom: 5%;
+  }
+
+  & .wrap {
+    @include display-flex-column;
+
+    & h2 {
+      text-transform: uppercase;
+      padding-bottom: 1%;
+      font-size: 18px;
+    }
+
+    & p {
+      padding-bottom: 2.5%;
+      font-size: 14px;
+      font-style: italic;
+      font-family: $open-sans;
+      font-weight: 300;
+      letter-spacing: .3px;
+    }
+
+    & .booster,
+    & .junior-booster {
+      @include cart(5% 10%);
+    }
+
+    & .restrictions {
+      padding-left: 5%;
+      margin-top: 10%;
+
+      & h3 {
+        font-size: 16px;
+        text-transform: uppercase;
+        padding-bottom: 1%;
+      }
+
+      & p{
+        font-weight: 400;
+        padding-left: 2.5%;
+      }
+    }
+  }
+}
+
+@media (orientation: portrait) and (min-width: 768px) {
+  .requirements{
+    & .wrap{
+      width: 75%;
+      margin: 0 auto;
+
+      & p {
+        font-size: 20px;
+      }
+
+      & .restrictions {
+        & p {
+          font-size: 20px;
+        }
+
+        & h3 {
+          font-size: 24px;
+        }
+      }
+    }
+
+    & h1{
+      font-size: 34px;
+    }
+
+    & h2 {
+      font-size: 26px;
+    }
+  }
+}
+
+@media (orientation: landscape) and (min-width: 550px) {
+  .requirements{
+    & .wrap {
+      width: 90%;
+      margin: 0 auto;
+
+      & h2 {
+        font-size: 20px;
+      }
+
+      & p {
+        font-size: 16px;
+      }
+
+      & .restrictions {
+        & p {
+          font-size: 16px;
+        }
+
+        & h3 {
+          font-size: 18px;
+        }
+      }
+    }
+
+    & h1 {
+      font-size: 24px;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .requirements {
+    padding-top: 5%;
+
+    & .wrap {
+      flex-direction: row;
+      justify-content: space-around;
+      width: 100%;
+
+      & .booster,
+      & .junior-booster {
+        flex-basis: 45%;
+        padding-bottom: 2.5%;
+      }
+
+      & h2 {
+        font-size: 26px;
+      }
+
+      & p {
+        font-size: 20px;
+      }
+
+      & .restrictions {
+       & h3 {
+          font-size: 24px;
+        }
+
+        & p {
+          font-size: 20px;
+        }
+      }
+    }
+
+    & h1 {
+      font-size: 38px;
+    }
+  }
+}
+
+@media (min-width: 1600px) {
+  .requirements{
+    padding-bottom: 0;
+
+    & .wrap{
+      & .booster,
+      & .junior-booster {
+        flex-basis: 40%;
+      }
+
+      & h1 {
+        font-size: 40px;
+      }
+
+      & h2 {
+        font-size: 32px;
+      }
+
+      & p {
+        font-size: 22px;
+      }
+
+      & .restrictions {
+        & h3 {
+          font-size: 28px;
+        }
+
+        & p {
+          font-size: 22px;
+        }
+      }
+    }
+  }
+}
+
+/* Section 3 - Job form */
+
+.login-form{
+  background-color: $white-background-color;
+  padding: 20% 10%;
+  height: 100%;
+  width: 100%;
+  font-family: $open-sans;
+
+  & div.wrap {
+    @include cart(5% 10%);
+
+    & h1 {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 20px;
+      text-align: center;
+      padding: 10% 0;
+    }
+
+    & p {
+      font-size: 14px;
+      text-align: center;
+      padding: 15% 0 10%;
+
+      & a {
+        text-decoration: none;
+        color: $blue-color;
+        border-bottom: 1px solid $blue-color;
+        letter-spacing: 0.5px;
+        margin: 0 1%;
+      }
+    }
+
+    & input.button{
+      @include button;
+    }
+
+    & span.error{
+      font-size: 10px;
+      color: darkred;
+      margin-left: 5%;
+    }
+  }
+}
+
+@media (orientation: portrait) and (min-width: 768px) {
+  .login-form{
+    padding: 10% 5%;
+
+    & div.wrap{
+      padding: 2.5% 5%;
+
+      & h1 {
+        padding: 5% 0;
+        font-size: 26px;
+      }
+
+      & p {
+        padding: 7.5% 0 5%;
+        font-size: 18px;
+      }
+
+      & span.error {
+        font-size: 14px;
+        margin-left: 10%;
+      }
+    }
+  }
+}
+
+@media (orientation: landscape) and (min-width: 550px) {
+  .login-form {
+    padding: 10% 5%;
+
+    & div.wrap{
+      & h1 {
+      padding: 5% 0;
+      }
+
+      & p {
+        padding: 7.5% 0 5%;
+      }
+
+      & span.error {
+        font-size: 10px;
+        margin-left: 7.5%;
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .login-form {
+    padding: 5% 15%;
+
+    & div.wrap{
+      padding: 2.5% 10%;
+
+      & h1 {
+        font-size: 28px;
+      }
+
+      & p {
+        font-size: 18px;
+
+        & a:hover {
+          border: none;
+        }
+      }
+
+      & input.button:hover {
+        @include button-hover;
+      }
+
+      & span.error {
+        font-size: 14px;
+        margin-left: 7.5%;
+      }
+    }
+  }
+}
+
+@media (min-width: 1300px) {
+  .login-form {
+    padding: 5% 30%;
+
+    & div.wrap{
+      & h1 {
+        font-size: 32px;
+      }
+    }
+  }
+}

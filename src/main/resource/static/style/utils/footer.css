@@ -1,218 +1,217 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
 /* Footer  */
-
 footer {
-    background-color: #4d4d4d;
-    color: #f8f8ff;
+  background-color: #4d4d4d;
+  color: #f8f8ff;
 }
-
 footer div.wrap {
-    width: 80%;
-    margin: 0 auto;
+  width: 80%;
+  margin: 0 auto;
 }
-
-footer .wrap section {
-    display: flex;
-    width: 90%;
-    margin: 15% auto 0;
-    padding: 0 7.5%;
-    flex-direction: column;
+footer div.wrap section {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 15% auto 0;
+  padding: 0 7.5%;
 }
-
+footer .text {
+  display: flex;
+  flex-direction: column;
+}
 footer .text h1 {
-    text-align: center;
-    margin: 5% 5% 10%;
-    padding-bottom: 5%;
-    font-size: 36px;
-    font-family: 'Dancing Script', cursive;
-    border-bottom: 1px solid #14a5eb;
+  text-align: center;
+  margin: 5% 5% 10%;
+  padding-bottom: 5%;
+  font-size: 36px;
+  font-family: "Dancing Script", cursive;
+  border-bottom: 1px solid #14a5eb;
 }
-
-.text h1:nth-last-of-type(1) {
-    margin-bottom: 5%;
+footer .text h1:nth-last-of-type(1) {
+  margin-bottom: 5%;
 }
-
-.text {
-    display: flex;
-    flex-direction: column;
+footer div.customer, footer div.pages {
+  display: flex;
+  flex-direction: column;
 }
-
-footer div.customer {
-    display: flex;
-    flex-direction: column;
-}
-
-footer div.pages {
-    display: flex;
-    flex-direction: column;
-}
-
 footer h2 {
-    font-family: 'Dancing Script', cursive;
-    font-size: 20px;
-    text-align: center;
-    text-transform: uppercase;
-    margin-bottom: 2.5%;
-    padding-bottom: 2.5%;
-    border-bottom: 1px solid #14a5eb;
+  font-family: "Dancing Script", cursive;
+  font-size: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 2.5%;
+  padding-bottom: 2.5%;
+  border-bottom: 1px solid #14a5eb;
 }
-
 footer div a {
-    text-decoration: none;
-    color: #f8f8ff;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-    margin-bottom: 2.5%;
-    transition: 0.3s linear;
+  text-decoration: none;
+  color: #f8f8ff;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  margin-bottom: 2.5%;
+  transition: 0.3s linear;
 }
 
 .customer {
-    margin-bottom: 10%;
+  margin-bottom: 10%;
 }
 
 @media (orientation: portrait) and (min-width: 375px) {
-    footer .text h1 {
-        font-size: 40px;
-    }
+  footer .text h1 {
+    font-size: 40px;
+  }
 
-    .footer-navigation {
-        padding: 0 5%;
-    }
+  .footer-navigation {
+    padding: 0 5%;
+  }
 
-    footer h2 {
-        font-size: 22px;
-    }
+  footer h2 {
+    font-size: 22px;
+  }
 
-    footer div a {
-        font-size: 18px;
-    }
+  footer div a {
+    font-size: 18px;
+  }
 }
-
 @media (orientation: portrait) and (min-width: 768px) {
-    footer .text h1 {
-        font-size: 44px;
-    }
+  footer .text h1 {
+    font-size: 44px;
+  }
 
-    footer h2 {
-        font-size: 28px;
-    }
+  footer h2 {
+    font-size: 28px;
+  }
 
-    footer div a {
-        font-size: 22px;
-    }
+  footer div a {
+    font-size: 22px;
+  }
 }
-
 @media (orientation: landscape) and (min-width: 550px) {
-    footer .text h1 {
-        font-size: 40px;
-    }
+  footer .text h1 {
+    font-size: 40px;
+  }
 
-    footer h2 {
-        font-size: 22px;
-    }
+  footer h2 {
+    font-size: 22px;
+  }
 
-    footer div a {
-        font-size: 18px;
-    }
+  footer div a {
+    font-size: 18px;
+  }
 }
-
 @media (orientation: landscape) and (min-width: 730px) {
-    footer .text h1 {
-        font-size: 44px;
-    }
+  footer .text h1 {
+    font-size: 44px;
+  }
 
-    footer h2 {
-        font-size: 28px;
-    }
+  footer h2 {
+    font-size: 28px;
+  }
 
-    footer div a {
-        font-size: 20px;
-    }
+  footer div a {
+    font-size: 20px;
+  }
 }
-
-
 @media (min-width: 1024px) {
-    .footer-navigation {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 0;
-        width: 100%;
-        margin: 5% 0 0;
-    }
+  .footer-navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0;
+    width: 100%;
+    margin: 5% 0 0;
+  }
 
-    .footer-navigation .pages {
-        flex-basis: 40%;
-    }
+  .footer-navigation .pages {
+    flex-basis: 40%;
+  }
 
-    .footer-navigation .customer {
-        flex-basis: 40%;
-    }
+  .footer-navigation .customer {
+    flex-basis: 40%;
+  }
 
-    .text {
-        width: 80%;
-        margin: 0 auto;
-    }
+  .text {
+    width: 80%;
+    margin: 0 auto;
+  }
 
-    footer .text h1 {
-        padding-bottom: 2.5%;
-        font-size: 44px;
-    }
+  footer .text h1 {
+    padding-bottom: 2.5%;
+    font-size: 44px;
+  }
 
-    .text h1:nth-last-of-type(1) {
-        margin-bottom: 5%;
-    }
+  .text h1:nth-last-of-type(1) {
+    margin-bottom: 5%;
+  }
 
-    .footer-navigation {
-        width: 90%;
-        margin: 0 auto;
-    }
+  .footer-navigation {
+    width: 90%;
+    margin: 0 auto;
+  }
 
-    footer h2 {
-        font-size: 34px;
-        padding-bottom: 5%;
-        margin-bottom: 10%;
-    }
+  footer h2 {
+    font-size: 34px;
+    padding-bottom: 5%;
+    margin-bottom: 10%;
+  }
 
-    .footer-navigation h2 {
-        text-align: left;
-    }
+  .footer-navigation h2 {
+    text-align: left;
+  }
 
-    footer div a {
-        font-size: 20px;
-        margin-left: 2.5%;
-    }
+  footer div a {
+    font-size: 20px;
+    margin-left: 2.5%;
+  }
 
-    footer div a:hover {
-        color: #14a5eb;
-    }
+  footer div a:hover {
+    color: #14a5eb;
+  }
 }
-
 @media (min-width: 1300px) {
-    .footer-navigation {
-        width: 90%;
-        margin: 0 auto;
-    }
+  .footer-navigation {
+    width: 90%;
+    margin: 0 auto;
+  }
 
-    footer .text h1 {
-        font-size: 50px;
-    }
+  footer .text h1 {
+    font-size: 50px;
+  }
 
-    footer h2 {
-        font-size: 34px;
-    }
+  footer h2 {
+    font-size: 34px;
+  }
 
-    footer div a {
-        font-size: 24px;
-    }
+  footer div a {
+    font-size: 24px;
+  }
 }
-
 @media (min-width: 1300px) {
+  .footer-navigation {
+    width: 85%;
+  }
 
-    .footer-navigation {
-        width: 85%;
-    }
-
-    footer h2 {
-        font-size: 36px;
-    }
+  footer h2 {
+    font-size: 36px;
+  }
 }
+
+/*# sourceMappingURL=footer.css.map */

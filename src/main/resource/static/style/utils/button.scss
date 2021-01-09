@@ -1,0 +1,23 @@
+@mixin button{
+  width: 75%;
+  height: 50px;
+  display: block;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin: 0 auto 2%;
+  line-height: 50px;
+  font-size: 20px;
+  color: #181819;
+  background-color: transparent;
+  border-radius: 25px;
+  border: 2px solid;
+  text-align: center;
+  transition: 0.3s linear;
+}
+
+@mixin button-hover{
+  background-color: #14a5eb;
+  color: #f8f8ff;
+  border: none;
+  cursor: pointer;
+}

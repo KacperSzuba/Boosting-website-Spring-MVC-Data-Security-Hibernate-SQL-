@@ -7,13 +7,13 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Order</title>
-        <link type="text/css" rel="stylesheet" th:href="@{/fontawesome/css/all.css}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto&display=swap&subset=latin-ext"
               rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Dancing+Script:600&display=swap" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" th:href="@{/style/utils/header.css}" />
-        <link type="text/css" rel="stylesheet" th:href="@{/style/order/order-style.css}" />
-        <link type="text/css" rel="stylesheet" th:href="@{/style/utils/footer.css}" />
+        <link type="text/css" rel="stylesheet" th:href="@{/style/utils/form-style.css}" />
+        <link type="text/css" rel="stylesheet" th:href="@{/style/order/order.css}" />
     </head>
     <body>
         <nav class="background">
@@ -210,23 +210,24 @@
                 <section class="account-info">
                     <h2>Account information</h2>
                     <div class="form-group">
-                        <input th:field="*{accountDetails.lolUsername}" type="text" class="form-control"
-                               placeholder="Enter your league of legends username" id="lolUsername">
+                        <input id="lolUsername" th:field="*{accountDetails.lolUsername}" type="text" class="form-control" required="">
+                        <label for="lolUsername">Enter your username</label>
                         <span class="error" th:if="${#fields.hasErrors('accountDetails.lolUsername')}" th:errors="*{accountDetails.lolUsername}"></span>
                     </div>
                     <div class="form-group">
-                        <input th:field="*{accountDetails.lolPassword}" type="password" class="form-control" placeholder="Enter your league of legends password" id="lolPassword">
+                        <input id="lolPassword" th:field="*{accountDetails.lolPassword}" type="password" class="form-control" required="">
+                        <label for="lolPassword">Enter your password</label>
                         <span class="error" th:if="${#fields.hasErrors('accountDetails.lolPassword')}" th:errors="*{accountDetails.lolPassword}"></span>
-
                     </div>
                     <div class="form-group">
-                        <textarea th:field="*{noteToBooster}" type="text" class="form-control" placeholder="Enter your note to bosoter" id="noteToBooster"></textarea>
+                        <textarea id="noteToBooster" th:field="*{noteToBooster}" class="form-control" required=""></textarea>
+                        <label for="noteToBooster">Enter your note to booster</label>
                     </div>
                 </section>
                 <section class="price">
                     <h2>Your Order</h2>
                     <div class="wrap">
-                        <h3 class="test">Server:</h3>
+                        <h3 class="server">Server:</h3>
                         <div class="form-group">
                             <select class="custom-select" th:field="*{accountDetails.region}" id="region">
                                 <option th:each="region : ${regions}" th:value="${region}" th:text="${region}"></option>
@@ -234,7 +235,7 @@
                         </div>
                     </div>
                     <div class="wrap">
-                        <h3 class="test">LP gain per win:</h3>
+                        <h3 class="lp-gain">LP gain per win:</h3>
                         <div class="form-group">
                             <select id="LPGainPerWin" class="custom-select" >
                                 <option th:each="LP : ${LPGainPerWin}" th:value="${LP}" th:text="${LP.name}"></option>
