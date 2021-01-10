@@ -211,6 +211,7 @@ body{
       }
     }
   }
+
   .wrap-image {
     height: 350px;
   }
@@ -408,19 +409,7 @@ section.support {
   @include display-flex-column;
 
   & a{
-    display: block;
-    text-decoration: none;
-    text-transform: uppercase;
-    width: 75%;
-    height: 50px;
-    line-height: 50px;
-    font-size: 20px;
-    color: $black-color;
-    border-radius: 25px;
-    border: 2px solid;
-    text-align: center;
-    margin: 0 auto 5%;
-    transition: 0.3s;
+    @include button;
   }
 }
 
