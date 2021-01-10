@@ -276,45 +276,36 @@ i.show {
     text-align: left;
   }
 
-  .sub-menu-link:hover {
-    background: $blue-color-header;
-    color: #f8f8ff !important;
-  }
-
+  .sub-menu-link:hover,
   .sub-menu-link input:hover {
     background: $blue-color-header;
-    color: #f8f8ff !important;
+    color: $white-color !important;
   }
 
   #main-menu .main-menu-li .main-menu-link:hover {
     color: $blue-color;
   }
 
-  #main-menu .main-menu-li .main-menu-link.transparent:hover {
+  #main-menu .main-menu-li .main-menu-link.color:hover {
     color: $white-color;
   }
 
-  #main-menu .main-menu-li .main-menu-link:hover > div.border div {
-    left: 0;
+  .main-menu-link:after {
+    position: absolute;
+    width: 0;
+    height: 2px;
+    content: '';
+    background: $blue-color;
+    transition: linear 0.15s;
   }
 
-  .border {
-    @include position-settings(absolute, 50%, 0);
-    @include size(100%, 2px);
-    margin-top: 20px;
-    overflow: hidden;
+  .main-menu-link:after {
+    left: 0;
+    bottom: 25%;
+  }
 
-    & div{
-      @include size(100%, 100%);
-      position: absolute;
-      left: -100%;
-      background-color: #14a5eb;
-      transition: 0.15s linear;
-
-      &.white{
-        background-color: $white-color;
-      }
-    }
+  .main-menu-link:hover:after {
+    width: 100%
   }
 
   .back-to-main-menu,

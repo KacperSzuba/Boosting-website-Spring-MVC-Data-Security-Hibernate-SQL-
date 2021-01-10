@@ -1,30 +1,24 @@
 const navigation = document.querySelector(".navigation");
-const link = document.querySelectorAll(".header-aside nav ul li a");
-const border = document.querySelectorAll(".border div");
-
+const linkLabel = document.querySelectorAll(".main-menu-link");
 const screenWidth = window.screen.width;
 
+let scrolled = false;
+
 window.addEventListener('scroll', function () {
-    if ((document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) && screenWidth >= 1024) {
-        navigation.classList.add("nav-animation");
-
-        for (let i = 0; i < link.length; i++) {
-            link[i].classList.add("color");
-            link[i].classList.add("transparent");
-            if(border[i] !== undefined){
-                border[i].classList.add("white")
-            }
+    if(!scrolled){
+        if (document.documentElement.scrollTop > 5 && screenWidth >= 1024) {
+            navigation.classList.add("nav-animation");
+            setPropertyToPseudoElements(linkLabel, "after", "background-color", "white");
+            setPropertyToElements(linkLabel, "color", "white");
+            scrolled = true;
+        } else {
+            navigation.classList.remove("nav-animation");
+            setPropertyToPseudoElements(linkLabel, "after", "background-color", "#14a5eb");
         }
-    } else {
-        navigation.classList.remove("nav-animation");
+    }
 
-        for (let i = 0; i < link.length; i++) {
-            link[i].classList.remove("color");
-            link[i].classList.remove("transparent");
-            if(border[i] !== undefined) {
-                border[i].classList.remove("white")
-            }
-        }
+    if(document.documentElement.scrollTop < 5){
+        scrolled = false;
     }
 });
 
@@ -97,5 +91,40 @@ if(screenWidth >= 1024 && subMenuBoosting != null) {
     if (subMenuBoosting != null) {
         subMenuBoosting.addEventListener('mouseenter', onMouseOverSubmenuBoosting);
         subMenuBoosting.addEventListener('mouseleave', onMouseOutSubmenuBoosting);
+    }
+}
+
+let UID = {
+    _current: 0,
+    getNew: function(){
+        this._current++;
+        return this._current;
+    }
+};
+
+HTMLElement.prototype.pseudoStyle = function(element, prop, value){
+    let _this = this;
+    let _sheetId = "pseudoStyles";
+    let _head = document.head || document.getElementsByTagName('head')[0];
+    let _sheet = document.getElementById(_sheetId) || document.createElement('style');
+    _sheet.id = _sheetId;
+    let className = "pseudoStyle" + UID.getNew();
+
+    _this.className +=  " "+className;
+
+    _sheet.innerHTML += " ."+className+":"+element+"{"+prop+":"+value+"}";
+    _head.appendChild(_sheet);
+    return this;
+};
+
+function setPropertyToPseudoElements(elements, pseudoElement, property, value){
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].pseudoStyle(pseudoElement, property, value);
+    }
+}
+
+function setPropertyToElements(elements, property, value){
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].style.color = value;
     }
 }

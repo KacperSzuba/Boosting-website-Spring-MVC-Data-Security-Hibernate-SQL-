@@ -9,10 +9,8 @@
         <title>Order preview</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto&display=swap&subset=latin-ext"
-              rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto&display=swap&subset=latin-ext" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Dancing+Script:600&display=swap" rel="stylesheet">
-
         <link type="text/css" rel="stylesheet" th:href="@{/style/utils/header.css}" />
         <link type="text/css" rel="stylesheet" th:href="@{/style/order/order-preview-style.css}" />
         <link type="text/css" rel="stylesheet" th:href="@{/style/utils/footer.css}" />
@@ -23,29 +21,16 @@
                 <nav class="navigation">
                     <ul id="main-menu">
                         <li class="main-menu-li">
-                            <a href="/" class="main-menu-link">
-                                <div class="height">Home</div>
-
-                                <div class="border">
-                                    <div></div>
-                                </div>
-                            </a>
+                            <a href="/" class="main-menu-link">Home</a>
                         </li>
 
                         <li id="boosting" class="main-menu-li">
-                            <a href="/order" class="main-menu-link">
-                                <div class="height">Boosting</div>
-
-                                <div class="border">
-                                    <div></div>
-                                </div>
-                            </a>
+                            <a href="/order" class="main-menu-link">Boosting</a>
 
                             <nav sec:authorize="hasAnyRole('USER','BOOSTER')" class="sub-menu-wrap">
                                 <ul class="sub-menu">
                                     <li class="back-to-main-menu sub-menu-li">
                                         <a class="sub-menu-link">Back</a>
-
                                         <i class="fas fa-chevron-left"></i>
                                     </li>
 
@@ -61,55 +46,27 @@
                         </li>
 
                         <li class="main-menu-li">
-                            <a href="/booster-application" class="main-menu-link">
-                                <div class="height">Join our team</div>
-
-                                <div class="border">
-                                    <div></div>
-                                </div>
-                            </a>
+                            <a href="/booster-application" class="main-menu-link">Join our team</a>
                         </li>
 
                         <li class="main-menu-li">
-                            <a href="/contact-us" class="main-menu-link">
-                                <div class="height">Contact us</div>
-
-                                <div class="border">
-                                    <div></div>
-                                </div>
-                            </a>
+                            <a href="/contact-us" class="main-menu-link">Contact us</a>
                         </li>
 
                         <li class="main-menu-li">
-                            <a href="#" class="main-menu-link">
-                                <div class="height">F.A.Q</div>
-
-                                <div class="border">
-                                    <div></div>
-                                </div>
-                            </a>
+                            <a href="#" class="main-menu-link">F.A.Q</a>
                         </li>
 
                         <li sec:authorize="${isAnonymous()}" class="main-menu-li">
-                            <a href="/login" class="main-menu-link">
-                                <div class="height">Login</div>
-
-                                <div class="border">
-                                    <div></div>
-                                </div>
-                            </a>
+                            <a href="/login" class="main-menu-link">Login</a>
                         </li>
 
                         <li id="account" sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')" class="main-menu-li">
                             <a class="move-right main-menu-link">
                                 <div class="account-wrap">
-                                    <div class="height">Account</div>
+                                    <div>Account</div>
 
                                     <i class="fas fa-chevron-right"></i>
-                                </div>
-
-                                <div class="border">
-                                    <div></div>
                                 </div>
                             </a>
 
@@ -131,7 +88,7 @@
 
                                     <li sec:authorize="${isFullyAuthenticated()}" class="sub-menu-li">
                                         <form th:action="@{/logout}" method="post">
-                                            <a class="height sub-menu-link" >
+                                            <a class="sub-menu-link" >
                                                 <input  type="submit" value="Logout" />
                                             </a>
                                         </form>
@@ -306,8 +263,8 @@
          <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
          <script src="/js/chat.js"></script>
-        <script src="/js/navigation/navigation-animation-mobile.js"></script>
-        <script src="/js/navigation/navigation-animation-desktop.js"></script>
+        <script src="/js/navigation/mobile.js"></script>
+        <script src="/js/navigation/desktop.js"></script>
         <script src="/js/notifications.js"></script>
         <script src="/js/image-swaping.js"></script>
         <script src="/js/order/image-displaying.js"></script>
