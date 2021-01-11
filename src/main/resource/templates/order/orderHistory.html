@@ -5,13 +5,12 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <head>
         <meta charset="UTF-8">
+        <title>Orders history</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Register</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Dancing+Script:600|Roboto&display=swap&subset=latin-ext" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" th:href="@{/style/utils/form-style.css}" />
-        <link type="text/css" rel="stylesheet" th:href="@{/style/account/register.css}" />
+        <link type="text/css" rel="stylesheet" th:href="@{/style/order/orderHistory.css}" />
     </head>
 
     <body>
@@ -114,71 +113,8 @@
             <a href="/order">Boost Me</a>
         </header>
 
-        <p th:if="${user.getCreationErrorMessage() != null}" th:text="${user.getCreationErrorMessage()}"></p>
-        <section class="login-form">
-            <div class="wrap">
-                <h1>Create new account</h1>
-
-                <form th:action="@{/register}" th:object="${user}"  method="post">
-                    <div class="form-group">
-                        <input id="username" th:field="*{username}" type="text" class="form-control" required="">
-                        <label for="username">Username</label>
-                        <p class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
-                    </div>
-
-                    <div class="form-group">
-                        <input id="password" th:field="*{password}" type="password" class="form-control password" required="">
-                        <label for="password">Password</label>
-                        <span class="far fa-eye-slash password"></span>
-                        <p class="capslockDetectedMessage">Caps lock is ON!</p>
-                        <p class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
-                    </div>
-
-                    <div class="form-group">
-                        <input id="confirmPassword" name="confirmPassword" type="password" class="form-control password" required="">
-                        <label for="confirmPassword">Confirm Password</label>
-                        <span class="far fa-eye-slash password"></span>
-                        <p class="capslockDetectedMessage">Caps lock is ON!</p>
-                    <!--<p class="error" th:text="${confirmPasswordErrorMessage}"></p> -->
-                    </div>
-
-                    <div class="form-group">
-                        <input id="email" th:field="*{email}" type="text" class="form-control" required="">
-                        <label for="email">E-mail</label>
-                        <p class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
-                    </div>
-
-                    <input class="button" type="submit" value="Register" />
-                </form>
-
-                <p class="login"> Already have an account? Click to <a href="/login">Sign In</a></p>
-            </div>
-        </section>
-
-        <footer>
-            <div class="wrap">
-                <div class="text">
-                    <h1>Boosting</h1>
-                </div>
-                <nav class="footer-navigation">
-                    <div class="customer">
-                        <h2>Customer</h2>
-                        <a href="/order">Order Now</a>
-                        <a href="/booster-application">Join Our Team</a>
-                    </div>
-                    <div class="pages">
-                        <h2>Pages</h2>
-                        <a href="#">F.A.Q.</a>
-                        <a href="/contact-us">Contact Us</a>
-                        <a href="#">Terms And Conditions</a>
-                    </div>
-                </nav>
-            </div>
-        </footer>
 
         <script src="/js/navigation/mobile.js"></script>
         <script src="/js/navigation/desktop.js"></script>
-        <script src="/js/showOrHidePassword.js"></script>
-        <script src="/js/account/capslock-detector.js"></script>
     </body>
 </html>

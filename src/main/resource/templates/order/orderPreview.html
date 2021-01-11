@@ -24,7 +24,12 @@
                         </li>
 
                         <li id="boosting" class="main-menu-li">
-                            <a href="/order" class="main-menu-link">Boosting</a>
+                            <div class="account-wrap">
+                                <div><a href="/order" class="move-right main-menu-link">Boosting</a></div>
+                                <div class="arrow" sec:authorize="${isFullyAuthenticated()}">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </div>
 
                             <nav sec:authorize="hasAnyRole('USER','BOOSTER')" class="sub-menu-wrap">
                                 <ul class="sub-menu">
@@ -61,13 +66,12 @@
                         </li>
 
                         <li id="account" sec:authorize="hasAnyRole('USER','BOOSTER','ADMIN')" class="main-menu-li">
-                            <a class="move-right main-menu-link">
-                                <div class="account-wrap">
-                                    <div>Account</div>
-
+                            <div class="account-wrap">
+                                <div><a class="move-right main-menu-link">Account</a></div>
+                                <div class="arrow">
                                     <i class="fas fa-chevron-right"></i>
                                 </div>
-                            </a>
+                            </div>
 
                             <nav class="sub-menu-wrap">
                                 <ul class="sub-menu">
@@ -98,7 +102,6 @@
                     </ul>
                 </nav>
             </aside>
-
             <div class="burger">
                 <i class="fas fa-bars show"></i>
                 <i class="fas fa-times"></i>

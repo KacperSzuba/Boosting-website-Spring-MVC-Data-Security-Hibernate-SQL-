@@ -6,20 +6,17 @@ const currentLeague = document.querySelector('.current-tier .tier-division');
 const desireLeague = document.querySelector('.desire-tier .tier-division');
 
 window.addEventListener('load', () => {
-    let startedTier = startedLeague.innerText.split(' ')[0];
-    let startedDivision = startedLeague.innerText.split(' ')[1];
-
-    let currentTier = currentLeague.innerText.split(' ')[0];
-    let currentDivision = currentLeague.innerText.split(' ')[1];
-
-    let desireTier = desireLeague.innerText.split(' ')[0];
-    let desireDivision = desireLeague.innerText.split(' ')[1];
-
-    startedLeagueImg.src = imagePath(startedTier, startedDivision);
-    currentLeagueImg.src = imagePath(currentTier, currentDivision);
-    desireLeagueImg.src = imagePath(desireTier, desireDivision);
+    prepareImage(startedLeague, startedLeagueImg);
+    prepareImage(currentLeague, currentLeagueImg);
+    prepareImage(desireLeague, desireLeagueImg);
 });
 
-function imagePath(tier, division) {
+function prepareImage(league, imageSrc){
+    let tier = league.innerText.split(' ')[0];
+    let division = league.innerText.split(' ')[1];
+    imageSrc.src = getImagePath(tier, division);
+}
+
+function getImagePath(tier, division) {
     return `${homeIMGURL}/${tier}/${tier}${convertDivision(division)}.png`;
 }

@@ -2,23 +2,14 @@ const navigation = document.querySelector(".navigation");
 const linkLabel = document.querySelectorAll(".main-menu-link");
 const screenWidth = window.screen.width;
 
-let scrolled = false;
-
 window.addEventListener('scroll', function () {
-    if(!scrolled){
-        if (document.documentElement.scrollTop > 5 && screenWidth >= 1024) {
-            navigation.classList.add("nav-animation");
-            setPropertyToPseudoElements(linkLabel, "after", "background-color", "white");
-            setPropertyToElements(linkLabel, "color", "white");
-            scrolled = true;
-        } else {
-            navigation.classList.remove("nav-animation");
-            setPropertyToPseudoElements(linkLabel, "after", "background-color", "#14a5eb");
-        }
-    }
-
-    if(document.documentElement.scrollTop < 5){
-        scrolled = false;
+    if (document.documentElement.scrollTop > 5 && screenWidth >= 1024) {
+        navigation.classList.add("nav-animation");
+        setPropertyToPseudoElements(linkLabel, "after", "background-color", "white");
+        setPropertyToElements(linkLabel, "color", "white");
+    } else {
+        navigation.classList.remove("nav-animation");
+        setPropertyToPseudoElements(linkLabel, "after", "background-color", "#14a5eb");
     }
 });
 
@@ -47,9 +38,9 @@ if(screenWidth >= 1024) {
         }, 300);
     };
 
-    if (accountDescription != null) {
-        accountDescription.addEventListener('mouseenter', onMouseOverAccount);
-        accountDescription.addEventListener('mouseleave', onMouseOutAccount);
+    if (accountLabel != null) {
+        accountLabel.addEventListener('mouseenter', onMouseOverAccount);
+        accountLabel.addEventListener('mouseleave', onMouseOutAccount);
     }
 
     if (subMenuAccount != null) {
@@ -83,9 +74,9 @@ if(screenWidth >= 1024 && subMenuBoosting != null) {
         }, 300);
     };
 
-    if (boostingDescription != null) {
-        boostingDescription.addEventListener('mouseenter', onMouseOverBoosting);
-        boostingDescription.addEventListener('mouseleave', onMouseOutBoosting);
+    if (boostingLabel != null) {
+        boostingLabel.addEventListener('mouseenter', onMouseOverBoosting);
+        boostingLabel.addEventListener('mouseleave', onMouseOutBoosting);
     }
 
     if (subMenuBoosting != null) {
@@ -94,25 +85,14 @@ if(screenWidth >= 1024 && subMenuBoosting != null) {
     }
 }
 
-let UID = {
-    _current: 0,
-    getNew: function(){
-        this._current++;
-        return this._current;
-    }
-};
-
 HTMLElement.prototype.pseudoStyle = function(element, prop, value){
-    let _this = this;
     let _sheetId = "pseudoStyles";
     let _head = document.head || document.getElementsByTagName('head')[0];
     let _sheet = document.getElementById(_sheetId) || document.createElement('style');
     _sheet.id = _sheetId;
-    let className = "pseudoStyle" + UID.getNew();
+    let className = "main-menu-link";
 
-    _this.className +=  " "+className;
-
-    _sheet.innerHTML += " ."+className+":"+element+"{"+prop+":"+value+"}";
+    _sheet.innerHTML = `.${className}:${element}{${prop}:${value}}`;
     _head.appendChild(_sheet);
     return this;
 };
