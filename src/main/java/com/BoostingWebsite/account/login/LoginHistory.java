@@ -2,6 +2,7 @@ package com.BoostingWebsite.account.login;
 
 import com.BoostingWebsite.account.user.User;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.annotation.PersistenceConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ public class LoginHistory {
     @ManyToOne
     private User user;
 
+    @PersistenceConstructor
     public LoginHistory() {
     }
 

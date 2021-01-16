@@ -1,8 +1,10 @@
 package com.BoostingWebsite.order.entity;
 
 import com.BoostingWebsite.account.user.User;
+import com.BoostingWebsite.order.QueueType;
 import com.BoostingWebsite.order.preview.Message;
 import org.hibernate.annotations.Type;
+import org.springframework.data.annotation.PersistenceConstructor;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -17,16 +19,10 @@ public class OrderBoost {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "notes_to_booster")
     private String noteToBooster;
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
-    @Column(name = "whether_paid")
-    private boolean whetherPaid;
-
-    @Type(type = "org.hibernate.type.NumericBooleanType")
-    @Column(name = "whether_done")
-    private boolean whetherDone;
+    private boolean paid;
 
     private double price;
 
@@ -54,27 +50,22 @@ public class OrderBoost {
     @Enumerated(EnumType.STRING)
     private EnumOrderStatus status;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Enumerated(EnumType.STRING)
+    private QueueType queueType;
 
-    @OneToMany(
-            mappedBy = "orderBoost",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(mappedBy = "orderBoost", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Message> messages;
 
     private LocalDateTime date;
 
+    @PersistenceConstructor
     public OrderBoost() {
     }
 
     public OrderBoost(OrderBoost orderBoost) {
         this.id = orderBoost.id;
         this.noteToBooster = orderBoost.noteToBooster;
-        this.whetherPaid = orderBoost.whetherPaid;
-        this.whetherDone = orderBoost.whetherDone;
+        this.paid = orderBoost.paid;
         this.price = orderBoost.price;
         this.currentLeague = orderBoost.currentLeague;
         this.destinationLeague = orderBoost.destinationLeague;
@@ -84,17 +75,17 @@ public class OrderBoost {
         this.date = LocalDateTime.now();
     }
 
-    public OrderBoost(String noteToBooster, boolean whetherPaid, boolean whetherDone, double price, League currentLeague, League destinationLeague,
-                      AccountDetails accountDetails, User user, User booster) {
+    public OrderBoost(String noteToBooster, boolean whetherPaid, double price, League currentLeague, League destinationLeague,
+                      AccountDetails accountDetails, User user, User booster, QueueType queueType) {
         this.noteToBooster = noteToBooster;
-        this.whetherPaid = whetherPaid;
-        this.whetherDone = whetherDone;
+        this.paid = whetherPaid;
         this.price = price;
         this.currentLeague = currentLeague;
         this.destinationLeague = destinationLeague;
         this.accountDetails = accountDetails;
         this.user = user;
         this.booster = booster;
+        this.queueType = queueType;
         this.date = LocalDateTime.now();
     }
 
@@ -110,20 +101,12 @@ public class OrderBoost {
         this.noteToBooster = noteToBooster;
     }
 
-    public boolean isWhetherPaid() {
-        return whetherPaid;
+    public boolean isPaid() {
+        return paid;
     }
 
-    public void setWhetherPaid(boolean whetherPaid) {
-        this.whetherPaid = whetherPaid;
-    }
-
-    public boolean isWhetherDone() {
-        return whetherDone;
-    }
-
-    public void setWhetherDone(boolean whetherDone) {
-        this.whetherDone = whetherDone;
+    public void setPaid(boolean whetherPaid) {
+        this.paid = whetherPaid;
     }
 
     public double getPrice() {
@@ -198,13 +181,20 @@ public class OrderBoost {
         this.status = status;
     }
 
+    public QueueType getQueueType() {
+        return queueType;
+    }
+
+    void setQueueType(QueueType queueType) {
+        this.queueType = queueType;
+    }
+
     @Override
     public String toString() {
         return "OrderBoost2{" +
                 "id=" + id +
                 ", noteToBooster='" + noteToBooster + '\'' +
-                ", whetherPaid=" + whetherPaid +
-                ", whetherDone=" + whetherDone +
+                ", whetherPaid=" + paid +
                 ", price=" + price +
                 ", currentLeague=" + currentLeague +
                 ", destinationLeague=" + destinationLeague +

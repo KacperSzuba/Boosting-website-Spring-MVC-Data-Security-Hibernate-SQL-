@@ -1,4 +1,4 @@
-package com.BoostingWebsite.employment;
+package com.BoostingWebsite.boosterApplication;
 
 import com.BoostingWebsite.order.Region;
 import org.hibernate.annotations.DynamicUpdate;

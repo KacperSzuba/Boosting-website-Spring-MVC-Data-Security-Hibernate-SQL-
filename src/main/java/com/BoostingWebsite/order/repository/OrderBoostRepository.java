@@ -1,6 +1,7 @@
 package com.BoostingWebsite.order.repository;
 
 import com.BoostingWebsite.account.user.User;
+import com.BoostingWebsite.order.entity.EnumOrderStatus;
 import com.BoostingWebsite.order.entity.OrderBoost;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,27 +15,27 @@ import java.util.Optional;
 @Transactional
 public interface OrderBoostRepository extends CrudRepository<OrderBoost, Long> {
     @Transactional
-    @Query(value = "select orderboost from OrderBoost orderboost where (orderboost.user =:user or orderboost.booster=:user) and orderboost.whetherDone = false")
+    @Query(value = "select orderboost from OrderBoost orderboost where (orderboost.user =:user or orderboost.booster=:user) and orderboost.status = 'NEW'")
     Optional<OrderBoost> findActiveBoost(@Param("user") User user);
 
-    @Query(value = "select orderboost.id from OrderBoost orderboost where (orderboost.user =:user or orderboost.booster=:user) and orderboost.whetherDone = false")
+    @Query(value = "select orderboost.id from OrderBoost orderboost where (orderboost.user =:user or orderboost.booster=:user) and orderboost.status = 'NEW'")
     Optional<Long> findActiveBoostId(@Param("user") User user);
 
-    @Query(value = "select orderboost from OrderBoost orderboost where (orderboost.user =:user or orderboost.booster=:user) and orderboost.whetherDone = false")
+    @Query(value = "select orderboost from OrderBoost orderboost where (orderboost.user =:user or orderboost.booster=:user) and orderboost.status = 'NEW'")
     Boolean whetherUserHasOrder(@Param("user") User user);
 
-    boolean existsByBoosterOrUserAndWhetherDone(User booster, User user, boolean whetherDone);
+    boolean existsByBoosterOrUserAndStatus(User booster, User user, EnumOrderStatus orderStatus);
 
     @Transactional
-    Optional<OrderBoost> findByBoosterOrUserAndWhetherDone(User booster, User user, boolean whetherDone);
+    Optional<OrderBoost> findByBoosterOrUserAndStatus(User booster, User user, EnumOrderStatus status);
 
     @Query(value = "SELECT orderboost FROM OrderBoost orderboost WHERE orderboost.booster = null")
     List<OrderBoost> findOrderBoostByBoosterEqualsNull();
 
-    @Query(value = "SELECT orderboost FROM OrderBoost orderboost WHERE orderboost.booster=:u and orderboost.whetherDone=false")
+    @Query(value = "SELECT orderboost FROM OrderBoost orderboost WHERE orderboost.booster=:u and orderboost.status = 'NEW'")
     Optional<OrderBoost> checkIfTheBoosterHasNoOrders(@Param("u") User u);
 
-    @Query(value = "select orderboost from OrderBoost orderboost where orderboost.booster =:user and orderboost.whetherDone=false")
+    @Query(value = "select orderboost from OrderBoost orderboost where orderboost.booster =:user and orderboost.status = 'NEW'")
     OrderBoost findCurrentBoost(@Param("user") User user);
 
     @Transactional
@@ -44,9 +45,9 @@ public interface OrderBoostRepository extends CrudRepository<OrderBoost, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE OrderBoost orderboost SET orderboost.whetherDone =true where orderboost.id=:id")
+    @Query(value = "UPDATE OrderBoost orderboost SET orderboost.status = 'COMPLETED' where orderboost.id=:id")
     void setOrderAsDone(@Param("id") Long id);
 
-    @Query(value = "select orderboost from OrderBoost orderboost where orderboost.whetherDone=true and orderboost.booster =:user")
+    @Query(value = "select orderboost from OrderBoost orderboost where orderboost.status = 'COMPLETED' and orderboost.booster =:user")
     List<OrderBoost> findDoneOrderBoost(@Param("user") User user);
 }

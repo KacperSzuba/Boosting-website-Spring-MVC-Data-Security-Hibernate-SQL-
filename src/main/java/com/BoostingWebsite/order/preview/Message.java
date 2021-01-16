@@ -2,6 +2,7 @@ package com.BoostingWebsite.order.preview;
 
 import com.BoostingWebsite.account.user.User;
 import com.BoostingWebsite.order.entity.OrderBoost;
+import org.springframework.data.annotation.PersistenceConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -29,6 +30,7 @@ public class Message implements Comparable<Message> {
     @ManyToOne(fetch = FetchType.EAGER)
     private OrderBoost orderBoost;
 
+    @PersistenceConstructor
     public Message() {
         this.date = LocalDateTime.now();
     }
@@ -39,10 +41,6 @@ public class Message implements Comparable<Message> {
         this.recipient = recipient;
         this.date = LocalDateTime.now();
     }
-
-   public void setId(Long id){
-        this.id = id;
-   }
 
     public Long getId() {
         return id;

@@ -1,6 +1,7 @@
 package com.BoostingWebsite.account.token;
 
 import com.BoostingWebsite.account.user.User;
+import org.springframework.data.annotation.PersistenceConstructor;
 
 import javax.persistence.*;
 import java.util.Calendar;
@@ -22,6 +23,7 @@ public class UserToken {
 
     private Date expiryDate;
 
+    @PersistenceConstructor
     public UserToken() {
     }
 

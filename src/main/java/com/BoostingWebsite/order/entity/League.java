@@ -5,6 +5,7 @@ import com.BoostingWebsite.order.Points;
 import com.BoostingWebsite.order.Tier;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.annotation.PersistenceConstructor;
 
 import javax.persistence.*;
 
@@ -20,14 +21,12 @@ public class League {
     @Enumerated(EnumType.STRING)
     private Tier tier;
 
-    @Column(name = "divisions")
     @Enumerated(EnumType.STRING)
     private Division division;
 
     @Enumerated(EnumType.STRING)
     private Points points;
 
-    @Column(name = "prices")
     private double price;
 
     private String currency;
@@ -35,6 +34,7 @@ public class League {
     @Transient
     private int leaguePoints;
 
+    @PersistenceConstructor
     public League() {
     }
 

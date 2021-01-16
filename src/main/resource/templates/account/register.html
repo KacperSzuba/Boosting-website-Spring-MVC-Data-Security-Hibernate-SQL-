@@ -122,13 +122,13 @@
                 <form th:action="@{/register}" th:object="${user}"  method="post">
                     <div class="form-group">
                         <input id="username" th:field="*{username}" type="text" class="form-control" required="">
-                        <label for="username">Username</label>
+                        <label class="animated-label" for="username">Username</label>
                         <p class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
                     </div>
 
                     <div class="form-group">
                         <input id="password" th:field="*{password}" type="password" class="form-control password" required="">
-                        <label for="password">Password</label>
+                        <label class="animated-label" for="password">Password</label>
                         <span class="far fa-eye-slash password"></span>
                         <p class="capslockDetectedMessage">Caps lock is ON!</p>
                         <p class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
@@ -136,7 +136,7 @@
 
                     <div class="form-group">
                         <input id="confirmPassword" name="confirmPassword" type="password" class="form-control password" required="">
-                        <label for="confirmPassword">Confirm Password</label>
+                        <label class="animated-label" for="confirmPassword">Confirm Password</label>
                         <span class="far fa-eye-slash password"></span>
                         <p class="capslockDetectedMessage">Caps lock is ON!</p>
                     <!--<p class="error" th:text="${confirmPasswordErrorMessage}"></p> -->
@@ -144,7 +144,7 @@
 
                     <div class="form-group">
                         <input id="email" th:field="*{email}" type="text" class="form-control" required="">
-                        <label for="email">E-mail</label>
+                        <label class="animated-label" for="email">E-mail</label>
                         <p class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
                     </div>
 

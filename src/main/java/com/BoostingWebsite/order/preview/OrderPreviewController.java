@@ -16,18 +16,18 @@ import java.io.IOException;
 
 @Controller
 @RequestMapping("/order/preview")
-public class OrderPreviewController {
+class OrderPreviewController {
 
     private final OrderPreviewService orderPreviewService;
     private final ApplicationSession applicationSession;
 
-    public OrderPreviewController(OrderPreviewService orderPreviewService, ApplicationSession applicationSession) {
+    OrderPreviewController(OrderPreviewService orderPreviewService, ApplicationSession applicationSession) {
         this.orderPreviewService = orderPreviewService;
         this.applicationSession = applicationSession;
     }
 
     @GetMapping
-    public String orderPreviewPage(Model model) {
+    String orderPreviewPage(Model model) {
         try{
             model.addAttribute("orderBoost", orderPreviewService.getOrderBoost());
             model.addAttribute("messages", orderPreviewService.getExistingChatMessages());
@@ -44,14 +44,14 @@ public class OrderPreviewController {
 
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/javainuse")
-    public MessageDTO sendMessage(@Payload MessageDTO messageDTO) {
+    MessageDTO sendMessage(@Payload MessageDTO messageDTO) {
         orderPreviewService.saveMessage(messageDTO);
         return messageDTO;
     }
 
     @MessageMapping("/chat.newUser")
     @SendTo("/topic/javainuse")
-    public MessageDTO addUser(@Payload MessageDTO messageDTO, SimpMessageHeaderAccessor headerAccessor) {
+    MessageDTO addUser(@Payload MessageDTO messageDTO, SimpMessageHeaderAccessor headerAccessor) {
         //headerAccessor.getSessionAttributes().put("senderName", messageDTO.getSenderName());
         return messageDTO;
     }

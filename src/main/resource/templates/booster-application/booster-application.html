@@ -198,25 +198,25 @@
                 <form method="post" th:action="@{/booster-application}" th:object="${boosterApplication}">
                     <div class="form-group">
                         <input id="skype" type="text" class="form-control" th:field="*{skype}" required="">
-                        <label for="skype">Skype</label>
+                        <label class="animated-label" for="skype">Skype</label>
                         <p class="error" th:if="${#fields.hasErrors('skype')}" th:errors="*{skype}"></p>
                     </div>
 
                     <div class="form-group">
                         <input id="discord" type="text" class="form-control" th:field="*{discord}" required="">
-                        <label for="discord">Discord</label>
+                        <label class="animated-label" for="discord">Discord</label>
                         <p class="error" th:if="${#fields.hasErrors('discord')}" th:errors="*{discord}"></p>
                     </div>
 
                     <div class="form-group">
                         <input id="email" type="text" class="form-control" th:field="*{email}" required="">
-                        <label for="email">E-mail</label>
+                        <label class="animated-label" for="email">E-mail</label>
                         <p class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
                     </div>
 
                     <div class="form-group">
                         <input id="opgg" type="text" class="form-control" th:field="*{opgg}" required="">
-                        <label for="opgg">OP.GG</label>
+                        <label class="animated-label" for="opgg">OP.GG</label>
                         <p class="error" th:if="${#fields.hasErrors('opgg')}" th:errors="*{opgg}"></p>
                     </div>
 
@@ -250,25 +250,25 @@
 
                     <div class="form-group">
                         <input id="age" class="form-control" type="number" th:field="*{age}" required="">
-                        <label for="age">Age</label>
+                        <label class="animated-label" for="age">Age</label>
                         <p class="error" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></p>
                     </div>
 
                     <div class="form-group">
                         <input id="country" class="form-control" type="text" th:field="*{country}" required="">
-                        <label for="country">Country</label>
+                        <label class="animated-label" for="country">Country</label>
                         <p class="error" th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></p>
                     </div>
 
                     <div class="form-group">
                         <input id="contact" class="form-control" type="text" th:field="*{bestFormOfContact}" required="">
-                        <label for="contact">Best schedule for future contact</label>
+                        <label class="animated-label" for="contact">Best schedule for future contact</label>
                         <p class="error" th:if="${#fields.hasErrors('bestFormOfContact')}" th:errors="*{bestFormOfContact}"></p>
                     </div>
 
                     <div class="form-group">
                         <textarea id="description" class="form-control" th:field="*{motivation}" required=""></textarea>
-                        <label for="description">Tell us about your booster experience and why you should work with us</label>
+                        <label class="animated-label" for="description">Tell us about your booster experience and why you should work with us</label>
                         <p class="error" th:if="${#fields.hasErrors('motivation')}" th:errors="*{motivation}"></p>
                     </div>
 

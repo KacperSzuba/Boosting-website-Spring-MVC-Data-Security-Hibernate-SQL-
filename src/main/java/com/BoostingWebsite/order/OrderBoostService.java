@@ -1,6 +1,7 @@
 package com.BoostingWebsite.order;
 
 import com.BoostingWebsite.account.user.ApplicationSession;
+import com.BoostingWebsite.order.entity.EnumOrderStatus;
 import com.BoostingWebsite.order.entity.OrderBoost;
 import com.BoostingWebsite.order.repository.LeagueRepository;
 import com.BoostingWebsite.order.repository.OrderBoostRepository;
@@ -39,7 +40,7 @@ public class OrderBoostService {
     }
 
     boolean whetherUserHasOrder(){
-        return orderBoostRepository.existsByBoosterOrUserAndWhetherDone(applicationSession.getActualUser(), applicationSession.getActualUser(), false);
+        return orderBoostRepository.existsByBoosterOrUserAndStatus(applicationSession.getActualUser(), applicationSession.getActualUser(), EnumOrderStatus.NEW);
     }
 
 /*

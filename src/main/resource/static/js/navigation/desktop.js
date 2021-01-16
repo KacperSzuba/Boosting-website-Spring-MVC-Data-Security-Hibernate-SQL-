@@ -1,89 +1,61 @@
 const navigation = document.querySelector(".navigation");
 const linkLabel = document.querySelectorAll(".main-menu-link");
+const accountDesktopLabel = document.querySelector("#account .account-wrap div");
+const boostingDesktopLabel = document.querySelector("#boosting .account-wrap div");
 const screenWidth = window.screen.width;
 
 window.addEventListener('scroll', function () {
     if (document.documentElement.scrollTop > 5 && screenWidth >= 1024) {
         navigation.classList.add("nav-animation");
         setPropertyToPseudoElements(linkLabel, "after", "background-color", "white");
-        setPropertyToElements(linkLabel, "color", "white");
+        addClassToElements(linkLabel, "white");
     } else {
         navigation.classList.remove("nav-animation");
         setPropertyToPseudoElements(linkLabel, "after", "background-color", "#14a5eb");
+        removeClassFromElements(linkLabel, "white");
     }
 });
 
-if(screenWidth >= 1024) {
-    let timer;
+function subMenu(subMenu, label) {
+    if (screenWidth >= 1024) {
+        let timer;
 
-    let onMouseOverSubmenu = function () {
-        clearTimeout(timer);
-        subMenuAccount.classList.add("show-sub-menu-for-desktop");
-    };
+        let onMouseOverSubmenu = function () {
+            clearTimeout(timer);
+            subMenu.classList.add("show-sub-menu-for-desktop");
+        };
 
-    let onMouseOutSubmenu = function () {
-        timer = setTimeout(function () {
-            subMenuAccount.classList.remove("show-sub-menu-for-desktop");
-        }, 300);
-    };
+        let onMouseOutSubmenu = function () {
+            timer = setTimeout(function () {
+                subMenu.classList.remove("show-sub-menu-for-desktop");
+            }, 300);
+        };
 
-    let onMouseOverAccount = function () {
-        clearTimeout(timer);
-        subMenuAccount.classList.add("show-sub-menu-for-desktop");
-    };
+        let onMouseOverAccount = function () {
+            clearTimeout(timer);
+            subMenu.classList.add("show-sub-menu-for-desktop");
+        };
 
-    let onMouseOutAccount = function () {
-        timer = setTimeout(function () {
-            subMenuAccount.classList.remove("show-sub-menu-for-desktop");
-        }, 300);
-    };
+        let onMouseOutAccount = function () {
+            timer = setTimeout(function () {
+                subMenu.classList.remove("show-sub-menu-for-desktop");
+            }, 300);
+        };
 
-    if (accountLabel != null) {
-        accountLabel.addEventListener('mouseenter', onMouseOverAccount);
-        accountLabel.addEventListener('mouseleave', onMouseOutAccount);
-    }
+        if (label != null) {
+            label.addEventListener('mouseenter', onMouseOverAccount);
+            label.addEventListener('mouseleave', onMouseOutAccount);
+        }
 
-    if (subMenuAccount != null) {
-        subMenuAccount.addEventListener('mouseenter', onMouseOverSubmenu);
-        subMenuAccount.addEventListener('mouseleave', onMouseOutSubmenu);
-    }
-}
-
-if(screenWidth >= 1024 && subMenuBoosting != null) {
-    let timer;
-
-    let onMouseOverSubmenuBoosting = function () {
-        clearTimeout(timer);
-        subMenuBoosting.classList.add("show-sub-menu-for-desktop");
-    };
-
-    let onMouseOutSubmenuBoosting = function () {
-        timer = setTimeout(function () {
-            subMenuBoosting.classList.remove("show-sub-menu-for-desktop");
-        }, 300);
-    };
-
-    let onMouseOverBoosting = function () {
-        clearTimeout(timer);
-        subMenuBoosting.classList.add("show-sub-menu-for-desktop");
-    };
-
-    let onMouseOutBoosting = function () {
-        timer = setTimeout(function () {
-            subMenuBoosting.classList.remove("show-sub-menu-for-desktop");
-        }, 300);
-    };
-
-    if (boostingLabel != null) {
-        boostingLabel.addEventListener('mouseenter', onMouseOverBoosting);
-        boostingLabel.addEventListener('mouseleave', onMouseOutBoosting);
-    }
-
-    if (subMenuBoosting != null) {
-        subMenuBoosting.addEventListener('mouseenter', onMouseOverSubmenuBoosting);
-        subMenuBoosting.addEventListener('mouseleave', onMouseOutSubmenuBoosting);
+        if (subMenu != null) {
+            subMenu.addEventListener('mouseenter', onMouseOverSubmenu);
+            subMenu.addEventListener('mouseleave', onMouseOutSubmenu);
+        }
     }
 }
+
+subMenu(subMenuAccount, accountDesktopLabel);
+subMenu(subMenuBoosting, boostingDesktopLabel);
 
 HTMLElement.prototype.pseudoStyle = function(element, prop, value){
     let _sheetId = "pseudoStyles";
@@ -103,8 +75,14 @@ function setPropertyToPseudoElements(elements, pseudoElement, property, value){
     }
 }
 
-function setPropertyToElements(elements, property, value){
+function addClassToElements(elements, value){
     for (let i = 0; i < elements.length; i++) {
-        elements[i].style.color = value;
+        elements[i].classList.add(value);
+    }
+}
+
+function removeClassFromElements(elements, value){
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].classList.remove(value);
     }
 }

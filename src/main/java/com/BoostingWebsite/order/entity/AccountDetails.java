@@ -1,6 +1,7 @@
 package com.BoostingWebsite.order.entity;
 
 import com.BoostingWebsite.order.Region;
+import org.springframework.data.annotation.PersistenceConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -13,20 +14,18 @@ public class AccountDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "summoner_id")
     private String summonerID;
 
     @NotEmpty(message = "Username cannot be empty")
-    @Column(name = "lol_username")
     private String lolUsername;
 
     @NotEmpty(message = "Password cannot be empty")
-    @Column(name = "lol_password")
     private String lolPassword;
 
     @Enumerated(EnumType.STRING)
     private Region region;
 
+    @PersistenceConstructor
     public AccountDetails() {
     }
 

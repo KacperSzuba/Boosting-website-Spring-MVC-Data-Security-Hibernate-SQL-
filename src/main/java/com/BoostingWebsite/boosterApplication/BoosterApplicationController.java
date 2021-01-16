@@ -1,4 +1,4 @@
-package com.BoostingWebsite.employment;
+package com.BoostingWebsite.boosterApplication;
 
 import com.BoostingWebsite.order.Region;
 import org.springframework.stereotype.Controller;
@@ -13,16 +13,16 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/booster-application")
-public class BoosterApplicationController {
+class BoosterApplicationController {
 
     private final BoosterApplicationRepository boosterApplicationRepository;
 
-    public BoosterApplicationController(BoosterApplicationRepository boosterApplicationRepository) {
+    BoosterApplicationController(BoosterApplicationRepository boosterApplicationRepository) {
         this.boosterApplicationRepository = boosterApplicationRepository;
     }
 
     @GetMapping
-    public String boosterApplicationPage(Model model) {
+    String boosterApplicationPage(Model model) {
         BoosterApplication boosterApplication = new BoosterApplication();
         model.addAttribute("boosterApplication", boosterApplication);
         model.addAttribute("regions", Region.values());
@@ -30,7 +30,7 @@ public class BoosterApplicationController {
     }
 
     @PostMapping
-    public String boosterApplicationForm(@Valid @ModelAttribute("boosterApplication") BoosterApplication boosterApplication, BindingResult bindingResult, Model model) {
+    String boosterApplicationForm(@Valid @ModelAttribute("boosterApplication") BoosterApplication boosterApplication, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("regions", Region.values());
             return "booster-application/booster-application";

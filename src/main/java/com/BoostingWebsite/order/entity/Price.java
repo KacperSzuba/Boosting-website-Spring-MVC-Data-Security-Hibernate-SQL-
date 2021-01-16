@@ -1,5 +1,7 @@
 package com.BoostingWebsite.order.entity;
 
+import org.springframework.data.annotation.PersistenceConstructor;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,6 +13,7 @@ public class Price {
 
     private Integer price;
 
+    @PersistenceConstructor
     public Price() {
     }
 

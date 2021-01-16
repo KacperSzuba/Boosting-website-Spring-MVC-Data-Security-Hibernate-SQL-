@@ -1,6 +1,7 @@
 package com.BoostingWebsite.contact;
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.annotation.PersistenceConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -32,6 +33,7 @@ public class Contact {
 
     private LocalDate date;
 
+    @PersistenceConstructor
     public Contact() {
     }
 

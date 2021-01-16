@@ -13,21 +13,23 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/order")
-public class OrderController {
+class OrderController {
 
-    private OrderBoostService orderBoostService;
+    private final OrderBoostService orderBoostService;
 
     public OrderController(OrderBoostService orderBoostService) {
         this.orderBoostService = orderBoostService;
     }
 
     @GetMapping
-    public String showOrderPage(Model model) {
+    String showOrderPage(Model model) {
         model.addAttribute("tiers", Tier.values());
         model.addAttribute("divisions", Division.values());
         model.addAttribute("points", Points.values());
         model.addAttribute("regions", Region.values());
         model.addAttribute("LPGainPerWin", LPGainPerWin.values());
+        model.addAttribute("queueType", QueueType.values());
+        model.addAttribute("defaultSelectedQueueType", QueueType.RANKED_SOLO_DUO);
 
         try {
             model.addAttribute("whetherUserHasOrder", orderBoostService.whetherUserHasOrder());
@@ -36,23 +38,22 @@ public class OrderController {
             return "redirect:/login";
         }
 
-        OrderBoost orderBoost = new OrderBoost();
-        model.addAttribute("orderBoost", orderBoost);
+        model.addAttribute("orderBoost", new OrderBoost());
 
-        return "order/newOrder";
+        return "order/order";
     }
 
-    @PostMapping("/new")
-    public String accountInformation(@Valid @ModelAttribute("orderBoost") OrderBoost orderBoost, BindingResult result) {
+    @PostMapping
+    String accountInformation(@Valid @ModelAttribute("orderBoost") OrderBoost orderBoost, BindingResult result) {
         if (result.hasErrors()) {
-            return "order/newOrder";
+            return "order/order";
         }
         try {
             if (orderBoostService.isLeagueIsValid(orderBoost)) {
                 orderBoostService.makeOrder(orderBoost);
                 return "redirect:/";
             } else {
-                return "order/newOrder";
+                return "order/order";
             }
         } catch (NullPointerException ex) {
             ex.printStackTrace();

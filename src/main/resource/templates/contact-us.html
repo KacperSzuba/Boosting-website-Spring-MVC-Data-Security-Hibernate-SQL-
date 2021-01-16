@@ -120,25 +120,25 @@
                 <form th:action="@{/contact-us/send}" th:object="${contact}" method="get">
                     <div class="form-group">
                         <input id="name" th:field="*{name}" type="text" class="form-control" required="">
-                        <label for="name">Name</label>
+                        <label class="animated-label" for="name">Name</label>
                         <p class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
                     </div>
 
                     <div class="form-group">
                         <input id="email" th:field="*{email}" type="text" class="form-control" required="">
-                        <label for="email">Email</label>
+                        <label class="animated-label" for="email">Email</label>
                         <p class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
                     </div>
 
                     <div class="form-group">
                         <input id="subject" th:field="*{subject}" type="text" class="form-control" required="">
-                        <label for="subject">Subject</label>
+                        <label class="animated-label" for="subject">Subject</label>
                         <p class="error" th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}"></p>
                     </div>
 
                     <div class="form-group">
                         <textarea id="question" th:field="*{question}" type="text" class="form-control" required=""></textarea>
-                        <label for="question">Question</label>
+                        <label class="animated-label" for="question">Question</label>
                         <p class="error" th:if="${#fields.hasErrors('question')}" th:errors="*{question}"></p>
                     </div>
 

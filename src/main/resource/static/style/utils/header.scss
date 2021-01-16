@@ -126,7 +126,7 @@ nav{
   @include size(100%, 100%);
 }
 
-.sub-menu-li form .sub-menu-link.height input {
+.sub-menu-li form .sub-menu-link input {
   background-color: transparent;
   border: none;
   font-size: 24px;
@@ -203,9 +203,13 @@ i.show {
 }
 
 @media (min-width: 1024px) {
-  .sub-menu-li form .main-menu-link.height input {
-    color: $white-color;
-    font-size: unset;
+  .account-wrap{
+    justify-content: center;
+
+    & div:nth-of-type(1),
+    & div:nth-of-type(2){
+      flex-basis: unset;
+    }
   }
 
   .burger {
@@ -278,7 +282,7 @@ i.show {
     padding-left: 10%;
   }
 
-  .sub-menu-li form .sub-menu-link.height input {
+  .sub-menu-li form .sub-menu-link input {
     @include size(100%, 100%);
     color: $blue-color-header;
     font-size: 16px;
@@ -328,7 +332,7 @@ i.show {
 @media (min-width: 1280px) {
   #main-menu .main-menu-li .main-menu-link,
   .sub-menu-li .sub-menu-link,
-  .sub-menu-li form .sub-menu-link.height input {
+  .sub-menu-li form .sub-menu-link input {
     font-size: 18px;
   }
 
@@ -340,7 +344,7 @@ i.show {
 @media (min-width: 1600px) {
   #main-menu .main-menu-li .main-menu-link,
   .sub-menu-li .sub-menu-link,
-  .sub-menu-li form .sub-menu-link.height input {
+  .sub-menu-li form .sub-menu-link input {
     font-size: 22px;
   }
 

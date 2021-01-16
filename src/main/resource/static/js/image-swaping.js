@@ -7,7 +7,6 @@ const currentTier = document.querySelector('.current #currentTier');
 const currentDivision = document.querySelector('.current #currentDivision');
 
 const homeIMGURL = `${window.location.protocol}//${window.location.host}/images`;
-const resumeText = document.querySelector('.resume-text');
 
 window.addEventListener('load', () => {
     let goldTier = desireTier[3];
@@ -18,38 +17,28 @@ window.addEventListener('load', () => {
     currentDivision[0].selected = true;
     desireDivision[0].selected = true;
 
-    setResumeText();
     disableWrongTiersOrDivisions();
     setImages();
 });
 
 desireTier.addEventListener('change', () => {
-    setResumeText();
     disableWrongTiersOrDivisions();
     setImages();
 });
 
 desireDivision.addEventListener('change', () => {
-    setResumeText();
     setImages();
 });
 
 currentTier.addEventListener('change', () => {
-    setResumeText();
     disableWrongTiersOrDivisions();
     setImages();
 });
 
 currentDivision.addEventListener('change', () => {
-    setResumeText();
     disableWrongTiersOrDivisions();
     setImages();
 });
-
-function setResumeText() {
-    resumeText.innerHTML = `${currentTier.value.toLowerCase().capitalize()} ${convertDivision(currentDivision.options[currentDivision.selectedIndex].text)} to
-                            ${desireTier.value.toLowerCase().capitalize()} ${convertDivision(desireDivision.options[desireDivision.selectedIndex].text)}`;
-}
 
 function setImages() {
     console.log(desireDivision.options[desireDivision.selectedIndex].text)

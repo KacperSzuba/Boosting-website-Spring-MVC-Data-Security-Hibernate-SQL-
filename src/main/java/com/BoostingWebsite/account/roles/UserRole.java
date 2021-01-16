@@ -1,6 +1,7 @@
 package com.BoostingWebsite.account.roles;
 
 import org.hibernate.annotations.Immutable;
+import org.springframework.data.annotation.PersistenceConstructor;
 
 import javax.persistence.*;
 
@@ -16,7 +17,7 @@ public class UserRole {
     @Enumerated(EnumType.STRING)
     private RoleName roleName;
 
-
+    @PersistenceConstructor
     public UserRole() {
     }
 

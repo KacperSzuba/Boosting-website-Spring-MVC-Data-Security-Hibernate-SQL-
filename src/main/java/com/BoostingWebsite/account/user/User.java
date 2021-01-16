@@ -5,6 +5,7 @@ import com.BoostingWebsite.account.roles.UserRole;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
+import org.springframework.data.annotation.PersistenceConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -42,6 +43,7 @@ public class User {
     @Transient
     private String creationErrorMessage;
 
+    @PersistenceConstructor
     public User() {
     }
 

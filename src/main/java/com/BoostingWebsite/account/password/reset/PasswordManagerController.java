@@ -8,21 +8,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/account")
-public class PasswordManagerController {
+class PasswordManagerController {
 
     private final PasswordManager passwordManager;
 
-    public PasswordManagerController(PasswordManager passwordManager) {
+    PasswordManagerController(PasswordManager passwordManager) {
         this.passwordManager = passwordManager;
     }
 
     @GetMapping("/change/password")
-    public String showChangePasswordPage() {
+    String showChangePasswordPage() {
         return "account/change-password";
     }
 
     @GetMapping("/change/password/form")
-    public String changePassword(@RequestParam("currentPassword") String currentPassword, @RequestParam("password") String password,
+    String changePassword(@RequestParam("currentPassword") String currentPassword, @RequestParam("password") String password,
                                  @RequestParam("repeatPassword") String repeatPassword, Model model) {
         passwordManager.changePassword(currentPassword, password, repeatPassword);
         model.addAttribute("newPassword", passwordManager.getMessage());

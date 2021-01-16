@@ -25,7 +25,7 @@ textarea.form-control{
     padding: 5%;
 }
 
-.form-group label {
+.form-group .animated-label {
     position: absolute;
     top: 0;
     left: 0;
@@ -41,8 +41,8 @@ div.wrap label {
     margin-left: 5%;
 }
 
-.form-control:focus ~ label,
-.form-control:valid ~ label{
+.form-control:focus ~ .animated-label,
+.form-control:valid ~ .animated-label{
     top: -20px;
     left: 0;
     color: rgba(20, 165, 235, 0.85);

@@ -1,4 +1,4 @@
-package com.BoostingWebsite.employment;
+package com.BoostingWebsite.boosterApplication;
 
 import org.springframework.data.repository.CrudRepository;
 

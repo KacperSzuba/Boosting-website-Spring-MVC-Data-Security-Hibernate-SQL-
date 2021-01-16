@@ -15,22 +15,22 @@ import static com.BoostingWebsite.utils.EmailValidator.validateEmail;
 
 @Controller
 @RequestMapping("/contact-us")
-public class ContactController {
+class ContactController {
 
     private final ContactRepository contactRepository;
 
-    public ContactController(ContactRepository contactRepository) {
+    ContactController(ContactRepository contactRepository) {
         this.contactRepository = contactRepository;
     }
 
     @GetMapping
-    public String showContactUsPage(Model model) {
+    String showContactUsPage(Model model) {
         model.addAttribute("contact", new Contact());
         return "contact-us";
     }
 
     @GetMapping("/send")
-    public String send(@Valid @ModelAttribute("contact") Contact contact, BindingResult result) {
+    String send(@Valid @ModelAttribute("contact") Contact contact, BindingResult result) {
         if (result.hasErrors()) {
             return "contact-us";
         } else {

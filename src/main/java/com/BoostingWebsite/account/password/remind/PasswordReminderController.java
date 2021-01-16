@@ -9,29 +9,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/account")
-public class PasswordReminderController {
+class PasswordReminderController {
 
     private final PasswordReminder passwordReminder;
     private final PasswordReminderToken passwordReminderToken;
 
-    public PasswordReminderController(PasswordReminder passwordReminder, PasswordReminderToken passwordReminderToken) {
+    PasswordReminderController(PasswordReminder passwordReminder, PasswordReminderToken passwordReminderToken) {
         this.passwordReminder = passwordReminder;
         this.passwordReminderToken = passwordReminderToken;
     }
 
     @GetMapping("/remind/password")
-    public String remindPasswordPage() {
+    String remindPasswordPage() {
         return "account/remind-password";
     }
 
     @GetMapping("/remind/password/form")
-    public String remindPassword(@RequestParam("email") String email) {
+    String remindPassword(@RequestParam("email") String email) {
         passwordReminder.remindPassword(email);
         return "account/remind-password";
     }
 
     @GetMapping("/remind/password/token")
-    public String remind(@RequestParam("id") Long id, @RequestParam("token") String token, Model model) {
+    String remind(@RequestParam("id") Long id, @RequestParam("token") String token, Model model) {
         String validatePasswordResetToken = passwordReminderToken.validateResetPasswordToken(id, token);
         if (validatePasswordResetToken != null) {
             model.addAttribute("token", "Your token is " + validatePasswordResetToken);
@@ -41,12 +41,12 @@ public class PasswordReminderController {
     }
 
     @GetMapping("/reset/password")
-    public String updatePassword() {
+    String updatePassword() {
         return "account/update-password";
     }
 
     @PostMapping("/reset/password")
-    public String resetPassword(@RequestParam("password") String password, @RequestParam("repeatPassword") String repeatPassword, Model model) {
+    String resetPassword(@RequestParam("password") String password, @RequestParam("repeatPassword") String repeatPassword, Model model) {
         passwordReminder.resetPassword(password, repeatPassword);
         if (passwordReminder.getPasswordRemindMessage() != null) {
             model.addAttribute("message", passwordReminder.getPasswordRemindMessage());
