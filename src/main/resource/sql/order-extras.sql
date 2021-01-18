@@ -1,0 +1,1 @@
+insert into OrderExtras(name) values ('Appear offline on chat'), ('Specific champions/roles'), ('Priority order at'), ('With streaming at');

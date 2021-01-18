@@ -4,7 +4,7 @@ public enum QueueType {
     RANKED_SOLO_DUO("Solo/Duo"),
     RANKED_FLEX("Flex");
 
-    private String name;
+    private final String name;
 
     QueueType(String name) {
         this.name = name;

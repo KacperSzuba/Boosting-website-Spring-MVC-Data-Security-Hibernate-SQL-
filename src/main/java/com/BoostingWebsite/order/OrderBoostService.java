@@ -3,11 +3,14 @@ package com.BoostingWebsite.order;
 import com.BoostingWebsite.account.user.ApplicationSession;
 import com.BoostingWebsite.order.entity.EnumOrderStatus;
 import com.BoostingWebsite.order.entity.OrderBoost;
+import com.BoostingWebsite.order.entity.OrderExtras;
 import com.BoostingWebsite.order.repository.LeagueRepository;
 import com.BoostingWebsite.order.repository.OrderBoostRepository;
+import com.BoostingWebsite.order.repository.OrderExtrasRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class OrderBoostService {
@@ -17,11 +20,13 @@ public class OrderBoostService {
     private final ApplicationSession applicationSession;
     private final LeagueRepository leagueRepository;
     private final OrderBoostRepository orderBoostRepository;
+    private final OrderExtrasRepository orderExtrasRepository;
 
-    public OrderBoostService(ApplicationSession applicationSession, LeagueRepository leagueRepository, OrderBoostRepository orderBoostRepository) {
+    public OrderBoostService(ApplicationSession applicationSession, LeagueRepository leagueRepository, OrderBoostRepository orderBoostRepository, OrderExtrasRepository orderExtrasRepository) {
         this.applicationSession = applicationSession;
         this.leagueRepository = leagueRepository;
         this.orderBoostRepository = orderBoostRepository;
+        this.orderExtrasRepository = orderExtrasRepository;
     }
 
     boolean isLeagueIsValid(OrderBoost orderBoost) {
@@ -41,6 +46,10 @@ public class OrderBoostService {
 
     boolean whetherUserHasOrder(){
         return orderBoostRepository.existsByBoosterOrUserAndStatus(applicationSession.getActualUser(), applicationSession.getActualUser(), EnumOrderStatus.NEW);
+    }
+
+    List<OrderExtras> getOrderExtras(){
+        return (List<OrderExtras>) orderExtrasRepository.findAll();
     }
 
 /*

@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "orders_boost")
@@ -48,6 +49,14 @@ public class OrderBoost {
     @JoinColumn(name = "boosters_id")
     private User booster;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "order_boost_extras",
+            joinColumns = @JoinColumn(name = "order_boost_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_extras_id")
+    )
+    private Set<OrderExtras> extras;
+
     @Enumerated(EnumType.STRING)
     private EnumOrderStatus status;
 
@@ -62,20 +71,6 @@ public class OrderBoost {
 
     @PersistenceConstructor
     public OrderBoost() {
-    }
-
-    public OrderBoost(String noteToBooster, boolean whetherPaid, double price, League currentLeague, League destinationLeague,
-                      AccountDetails accountDetails, User user, User booster, QueueType queueType) {
-        this.noteToBooster = noteToBooster;
-        this.paid = whetherPaid;
-        this.price = price;
-        this.currentLeague = currentLeague;
-        this.destinationLeague = destinationLeague;
-        this.accountDetails = accountDetails;
-        this.user = user;
-        this.booster = booster;
-        this.queueType = queueType;
-        this.date = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -176,6 +171,14 @@ public class OrderBoost {
 
     void setQueueType(QueueType queueType) {
         this.queueType = queueType;
+    }
+
+    public Set<OrderExtras> getExtras() {
+        return extras;
+    }
+
+    public void setExtras(Set<OrderExtras> extras) {
+        this.extras = extras;
     }
 
     @Override

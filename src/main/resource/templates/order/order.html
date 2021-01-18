@@ -215,7 +215,7 @@
                             <div class="select-wrap">
                                 <ul>
                                     <li th:each="queueType : ${queueType}">
-                                        <input type = "radio" name = "queueType" th:id = "${queueType}" th:value = "${queueType.name}" th:checked = "${queueType.name == defaultSelectedQueueType} "/>
+                                        <input type = "radio" name = "test" th:id = "${queueType}" th:value = "${queueType.name}" th:checked = "${queueType.name == defaultSelectedQueueType} "/>
                                         <label th:for = "${queueType}" th:text = "${queueType.name}"></label>
                                     </li>
                                 </ul>
@@ -249,18 +249,14 @@
                     <h2>Your Order</h2>
 
                     <div class="extras">
-                        <label><input type="checkbox" /> APPEAR OFFLINE ON CHAT</label>
-
-                        <label><input type="checkbox" /> SPECIFIC CHAMPIONS/ROLES </label>
-
-                        <label><input type="checkbox" /> PRIORITY ORDER AT</label>
-
-                        <label><input type="checkbox" /> WITH STREAMING AT</label>
+                        <label th:each="extra : ${extras}">
+                            <input type="checkbox" name="extras" th:text="${extra.name}" th:value="${extra}" th:field="*{extras}"/>
+                        </label>
                     </div>
 
                     <div class="wrap">
                         <h3 class="total-price">Total: </h3>
-                        <p class="price">60</p>
+                        <p class="total-costs">60</p>
                     </div>
 
                     <input class="btn-sm" type="submit" th:disabled="${whetherUserHasOrder}" value="Place order" />

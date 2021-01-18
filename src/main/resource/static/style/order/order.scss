@@ -80,7 +80,7 @@
 }
 
 .price{
-  &div.wrap{
+  & div.wrap{
     display: flex;
     padding-left: 5%;
     padding-right: 5%;
@@ -91,31 +91,20 @@
       width: 25%;
       text-align: right;
     }
-
-    & div {
-      display: flex;
-    }
-
-    & p.text {
-      flex-direction: row;
-      width: 75%;
-      line-height: 40px;
-      font-size: 14px;
-    }
-
-    & .total-price {
-      width: 75%;
-    }
   }
 
   & h2 {
     padding: 2.5% 0 20%;
   }
-}
 
-.extras{
-  display: flex;
-  flex-direction: column;
+  & .extras{
+    display: flex;
+    flex-direction: column;
+
+    & label{
+      text-transform: uppercase;
+    }
+  }
 }
 
 @media (orientation: portrait) and (min-width: 375px) {
@@ -129,7 +118,7 @@
     }
 
     & div.wrap p.text,
-    & div.wrap p.price {
+    & div.wrap p.total-costs {
       font-size: 16px;
     }
   }
@@ -154,7 +143,7 @@
   }
 
   p.text,
-  p.price {
+  p.total-costs {
     font-size: 22px;
   }
 }
@@ -180,7 +169,7 @@
   }
 
   p.text,
-  p.price {
+  p.total-costs {
     font-size: 16px;
   }
 }
@@ -205,7 +194,7 @@
   }
 
   p.text,
-  p.price {
+  p.total-costs {
     font-size: 18px;
   }
 }

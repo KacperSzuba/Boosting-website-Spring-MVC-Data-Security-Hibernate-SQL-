@@ -30,6 +30,7 @@ class OrderController {
         model.addAttribute("LPGainPerWin", LPGainPerWin.values());
         model.addAttribute("queueType", QueueType.values());
         model.addAttribute("defaultSelectedQueueType", QueueType.RANKED_SOLO_DUO);
+        model.addAttribute("extras", orderBoostService.getOrderExtras());
 
         try {
             model.addAttribute("whetherUserHasOrder", orderBoostService.whetherUserHasOrder());
