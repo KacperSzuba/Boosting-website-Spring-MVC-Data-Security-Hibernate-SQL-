@@ -43,6 +43,9 @@ public interface OrderBoostRepository extends CrudRepository<OrderBoost, Long> {
     @Query(value = "UPDATE OrderBoost orderboost SET orderboost.booster =:user where orderboost.id=:id")
     void findFreeOrderBoosts(@Param("id") Long id, @Param("user") User user);
 
+    @Query(value = "select orderboost from OrderBoost  orderboost where orderboost.status = 'NEW'")
+    List<OrderBoost> getFreeOrderBoosts();
+
     @Transactional
     @Modifying
     @Query(value = "UPDATE OrderBoost orderboost SET orderboost.status = 'COMPLETED' where orderboost.id=:id")

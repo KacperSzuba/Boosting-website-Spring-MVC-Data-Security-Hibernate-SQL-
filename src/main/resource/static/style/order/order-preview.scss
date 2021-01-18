@@ -201,8 +201,8 @@
 #conversation-name{
   display: flex;
   align-items: center;
-  background-color: rgba(20, 165, 235, 0.85);
-  color: #f8f8ff;
+  background-color: $blue-color-header;
+  color: $white-color;
 }
 
 #conversation-user-icon{
@@ -243,15 +243,15 @@
 }
 
 .caller-message{
-  background-color: #F0F8FF;
-  color: rgba(20, 165, 235, 0.85);
+  background-color: $white-color;
+  color: $blue-color-header;
   float: left;
   overflow: hidden;
 }
 
 .your-message{
-  background-color: rgba(20, 165, 235, 0.85);
-  color: #f8f8ff;
+  background-color: $blue-color-header;
+  color: $white-color;
   float: right;
   overflow: hidden;
 }
@@ -342,7 +342,7 @@
 }
 
 #order-not-available{
-  background-color: #F6F6F6;
+  background-color: $white-background-color;
   height: 100%;
   width: 100%;
 

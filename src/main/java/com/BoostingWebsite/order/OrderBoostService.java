@@ -39,6 +39,7 @@ public class OrderBoostService {
     void makeOrder(OrderBoost orderBoost) {
         orderBoost.setDate(LocalDateTime.now());
         orderBoost.setUser(applicationSession.getActualUser());
+        orderBoost.setStatus(EnumOrderStatus.NEW);
         leagueRepository.save(orderBoost.getCurrentLeague());
         leagueRepository.save(orderBoost.getDestinationLeague());
         orderBoostRepository.save(orderBoost);

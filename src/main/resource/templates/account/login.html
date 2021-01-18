@@ -43,7 +43,11 @@
                                     </li>
 
                                     <li class="sub-menu-li">
-                                        <a class="sub-menu-link">History</a>
+                                        <a href="/order/orderHistory" class="sub-menu-link">History</a>
+                                    </li>
+
+                                    <li sec:authorize="hasAnyRole('BOOSTER')" class="sub-menu-li">
+                                        <a href="/order/freeOrders" class="sub-menu-link">Free orders</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -77,7 +81,6 @@
                                 <ul class="sub-menu">
                                     <li class="back-to-main-menu sub-menu-li">
                                         <a class="sub-menu-link">Back</a>
-
                                         <i class="fas fa-chevron-left"></i>
                                     </li>
 

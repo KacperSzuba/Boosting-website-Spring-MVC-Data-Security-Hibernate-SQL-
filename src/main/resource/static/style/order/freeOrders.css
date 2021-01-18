@@ -746,5 +746,20 @@ footer div a {
     font-size: 36px;
   }
 }
+#free-orders {
+  background-color: #f6f6f6;
+  padding: 20% 10%;
+  height: 100%;
+  width: 100%;
+  font-family: "Open Sans", sans-serif;
+}
+#free-orders .free-order {
+  padding: 5% 10%;
+  background-color: white;
+  height: 100%;
+  border: 10px white solid;
+  border-radius: 10%;
+  margin-bottom: 5%;
+}
 
 /*# sourceMappingURL=freeOrders.css.map */

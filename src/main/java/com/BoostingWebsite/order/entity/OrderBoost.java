@@ -58,6 +58,7 @@ public class OrderBoost {
     private Set<OrderExtras> extras;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private EnumOrderStatus status;
 
     @Enumerated(EnumType.STRING)

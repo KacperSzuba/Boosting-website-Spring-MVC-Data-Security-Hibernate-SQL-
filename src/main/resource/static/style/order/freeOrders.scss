@@ -1,2 +1,9 @@
 @import "../utils/utils" , "../utils/header", "../utils/footer";
 
+#free-orders{
+  @include main;
+
+  & .free-order{
+    @include cart(5% 10%);
+  }
+}

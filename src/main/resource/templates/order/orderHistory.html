@@ -42,7 +42,11 @@
                                     </li>
 
                                     <li class="sub-menu-li">
-                                        <a class="sub-menu-link">History</a>
+                                        <a href="/order/orderHistory" class="sub-menu-link">History</a>
+                                    </li>
+
+                                    <li sec:authorize="hasAnyRole('BOOSTER')" class="sub-menu-li">
+                                        <a href="/order/freeOrders" class="sub-menu-link">Free orders</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -76,7 +80,6 @@
                                 <ul class="sub-menu">
                                     <li class="back-to-main-menu sub-menu-li">
                                         <a class="sub-menu-link">Back</a>
-
                                         <i class="fas fa-chevron-left"></i>
                                     </li>
 
@@ -113,6 +116,26 @@
             <a href="/order">Boost Me</a>
         </header>
 
+        <footer>
+            <div class="wrap">
+                <div class="text">
+                    <h1>Boosting</h1>
+                </div>
+                <nav class="footer-navigation">
+                    <div class="customer">
+                        <h2>Customer</h2>
+                        <a href="/order">Order Now</a>
+                        <a href="/booster-application">Join Our Team</a>
+                    </div>
+                    <div class="pages">
+                        <h2>Pages</h2>
+                        <a href="#">F.A.Q.</a>
+                        <a href="/contact-us">Contact Us</a>
+                        <a href="#">Terms And Conditions</a>
+                    </div>
+                </nav>
+            </div>
+        </footer>
 
         <script src="/js/navigation/mobile.js"></script>
         <script src="/js/navigation/desktop.js"></script>
