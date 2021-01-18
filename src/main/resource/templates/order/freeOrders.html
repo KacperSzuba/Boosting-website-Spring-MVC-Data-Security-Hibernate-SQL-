@@ -118,6 +118,28 @@
 
         <main id="free-orders">
             <section class="free-order" th:each="order : ${freeOrders}">
+                <h1 th:text="${order.queueType.name}"></h1>
+
+                <div class="show-details">
+                    <i class="fas fa-caret-down"></i>
+                </div>
+
+                <section class="images">
+                    <div class="wrap-image">
+                        <img src="../images/Iron/Iron4.png" alt="Started league image">
+                        <p class="league">Iron</p>
+                    </div>
+
+                    <div class="right-arrow">
+                        <span>></span>
+                    </div>
+
+                    <div class="wrap-image">
+                        <img src="../images/Iron/Iron4.png" alt="Desire league image">
+                        <p class="league">Iron</p>
+                    </div>
+                </section>
+
                 <p th:text="${order.accountDetails.lolUsername}"></p>
             </section>
         </main>

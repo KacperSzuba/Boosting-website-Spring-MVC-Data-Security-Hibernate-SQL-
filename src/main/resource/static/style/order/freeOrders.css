@@ -754,12 +754,43 @@ footer div a {
   font-family: "Open Sans", sans-serif;
 }
 #free-orders .free-order {
-  padding: 5% 10%;
+  padding: 5%;
   background-color: white;
   height: 100%;
   border: 10px white solid;
   border-radius: 10%;
   margin-bottom: 5%;
+  position: relative;
+}
+#free-orders .free-order h1 {
+  text-align: center;
+}
+#free-orders .free-order .show-details {
+  cursor: pointer;
+  position: absolute;
+  top: 5%;
+  right: 10%;
+}
+#free-orders .free-order .show-details .fas {
+  display: block;
+  font-size: 22px;
+}
+#free-orders .free-order .images {
+  display: flex;
+}
+#free-orders .free-order .images .wrap-image img {
+  max-width: 100%;
+}
+#free-orders .free-order .images .wrap-image .league {
+  text-align: center;
+}
+#free-orders .free-order .images .right-arrow span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 30px;
+  font-weight: 700;
 }
 
 /*# sourceMappingURL=freeOrders.css.map */

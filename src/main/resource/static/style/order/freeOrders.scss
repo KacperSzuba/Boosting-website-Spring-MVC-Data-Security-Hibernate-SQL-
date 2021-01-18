@@ -4,6 +4,48 @@
   @include main;
 
   & .free-order{
-    @include cart(5% 10%);
+    @include cart(5%);
+    position: relative;
+    
+    & h1{
+      text-align: center;
+    }
+
+    & .show-details{
+      cursor: pointer;
+      position: absolute;
+      top: 5%;
+      right: 10%;
+
+      & .fas{
+        display: block;
+        font-size: 22px;
+      }
+    }
+
+    & .images{
+      display: flex;
+
+      & .wrap-image{
+        & img{
+          max-width:100%;
+        }
+
+        & .league{
+          text-align: center;
+        }
+      }
+
+      & .right-arrow{
+        & span{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+          font-size: 30px;
+          font-weight: 700;
+        }
+      }
+    }
   }
 }
