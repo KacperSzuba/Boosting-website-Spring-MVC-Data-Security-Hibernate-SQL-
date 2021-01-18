@@ -8,6 +8,7 @@ import org.springframework.data.annotation.PersistenceConstructor;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -51,6 +52,7 @@ public class OrderBoost {
     private EnumOrderStatus status;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private QueueType queueType;
 
     @OneToMany(mappedBy = "orderBoost", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -60,19 +62,6 @@ public class OrderBoost {
 
     @PersistenceConstructor
     public OrderBoost() {
-    }
-
-    public OrderBoost(OrderBoost orderBoost) {
-        this.id = orderBoost.id;
-        this.noteToBooster = orderBoost.noteToBooster;
-        this.paid = orderBoost.paid;
-        this.price = orderBoost.price;
-        this.currentLeague = orderBoost.currentLeague;
-        this.destinationLeague = orderBoost.destinationLeague;
-        this.accountDetails = orderBoost.accountDetails;
-        this.user = orderBoost.user;
-        this.booster = orderBoost.booster;
-        this.date = LocalDateTime.now();
     }
 
     public OrderBoost(String noteToBooster, boolean whetherPaid, double price, League currentLeague, League destinationLeague,
