@@ -72,6 +72,7 @@ public class OrderBoost {
 
     @PersistenceConstructor
     public OrderBoost() {
+        status = EnumOrderStatus.NEW;
     }
 
     public Long getId() {
@@ -170,7 +171,7 @@ public class OrderBoost {
         return queueType;
     }
 
-    void setQueueType(QueueType queueType) {
+    public void setQueueType(QueueType queueType) {
         this.queueType = queueType;
     }
 

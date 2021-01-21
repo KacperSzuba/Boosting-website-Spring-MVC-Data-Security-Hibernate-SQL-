@@ -4,6 +4,7 @@ import com.BoostingWebsite.account.user.ApplicationSession;
 import com.BoostingWebsite.order.entity.EnumOrderStatus;
 import com.BoostingWebsite.order.entity.OrderBoost;
 import com.BoostingWebsite.order.entity.OrderExtras;
+import com.BoostingWebsite.order.repository.AccountDetailsRepository;
 import com.BoostingWebsite.order.repository.LeagueRepository;
 import com.BoostingWebsite.order.repository.OrderBoostRepository;
 import com.BoostingWebsite.order.repository.OrderExtrasRepository;
@@ -21,18 +22,21 @@ public class OrderBoostService {
     private final LeagueRepository leagueRepository;
     private final OrderBoostRepository orderBoostRepository;
     private final OrderExtrasRepository orderExtrasRepository;
+    private final AccountDetailsRepository accountDetailsRepository;
 
-    public OrderBoostService(ApplicationSession applicationSession, LeagueRepository leagueRepository, OrderBoostRepository orderBoostRepository, OrderExtrasRepository orderExtrasRepository) {
+    public OrderBoostService(ApplicationSession applicationSession, LeagueRepository leagueRepository, OrderBoostRepository orderBoostRepository, OrderExtrasRepository orderExtrasRepository, AccountDetailsRepository accountDetailsRepository) {
         this.applicationSession = applicationSession;
         this.leagueRepository = leagueRepository;
         this.orderBoostRepository = orderBoostRepository;
         this.orderExtrasRepository = orderExtrasRepository;
+        this.accountDetailsRepository = accountDetailsRepository;
     }
 
     boolean isLeagueIsValid(OrderBoost orderBoost) {
         int priorityOfCurrentLeague = orderBoost.getCurrentLeague().getTier().getPriority() + orderBoost.getCurrentLeague().getDivision().getPriority();
         int priorityOfDestinationLeague = orderBoost.getDestinationLeague().getTier().getPriority() + orderBoost.getDestinationLeague().getDivision().getPriority();
-
+        System.out.println(priorityOfCurrentLeague);
+        System.out.println(priorityOfDestinationLeague);
         return priorityOfDestinationLeague > priorityOfCurrentLeague;
     }
 
@@ -40,6 +44,7 @@ public class OrderBoostService {
         orderBoost.setDate(LocalDateTime.now());
         orderBoost.setUser(applicationSession.getActualUser());
         orderBoost.setStatus(EnumOrderStatus.NEW);
+        accountDetailsRepository.save(orderBoost.getAccountDetails());
         leagueRepository.save(orderBoost.getCurrentLeague());
         leagueRepository.save(orderBoost.getDestinationLeague());
         orderBoostRepository.save(orderBoost);

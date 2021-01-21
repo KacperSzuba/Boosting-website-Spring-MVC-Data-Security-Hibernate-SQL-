@@ -29,7 +29,7 @@ class OrderController {
         model.addAttribute("regions", Region.values());
         model.addAttribute("LPGainPerWin", LPGainPerWin.values());
         model.addAttribute("queueType", QueueType.values());
-        model.addAttribute("defaultSelectedQueueType", QueueType.RANKED_SOLO_DUO);
+        model.addAttribute("defaultSelectedQueueType", QueueType.RANKED_SOLO_DUO.getName());
         model.addAttribute("extras", orderBoostService.getOrderExtras());
 
         try {

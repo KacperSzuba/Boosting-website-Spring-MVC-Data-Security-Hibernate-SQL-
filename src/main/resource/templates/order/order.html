@@ -214,12 +214,11 @@
 
                         <div class="form-group">
                             <h3 class="server">Queue Type</h3>
-
                             <div class="select-wrap">
                                 <ul>
-                                    <li th:each="queueType : ${queueType}">
-                                        <input type = "radio" name = "test" th:id = "${queueType}" th:value = "${queueType.name}" th:checked = "${queueType.name == defaultSelectedQueueType} "/>
-                                        <label th:for = "${queueType}" th:text = "${queueType.name}"></label>
+                                    <li th:each="type : ${queueType}">
+                                        <input type="radio" th:field="*{queueType}" th:value="${type}" th:checked="${type == defaultSelectedQueueType ? 'checked' : ''}"/>
+                                        <label th:for="${type}" th:text="${type.name}"></label>
                                     </li>
                                 </ul>
                             </div>

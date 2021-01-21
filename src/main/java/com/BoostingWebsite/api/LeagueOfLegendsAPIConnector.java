@@ -17,7 +17,10 @@ public class LeagueOfLegendsAPIConnector {
     private final String region;
     private final String username;
     private final String summonerId;
-    private final String apiKey = "RGAPI-2fd9dfa6-9de8-4f28-bee8-f70fb955ea38";
+    private static final String HTTPS =  "https://";
+    private static final String LOL_SUMMONER_BY_NAME = ".api.riotgames.com/lol/summoner/v4/summoners/by-name/";
+    private static final String LOL_SUMMONER_ID = ".api.riotgames.com/lol/league/v4/entries/by-summoner/";
+    private static final String API_KEY = "?api_key=";
 
     public LeagueOfLegendsAPIConnector(String username, Region region) {
         this.username = username;
@@ -28,7 +31,7 @@ public class LeagueOfLegendsAPIConnector {
     private String retrieveSummonerId(){
         String summonerId;
         try {
-            URL summoner = new URL("https://" + region + ".api.riotgames.com/lol/summoner/v4/summoners/by-name/" + username + "?api_key=" + apiKey);
+            URL summoner = new URL(createURL(LOL_SUMMONER_BY_NAME, username));
             JsonObject jsonObject = (JsonObject) parser(summoner);
             summonerId = jsonObject.get("id").toString();
 
@@ -41,7 +44,7 @@ public class LeagueOfLegendsAPIConnector {
     }
 
     private Map<String, JsonObject> retrieveSummonerLeague() throws IOException {
-        URL summonerLeague = new URL("https://" + region + ".api.riotgames.com/lol/league/v4/entries/by-summoner/" + summonerId + "?api_key=" + apiKey);
+        URL summonerLeague = new URL(createURL(LOL_SUMMONER_ID, summonerId));
         JsonArray jsonArray = (JsonArray) parser(summonerLeague);
 
         Map<String, JsonObject> map = new HashMap<>();
@@ -95,5 +98,17 @@ public class LeagueOfLegendsAPIConnector {
 
     private static String removeQuotes(String text) {
         return text.replace("\"", "");
+    }
+
+    private String createURL(String apiLink, String user){
+        StringBuilder builder = new StringBuilder();
+        builder.append(HTTPS);
+        builder.append(region);
+        builder.append(apiLink);
+        builder.append(user);
+        builder.append(API_KEY);
+        builder.append("RGAPI-878a575e-5a26-402a-8eff-7822da62990e");
+
+        return builder.toString();
     }
 }

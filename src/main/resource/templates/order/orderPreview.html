@@ -133,8 +133,6 @@
                 <h1><span id="buyers-username" th:text="${orderBoost.user.username}"></span> order</h1>
                 <section class="tiers">
                     <div class="started-tier">
-                        <h2>Started tier</h2>
-
                         <div class="image">
                             <img alt="Started tier image">
                         </div>
@@ -145,9 +143,11 @@
                         </p>
                     </div>
 
-                    <div class="current-tier">
-                        <h2>Current tier</h2>
+                    <div class="right-arrow">
+                        <span>></span>
+                    </div>
 
+                    <div class="current-tier">
                         <div class="image">
                             <img alt="Current tier image">
                         </div>
@@ -159,9 +159,11 @@
                         </p>
                     </div>
 
-                    <div class="desire-tier">
-                        <h2>Desire tier</h2>
+                    <div class="right-arrow">
+                        <span>></span>
+                    </div>
 
+                    <div class="desire-tier">
                         <div class="image">
                             <img alt="Desire tier image">
                         </div>
@@ -176,7 +178,7 @@
                 <section class="boosting-details">
                     <form method="get" th:object="${orderBoost}">
                         <div id="account-name">
-                            <p>Boosting account name</p>
+                            <p>Account name</p>
                             <p th:text="${orderBoost.accountDetails.lolUsername}"></p>
                         </div>
 
@@ -201,7 +203,8 @@
                         </div>
 
                         <div id="estimated-date-of-order-fulfillment">
-                            <p>Expected date of completion</p>
+                            <!-- TODO Dodać tooltip z informacją że jest to tylko przewidywana data zakończenia -->
+                            <p>Date of completion</p>
                             <p>05.04.2020</p>
                         </div>
                     </form>

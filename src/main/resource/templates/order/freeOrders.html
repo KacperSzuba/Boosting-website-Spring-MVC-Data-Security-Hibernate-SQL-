@@ -127,7 +127,10 @@
                 <section class="images">
                     <div class="wrap-image">
                         <img src="../images/Iron/Iron4.png" alt="Started league image">
-                        <p class="league">Iron</p>
+                        <p class="league">
+                            <span th:text="${order.currentLeague.tier.name} + ' '"></span>
+                            <span th:text=" ${order.currentLeague.division.name}"></span>
+                        </p>
                     </div>
 
                     <div class="right-arrow">
@@ -136,7 +139,10 @@
 
                     <div class="wrap-image">
                         <img src="../images/Iron/Iron4.png" alt="Desire league image">
-                        <p class="league">Iron</p>
+                        <p class="league">
+                            <span th:text="${order.destinationLeague.tier.name} + ' '"></span>
+                            <span th:text=" ${order.destinationLeague.division.name}"></span>
+                        </p>
                     </div>
                 </section>
 

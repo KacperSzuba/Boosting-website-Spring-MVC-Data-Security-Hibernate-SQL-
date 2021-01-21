@@ -22,6 +22,8 @@
   }
 
   & .form-group{
+    width: 45%;
+
     & ul{
       width: 100%;
       height: 40px;
@@ -77,6 +79,12 @@
     & .lp-gain{
       @include display-flex-column;
       justify-content: space-around;
+    }
+  }
+
+  .account-info{
+    & .form-group{
+      width: 85%;
     }
   }
 }
@@ -136,15 +144,17 @@
 
     & h2 {
       font-size: 34px;
-      padding: 2.5% 0 10% 0;
+      padding: 4% 0;
     }
 
     & h3 {
       font-size: 26px;
     }
 
-    & .price h2 {
-      padding: 2.5% 0 15%;
+    & .price{
+      & .extras{
+        padding: 0 5% 2%;
+      }
     }
   }
 
@@ -222,10 +232,6 @@
     & .select-wrap{
       display: flex;
       justify-content: center;
-    }
-
-    & .form-group{
-      width: 50%;
     }
 
     & input.btn-sm:hover {

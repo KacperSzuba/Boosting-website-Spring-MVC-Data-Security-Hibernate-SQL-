@@ -42,10 +42,21 @@ public class OrderPreviewService {
         messageRepository.save(message);
     }
 
-    public List<MessageDTO> getExistingChatMessages() throws OrderBoostNotFoundException {
-        List<Message> chatMessages = messageRepository.getChatMessages(getOrderBoost().getUser().getId(), getOrderBoost().getBooster().getId());
+    private List<Message> getExistingChatMessages() throws OrderBoostNotFoundException {
+        OrderBoost orderBoost = getOrderBoost();
 
-        return ChatMessageMapper.mapMessagesToChatDTOs(chatMessages);
+        if(orderBoost.getBooster() == null){
+            throw new OrderBoostNotFoundException();
+        }
+
+        Long userId = orderBoost.getId();
+        Long boosterId = orderBoost.getId();
+
+        return messageRepository.getChatMessages(userId, boosterId);
+    }
+
+    public List<MessageDTO> getChatMessages() throws OrderBoostNotFoundException {
+        return ChatMessageMapper.mapMessagesToChatDTOs(getExistingChatMessages());
     }
 
     public League getCurrentLeague() throws OrderBoostNotFoundException, IOException {
