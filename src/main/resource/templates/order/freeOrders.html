@@ -148,26 +148,36 @@
 
                 <div class="region">
                     <p>Region</p>
-                    <div class="">
+                    <div class="form-group">
                         <input id="region" readonly="readonly" />
                         <label for="region" th:text=" ${order.accountDetails.region}"></label>
                     </div>
                 </div>
 
                 <div class="price">
-                    <p>price</p>
-                    <p>60</p>
+                    <p>Price</p>
+
+                    <div class="form-group">
+                        <input id="price" readonly="readonly" />
+                        <label for="price">60</label>
+                    </div>
                 </div>
 
                 <section class="details">
                     <div class="username">
                         <p>Username</p>
-                        <p th:text="${order.accountDetails.lolUsername}"></p>
+                        <div class="form-group">
+                            <input id="username" readonly="readonly" />
+                            <label for="username" th:text="${order.accountDetails.lolUsername}"></label>
+                        </div>
                     </div>
 
                     <div class="note-to-booster">
                         <p>Note to booster</p>
-                        <p th:text="${order.noteToBooster}"></p>
+                        <div class="form-group">
+                            <input id="note-to-booster" readonly="readonly" />
+                            <label for="note-to-booster" th:text="${order.noteToBooster}"></label>
+                        </div>
                     </div>
                 </section>
             </section>

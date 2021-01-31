@@ -75,9 +75,11 @@
 
     & .form-group{
       @include form-group(auto);
+      height: 100%;
 
       & .animated-label{
         @include animated-label;
+        padding: 0;
       }
 
       & input:focus,

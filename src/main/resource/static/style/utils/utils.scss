@@ -122,8 +122,6 @@ $open-sans: 'Open Sans', sans-serif;
 }
 
 @mixin form-group($width){
-  display: flex;
-  flex-direction: column;
   position: relative;
   margin: 5% auto;
   width: $width;
@@ -163,10 +161,10 @@ $open-sans: 'Open Sans', sans-serif;
 @mixin animated-label-focus-and-valid{
   top: -20px;
   left: 0;
-  color: rgba(20, 165, 235, 0.85);
+  color: $blue-color-header;
   font-size: 12px !important;
 }
 
 @mixin input-border-style{
-  border-bottom: 1px solid #14a5eb !important;
+  border-bottom: 1px solid $blue-color !important;
 }

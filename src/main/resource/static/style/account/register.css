@@ -769,8 +769,6 @@ body {
   margin-left: 5%;
 }
 .login-form div.wrap .form-group {
-  display: flex;
-  flex-direction: column;
   position: relative;
   margin: 5% auto;
   width: auto;

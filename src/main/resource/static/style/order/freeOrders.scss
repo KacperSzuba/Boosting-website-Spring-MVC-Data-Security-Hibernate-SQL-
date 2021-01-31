@@ -50,13 +50,28 @@
       }
     }
 
+    & .form-group{
+      @include form-group(auto);
+
+      & input{
+        @include custom-select;
+      }
+
+      & label{
+        @include animated-label;
+      }
+    }
+
     & .region,
-    & .price{
+    & .price,
+    & .username,
+    & .note-to-booster{
       display: flex;
 
       & p{
         flex-grow: 1;
-        margin-top: 5%;
+        display: flex;
+        align-items: center;
       }
     }
   }
