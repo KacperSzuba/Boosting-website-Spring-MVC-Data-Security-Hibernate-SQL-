@@ -25,7 +25,7 @@ public class LoginHistory {
     public LoginHistory() {
     }
 
-    public LoginHistory(LocalDateTime date) {
+    LoginHistory(LocalDateTime date) {
         this.date = date;
     }
 

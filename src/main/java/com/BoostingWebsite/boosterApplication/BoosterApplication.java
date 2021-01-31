@@ -104,7 +104,7 @@ public class BoosterApplication {
         return AverageNumberOfHoursPlayedDaily;
     }
 
-    public void setAverageNumberOfHoursPlayedDaily(String averageNumberOfHoursPlayedDaily) {
+    void setAverageNumberOfHoursPlayedDaily(String averageNumberOfHoursPlayedDaily) {
         AverageNumberOfHoursPlayedDaily = averageNumberOfHoursPlayedDaily;
     }
 
@@ -120,7 +120,7 @@ public class BoosterApplication {
         return country;
     }
 
-    public void setCountry(String country) {
+    void setCountry(String country) {
         this.country = country;
     }
 
@@ -136,7 +136,7 @@ public class BoosterApplication {
         return motivation;
     }
 
-    public void setMotivation(String motivation) {
+    void setMotivation(String motivation) {
         this.motivation = motivation;
     }
 

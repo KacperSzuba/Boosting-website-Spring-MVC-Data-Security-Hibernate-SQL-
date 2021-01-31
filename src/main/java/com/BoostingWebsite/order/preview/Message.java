@@ -50,7 +50,7 @@ public class Message implements Comparable<Message> {
         return author;
     }
 
-    public void setAuthor(User author) {
+    void setAuthor(User author) {
         this.author = author;
     }
 
@@ -58,7 +58,7 @@ public class Message implements Comparable<Message> {
         return recipient;
     }
 
-    public void setRecipient(User recipient) {
+    void setRecipient(User recipient) {
         this.recipient = recipient;
     }
 

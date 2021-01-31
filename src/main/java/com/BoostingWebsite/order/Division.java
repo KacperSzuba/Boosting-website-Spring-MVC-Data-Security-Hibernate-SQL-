@@ -8,8 +8,8 @@ public enum Division {
 
     public final static String PLACEMENTS = "Placements";
 
-    private String name;
-    private int priority;
+    private final String name;
+    private final int priority;
 
     Division(String name, int priority){
         this.name = name;

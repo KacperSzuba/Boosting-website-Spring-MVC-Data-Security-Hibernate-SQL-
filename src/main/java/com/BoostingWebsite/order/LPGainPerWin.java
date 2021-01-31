@@ -6,7 +6,7 @@ public enum LPGainPerWin {
     BETWEEN_17_AND_19("17-19"),
     MORE_THAN_20("20+");
 
-    private String name;
+    private final String name;
 
     LPGainPerWin(String name) {
         this.name = name;

@@ -76,7 +76,7 @@ public class Contact {
         return question;
     }
 
-    public void setQuestion(String question) {
+    void setQuestion(String question) {
         this.question = question;
     }
 

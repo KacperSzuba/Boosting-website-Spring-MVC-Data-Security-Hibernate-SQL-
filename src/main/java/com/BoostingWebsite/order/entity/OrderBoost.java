@@ -83,7 +83,7 @@ public class OrderBoost {
         return noteToBooster;
     }
 
-    public void setNoteToBooster(String noteToBooster) {
+    void setNoteToBooster(String noteToBooster) {
         this.noteToBooster = noteToBooster;
     }
 
@@ -107,7 +107,7 @@ public class OrderBoost {
         return currentLeague;
     }
 
-    public void setCurrentLeague(League currentLeague) {
+    void setCurrentLeague(League currentLeague) {
         this.currentLeague = currentLeague;
     }
 
@@ -115,7 +115,7 @@ public class OrderBoost {
         return destinationLeague;
     }
 
-    public void setDestinationLeague(League destinationLeague) {
+    void setDestinationLeague(League destinationLeague) {
         this.destinationLeague = destinationLeague;
     }
 
@@ -123,7 +123,7 @@ public class OrderBoost {
         return accountDetails;
     }
 
-    public void setAccountDetails(AccountDetails accountDetails) {
+    void setAccountDetails(AccountDetails accountDetails) {
         this.accountDetails = accountDetails;
     }
 
@@ -175,7 +175,7 @@ public class OrderBoost {
         this.queueType = queueType;
     }
 
-    public Set<OrderExtras> getExtras() {
+    Set<OrderExtras> getExtras() {
         return extras;
     }
 

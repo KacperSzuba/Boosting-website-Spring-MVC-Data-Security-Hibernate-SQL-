@@ -6,7 +6,7 @@ public enum Region {
     RU("ru"),
     TR("tr1");
 
-    private String value;
+    private final String value;
 
     Region(String value){
         this.value = value;

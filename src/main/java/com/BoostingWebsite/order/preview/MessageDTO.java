@@ -31,7 +31,7 @@ public class MessageDTO {
         return recipientName;
     }
 
-    public void setRecipientName(String recipientName) {
+    void setRecipientName(String recipientName) {
         this.recipientName = recipientName;
     }
 

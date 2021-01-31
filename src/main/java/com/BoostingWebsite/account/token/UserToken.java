@@ -27,7 +27,7 @@ public class UserToken {
     public UserToken() {
     }
 
-    public UserToken(final String token) {
+    UserToken(final String token) {
         this.token = token;
         this.expiryDate = calculateExpiryDate(EXPIRATION);
     }
@@ -62,7 +62,7 @@ public class UserToken {
         return expiryDate;
     }
 
-    public void setExpiryDate(final Date expiryDate) {
+    void setExpiryDate(final Date expiryDate) {
         this.expiryDate = expiryDate;
     }
 
@@ -73,7 +73,7 @@ public class UserToken {
         return new Date(cal.getTime().getTime());
     }
 
-    public void updateToken(final String token) {
+    void updateToken(final String token) {
         this.token = token;
         this.expiryDate = calculateExpiryDate(EXPIRATION);
     }

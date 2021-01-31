@@ -40,11 +40,11 @@ public class AccountDetails {
         return id;
     }
 
-    public String getSummonerID() {
+    String getSummonerID() {
         return summonerID;
     }
 
-    public void setSummonerID(String summonerID) {
+    void setSummonerID(String summonerID) {
         this.summonerID = summonerID;
     }
 
@@ -52,7 +52,7 @@ public class AccountDetails {
         return lolUsername;
     }
 
-    public void setLolUsername(String lolUsername) {
+    void setLolUsername(String lolUsername) {
         this.lolUsername = lolUsername;
     }
 
@@ -60,7 +60,7 @@ public class AccountDetails {
         return lolPassword;
     }
 
-    public void setLolPassword(String lolPassword) {
+    void setLolPassword(String lolPassword) {
         this.lolPassword = lolPassword;
     }
 

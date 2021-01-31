@@ -8,8 +8,8 @@ public enum Tier {
     PLATINUM("Platinum", 50),
     DIAMOND("Diamond", 60);
 
-    private String name;
-    private int priority;
+    private final String name;
+    private final int priority;
 
     Tier(String name, int priority) {
         this.name = name;

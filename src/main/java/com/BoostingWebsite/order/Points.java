@@ -8,7 +8,7 @@ public enum Points {
     EIGHTY_TO_NINETY_NINE("80-99"),
     SERIES("Series");
 
-    private String name;
+    private final String name;
 
     Points(String name) {
         this.name = name;

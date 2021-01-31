@@ -87,11 +87,11 @@ public class League {
         this.price = price;
     }
 
-    public String getCurrency() {
+    String getCurrency() {
         return currency;
     }
 
-    public void setCurrency(String currency) {
+    void setCurrency(String currency) {
         this.currency = currency;
     }
 
@@ -99,7 +99,7 @@ public class League {
         return leaguePoints;
     }
 
-    public void setLeaguePoints(int leaguePoints) {
+    void setLeaguePoints(int leaguePoints) {
         this.leaguePoints = leaguePoints;
     }
 
