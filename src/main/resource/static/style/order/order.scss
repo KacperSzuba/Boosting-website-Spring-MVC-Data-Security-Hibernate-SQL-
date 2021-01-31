@@ -1,5 +1,7 @@
 @import "../utils/utils" , "../utils/header", "../utils/footer";
 
+@include basic-settings;
+
 /* main - order */
 
 .division {
@@ -22,7 +24,16 @@
   }
 
   & .form-group{
-    width: 45%;
+    @include form-group(45%);
+
+    & .animated-label{
+      @include animated-label;
+    }
+
+    & input:focus,
+    & textarea:focus{
+      @include input-border-style;
+    }
 
     & ul{
       width: 100%;
@@ -48,6 +59,20 @@
         }
       }
     }
+  }
+
+  & input.form-control,
+  & .custom-select{
+    @include custom-select;
+  }
+
+  & textarea.form-control{
+    @include textarea;
+  }
+
+  & .form-control:focus ~ .animated-label,
+  & .form-control:valid ~ .animated-label{
+    @include animated-label-focus-and-valid;
   }
 
   & section {
@@ -117,6 +142,10 @@
 
     & label{
       text-transform: uppercase;
+
+      & input{
+        margin-right: 2%;
+      }
     }
   }
 }

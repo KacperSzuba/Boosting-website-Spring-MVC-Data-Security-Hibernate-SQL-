@@ -122,11 +122,9 @@
             <p>Blue often indicates a neutral informative change or action.</p>
         </div>
 
-        <main id="order-not-available">
-            <section th:if="${orderBoost.id == null}">
-                <p>You do not have any ongoing orders</p>
-            </section>
-        </main>
+        <section id="order-not-available" th:if="${orderBoost.id == null}">
+            <p>You do not have any ongoing orders</p>
+        </section>
 
         <main id="order-preview" th:if="${orderBoost.id != null}">
             <section id="order">

@@ -7,31 +7,33 @@ $gray-color: #4d4d4d;
 $roboto: 'Roboto', sans-serif;
 $open-sans: 'Open Sans', sans-serif;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 @mixin window-basic-settings($font-family) {
   font-family: $font-family;
   max-width: 1920px;
   margin: 0 auto;
 }
 
-body {
-  @include window-basic-settings($roboto);
-}
+@mixin basic-settings{
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-  outline: none;
-}
+  input:focus,
+  select:focus,
+  textarea:focus,
+  button:focus {
+    outline: none;
+  }
 
-.white{
-  color:white !important;
+  body {
+    @include window-basic-settings($roboto);
+  }
+
+  .white{
+    color:white !important;
+  }
 }
 
 @mixin show{
@@ -75,7 +77,7 @@ button:focus {
   font-family: $open-sans;
 }
 
-@mixin wrap{
+@mixin  wrap{
   padding: 5% 10%;
   background-color: white;
   height: 100%;
@@ -117,4 +119,54 @@ button:focus {
   padding-right: 5%;
   margin: 2.5% auto 5%;
   border: 1px solid black;
+}
+
+@mixin form-group($width){
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: 5% auto;
+  width: $width;
+}
+
+@mixin custom-select{
+  width: 100%;
+  height: 40px;
+  padding-left: 5%;
+  padding-right: 5%;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  color: black;
+  background: transparent;
+}
+
+@mixin textarea{
+  @include custom-select;
+  resize: none;
+  height: 150px;
+  padding: 5%;
+}
+
+@mixin animated-label{
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  margin-left: 5%;
+  font-size: 16px !important;
+  color: black;
+  pointer-events: none;
+  transition: .5s;
+}
+
+@mixin animated-label-focus-and-valid{
+  top: -20px;
+  left: 0;
+  color: rgba(20, 165, 235, 0.85);
+  font-size: 12px !important;
+}
+
+@mixin input-border-style{
+  border-bottom: 1px solid #14a5eb !important;
 }

@@ -1,0 +1,1 @@
+const showDetails = document.querySelectorAll('.show-details');

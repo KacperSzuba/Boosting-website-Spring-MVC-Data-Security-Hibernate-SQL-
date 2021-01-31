@@ -107,7 +107,7 @@ public class LeagueOfLegendsAPIConnector {
         builder.append(apiLink);
         builder.append(user);
         builder.append(API_KEY);
-        builder.append("RGAPI-878a575e-5a26-402a-8eff-7822da62990e");
+        builder.append("RGAPI-1d9c9692-9690-4ac5-92a3-298b131c0040");
 
         return builder.toString();
     }

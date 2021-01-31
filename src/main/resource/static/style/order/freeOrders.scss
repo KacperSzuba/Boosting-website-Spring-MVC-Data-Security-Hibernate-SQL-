@@ -1,5 +1,7 @@
 @import "../utils/utils" , "../utils/header", "../utils/footer";
 
+@include basic-settings;
+
 #free-orders{
   @include main;
 
@@ -45,6 +47,16 @@
           font-size: 30px;
           font-weight: 700;
         }
+      }
+    }
+
+    & .region,
+    & .price{
+      display: flex;
+
+      & p{
+        flex-grow: 1;
+        margin-top: 5%;
       }
     }
   }

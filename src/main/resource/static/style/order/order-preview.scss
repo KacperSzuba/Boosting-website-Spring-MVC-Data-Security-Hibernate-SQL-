@@ -1,5 +1,7 @@
 @import "../utils/utils" , "../utils/header", "../utils/footer";
 
+@include basic-settings;
+
 /* Clearfix */
 
 .clearfix::after {
@@ -26,7 +28,7 @@
 #order{
   @include wrap;
   margin-bottom: 10%;
-  padding: 5%;
+  padding: 2%;
   
   & h1{
     font-size: 22px;
@@ -49,7 +51,7 @@
     display: flex;
 
     & p{
-      font-size: 16px;
+      font-size: 10px;
     }
 
     & div{
@@ -100,9 +102,17 @@
   text-align: center;
 }
 
-@media (min-width: 414px) {
+@media (min-width: 375px) {
   .boosting-details div {
     padding: 0 5%;
+  }
+
+  #order{
+    & .tiers{
+      & p{
+        font-size: 12px;
+      }
+    }
   }
 }
 

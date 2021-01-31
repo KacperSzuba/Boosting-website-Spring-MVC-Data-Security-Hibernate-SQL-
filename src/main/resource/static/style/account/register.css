@@ -1,49 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Roboto", sans-serif;
-  max-width: 1920px;
-  margin: 0 auto;
-}
-
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-  outline: none;
-}
-
-.white {
-  color: white !important;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Roboto", sans-serif;
-  max-width: 1920px;
-  margin: 0 auto;
-}
-
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-  outline: none;
-}
-
-.white {
-  color: white !important;
-}
-
 nav.background {
   height: 100vh;
   background-image: url(/images/others/person.jpg);
@@ -553,29 +507,6 @@ i.fa-chevron-left,
   display: block !important;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Roboto", sans-serif;
-  max-width: 1920px;
-  margin: 0 auto;
-}
-
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-  outline: none;
-}
-
-.white {
-  color: white !important;
-}
-
 /* Footer  */
 footer {
   background-color: #4d4d4d;
@@ -746,6 +677,29 @@ footer div a {
     font-size: 36px;
   }
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+.white {
+  color: white !important;
+}
+
 /* Section 1 - Register form */
 .capslockDetectedMessage {
   color: red;
@@ -813,6 +767,58 @@ footer div a {
   font-size: 10px;
   color: darkred;
   margin-left: 5%;
+}
+.login-form div.wrap .form-group {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: 5% auto;
+  width: auto;
+}
+.login-form div.wrap .form-group .animated-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  margin-left: 5%;
+  font-size: 16px !important;
+  color: black;
+  pointer-events: none;
+  transition: 0.5s;
+}
+.login-form div.wrap .form-group input:focus, .login-form div.wrap .form-group textarea:focus {
+  border-bottom: 1px solid #14a5eb !important;
+}
+.login-form div.wrap input.form-control, .login-form div.wrap .custom-select {
+  width: 100%;
+  height: 40px;
+  padding-left: 5%;
+  padding-right: 5%;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  color: black;
+  background: transparent;
+}
+.login-form div.wrap textarea.form-control {
+  width: 100%;
+  height: 40px;
+  padding-left: 5%;
+  padding-right: 5%;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  color: black;
+  background: transparent;
+  resize: none;
+  height: 150px;
+  padding: 5%;
+}
+.login-form div.wrap .form-control:focus ~ .animated-label, .login-form div.wrap .form-control:valid ~ .animated-label {
+  top: -20px;
+  left: 0;
+  color: rgba(20, 165, 235, 0.85);
+  font-size: 12px !important;
 }
 
 @media (orientation: portrait) and (min-width: 768px) {

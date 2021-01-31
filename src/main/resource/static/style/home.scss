@@ -1,6 +1,9 @@
 @import "utils/utils", "utils/header", "utils/footer";
 
+@include basic-settings;
+
 /* Section 1 - Advantages */
+
 body{
   & section {
     @include display-flex-column;

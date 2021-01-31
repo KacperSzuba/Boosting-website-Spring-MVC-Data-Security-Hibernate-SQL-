@@ -1,5 +1,7 @@
 @import "../utils/utils" , "../utils/header", "../utils/footer";
 
+@include basic-settings;
+
 /* Section 1 - Login form */
 
 #login-error{
@@ -69,6 +71,33 @@
 
     & input.button{
       @include button;
+    }
+
+    & .form-group{
+      @include form-group(auto);
+
+      & .animated-label{
+        @include animated-label;
+      }
+
+      & input:focus,
+      & textarea:focus{
+        @include input-border-style;
+      }
+    }
+
+    & input.form-control,
+    & .custom-select{
+      @include custom-select;
+    }
+
+    & textarea.form-control{
+      @include textarea;
+    }
+
+    & .form-control:focus ~ .animated-label,
+    & .form-control:valid ~ .animated-label{
+      @include animated-label-focus-and-valid;
     }
   }
 }

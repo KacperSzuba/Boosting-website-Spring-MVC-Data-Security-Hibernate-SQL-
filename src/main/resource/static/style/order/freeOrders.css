@@ -1,49 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Roboto", sans-serif;
-  max-width: 1920px;
-  margin: 0 auto;
-}
-
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-  outline: none;
-}
-
-.white {
-  color: white !important;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Roboto", sans-serif;
-  max-width: 1920px;
-  margin: 0 auto;
-}
-
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-  outline: none;
-}
-
-.white {
-  color: white !important;
-}
-
 nav.background {
   height: 100vh;
   background-image: url(/images/others/person.jpg);
@@ -553,29 +507,6 @@ i.fa-chevron-left,
   display: block !important;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Roboto", sans-serif;
-  max-width: 1920px;
-  margin: 0 auto;
-}
-
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-  outline: none;
-}
-
-.white {
-  color: white !important;
-}
-
 /* Footer  */
 footer {
   background-color: #4d4d4d;
@@ -746,6 +677,29 @@ footer div a {
     font-size: 36px;
   }
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+.white {
+  color: white !important;
+}
+
 #free-orders {
   background-color: #f6f6f6;
   padding: 20% 10%;
@@ -791,6 +745,13 @@ footer div a {
   height: 100%;
   font-size: 30px;
   font-weight: 700;
+}
+#free-orders .free-order .region, #free-orders .free-order .price {
+  display: flex;
+}
+#free-orders .free-order .region p, #free-orders .free-order .price p {
+  flex-grow: 1;
+  margin-top: 5%;
 }
 
 /*# sourceMappingURL=freeOrders.css.map */

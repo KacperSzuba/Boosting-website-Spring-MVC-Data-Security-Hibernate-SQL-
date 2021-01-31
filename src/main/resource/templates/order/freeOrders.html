@@ -146,7 +146,30 @@
                     </div>
                 </section>
 
-                <p th:text="${order.accountDetails.lolUsername}"></p>
+                <div class="region">
+                    <p>Region</p>
+                    <div class="">
+                        <input id="region" readonly="readonly" />
+                        <label for="region" th:text=" ${order.accountDetails.region}"></label>
+                    </div>
+                </div>
+
+                <div class="price">
+                    <p>price</p>
+                    <p>60</p>
+                </div>
+
+                <section class="details">
+                    <div class="username">
+                        <p>Username</p>
+                        <p th:text="${order.accountDetails.lolUsername}"></p>
+                    </div>
+
+                    <div class="note-to-booster">
+                        <p>Note to booster</p>
+                        <p th:text="${order.noteToBooster}"></p>
+                    </div>
+                </section>
             </section>
         </main>
 
@@ -173,5 +196,6 @@
 
         <script src="/js/navigation/mobile.js"></script>
         <script src="/js/navigation/desktop.js"></script>
+        <script src="/js/order/order-list.js"></script>
     </body>
 </html>
