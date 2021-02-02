@@ -12,7 +12,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.Transient;
 
 @Embeddable
-public class League{
+class League{
     @Enumerated(EnumType.STRING)
     private Tier tier;
 
@@ -26,16 +26,16 @@ public class League{
     private int leaguePoints;
 
     @PersistenceConstructor
-    public League() {
+    protected League() {
     }
 
-    public League(Tier tier, Division division, int leaguePoints) {
+    League(Tier tier, Division division, int leaguePoints) {
         this.tier = tier;
         this.division = division;
         this.leaguePoints = leaguePoints;
     }
 
-    public Tier getTier() {
+    Tier getTier() {
         return tier;
     }
 
@@ -43,7 +43,7 @@ public class League{
         this.tier = tier;
     }
 
-    public Division getDivision() {
+    Division getDivision() {
         return division;
     }
 
@@ -51,7 +51,7 @@ public class League{
         this.division = division;
     }
 
-    public Points getPoints() {
+    Points getPoints() {
         return points;
     }
 
@@ -59,7 +59,7 @@ public class League{
         this.points = points;
     }
 
-    public int getLeaguePoints() {
+    int getLeaguePoints() {
         return leaguePoints;
     }
 

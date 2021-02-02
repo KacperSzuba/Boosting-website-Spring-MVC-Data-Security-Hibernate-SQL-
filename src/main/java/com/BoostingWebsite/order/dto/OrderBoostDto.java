@@ -5,7 +5,7 @@ import com.BoostingWebsite.order.OrderExtras;
 import com.BoostingWebsite.order.enumeration.EnumOrderStatus;
 import com.BoostingWebsite.order.enumeration.QueueType;
 import com.BoostingWebsite.order.enumeration.Region;
-import com.BoostingWebsite.order.message.Message;
+import com.BoostingWebsite.order.message.dto.SimpleMessageDto;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -32,7 +32,7 @@ public class OrderBoostDto {
     private final Set<OrderExtras> extras;
     private final EnumOrderStatus status;
     private final QueueType queueType;
-    private final List<Message> messages;
+    private final List<SimpleMessageDto> messages;
     private final LocalDateTime date;
 
     private OrderBoostDto(Builder builder) {
@@ -115,7 +115,7 @@ public class OrderBoostDto {
         return queueType;
     }
 
-    public List<Message> getMessages() {
+    public List<SimpleMessageDto> getMessages() {
         return messages;
     }
 
@@ -139,7 +139,7 @@ public class OrderBoostDto {
         private Set<OrderExtras> extras;
         private EnumOrderStatus status;
         private QueueType queueType;
-        private List<Message> messages;
+        private List<SimpleMessageDto> messages;
         private LocalDateTime date;
 
         private Builder(){}
@@ -223,7 +223,7 @@ public class OrderBoostDto {
             return this;
         }
 
-        public Builder withMessages(List<Message> messages) {
+        public Builder withMessages(List<SimpleMessageDto> messages) {
             this.messages = messages;
             return this;
         }

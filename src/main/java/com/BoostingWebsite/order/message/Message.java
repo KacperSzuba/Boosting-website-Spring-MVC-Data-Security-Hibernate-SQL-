@@ -1,7 +1,6 @@
 package com.BoostingWebsite.order.message;
 
 import com.BoostingWebsite.account.User;
-import com.BoostingWebsite.order.OrderBoost;
 import com.BoostingWebsite.order.message.dto.MessageDTO;
 import org.springframework.data.annotation.PersistenceConstructor;
 
@@ -10,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "messages")
-public class Message implements Comparable<Message> {
+class Message implements Comparable<Message> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,28 +25,24 @@ public class Message implements Comparable<Message> {
     @JoinColumn(name = "recipient_of_the_message")
     private User recipient;
 
-    private final LocalDateTime date;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    private OrderBoost orderBoost;
+    private LocalDateTime date;
 
     @PersistenceConstructor
-    public Message() {
-        this.date = LocalDateTime.now();
+    protected Message() {
     }
 
-    public Message(String message, User author, User recipient) {
+    Message(String message, User author, User recipient) {
         this.message = message;
         this.author = author;
         this.recipient = recipient;
         this.date = LocalDateTime.now();
     }
 
-    public Long getId() {
+    Long getId() {
         return id;
     }
 
-    public User getAuthor() {
+    User getAuthor() {
         return author;
     }
 
@@ -55,7 +50,7 @@ public class Message implements Comparable<Message> {
         this.author = author;
     }
 
-    public User getRecipient() {
+    User getRecipient() {
         return recipient;
     }
 
@@ -63,7 +58,7 @@ public class Message implements Comparable<Message> {
         this.recipient = recipient;
     }
 
-    public String getMessage() {
+    String getMessage() {
         return message;
     }
 
@@ -73,14 +68,6 @@ public class Message implements Comparable<Message> {
 
     LocalDateTime getDate() {
         return date;
-    }
-
-    public OrderBoost getOrderBoost() {
-        return orderBoost;
-    }
-
-    void setOrderBoost(OrderBoost orderBoost) {
-        this.orderBoost = orderBoost;
     }
 
     @Override
@@ -103,5 +90,10 @@ public class Message implements Comparable<Message> {
                 ", sendMessage ='" + message + '\'' +
                 ", date =" + date +
                 '}';
+    }
+
+    @PrePersist
+    void prePersist(){
+        this.date = LocalDateTime.now();
     }
 }

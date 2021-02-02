@@ -1,6 +1,7 @@
 package com.BoostingWebsite.order;
 
 import com.BoostingWebsite.api.LeagueOfLegendsAPIFacade;
+import com.BoostingWebsite.order.dto.OrderBoostDto;
 import com.BoostingWebsite.order.exception.OrderBoostNotFoundException;
 import com.BoostingWebsite.order.message.MessageFacade;
 import com.BoostingWebsite.order.message.dto.MessageDTO;
@@ -38,7 +39,7 @@ class OrderPreviewController {
     @GetMapping
     String orderPreviewPage(Model model) {
         try{
-            OrderBoost orderBoost = orderBoostFacade.findActiveBoost();
+            OrderBoostDto orderBoost = orderBoostFacade.findActiveBoost();
 
             model.addAttribute("orderBoost", orderBoost);
             model.addAttribute("messages", messageFacade.getChatMessages(orderBoost.getUser(), orderBoost.getBooster()));
@@ -46,7 +47,7 @@ class OrderPreviewController {
             model.addAttribute("currentLeague", leagueOfLegendsAPIFacade.getCurrentLeague());
         }
         catch (OrderBoostNotFoundException | IOException ex){
-            model.addAttribute("orderBoost", new OrderBoost());
+            model.addAttribute("orderBoost", OrderBoostDto.builder().build());
             logger.error(ex);
         }
 

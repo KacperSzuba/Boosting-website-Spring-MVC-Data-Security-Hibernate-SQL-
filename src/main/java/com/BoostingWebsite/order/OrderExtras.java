@@ -1,5 +1,7 @@
 package com.BoostingWebsite.order;
 
+import org.springframework.data.annotation.PersistenceConstructor;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,8 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "order_extras")
-public
-class OrderExtras {
+public class OrderExtras {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,11 +18,15 @@ class OrderExtras {
 
     private String name;
 
+    @PersistenceConstructor
+    protected OrderExtras(){
+    }
+
     Long getId() {
         return id;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 }

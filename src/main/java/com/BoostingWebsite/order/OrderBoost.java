@@ -5,7 +5,7 @@ import com.BoostingWebsite.order.dto.OrderBoostDto;
 import com.BoostingWebsite.order.enumeration.EnumOrderStatus;
 import com.BoostingWebsite.order.enumeration.QueueType;
 import com.BoostingWebsite.order.enumeration.Region;
-import com.BoostingWebsite.order.message.Message;
+import com.BoostingWebsite.order.message.dto.SimpleMessageDto;
 import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.PersistenceConstructor;
 
@@ -19,7 +19,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "orders_boost")
-public class OrderBoost {
+class OrderBoost {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -83,21 +83,21 @@ public class OrderBoost {
     @NotNull
     private QueueType queueType;
 
-    @OneToMany(mappedBy = "orderBoost", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Message> messages;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SimpleMessageDto> messages;
 
     private LocalDateTime date;
 
     @PersistenceConstructor
-    public OrderBoost() {
+    protected OrderBoost() {
         status = EnumOrderStatus.NEW;
     }
 
-    public Long getId() {
+    Long getId() {
         return id;
     }
 
-    public String getNoteToBooster() {
+    String getNoteToBooster() {
         return noteToBooster;
     }
 
@@ -105,7 +105,7 @@ public class OrderBoost {
         this.noteToBooster = noteToBooster;
     }
 
-    public boolean isPaid() {
+    boolean isPaid() {
         return paid;
     }
 
@@ -113,7 +113,7 @@ public class OrderBoost {
         this.paid = whetherPaid;
     }
 
-    public BigDecimal getPrice() {
+    BigDecimal getPrice() {
         return price;
     }
 
@@ -121,7 +121,7 @@ public class OrderBoost {
         this.price = price;
     }
 
-    public League getCurrentLeague() {
+    League getCurrentLeague() {
         return currentLeague;
     }
 
@@ -129,7 +129,7 @@ public class OrderBoost {
         this.currentLeague = currentLeague;
     }
 
-    public League getDestinationLeague() {
+    League getDestinationLeague() {
         return destinationLeague;
     }
 
@@ -137,7 +137,7 @@ public class OrderBoost {
         this.destinationLeague = destinationLeague;
     }
 
-    public User getUser() {
+    User getUser() {
         return user;
     }
 
@@ -145,7 +145,7 @@ public class OrderBoost {
         this.user = user;
     }
 
-    public User getBooster() {
+    User getBooster() {
         return booster;
     }
 
@@ -153,15 +153,15 @@ public class OrderBoost {
         this.booster = booster;
     }
 
-    public List<Message> getMessages() {
+    List<SimpleMessageDto> getMessages() {
         return messages;
     }
 
-    void setMessages(List<Message> messages) {
+    void setMessages(List<SimpleMessageDto> messages) {
         this.messages = messages;
     }
 
-    public LocalDateTime getDate() {
+    LocalDateTime getDate() {
         return date;
     }
 
@@ -169,7 +169,7 @@ public class OrderBoost {
         this.date = date;
     }
 
-    public EnumOrderStatus getStatus() {
+    EnumOrderStatus getStatus() {
         return status;
     }
 
@@ -193,7 +193,7 @@ public class OrderBoost {
         this.extras = extras;
     }
 
-    public String getSummonerID() {
+    String getSummonerID() {
         return summonerID;
     }
 
@@ -201,7 +201,7 @@ public class OrderBoost {
         this.summonerID = summonerID;
     }
 
-    public String getLolUsername() {
+    String getLolUsername() {
         return lolUsername;
     }
 
@@ -217,7 +217,7 @@ public class OrderBoost {
         this.lolPassword = lolPassword;
     }
 
-    public Region getRegion() {
+    Region getRegion() {
         return region;
     }
 

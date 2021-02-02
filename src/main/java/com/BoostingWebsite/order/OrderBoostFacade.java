@@ -62,10 +62,14 @@ public class OrderBoostFacade {
                 .collect(Collectors.toList());
     }
 
-    public OrderBoost findActiveBoost() throws OrderBoostNotFoundException {
-
+    public OrderBoostDto findActiveBoost() throws OrderBoostNotFoundException {
         return orderBoostRepository
                 .findActiveBoost(applicationSession.getActualUser().getId())
+                .map(OrderBoost::toDto)
                 .orElseThrow(OrderBoostNotFoundException::new);
+    }
+
+    public boolean isActiveBoost(){
+        return orderBoostRepository.findByUser_IdOrBooster_IdAndStatus(applicationSession.getActualUser().getId(), applicationSession.getActualUser().getId(), EnumOrderStatus.NEW);
     }
 }

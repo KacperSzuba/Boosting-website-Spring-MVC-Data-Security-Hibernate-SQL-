@@ -10,7 +10,6 @@ import java.security.Principal;
 
 @Component
 public class ApplicationSession {
-/*
     private final UserFacade userFacade;
     private final HttpServletRequest request;
 
@@ -19,23 +18,18 @@ public class ApplicationSession {
         this.request = request;
     }
 
-
- */
     public UserDto getActualUser() {
-       // Principal principal = this.request.getUserPrincipal();
-      //  return userFacade.findByUsername(principal.getName()).toDto();
-        return UserDto.builder().build();
+        Principal principal = this.request.getUserPrincipal();
+        return userFacade.findByUsername(principal.getName()).toDto();
     }
 
     public RoleName getCurrentUserRole(UserDto userDto) {
-      //  return userFacade.getRoleName(userDto);
-        return null;
+        return userFacade.getRoleName(userDto);
     }
 
     public String getAppUrl() {
-    //    StringBuilder sb = new StringBuilder();
-    //    sb.append("http://").append(request.getServerName()).append(":").append(request.getServerPort()).append(request.getContextPath());
-      //  return sb.toString();
-        return null;
+        StringBuilder sb = new StringBuilder();
+        sb.append("http://").append(request.getServerName()).append(":").append(request.getServerPort()).append(request.getContextPath());
+        return sb.toString();
     }
 }
