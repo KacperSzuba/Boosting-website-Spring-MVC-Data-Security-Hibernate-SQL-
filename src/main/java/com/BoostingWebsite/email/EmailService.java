@@ -1,6 +1,6 @@
 package com.BoostingWebsite.email;
 
-import com.BoostingWebsite.account.user.User;
+import com.BoostingWebsite.account.User;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;

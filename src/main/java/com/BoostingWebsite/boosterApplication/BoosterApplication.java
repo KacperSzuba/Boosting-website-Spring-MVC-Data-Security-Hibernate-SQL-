@@ -1,6 +1,6 @@
 package com.BoostingWebsite.boosterApplication;
 
-import com.BoostingWebsite.order.Region;
+import com.BoostingWebsite.order.enumeration.Region;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @DynamicUpdate
 @Entity
 @Table(name = "booster_application")
-public class BoosterApplication {
+class BoosterApplication {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,7 +56,7 @@ public class BoosterApplication {
         return skype;
     }
 
-    public void setSkype(String skype) {
+    void setSkype(String skype) {
         this.skype = skype;
     }
 
@@ -64,7 +64,7 @@ public class BoosterApplication {
         return discord;
     }
 
-    public void setDiscord(String discord) {
+    void setDiscord(String discord) {
         this.discord = discord;
     }
 
@@ -72,7 +72,7 @@ public class BoosterApplication {
         return email;
     }
 
-    public void setEmail(String email) {
+    void setEmail(String email) {
         this.email = email;
     }
 
@@ -80,7 +80,7 @@ public class BoosterApplication {
         return opgg;
     }
 
-    public void setOpgg(String opgg) {
+    void setOpgg(String opgg) {
         this.opgg = opgg;
     }
 
@@ -88,7 +88,7 @@ public class BoosterApplication {
         return region;
     }
 
-    public void setRegion(Region region) {
+    void setRegion(Region region) {
         this.region = region;
     }
 
@@ -96,7 +96,7 @@ public class BoosterApplication {
         return leagueRank;
     }
 
-    public void setLeagueRank(String leagueRank) {
+    void setLeagueRank(String leagueRank) {
         this.leagueRank = leagueRank;
     }
 
@@ -112,7 +112,7 @@ public class BoosterApplication {
         return age;
     }
 
-    public void setAge(Integer age) {
+    void setAge(Integer age) {
         this.age = age;
     }
 
@@ -128,7 +128,7 @@ public class BoosterApplication {
         return bestFormOfContact;
     }
 
-    public void setBestFormOfContact(String bestFormOfContact) {
+    void setBestFormOfContact(String bestFormOfContact) {
         this.bestFormOfContact = bestFormOfContact;
     }
 

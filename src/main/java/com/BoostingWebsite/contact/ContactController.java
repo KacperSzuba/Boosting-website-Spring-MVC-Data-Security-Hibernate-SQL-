@@ -11,7 +11,7 @@ import javax.validation.Valid;
 
 import java.time.LocalDate;
 
-import static com.BoostingWebsite.utils.EmailValidator.validateEmail;
+import static com.BoostingWebsite.utils.EmailValidator.whetherEmailIsValid;
 
 @Controller
 @RequestMapping("/contact-us")
@@ -34,7 +34,7 @@ class ContactController {
         if (result.hasErrors()) {
             return "contact-us";
         } else {
-            if (validateEmail(contact.getEmail())) {
+            if (whetherEmailIsValid(contact.getEmail())) {
                 contact.setDate(LocalDate.now());
                 contactRepository.save(contact);
                 return "redirect:/";

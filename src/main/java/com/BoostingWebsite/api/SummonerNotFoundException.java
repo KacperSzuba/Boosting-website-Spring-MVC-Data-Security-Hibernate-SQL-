@@ -1,4 +1,4 @@
 package com.BoostingWebsite.api;
 
-public class SummonerNotFoundException extends RuntimeException{
+class SummonerNotFoundException extends RuntimeException{
 }

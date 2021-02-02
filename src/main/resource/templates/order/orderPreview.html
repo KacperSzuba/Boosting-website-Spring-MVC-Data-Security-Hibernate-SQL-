@@ -136,8 +136,8 @@
                         </div>
 
                         <p class="tier-division">
-                            <span th:text="${orderBoost.currentLeague.tier.name} + ' '"></span>
-                            <span th:text=" ${orderBoost.currentLeague.division.name}"></span>
+                            <span th:text="${orderBoost.currentLeagueDto.tier.name} + ' '"></span>
+                            <span th:text=" ${orderBoost.currentLeagueDto.division.name}"></span>
                         </p>
                     </div>
 
@@ -151,9 +151,9 @@
                         </div>
 
                         <p class="tier-division">
-                            <span th:text="${currentLeague.tier.name} + ' '"></span>
-                            <span th:text="${currentLeague.division.name} + ' '"></span>
-                            <span th:text="${currentLeague.leaguePoints} + ' LP'"></span>
+                            <span th:text="${currentLeagueDto.tier.name} + ' '"></span>
+                            <span th:text="${currentLeagueDto.division.name} + ' '"></span>
+                            <span th:text="${currentLeagueDto.leaguePoints} + ' LP'"></span>
                         </p>
                     </div>
 
@@ -167,8 +167,8 @@
                         </div>
 
                         <p class="tier-division">
-                            <span th:text="${orderBoost.destinationLeague.tier.name} + ' '"></span>
-                            <span th:text=" ${orderBoost.destinationLeague.division.name}"></span>
+                            <span th:text="${orderBoost.destinationLeagueDto.tier.name} + ' '"></span>
+                            <span th:text=" ${orderBoost.destinationLeagueDto.division.name}"></span>
                         </p>
                     </div>
                 </section>

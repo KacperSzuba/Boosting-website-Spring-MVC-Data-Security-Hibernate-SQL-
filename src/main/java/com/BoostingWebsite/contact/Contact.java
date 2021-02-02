@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 @Entity
 @DynamicUpdate
-public class Contact {
+class Contact {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,13 +37,6 @@ public class Contact {
     public Contact() {
     }
 
-    public Contact(String name, String email, String subject, String question) {
-        this.name = name;
-        this.email = email;
-        this.subject = subject;
-        this.question = question;
-    }
-
     public Long getId() {
         return id;
     }
@@ -52,7 +45,7 @@ public class Contact {
         return name;
     }
 
-    public void setName(String name) {
+    void setName(String name) {
         this.name = name;
     }
 
@@ -60,7 +53,7 @@ public class Contact {
         return email;
     }
 
-    public void setEmail(String email) {
+    void setEmail(String email) {
         this.email = email;
     }
 
@@ -68,7 +61,7 @@ public class Contact {
         return subject;
     }
 
-    public void setSubject(String subject) {
+    void setSubject(String subject) {
         this.subject = subject;
     }
 
@@ -84,7 +77,7 @@ public class Contact {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    void setDate(LocalDate date) {
         this.date = date;
     }
 }

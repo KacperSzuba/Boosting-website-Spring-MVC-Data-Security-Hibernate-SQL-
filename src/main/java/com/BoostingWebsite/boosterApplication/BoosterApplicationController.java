@@ -1,6 +1,6 @@
 package com.BoostingWebsite.boosterApplication;
 
-import com.BoostingWebsite.order.Region;
+import com.BoostingWebsite.order.enumeration.Region;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

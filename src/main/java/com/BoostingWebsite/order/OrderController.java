@@ -1,6 +1,11 @@
 package com.BoostingWebsite.order;
 
-import com.BoostingWebsite.order.entity.OrderBoost;
+import com.BoostingWebsite.order.enumeration.Division;
+import com.BoostingWebsite.order.enumeration.LPGainPerWin;
+import com.BoostingWebsite.order.enumeration.Points;
+import com.BoostingWebsite.order.enumeration.QueueType;
+import com.BoostingWebsite.order.enumeration.Region;
+import com.BoostingWebsite.order.enumeration.Tier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,10 +20,10 @@ import javax.validation.Valid;
 @RequestMapping("/order")
 class OrderController {
 
-    private final OrderBoostService orderBoostService;
+    private final OrderBoostFacade orderBoostFacade;
 
-    public OrderController(OrderBoostService orderBoostService) {
-        this.orderBoostService = orderBoostService;
+    public OrderController(OrderBoostFacade orderBoostFacade) {
+        this.orderBoostFacade = orderBoostFacade;
     }
 
     @GetMapping
@@ -30,10 +35,10 @@ class OrderController {
         model.addAttribute("LPGainPerWin", LPGainPerWin.values());
         model.addAttribute("queueType", QueueType.values());
         model.addAttribute("defaultSelectedQueueType", QueueType.RANKED_SOLO_DUO.getName());
-        model.addAttribute("extras", orderBoostService.getOrderExtras());
+        model.addAttribute("extras", orderBoostFacade.getOrderExtras());
 
         try {
-            model.addAttribute("whetherUserHasOrder", orderBoostService.whetherUserHasOrder());
+            model.addAttribute("whetherUserHasOrder", orderBoostFacade.whetherUserHasOrder());
         }
         catch (NullPointerException ex){
             return "redirect:/login";
@@ -50,8 +55,8 @@ class OrderController {
             return "order/order";
         }
         try {
-            if (orderBoostService.isLeagueIsValid(orderBoost)) {
-                orderBoostService.makeOrder(orderBoost);
+            if (orderBoostFacade.isLeagueIsValid(orderBoost)) {
+                orderBoostFacade.makeOrder(orderBoost);
                 return "redirect:/";
             } else {
                 return "order/order";

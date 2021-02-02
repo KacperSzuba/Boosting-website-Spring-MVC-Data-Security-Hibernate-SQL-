@@ -135,7 +135,7 @@
                             <h3>Tier</h3>
 
                             <div class="select-wrap">
-                                <select id="currentTier" class="custom-select" th:field="*{currentLeague.tier}">
+                                <select id="currentTier" class="custom-select" th:field="*{currentLeagueDto.tier}">
                                     <option th:each="currentTier : ${tiers}" th:value="${currentTier}" th:text="${currentTier.name}"></option>
                                 </select>
                             </div>
@@ -145,7 +145,7 @@
                             <h3>Division</h3>
 
                             <div class="select-wrap">
-                                <select id="currentDivision" class="custom-select" th:field="*{currentLeague.division}">
+                                <select id="currentDivision" class="custom-select" th:field="*{currentLeagueDto.division}">
                                     <option th:each="currentDivision : ${divisions}" th:value="${currentDivision}" th:text="${currentDivision.name}"></option>
                                 </select>
                             </div>
@@ -155,7 +155,7 @@
                             <h3>Points</h3>
 
                             <div class="select-wrap">
-                                <select id="currentPoints" class="custom-select" th:field="*{currentLeague.points}">
+                                <select id="currentPoints" class="custom-select" th:field="*{currentLeagueDto.points}">
                                     <option th:each="currentPoints : ${points}" th:value="${currentPoints}" th:text="${currentPoints.name}"></option>
                                 </select>
                             </div>
@@ -185,7 +185,7 @@
                             <h3>Tier</h3>
 
                             <div class="select-wrap">
-                                <select id="destinationTier" class="custom-select" th:field="*{destinationLeague.tier}">
+                                <select id="destinationTier" class="custom-select" th:field="*{destinationLeagueDto.tier}">
                                     <option th:each="destinationTier : ${tiers}" th:value="${destinationTier}" th:text="${destinationTier.name}"></option>
                                 </select>
                             </div>
@@ -195,7 +195,7 @@
                             <h3>Division</h3>
 
                             <div class="select-wrap">
-                                <select id="destinationDivision" class="custom-select" th:field="*{destinationLeague.division}">
+                                <select id="destinationDivision" class="custom-select" th:field="*{destinationLeagueDto.division}">
                                     <option th:each="destinationDivision : ${divisions}" th:value="${destinationDivision}" th:text="${destinationDivision.name}"></option>
                                 </select>
                             </div>

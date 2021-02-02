@@ -128,8 +128,8 @@
                     <div class="wrap-image">
                         <img src="../images/Iron/Iron4.png" alt="Started league image">
                         <p class="league">
-                            <span th:text="${order.currentLeague.tier.name} + ' '"></span>
-                            <span th:text=" ${order.currentLeague.division.name}"></span>
+                            <span th:text="${order.currentLeagueDto.tier.name} + ' '"></span>
+                            <span th:text=" ${order.currentLeagueDto.division.name}"></span>
                         </p>
                     </div>
 
@@ -140,8 +140,8 @@
                     <div class="wrap-image">
                         <img src="../images/Iron/Iron4.png" alt="Desire league image">
                         <p class="league">
-                            <span th:text="${order.destinationLeague.tier.name} + ' '"></span>
-                            <span th:text=" ${order.destinationLeague.division.name}"></span>
+                            <span th:text="${order.destinationLeagueDto.tier.name} + ' '"></span>
+                            <span th:text=" ${order.destinationLeagueDto.division.name}"></span>
                         </p>
                     </div>
                 </section>
