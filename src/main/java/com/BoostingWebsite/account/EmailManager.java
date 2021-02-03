@@ -1,8 +1,7 @@
 package com.BoostingWebsite.account;
 
 import com.BoostingWebsite.account.exception.DataMismatchException;
-import com.BoostingWebsite.auth.TokenRecorder;
-import com.BoostingWebsite.auth.TokenValidator;
+import com.BoostingWebsite.auth.UserTokenFacade;
 import com.BoostingWebsite.email.EmailService;
 import com.BoostingWebsite.utils.ApplicationSession;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,26 +19,24 @@ import static com.BoostingWebsite.account.EmailValidator.whetherTheEmailsAreTheS
 class EmailManager {
     private final ApplicationSession applicationSession;
     private final EmailService emailService;
-    private final TokenRecorder tokenRecorder;
-    private final TokenValidator tokenValidator;
+    private final UserTokenFacade userTokenFacade;
     private final UserFacade userFacade;
 
-    EmailManager(ApplicationSession applicationSession, EmailService emailService, TokenRecorder tokenRecorder, TokenValidator tokenValidator, UserFacade userFacade) {
+    EmailManager(ApplicationSession applicationSession, EmailService emailService, UserTokenFacade userTokenFacade, UserFacade userFacade) {
         this.applicationSession = applicationSession;
         this.emailService = emailService;
-        this.tokenRecorder = tokenRecorder;
-        this.tokenValidator = tokenValidator;
+        this.userTokenFacade = userTokenFacade;
         this.userFacade = userFacade;
     }
 
     void confirmEmail(String contextPath, String token, User user) {
         String url = contextPath + "/register/confirm?id=" + user.getId() + "&token=" + token;
-        tokenRecorder.saveOrUpdateToken(token, user);
+        userTokenFacade.saveOrUpdateToken(token, user);
         emailService.sendEmail(user.getEmail(), "Confirm email", " \r\n" + url);
     }
 
     String emailTokenConfirmation(Long id, String token) {
-        String tempToken = tokenValidator.validateToken(id, token);
+        String tempToken = userTokenFacade.validateToken(id, token);
         if (tempToken != null) {
             return tempToken;
         } else {

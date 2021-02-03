@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "password_reset_token")
-public class UserToken {
+class UserToken {
     private static final int EXPIRATION = 60 * 24;
 
     @Id
@@ -24,7 +24,7 @@ public class UserToken {
     private Date expiryDate;
 
     @PersistenceConstructor
-    public UserToken() {
+    protected UserToken() {
     }
 
     UserToken(final String token) {
@@ -38,23 +38,23 @@ public class UserToken {
         this.expiryDate = calculateExpiryDate(EXPIRATION);
     }
 
-    public Long getId() {
+    Long getId() {
         return id;
     }
 
-    public String getToken() {
+    String getToken() {
         return token;
     }
 
-    public void setToken(final String token) {
+    void setToken(final String token) {
         this.token = token;
     }
 
-    public User getUser() {
+    User getUser() {
         return user;
     }
 
-    public void setUser(final User user) {
+    void setUser(final User user) {
         this.user = user;
     }
 
@@ -132,5 +132,14 @@ public class UserToken {
                 ", user=" + user +
                 ", expiryDate=" + expiryDate +
                 '}';
+    }
+
+    UserTokenDto toDto(){
+        return UserTokenDto.builder()
+                .withId(id)
+                .withToken(token)
+                .withUser(user)
+                .withExpiryDate(expiryDate)
+                .build();
     }
 }

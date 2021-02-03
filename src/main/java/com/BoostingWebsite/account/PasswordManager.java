@@ -1,10 +1,7 @@
 package com.BoostingWebsite.account;
 
 import com.BoostingWebsite.account.exception.DataMismatchException;
-import com.BoostingWebsite.auth.TokenRecorder;
-import com.BoostingWebsite.auth.TokenValidator;
-import com.BoostingWebsite.auth.UserToken;
-import com.BoostingWebsite.auth.UserTokenRepository;
+import com.BoostingWebsite.auth.UserTokenFacade;
 import com.BoostingWebsite.email.EmailService;
 import com.BoostingWebsite.utils.ApplicationSession;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,28 +24,23 @@ class PasswordManager {
     private final PasswordEncoder passwordEncoder;
     private final UserFacade userFacade;
     private final ApplicationSession applicationSession;
-    private final TokenRecorder tokenRecorder;
-    private final TokenValidator tokenValidator;
+    private final UserTokenFacade userTokenFacade;
     private final EmailService emailService;
-    private final UserTokenRepository userTokenRepository;
 
-    PasswordManager(PasswordEncoder passwordEncoder, UserFacade userFacade, ApplicationSession applicationSession, TokenRecorder tokenRecorder,
-                    TokenValidator tokenValidator, EmailService emailService, UserTokenRepository userTokenRepository) {
+    PasswordManager(PasswordEncoder passwordEncoder, UserFacade userFacade, ApplicationSession applicationSession, UserTokenFacade tokenRecorder, EmailService emailService) {
         this.passwordEncoder = passwordEncoder;
         this.userFacade = userFacade;
         this.applicationSession = applicationSession;
-        this.tokenRecorder = tokenRecorder;
-        this.tokenValidator = tokenValidator;
+        this.userTokenFacade = tokenRecorder;
         this.emailService = emailService;
-        this.userTokenRepository = userTokenRepository;
     }
 
     String validateResetPasswordToken(Long id, String token) {
-        String tempToken = tokenValidator.validateToken(id, token);
+        String tempToken = userTokenFacade.validateToken(id, token);
         if (tempToken != null) {
             return tempToken;
         } else {
-            User user = userTokenRepository.findByToken(token).getUser();
+            User user = userTokenFacade.findByToken(token).getUser();
             Authentication auth = new UsernamePasswordAuthenticationToken(user, null, Collections.singletonList(
                     new SimpleGrantedAuthority("CHANGE_PASSWORD_PRIVILEGE")));
             SecurityContextHolder.getContext().setAuthentication(auth);
@@ -69,9 +61,8 @@ class PasswordManager {
         Optional<User> user = userFacade.findByEmail(email);
 
         if (whetherEmailIsValid(email) && user.isPresent()) {
-            tokenRecorder.saveOrUpdateToken(getToken(), user.get());
-            UserToken userToken = userTokenRepository.findByUser(user.get()).get();
-            String token = userToken.getToken();
+            userTokenFacade.saveOrUpdateToken(getToken(), user.get());
+            String token = userTokenFacade.findByUser(user.get()).getToken();
             emailService.constructResetTokenEmail(applicationSession.getAppUrl(), token, user.get());
         }
 

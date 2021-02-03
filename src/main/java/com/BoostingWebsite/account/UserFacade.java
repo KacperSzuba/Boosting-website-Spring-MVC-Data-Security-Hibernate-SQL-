@@ -1,7 +1,7 @@
 package com.BoostingWebsite.account;
 
 import com.BoostingWebsite.account.exception.UserNotFoundException;
-import com.BoostingWebsite.auth.UserTokenRepository;
+import com.BoostingWebsite.auth.UserTokenFacade;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +13,16 @@ public class UserFacade {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final UserRoleFacade userRoleFacade;
-    private final UserTokenRepository userTokenRepository;
     private final UserValidator userValidator;
+    private final UserTokenFacade userTokenFacade;
 
-    UserFacade(PasswordEncoder passwordEncoder, UserRepository userRepository, UserRoleFacade userRoleFacade, UserTokenRepository userTokenRepository,
-               UserValidator userValidator) {
+    UserFacade(PasswordEncoder passwordEncoder, UserRepository userRepository, UserRoleFacade userRoleFacade,
+               UserValidator userValidator, UserTokenFacade userTokenFacade) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.userRoleFacade = userRoleFacade;
-        this.userTokenRepository = userTokenRepository;
         this.userValidator = userValidator;
+        this.userTokenFacade = userTokenFacade;
     }
 
     public User findById(Long id){
@@ -57,7 +57,7 @@ public class UserFacade {
     }
 
     public User findUserByToken(String token){
-        return userTokenRepository.findByToken(token).getUser();
+        return userTokenFacade.findByToken(token).getUser();
     }
 
     public User findByUsername(String username){
