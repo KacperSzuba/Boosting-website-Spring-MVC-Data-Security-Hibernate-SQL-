@@ -1,4 +1,4 @@
-package com.BoostingWebsite.account.userRole;
+package com.BoostingWebsite.account;
 
 import org.springframework.stereotype.Service;
 

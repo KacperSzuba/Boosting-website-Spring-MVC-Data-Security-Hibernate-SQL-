@@ -1,8 +1,5 @@
-package com.BoostingWebsite.account.password;
+package com.BoostingWebsite.account;
 
-import com.BoostingWebsite.account.User;
-import com.BoostingWebsite.account.UserFacade;
-import com.BoostingWebsite.account.dto.UserDto;
 import com.BoostingWebsite.account.exception.DataMismatchException;
 import com.BoostingWebsite.auth.TokenRecorder;
 import com.BoostingWebsite.auth.TokenValidator;
@@ -21,12 +18,12 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.BoostingWebsite.account.password.PasswordValidator.isPasswordLengthSufficient;
-import static com.BoostingWebsite.account.password.PasswordValidator.whetherThePasswordsAreTheSame;
+import static com.BoostingWebsite.account.PasswordValidator.isPasswordLengthSufficient;
+import static com.BoostingWebsite.account.PasswordValidator.whetherThePasswordsAreTheSame;
 import static com.BoostingWebsite.utils.EmailValidator.whetherEmailIsValid;
 
 @Service
-public class PasswordManager {
+class PasswordManager {
     private final PasswordEncoder passwordEncoder;
     private final UserFacade userFacade;
     private final ApplicationSession applicationSession;
@@ -46,7 +43,7 @@ public class PasswordManager {
         this.userTokenRepository = userTokenRepository;
     }
 
-    public String validateResetPasswordToken(Long id, String token) {
+    String validateResetPasswordToken(Long id, String token) {
         String tempToken = tokenValidator.validateToken(id, token);
         if (tempToken != null) {
             return tempToken;
@@ -59,7 +56,7 @@ public class PasswordManager {
         }
     }
 
-    public void resetPassword(String password, String confirmPassword) throws DataMismatchException {
+    void resetPassword(String password, String confirmPassword) throws DataMismatchException {
         if (checkIfPasswordsAreTheSameAndHaveRequiredLength(password, confirmPassword)) {
             UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             userFacade.changePassword(user, passwordEncoder.encode(password));
@@ -68,7 +65,7 @@ public class PasswordManager {
         throw new DataMismatchException("An unknown error has occurred!");
     }
 
-    public void remindPassword(String email) throws DataMismatchException {
+    void remindPassword(String email) throws DataMismatchException {
         Optional<User> user = userFacade.findByEmail(email);
 
         if (whetherEmailIsValid(email) && user.isPresent()) {
@@ -81,11 +78,11 @@ public class PasswordManager {
         throw new DataMismatchException("This e-mail is invalid or already exists in our database!");
     }
 
-    public String getToken() {
+    String getToken() {
         return UUID.randomUUID().toString();
     }
 
-    public void changePassword(String currentPassword, String password, String confirmPassword) throws DataMismatchException {
+    void changePassword(String currentPassword, String password, String confirmPassword) throws DataMismatchException {
         if (checkIfPasswordEnteredMatchesCurrent(currentPassword) && checkIfPasswordsAreTheSameAndHaveRequiredLength(password, confirmPassword)) {
             userFacade.changePassword(loggedInUser(), passwordEncoder.encode(password));
         }

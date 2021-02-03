@@ -1,4 +1,4 @@
-package com.BoostingWebsite.account.mail;
+package com.BoostingWebsite.account;
 
 import com.BoostingWebsite.account.exception.DataMismatchException;
 import org.springframework.stereotype.Controller;

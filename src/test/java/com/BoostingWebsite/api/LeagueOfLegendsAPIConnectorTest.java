@@ -1,6 +1,5 @@
-package com.BoostingWebsite;
+package com.BoostingWebsite.api;
 
-import com.BoostingWebsite.api.LeagueOfLegendsAPIConnector;
 import com.BoostingWebsite.order.enumeration.Region;
 import com.BoostingWebsite.order.enumeration.Tier;
 import org.junit.jupiter.api.BeforeEach;

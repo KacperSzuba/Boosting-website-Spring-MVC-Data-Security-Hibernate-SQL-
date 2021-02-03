@@ -1,7 +1,5 @@
 package com.BoostingWebsite.account;
 
-import com.BoostingWebsite.account.dto.UserDto;
-import com.BoostingWebsite.account.userRole.UserRole;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;

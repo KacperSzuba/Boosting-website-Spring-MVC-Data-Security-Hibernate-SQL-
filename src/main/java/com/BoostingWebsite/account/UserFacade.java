@@ -1,10 +1,6 @@
 package com.BoostingWebsite.account;
 
-import com.BoostingWebsite.account.dto.UserDto;
 import com.BoostingWebsite.account.exception.UserNotFoundException;
-import com.BoostingWebsite.account.userRole.RoleName;
-import com.BoostingWebsite.account.userRole.UserRole;
-import com.BoostingWebsite.account.userRole.UserRoleFacade;
 import com.BoostingWebsite.auth.UserTokenRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

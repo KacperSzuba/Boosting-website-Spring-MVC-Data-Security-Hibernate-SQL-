@@ -1,4 +1,4 @@
-package com.BoostingWebsite.account.loginHistory;
+package com.BoostingWebsite.account;
 
 import org.springframework.data.repository.CrudRepository;
 

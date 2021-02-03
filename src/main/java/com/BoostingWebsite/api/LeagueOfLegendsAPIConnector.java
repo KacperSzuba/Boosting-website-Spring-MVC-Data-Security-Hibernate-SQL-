@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LeagueOfLegendsAPIConnector {
+class LeagueOfLegendsAPIConnector {
     private final String region;
     private final String username;
     private final String summonerId;
@@ -23,14 +23,14 @@ public class LeagueOfLegendsAPIConnector {
     private static final String LOL_SUMMONER_ID = ".api.riotgames.com/lol/league/v4/entries/by-summoner/";
     private static final String API_KEY = "?api_key=";
 
-    public LeagueOfLegendsAPIConnector(String username, Region region) {
+    LeagueOfLegendsAPIConnector(String username, Region region) {
         this.username = username;
         this.region = region.getValue();
         summonerId = retrieveSummonerId();
         apiKeyValue = null;
     }
 
-    public LeagueOfLegendsAPIConnector(String apiKeyValue, String username, Region region) {
+    LeagueOfLegendsAPIConnector(String apiKeyValue, String username, Region region) {
         this.username = username;
         this.region = region.getValue();
         summonerId = retrieveSummonerId();
@@ -75,32 +75,32 @@ public class LeagueOfLegendsAPIConnector {
         return retrieveSummonerLeague().get(queueType);
     }
 
-    public String getActualSoloDuoTier() throws IOException {
+    String getActualSoloDuoTier() throws IOException {
         String tier = getJsonObject("RANKED_SOLO_5x5").get("tier").toString();
         return removeQuotes(tier);
     }
 
-    public String getActualSoloDuoDivision() throws IOException {
+    String getActualSoloDuoDivision() throws IOException {
         String division = getJsonObject("RANKED_SOLO_5x5").get("rank").toString();
         return removeQuotes(division);
     }
 
-    public String getActualSoloDuoLeaguePoints() throws IOException {
+    String getActualSoloDuoLeaguePoints() throws IOException {
         String leaguePoints = getJsonObject("RANKED_SOLO_5x5").get("leaguePoints").toString();
         return removeQuotes(leaguePoints);
     }
 
-    public String getActual5vs5Tier() throws IOException {
+    String getActual5vs5Tier() throws IOException {
         String tier = getJsonObject("RANKED_FLEX_SR").get("tier").toString();
         return removeQuotes(tier);
     }
 
-    public String getActual5vs5Division() throws IOException {
+    String getActual5vs5Division() throws IOException {
         String division = getJsonObject("RANKED_FLEX_SR").get("rank").toString();
         return removeQuotes(division);
     }
 
-    public String getActual5vs5LeaguePoints() throws IOException {
+    String getActual5vs5LeaguePoints() throws IOException {
         String leaguePoints = getJsonObject("RANKED_FLEX_SR").get("leaguePoints").toString();
         return removeQuotes(leaguePoints);
     }

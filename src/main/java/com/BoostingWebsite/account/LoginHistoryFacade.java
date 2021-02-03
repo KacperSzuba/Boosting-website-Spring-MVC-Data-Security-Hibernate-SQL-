@@ -1,6 +1,5 @@
-package com.BoostingWebsite.account.loginHistory;
+package com.BoostingWebsite.account;
 
-import com.BoostingWebsite.account.User;
 import org.springframework.stereotype.Service;
 
 @Service

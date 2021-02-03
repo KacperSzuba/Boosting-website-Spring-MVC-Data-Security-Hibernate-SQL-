@@ -1,8 +1,5 @@
-package com.BoostingWebsite.account.mail;
+package com.BoostingWebsite.account;
 
-import com.BoostingWebsite.account.User;
-import com.BoostingWebsite.account.UserFacade;
-import com.BoostingWebsite.account.dto.UserDto;
 import com.BoostingWebsite.account.exception.DataMismatchException;
 import com.BoostingWebsite.auth.TokenRecorder;
 import com.BoostingWebsite.auth.TokenValidator;
@@ -17,10 +14,10 @@ import com.BoostingWebsite.utils.EmailValidator;
 
 import java.util.Collections;
 
-import static com.BoostingWebsite.account.mail.EmailValidator.whetherTheEmailsAreTheSame;
+import static com.BoostingWebsite.account.EmailValidator.whetherTheEmailsAreTheSame;
 
 @Service
-public class EmailManager {
+class EmailManager {
     private final ApplicationSession applicationSession;
     private final EmailService emailService;
     private final TokenRecorder tokenRecorder;
@@ -35,13 +32,13 @@ public class EmailManager {
         this.userFacade = userFacade;
     }
 
-    public void confirmEmail(String contextPath, String token, User user) {
+    void confirmEmail(String contextPath, String token, User user) {
         String url = contextPath + "/register/confirm?id=" + user.getId() + "&token=" + token;
         tokenRecorder.saveOrUpdateToken(token, user);
         emailService.sendEmail(user.getEmail(), "Confirm email", " \r\n" + url);
     }
 
-    public String emailTokenConfirmation(Long id, String token) {
+    String emailTokenConfirmation(Long id, String token) {
         String tempToken = tokenValidator.validateToken(id, token);
         if (tempToken != null) {
             return tempToken;
@@ -53,7 +50,7 @@ public class EmailManager {
         }
     }
 
-    public void changeEmail(String currentEmail, String email, String confirmEmail) throws DataMismatchException {
+    void changeEmail(String currentEmail, String email, String confirmEmail) throws DataMismatchException {
         if (checkIfEmailEnteredMatchesCurrent(currentEmail) && checkIfEmailIsCorrect(email, confirmEmail) && checkIfEmailIsNotAlreadyInDatabase(currentEmail)) {
             userFacade.changeEmail(loggedInUser(), email);
         }

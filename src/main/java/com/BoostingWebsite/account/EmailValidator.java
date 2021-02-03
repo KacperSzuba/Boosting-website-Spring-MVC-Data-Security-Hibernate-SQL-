@@ -1,4 +1,4 @@
-package com.BoostingWebsite.account.mail;
+package com.BoostingWebsite.account;
 
 class EmailValidator {
     static boolean whetherTheEmailsAreTheSame(String email, String confirmEmail) {

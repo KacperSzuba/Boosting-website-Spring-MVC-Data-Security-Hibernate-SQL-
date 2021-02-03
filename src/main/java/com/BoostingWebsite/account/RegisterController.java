@@ -1,6 +1,5 @@
 package com.BoostingWebsite.account;
 
-import com.BoostingWebsite.account.mail.EmailManager;
 import com.BoostingWebsite.utils.ApplicationSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,4 +1,4 @@
-package com.BoostingWebsite.account.password;
+package com.BoostingWebsite.account;
 
 class PasswordValidator {
     static boolean isPasswordLengthSufficient(String password) {

@@ -1,4 +1,4 @@
-package com.BoostingWebsite.account.userRole;
+package com.BoostingWebsite.account;
 
 import org.hibernate.annotations.Immutable;
 import org.springframework.data.annotation.PersistenceConstructor;
@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user_roles")
 @Immutable
-public class UserRole {
+class UserRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,18 +18,18 @@ public class UserRole {
     private RoleName roleName;
 
     @PersistenceConstructor
-    public UserRole() {
+    UserRole() {
     }
 
-    public UserRole(RoleName roleName) {
+    UserRole(RoleName roleName) {
         this.roleName = roleName;
     }
 
-    public int getId() {
+    int getId() {
         return id;
     }
 
-    public RoleName getRoleName() {
+    RoleName getRoleName() {
         return roleName;
     }
 

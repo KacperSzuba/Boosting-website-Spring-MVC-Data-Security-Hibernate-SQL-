@@ -1,6 +1,5 @@
 package com.BoostingWebsite.account;
 
-import com.BoostingWebsite.account.userRole.UserRole;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

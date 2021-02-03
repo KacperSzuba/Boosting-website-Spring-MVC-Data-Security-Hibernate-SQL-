@@ -1,6 +1,4 @@
-package com.BoostingWebsite.account.dto;
-
-import com.BoostingWebsite.account.userRole.UserRole;
+package com.BoostingWebsite.account;
 
 import java.util.List;
 

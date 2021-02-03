@@ -1,6 +1,5 @@
-package com.BoostingWebsite.account.password;
+package com.BoostingWebsite.account;
 
-import com.BoostingWebsite.account.UserFacade;
 import com.BoostingWebsite.account.exception.DataMismatchException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,4 +1,4 @@
-package com.BoostingWebsite.account.userRole;
+package com.BoostingWebsite.account;
 
 public enum RoleName {
     ROLE_USER,
