@@ -1,6 +1,6 @@
 package com.BoostingWebsite.order.message.dto;
 
-import com.BoostingWebsite.account.User;
+import org.springframework.data.annotation.Immutable;
 import org.springframework.data.annotation.PersistenceConstructor;
 
 import javax.persistence.Column;
@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "messages")
+@Immutable
 public class SimpleMessageDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

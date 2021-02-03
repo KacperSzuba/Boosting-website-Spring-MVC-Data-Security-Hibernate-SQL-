@@ -13,8 +13,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Immutable
 @Table(name = "consts")
+@Immutable
 class Const {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,17 +26,25 @@ class Const {
     private EnumConst enumConst;
 
     @NotNull
-    private String name;
+    private String value;
 
     Long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    EnumConst getConst(){
+        return enumConst;
     }
 
-    public EnumConst getConst(){
-        return enumConst;
+    String getValue(){
+        return value;
+    }
+
+    ConstDto toDto(){
+        return ConstDto.builder()
+                .withId(id)
+                .withEnumConst(enumConst)
+                .withValue(value)
+                .build();
     }
 }

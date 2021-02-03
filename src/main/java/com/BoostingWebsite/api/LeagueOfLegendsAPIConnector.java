@@ -17,6 +17,7 @@ public class LeagueOfLegendsAPIConnector {
     private final String region;
     private final String username;
     private final String summonerId;
+    private final String apiKeyValue;
     private static final String HTTPS =  "https://";
     private static final String LOL_SUMMONER_BY_NAME = ".api.riotgames.com/lol/summoner/v4/summoners/by-name/";
     private static final String LOL_SUMMONER_ID = ".api.riotgames.com/lol/league/v4/entries/by-summoner/";
@@ -26,6 +27,14 @@ public class LeagueOfLegendsAPIConnector {
         this.username = username;
         this.region = region.getValue();
         summonerId = retrieveSummonerId();
+        apiKeyValue = null;
+    }
+
+    public LeagueOfLegendsAPIConnector(String apiKeyValue, String username, Region region) {
+        this.username = username;
+        this.region = region.getValue();
+        summonerId = retrieveSummonerId();
+        this.apiKeyValue = apiKeyValue;
     }
 
     private String retrieveSummonerId(){
@@ -107,7 +116,7 @@ public class LeagueOfLegendsAPIConnector {
         builder.append(apiLink);
         builder.append(user);
         builder.append(API_KEY);
-        builder.append("RGAPI-1d9c9692-9690-4ac5-92a3-298b131c0040");
+        builder.append(apiKeyValue);
 
         return builder.toString();
     }
