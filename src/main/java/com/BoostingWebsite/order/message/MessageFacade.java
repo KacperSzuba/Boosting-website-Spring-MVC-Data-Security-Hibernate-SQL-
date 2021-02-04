@@ -15,7 +15,7 @@ public class MessageFacade {
     private final OrderBoostFacade orderBoostFacade;
     private final MessageFactory messageFactory;
 
-    public MessageFacade(MessageRepository messageRepository, OrderBoostFacade orderBoostFacade, MessageFactory messageFactory) {
+    public MessageFacade(final MessageRepository messageRepository, final OrderBoostFacade orderBoostFacade, final MessageFactory messageFactory) {
         this.messageRepository = messageRepository;
         this.orderBoostFacade = orderBoostFacade;
         this.messageFactory = messageFactory;

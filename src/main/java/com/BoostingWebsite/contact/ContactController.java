@@ -19,7 +19,7 @@ class ContactController {
 
     private final ContactRepository contactRepository;
 
-    ContactController(ContactRepository contactRepository) {
+    ContactController(final ContactRepository contactRepository) {
         this.contactRepository = contactRepository;
     }
 

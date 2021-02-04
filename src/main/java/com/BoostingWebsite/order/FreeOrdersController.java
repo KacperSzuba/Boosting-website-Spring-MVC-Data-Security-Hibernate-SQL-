@@ -11,7 +11,7 @@ class FreeOrdersController {
 
     private final OrderBoostFacade orderBoostFacade;
 
-    FreeOrdersController(OrderBoostFacade orderBoostFacade) {
+    FreeOrdersController(final OrderBoostFacade orderBoostFacade) {
         this.orderBoostFacade = orderBoostFacade;
     }
 

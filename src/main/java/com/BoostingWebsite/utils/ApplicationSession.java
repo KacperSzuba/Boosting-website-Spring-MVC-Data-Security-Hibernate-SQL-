@@ -13,7 +13,7 @@ public class ApplicationSession {
     private final UserFacade userFacade;
     private final HttpServletRequest request;
 
-    public ApplicationSession(UserFacade userFacade, HttpServletRequest request) {
+    public ApplicationSession(final UserFacade userFacade, final HttpServletRequest request) {
         this.userFacade = userFacade;
         this.request = request;
     }

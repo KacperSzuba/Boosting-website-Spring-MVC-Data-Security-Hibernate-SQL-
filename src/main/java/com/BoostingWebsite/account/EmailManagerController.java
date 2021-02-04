@@ -13,7 +13,7 @@ class EmailManagerController {
 
     private final EmailManager emailManager;
 
-    EmailManagerController(EmailManager emailManager) {
+    EmailManagerController(final EmailManager emailManager) {
         this.emailManager = emailManager;
     }
 

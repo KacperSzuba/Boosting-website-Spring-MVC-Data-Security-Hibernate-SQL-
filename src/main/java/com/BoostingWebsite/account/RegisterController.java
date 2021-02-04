@@ -19,7 +19,7 @@ class RegisterController {
     private final EmailManager emailManager;
     private final ApplicationSession applicationSession;
 
-    RegisterController(UserFacade userFacade, EmailManager emailManager, ApplicationSession applicationSession) {
+    RegisterController(final UserFacade userFacade, final EmailManager emailManager, final ApplicationSession applicationSession) {
         this.userFacade = userFacade;
         this.emailManager = emailManager;
         this.applicationSession = applicationSession;

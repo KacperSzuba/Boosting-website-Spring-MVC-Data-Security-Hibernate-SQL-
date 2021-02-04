@@ -5,13 +5,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
-interface OrderBoostRepository extends CrudRepository<OrderBoost, Long> {
-    @Transactional
+public interface OrderBoostRepository extends CrudRepository<OrderBoost, Long> {
+
     @Query(value = "select orderboost from OrderBoost orderboost where (orderboost.user.id =:id or orderboost.booster.id=:id) and orderboost.status = 'NEW'")
     Optional<OrderBoost> findActiveBoost(@Param("id") Long id);
 

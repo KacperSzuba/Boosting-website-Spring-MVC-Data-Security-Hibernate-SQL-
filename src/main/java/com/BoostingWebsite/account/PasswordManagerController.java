@@ -13,7 +13,7 @@ class PasswordManagerController {
 
     private final PasswordManager passwordManager;
 
-    PasswordManagerController(PasswordManager passwordManager) {
+    PasswordManagerController(final PasswordManager passwordManager) {
         this.passwordManager = passwordManager;
     }
 

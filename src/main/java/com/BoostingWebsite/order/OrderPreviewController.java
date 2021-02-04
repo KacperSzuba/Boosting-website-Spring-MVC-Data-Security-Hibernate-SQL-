@@ -29,7 +29,8 @@ class OrderPreviewController {
     private final MessageFacade messageFacade;
     private final LeagueOfLegendsAPIFacade leagueOfLegendsAPIFacade;
 
-    OrderPreviewController(ApplicationSession applicationSession, OrderBoostFacade orderBoostFacade, MessageFacade messageFacade, LeagueOfLegendsAPIFacade leagueOfLegendsAPIFacade) {
+    OrderPreviewController(final ApplicationSession applicationSession, final OrderBoostFacade orderBoostFacade, final MessageFacade messageFacade,
+                           final LeagueOfLegendsAPIFacade leagueOfLegendsAPIFacade) {
         this.orderBoostFacade = orderBoostFacade;
         this.messageFacade = messageFacade;
         this.leagueOfLegendsAPIFacade = leagueOfLegendsAPIFacade;

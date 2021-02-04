@@ -7,7 +7,7 @@ public class LoginHistoryFacade {
 
     private final LoginHistoryRepository loginHistoryRepository;
 
-    public LoginHistoryFacade(LoginHistoryRepository loginHistoryRepository) {
+    public LoginHistoryFacade(final LoginHistoryRepository loginHistoryRepository) {
         this.loginHistoryRepository = loginHistoryRepository;
     }
 

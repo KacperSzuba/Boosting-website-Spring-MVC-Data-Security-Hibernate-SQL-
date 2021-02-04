@@ -28,8 +28,8 @@ class PasswordManager {
     private final EmailService emailService;
     private final SimpleUserDtoFactory simpleUserDtoFactory;
 
-    PasswordManager(PasswordEncoder passwordEncoder, UserFacade userFacade, ApplicationSession applicationSession, UserTokenFacade tokenRecorder,
-                    EmailService emailService, SimpleUserDtoFactory simpleUserDtoFactory) {
+    PasswordManager(final PasswordEncoder passwordEncoder, final UserFacade userFacade, final ApplicationSession applicationSession, final UserTokenFacade tokenRecorder,
+                    final EmailService emailService, final SimpleUserDtoFactory simpleUserDtoFactory) {
         this.passwordEncoder = passwordEncoder;
         this.userFacade = userFacade;
         this.applicationSession = applicationSession;

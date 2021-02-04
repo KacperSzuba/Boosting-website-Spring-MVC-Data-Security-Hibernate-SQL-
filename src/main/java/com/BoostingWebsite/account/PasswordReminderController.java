@@ -13,7 +13,7 @@ class PasswordReminderController {
 
     private final PasswordManager passwordManager;
 
-    PasswordReminderController(PasswordManager passwordManager) {
+    PasswordReminderController(final PasswordManager passwordManager) {
         this.passwordManager = passwordManager;
     }
 

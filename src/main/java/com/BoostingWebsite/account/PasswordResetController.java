@@ -14,7 +14,7 @@ class PasswordResetController {
 
     private final PasswordManager passwordManager;
 
-    PasswordResetController(PasswordManager passwordManager) {
+    PasswordResetController(final PasswordManager passwordManager) {
         this.passwordManager = passwordManager;
     }
 

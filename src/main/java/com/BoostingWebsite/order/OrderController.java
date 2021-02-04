@@ -22,7 +22,7 @@ class OrderController {
 
     private final OrderBoostFacade orderBoostFacade;
 
-    public OrderController(OrderBoostFacade orderBoostFacade) {
+    public OrderController(final OrderBoostFacade orderBoostFacade) {
         this.orderBoostFacade = orderBoostFacade;
     }
 

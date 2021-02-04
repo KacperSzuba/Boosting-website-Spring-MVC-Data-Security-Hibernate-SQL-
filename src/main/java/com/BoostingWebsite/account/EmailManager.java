@@ -23,7 +23,8 @@ class EmailManager {
     private final UserFacade userFacade;
     private final SimpleUserDtoFactory simpleUserDtoFactory;
 
-    EmailManager(ApplicationSession applicationSession, EmailService emailService, UserTokenFacade userTokenFacade, UserFacade userFacade, SimpleUserDtoFactory simpleUserDtoFactory) {
+    EmailManager(final ApplicationSession applicationSession, final EmailService emailService, final UserTokenFacade userTokenFacade,
+                 final UserFacade userFacade, final SimpleUserDtoFactory simpleUserDtoFactory) {
         this.applicationSession = applicationSession;
         this.emailService = emailService;
         this.userTokenFacade = userTokenFacade;

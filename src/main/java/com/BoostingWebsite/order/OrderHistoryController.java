@@ -11,7 +11,7 @@ class OrderHistoryController {
 
     private final OrderBoostFacade orderBoostFacade;
 
-    OrderHistoryController(OrderBoostFacade orderBoostFacade) {
+    OrderHistoryController(final OrderBoostFacade orderBoostFacade) {
         this.orderBoostFacade = orderBoostFacade;
     }
 

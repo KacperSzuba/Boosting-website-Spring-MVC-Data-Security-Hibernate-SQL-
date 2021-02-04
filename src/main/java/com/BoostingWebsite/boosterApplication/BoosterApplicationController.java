@@ -17,7 +17,7 @@ class BoosterApplicationController {
 
     private final BoosterApplicationRepository boosterApplicationRepository;
 
-    BoosterApplicationController(BoosterApplicationRepository boosterApplicationRepository) {
+    BoosterApplicationController(final BoosterApplicationRepository boosterApplicationRepository) {
         this.boosterApplicationRepository = boosterApplicationRepository;
     }
 

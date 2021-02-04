@@ -12,7 +12,7 @@ public class UserTokenFacade {
 
     private final UserTokenRepository userTokenRepository;
 
-    public UserTokenFacade(UserTokenRepository userTokenRepository) {
+    public UserTokenFacade(final UserTokenRepository userTokenRepository) {
         this.userTokenRepository = userTokenRepository;
     }
 

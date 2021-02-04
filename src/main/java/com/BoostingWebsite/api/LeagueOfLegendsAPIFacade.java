@@ -16,7 +16,7 @@ public class LeagueOfLegendsAPIFacade {
     private final OrderBoostFacade orderBoostFacade;
     private final ConstFacade constFacade;
 
-    public LeagueOfLegendsAPIFacade(OrderBoostFacade orderBoostFacade, ConstFacade constFacade) {
+    public LeagueOfLegendsAPIFacade(final OrderBoostFacade orderBoostFacade, final ConstFacade constFacade) {
         this.orderBoostFacade = orderBoostFacade;
         this.constFacade = constFacade;
     }

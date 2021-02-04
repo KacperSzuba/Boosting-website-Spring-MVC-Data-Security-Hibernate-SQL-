@@ -16,7 +16,7 @@ class UserRepositoryUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
     private final LoginHistoryFacade loginHistoryFacade;
 
-    UserRepositoryUserDetailsService(UserRepository userRepository, LoginHistoryFacade loginHistoryFacade) {
+    UserRepositoryUserDetailsService(final UserRepository userRepository, final LoginHistoryFacade loginHistoryFacade) {
         this.userRepository = userRepository;
         this.loginHistoryFacade = loginHistoryFacade;
     }

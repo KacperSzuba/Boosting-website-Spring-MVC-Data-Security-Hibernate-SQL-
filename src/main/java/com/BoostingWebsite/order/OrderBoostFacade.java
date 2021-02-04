@@ -19,7 +19,8 @@ public class OrderBoostFacade {
     private final OrderExtrasRepository orderExtrasRepository;
     private final UserFacade userFacade;
 
-    public OrderBoostFacade(ApplicationSession applicationSession, OrderBoostRepository orderBoostRepository, OrderExtrasRepository orderExtrasRepository, UserFacade userFacade) {
+    public OrderBoostFacade(final ApplicationSession applicationSession, final OrderBoostRepository orderBoostRepository,
+                            final OrderExtrasRepository orderExtrasRepository, final UserFacade userFacade) {
         this.applicationSession = applicationSession;
         this.orderBoostRepository = orderBoostRepository;
         this.orderExtrasRepository = orderExtrasRepository;

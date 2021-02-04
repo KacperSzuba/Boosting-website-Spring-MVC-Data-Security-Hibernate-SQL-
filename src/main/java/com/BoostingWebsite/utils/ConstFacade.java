@@ -7,7 +7,7 @@ public class ConstFacade {
 
     private final ConstRepository constRepository;
 
-    public ConstFacade(ConstRepository constRepository) {
+    public ConstFacade(final ConstRepository constRepository) {
         this.constRepository = constRepository;
     }
 
