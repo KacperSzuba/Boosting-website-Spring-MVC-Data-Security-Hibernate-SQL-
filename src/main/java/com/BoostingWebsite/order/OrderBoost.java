@@ -1,6 +1,6 @@
 package com.BoostingWebsite.order;
 
-import com.BoostingWebsite.account.User;
+import com.BoostingWebsite.account.SimpleUserDto;
 import com.BoostingWebsite.order.dto.OrderBoostDto;
 import com.BoostingWebsite.order.enumeration.EnumOrderStatus;
 import com.BoostingWebsite.order.enumeration.QueueType;
@@ -61,11 +61,11 @@ class OrderBoost {
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "users_id")
-    private User user;
+    private SimpleUserDto user;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "boosters_id")
-    private User booster;
+    private SimpleUserDto booster;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(
@@ -137,19 +137,19 @@ class OrderBoost {
         this.destinationLeague = destinationLeague;
     }
 
-    User getUser() {
+    SimpleUserDto getUser() {
         return user;
     }
 
-    void setUser(User user) {
+    void setUser(SimpleUserDto user) {
         this.user = user;
     }
 
-    User getBooster() {
+    SimpleUserDto getBooster() {
         return booster;
     }
 
-    void setBooster(User booster) {
+    void setBooster(SimpleUserDto booster) {
         this.booster = booster;
     }
 
@@ -177,7 +177,7 @@ class OrderBoost {
         this.status = status;
     }
 
-    public QueueType getQueueType() {
+    QueueType getQueueType() {
         return queueType;
     }
 

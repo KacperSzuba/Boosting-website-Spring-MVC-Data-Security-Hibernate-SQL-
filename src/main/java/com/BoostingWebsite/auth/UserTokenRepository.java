@@ -1,13 +1,12 @@
 package com.BoostingWebsite.auth;
 
-import com.BoostingWebsite.account.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
 interface UserTokenRepository extends CrudRepository<UserToken, Long> {
 
-    Optional<UserToken> findByUser(User user);
+    Optional<UserToken> findByUser_Username(String username);
 
     UserToken findByToken(String token);
 }

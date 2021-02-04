@@ -1,6 +1,6 @@
 package com.BoostingWebsite.order;
 
-import com.BoostingWebsite.account.User;
+import com.BoostingWebsite.account.SimpleUserDto;
 import com.BoostingWebsite.account.UserFacade;
 import com.BoostingWebsite.order.dto.OrderBoostDto;
 import com.BoostingWebsite.order.enumeration.EnumOrderStatus;
@@ -34,7 +34,7 @@ public class OrderBoostFacade {
     }
 
     public void makeOrder(OrderBoost orderBoost) {
-        User user = userFacade.findById(applicationSession.getActualUser().getId());
+        SimpleUserDto user = userFacade.findUserById(applicationSession.getActualUser().getId());
 
         orderBoost.setDate(LocalDateTime.now());
         orderBoost.setUser(user);

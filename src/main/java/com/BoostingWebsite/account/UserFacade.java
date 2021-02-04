@@ -15,17 +15,19 @@ public class UserFacade {
     private final UserRoleFacade userRoleFacade;
     private final UserValidator userValidator;
     private final UserTokenFacade userTokenFacade;
+    private final SimpleUserDtoFactory simpleUserDtoFactory;
 
     UserFacade(PasswordEncoder passwordEncoder, UserRepository userRepository, UserRoleFacade userRoleFacade,
-               UserValidator userValidator, UserTokenFacade userTokenFacade) {
+               UserValidator userValidator, UserTokenFacade userTokenFacade, SimpleUserDtoFactory simpleUserDtoFactory) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.userRoleFacade = userRoleFacade;
         this.userValidator = userValidator;
         this.userTokenFacade = userTokenFacade;
+        this.simpleUserDtoFactory = simpleUserDtoFactory;
     }
 
-    public User findById(Long id){
+    User findById(Long id){
         Optional<User> user = userRepository.findById(id);
 
         if(user.isEmpty()){
@@ -33,6 +35,16 @@ public class UserFacade {
         }
 
         return user.get();
+    }
+
+    public SimpleUserDto findUserById(Long id){
+        Optional<User> user = userRepository.findById(id);
+
+        if(user.isEmpty()){
+            throw new UserNotFoundException("User not found!");
+        }
+
+        return simpleUserDtoFactory.to(user.get());
     }
 
     public void changePassword(UserDto userDto, String password){
@@ -57,11 +69,19 @@ public class UserFacade {
     }
 
     public User findUserByToken(String token){
-        return userTokenFacade.findByToken(token).getUser();
+        return simpleUserDtoFactory.from(userTokenFacade.findByToken(token).getUser());
     }
 
-    public User findByUsername(String username){
+    User findByUsername(String username){
         return userRepository.findByUsername(username);
+    }
+
+    public SimpleUserDto findUserByUsername(String username){
+        return simpleUserDtoFactory.to(userRepository.findByUsername(username));
+    }
+
+    public UserDto findUserDtoByUsername(String username){
+        return userRepository.findByUsername(username).toDto();
     }
 
     public Optional<User> findByEmail(String email){

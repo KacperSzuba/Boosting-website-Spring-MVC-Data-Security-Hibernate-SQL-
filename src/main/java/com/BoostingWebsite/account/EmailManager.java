@@ -21,17 +21,19 @@ class EmailManager {
     private final EmailService emailService;
     private final UserTokenFacade userTokenFacade;
     private final UserFacade userFacade;
+    private final SimpleUserDtoFactory simpleUserDtoFactory;
 
-    EmailManager(ApplicationSession applicationSession, EmailService emailService, UserTokenFacade userTokenFacade, UserFacade userFacade) {
+    EmailManager(ApplicationSession applicationSession, EmailService emailService, UserTokenFacade userTokenFacade, UserFacade userFacade, SimpleUserDtoFactory simpleUserDtoFactory) {
         this.applicationSession = applicationSession;
         this.emailService = emailService;
         this.userTokenFacade = userTokenFacade;
         this.userFacade = userFacade;
+        this.simpleUserDtoFactory = simpleUserDtoFactory;
     }
 
     void confirmEmail(String contextPath, String token, User user) {
         String url = contextPath + "/register/confirm?id=" + user.getId() + "&token=" + token;
-        userTokenFacade.saveOrUpdateToken(token, user);
+        userTokenFacade.saveOrUpdateToken(token, simpleUserDtoFactory.to(user));
         emailService.sendEmail(user.getEmail(), "Confirm email", " \r\n" + url);
     }
 

@@ -1,6 +1,6 @@
 package com.BoostingWebsite.auth;
 
-import com.BoostingWebsite.account.User;
+import com.BoostingWebsite.account.SimpleUserDto;
 import org.springframework.data.annotation.PersistenceConstructor;
 
 import javax.persistence.*;
@@ -17,9 +17,9 @@ class UserToken {
     private Long id;
     private String token;
 
-    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = SimpleUserDto.class, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id")
-    private User user;
+    private SimpleUserDto user;
 
     private Date expiryDate;
 
@@ -32,7 +32,7 @@ class UserToken {
         this.expiryDate = calculateExpiryDate(EXPIRATION);
     }
 
-    UserToken(final String token, final User user) {
+    UserToken(final String token, final SimpleUserDto user) {
         this.token = token;
         this.user = user;
         this.expiryDate = calculateExpiryDate(EXPIRATION);
@@ -50,11 +50,11 @@ class UserToken {
         this.token = token;
     }
 
-    User getUser() {
+    SimpleUserDto getUser() {
         return user;
     }
 
-    void setUser(final User user) {
+    void setUser(final SimpleUserDto user) {
         this.user = user;
     }
 

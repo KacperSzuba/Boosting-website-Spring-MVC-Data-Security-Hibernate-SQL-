@@ -1,6 +1,6 @@
 package com.BoostingWebsite.email;
 
-import com.BoostingWebsite.account.User;
+import com.BoostingWebsite.account.SimpleUserDto;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
@@ -30,7 +30,7 @@ public class EmailService {
         }
     }
 
-    public void constructResetTokenEmail(String contextPath, String token, User user) {
+    public void constructResetTokenEmail(String contextPath, String token, SimpleUserDto user) {
         String url = contextPath + "/account/remind/password/token?id=" + user.getId() + "&token=" + token;
         sendEmail(user.getEmail(), "Reset Password", " \r\n" + url);
     }

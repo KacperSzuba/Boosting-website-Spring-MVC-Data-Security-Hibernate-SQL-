@@ -1,6 +1,6 @@
 package com.BoostingWebsite.order.message;
 
-import com.BoostingWebsite.account.User;
+import com.BoostingWebsite.account.SimpleUserDto;
 import com.BoostingWebsite.order.OrderBoostFacade;
 import com.BoostingWebsite.order.exception.OrderBoostNotFoundException;
 import com.BoostingWebsite.order.message.dto.MessageDTO;
@@ -25,7 +25,7 @@ public class MessageFacade {
         messageRepository.save(message);
     }
 
-    public List<MessageDTO> getChatMessages(User sender, User recipient) throws OrderBoostNotFoundException {
+    public List<MessageDTO> getChatMessages(SimpleUserDto sender, SimpleUserDto recipient) throws OrderBoostNotFoundException {
         if(!orderBoostFacade.isActiveBoost()){
             throw new OrderBoostNotFoundException();
         }

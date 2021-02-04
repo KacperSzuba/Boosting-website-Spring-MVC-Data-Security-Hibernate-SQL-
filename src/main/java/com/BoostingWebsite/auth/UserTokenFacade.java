@@ -1,6 +1,6 @@
 package com.BoostingWebsite.auth;
 
-import com.BoostingWebsite.account.User;
+import com.BoostingWebsite.account.SimpleUserDto;
 import com.BoostingWebsite.account.exception.UserNotFoundException;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ public class UserTokenFacade {
         this.userTokenRepository = userTokenRepository;
     }
 
-    public void saveOrUpdateToken(String token, User user) {
+    public void saveOrUpdateToken(String token, SimpleUserDto user) {
         if (checkIfUserHasTokenGenerated(user)) {
             saveToken(token, user);
         } else {
@@ -24,16 +24,16 @@ public class UserTokenFacade {
         }
     }
 
-    private void updateToken(String token, User user) {
+    private void updateToken(String token, SimpleUserDto user) {
         try {
-            userTokenRepository.delete(userTokenRepository.findByUser(user).get());
+            userTokenRepository.delete(userTokenRepository.findByUser_Username(user.getUsername()).get());
             saveToken(token, user);
         } catch (Exception exception) {
             exception.printStackTrace();
         }
     }
 
-    private void saveToken(String token, User user) {
+    private void saveToken(String token, SimpleUserDto user) {
         try {
             UserToken userToken = new UserToken(token, user);
             userTokenRepository.save(userToken);
@@ -42,12 +42,12 @@ public class UserTokenFacade {
         }
     }
 
-    private boolean checkIfUserHasTokenGenerated(User user) {
-        return this.userTokenRepository.findByUser(user).isEmpty();
+    private boolean checkIfUserHasTokenGenerated(SimpleUserDto user) {
+        return this.userTokenRepository.findByUser_Username(user.getUsername()).isEmpty();
     }
 
-    public UserTokenDto findByUser(User user){
-        Optional<UserToken> userToken = userTokenRepository.findByUser(user);
+    public UserTokenDto findByUser(SimpleUserDto user){
+        Optional<UserToken> userToken = userTokenRepository.findByUser_Username(user.getUsername());
 
         if(userToken.isEmpty()){
             throw new UserNotFoundException("Token not found!");

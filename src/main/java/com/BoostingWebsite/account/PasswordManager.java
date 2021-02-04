@@ -26,13 +26,16 @@ class PasswordManager {
     private final ApplicationSession applicationSession;
     private final UserTokenFacade userTokenFacade;
     private final EmailService emailService;
+    private final SimpleUserDtoFactory simpleUserDtoFactory;
 
-    PasswordManager(PasswordEncoder passwordEncoder, UserFacade userFacade, ApplicationSession applicationSession, UserTokenFacade tokenRecorder, EmailService emailService) {
+    PasswordManager(PasswordEncoder passwordEncoder, UserFacade userFacade, ApplicationSession applicationSession, UserTokenFacade tokenRecorder,
+                    EmailService emailService, SimpleUserDtoFactory simpleUserDtoFactory) {
         this.passwordEncoder = passwordEncoder;
         this.userFacade = userFacade;
         this.applicationSession = applicationSession;
         this.userTokenFacade = tokenRecorder;
         this.emailService = emailService;
+        this.simpleUserDtoFactory = simpleUserDtoFactory;
     }
 
     String validateResetPasswordToken(Long id, String token) {
@@ -40,7 +43,7 @@ class PasswordManager {
         if (tempToken != null) {
             return tempToken;
         } else {
-            User user = userTokenFacade.findByToken(token).getUser();
+            User user = simpleUserDtoFactory.from(userTokenFacade.findByToken(token).getUser());
             Authentication auth = new UsernamePasswordAuthenticationToken(user, null, Collections.singletonList(
                     new SimpleGrantedAuthority("CHANGE_PASSWORD_PRIVILEGE")));
             SecurityContextHolder.getContext().setAuthentication(auth);
@@ -61,9 +64,9 @@ class PasswordManager {
         Optional<User> user = userFacade.findByEmail(email);
 
         if (whetherEmailIsValid(email) && user.isPresent()) {
-            userTokenFacade.saveOrUpdateToken(getToken(), user.get());
-            String token = userTokenFacade.findByUser(user.get()).getToken();
-            emailService.constructResetTokenEmail(applicationSession.getAppUrl(), token, user.get());
+            userTokenFacade.saveOrUpdateToken(getToken(), simpleUserDtoFactory.to(user.get()));
+            String token = userTokenFacade.findByUser(simpleUserDtoFactory.to(user.get())).getToken();
+            emailService.constructResetTokenEmail(applicationSession.getAppUrl(), token, simpleUserDtoFactory.to(user.get()));
         }
 
         throw new DataMismatchException("This e-mail is invalid or already exists in our database!");

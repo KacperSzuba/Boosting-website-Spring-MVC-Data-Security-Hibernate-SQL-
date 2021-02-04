@@ -19,7 +19,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User {
+class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -48,7 +48,13 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password, boolean enabled, String email, List<UserRole> roles) {
+    User(Long id, String username, String email){
+        this.id = id;
+        this.username = username;
+        this.email = email;
+    }
+
+    User(String username, String password, boolean enabled, String email, List<UserRole> roles) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
@@ -56,27 +62,27 @@ public class User {
         this.roles = roles;
     }
 
-    public Long getId() {
+    Long getId() {
         return id;
     }
 
-    public String getUsername() {
+    String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    void setUsername(String username) {
         this.username = username;
     }
 
-    public String getPassword() {
+    String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    void setPassword(String password) {
         this.password = password;
     }
 
-    public boolean isEnabled() {
+    boolean isEnabled() {
         return enabled;
     }
 
@@ -84,27 +90,27 @@ public class User {
         this.enabled = enabled;
     }
 
-    public String getEmail() {
+    String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    void setEmail(String email) {
         this.email = email;
     }
 
-    public List<UserRole> getRoles() {
+    List<UserRole> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<UserRole> roles) {
+    void setRoles(List<UserRole> roles) {
         this.roles = roles;
     }
 
-    public String getCreationErrorMessage() {
+    String getCreationErrorMessage() {
         return creationErrorMessage;
     }
 
-    public void setCreationErrorMessage(String creationErrorMessage) {
+    void setCreationErrorMessage(String creationErrorMessage) {
         this.creationErrorMessage = creationErrorMessage;
     }
 
@@ -120,7 +126,7 @@ public class User {
                 '}';
     }
 
-    public UserDto toDto(){
+    UserDto toDto(){
         return UserDto.builder()
                 .withId(id)
                 .withUsername(username)

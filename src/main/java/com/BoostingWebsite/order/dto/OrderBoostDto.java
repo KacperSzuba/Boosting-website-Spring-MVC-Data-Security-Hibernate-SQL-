@@ -1,6 +1,6 @@
 package com.BoostingWebsite.order.dto;
 
-import com.BoostingWebsite.account.User;
+import com.BoostingWebsite.account.SimpleUserDto;
 import com.BoostingWebsite.order.OrderExtras;
 import com.BoostingWebsite.order.enumeration.EnumOrderStatus;
 import com.BoostingWebsite.order.enumeration.QueueType;
@@ -27,8 +27,8 @@ public class OrderBoostDto {
     private final Region region;
     private final LeagueDto currentLeagueDto;
     private final LeagueDto destinationLeagueDto;
-    private final User user;
-    private final User booster;
+    private final SimpleUserDto user;
+    private final SimpleUserDto booster;
     private final Set<OrderExtras> extras;
     private final EnumOrderStatus status;
     private final QueueType queueType;
@@ -95,11 +95,11 @@ public class OrderBoostDto {
         return destinationLeagueDto;
     }
 
-    public User getUser() {
+    public SimpleUserDto getUser() {
         return user;
     }
 
-    public User getBooster() {
+    public SimpleUserDto getBooster() {
         return booster;
     }
 
@@ -134,8 +134,8 @@ public class OrderBoostDto {
         private Region region;
         private LeagueDto currentLeagueDto;
         private LeagueDto destinationLeagueDto;
-        private User user;
-        private User booster;
+        private SimpleUserDto user;
+        private SimpleUserDto booster;
         private Set<OrderExtras> extras;
         private EnumOrderStatus status;
         private QueueType queueType;
@@ -198,12 +198,12 @@ public class OrderBoostDto {
             return this;
         }
 
-        public Builder withUser(User user) {
+        public Builder withUser(SimpleUserDto user) {
             this.user = user;
             return this;
         }
 
-        public Builder withBooster(User booster) {
+        public Builder withBooster(SimpleUserDto booster) {
             this.booster = booster;
             return this;
         }

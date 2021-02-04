@@ -20,7 +20,7 @@ public class ApplicationSession {
 
     public UserDto getActualUser() {
         Principal principal = this.request.getUserPrincipal();
-        return userFacade.findByUsername(principal.getName()).toDto();
+        return userFacade.findUserDtoByUsername(principal.getName());
     }
 
     public RoleName getCurrentUserRole(UserDto userDto) {

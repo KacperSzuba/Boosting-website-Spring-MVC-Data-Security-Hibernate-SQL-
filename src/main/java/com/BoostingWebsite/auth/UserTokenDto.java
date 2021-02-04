@@ -1,6 +1,6 @@
 package com.BoostingWebsite.auth;
 
-import com.BoostingWebsite.account.User;
+import com.BoostingWebsite.account.SimpleUserDto;
 
 import java.util.Date;
 
@@ -11,7 +11,7 @@ public class UserTokenDto {
 
     private final Long id;
     private final String token;
-    private final User user;
+    private final SimpleUserDto user;
     private final Date expiryDate;
 
     private UserTokenDto(Builder builder){
@@ -24,7 +24,7 @@ public class UserTokenDto {
     public static class Builder{
         private Long id;
         private String token;
-        private User user;
+        private SimpleUserDto user;
         private Date expiryDate;
 
         private Builder(){}
@@ -43,7 +43,7 @@ public class UserTokenDto {
             return this;
         }
 
-        public Builder withUser(User user) {
+        public Builder withUser(SimpleUserDto user) {
             this.user = user;
             return this;
         }
@@ -62,7 +62,7 @@ public class UserTokenDto {
         return token;
     }
 
-    public User getUser() {
+    public SimpleUserDto getUser() {
         return user;
     }
 
