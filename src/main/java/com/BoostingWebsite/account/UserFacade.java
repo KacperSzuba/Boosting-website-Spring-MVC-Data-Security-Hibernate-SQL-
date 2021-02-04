@@ -16,15 +16,17 @@ public class UserFacade {
     private final UserValidator userValidator;
     private final UserTokenFacade userTokenFacade;
     private final SimpleUserDtoFactory simpleUserDtoFactory;
+    private final UserQueryRepository userQueryRepository;
 
     UserFacade(PasswordEncoder passwordEncoder, UserRepository userRepository, UserRoleFacade userRoleFacade,
-               UserValidator userValidator, UserTokenFacade userTokenFacade, SimpleUserDtoFactory simpleUserDtoFactory) {
+               UserValidator userValidator, UserTokenFacade userTokenFacade, SimpleUserDtoFactory simpleUserDtoFactory, UserQueryRepository userQueryRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.userRoleFacade = userRoleFacade;
         this.userValidator = userValidator;
         this.userTokenFacade = userTokenFacade;
         this.simpleUserDtoFactory = simpleUserDtoFactory;
+        this.userQueryRepository = userQueryRepository;
     }
 
     User findById(Long id){
@@ -35,16 +37,6 @@ public class UserFacade {
         }
 
         return user.get();
-    }
-
-    public SimpleUserDto findUserById(Long id){
-        Optional<User> user = userRepository.findById(id);
-
-        if(user.isEmpty()){
-            throw new UserNotFoundException("User not found!");
-        }
-
-        return simpleUserDtoFactory.to(user.get());
     }
 
     public void changePassword(UserDto userDto, String password){
@@ -59,7 +51,7 @@ public class UserFacade {
     }
 
     public boolean existsUserByEmail(String email){
-        return userRepository.existsUserByEmail(email);
+        return userQueryRepository.existsUserByEmail(email);
     }
 
     public RoleName getRoleName(UserDto userDto){
@@ -74,10 +66,6 @@ public class UserFacade {
 
     User findByUsername(String username){
         return userRepository.findByUsername(username);
-    }
-
-    public SimpleUserDto findUserByUsername(String username){
-        return simpleUserDtoFactory.to(userRepository.findByUsername(username));
     }
 
     public UserDto findUserDtoByUsername(String username){

@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
-public interface OrderBoostRepository extends CrudRepository<OrderBoost, Long> {
+public interface OrderBoostQueryRepository extends CrudRepository<OrderBoost, Long> {
 
     @Query(value = "select orderboost from OrderBoost orderboost where (orderboost.user.id =:id or orderboost.booster.id=:id) and orderboost.status = 'NEW'")
     Optional<OrderBoost> findActiveBoost(@Param("id") Long id);

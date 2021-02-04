@@ -1,7 +1,7 @@
 package com.BoostingWebsite.order;
 
 import com.BoostingWebsite.account.SimpleUserDto;
-import com.BoostingWebsite.account.UserFacade;
+import com.BoostingWebsite.account.UserQueryRepository;
 import com.BoostingWebsite.order.dto.OrderBoostDto;
 import com.BoostingWebsite.order.enumeration.EnumOrderStatus;
 import com.BoostingWebsite.order.exception.OrderBoostNotFoundException;
@@ -15,16 +15,16 @@ import java.util.stream.Collectors;
 @Service
 public class OrderBoostFacade {
     private final ApplicationSession applicationSession;
-    private final OrderBoostRepository orderBoostRepository;
+    private final OrderBoostQueryRepository orderBoostQueryRepository;
     private final OrderExtrasRepository orderExtrasRepository;
-    private final UserFacade userFacade;
+    private final UserQueryRepository userQueryRepository;
 
-    public OrderBoostFacade(final ApplicationSession applicationSession, final OrderBoostRepository orderBoostRepository,
-                            final OrderExtrasRepository orderExtrasRepository, final UserFacade userFacade) {
+    public OrderBoostFacade(final ApplicationSession applicationSession, final OrderBoostQueryRepository orderBoostQueryRepository,
+                            final OrderExtrasRepository orderExtrasRepository, final UserQueryRepository userQueryRepository) {
         this.applicationSession = applicationSession;
-        this.orderBoostRepository = orderBoostRepository;
+        this.orderBoostQueryRepository = orderBoostQueryRepository;
         this.orderExtrasRepository = orderExtrasRepository;
-        this.userFacade = userFacade;
+        this.userQueryRepository = userQueryRepository;
     }
 
     boolean isLeagueIsValid(OrderBoost orderBoost) {
@@ -35,16 +35,16 @@ public class OrderBoostFacade {
     }
 
     public void makeOrder(OrderBoost orderBoost) {
-        SimpleUserDto user = userFacade.findUserById(applicationSession.getActualUser().getId());
+        SimpleUserDto user = userQueryRepository.getById(applicationSession.getActualUser().getId()).get();
 
         orderBoost.setDate(LocalDateTime.now());
         orderBoost.setUser(user);
         orderBoost.setStatus(EnumOrderStatus.NEW);
-        orderBoostRepository.save(orderBoost);
+        orderBoostQueryRepository.save(orderBoost);
     }
 
     public boolean whetherUserHasOrder(){
-        return orderBoostRepository.existsByBooster_IdOrUser_IdAndStatus(applicationSession.getActualUser().getId(), applicationSession.getActualUser().getId(), EnumOrderStatus.NEW);
+        return orderBoostQueryRepository.existsByBooster_IdOrUser_IdAndStatus(applicationSession.getActualUser().getId(), applicationSession.getActualUser().getId(), EnumOrderStatus.NEW);
     }
 
     public List<OrderExtras> getOrderExtras(){
@@ -52,25 +52,25 @@ public class OrderBoostFacade {
     }
 
     public List<OrderBoostDto> getFreeOrderBoosts(){
-        return orderBoostRepository.getFreeOrderBoosts().stream()
+        return orderBoostQueryRepository.getFreeOrderBoosts().stream()
                 .map(OrderBoost::toDto)
                 .collect(Collectors.toList());
     }
 
     public List<OrderBoostDto> getCompletedOrderBoosts(){
-        return orderBoostRepository.findDoneOrderBoost(applicationSession.getActualUser().getId()).stream()
+        return orderBoostQueryRepository.findDoneOrderBoost(applicationSession.getActualUser().getId()).stream()
                 .map(OrderBoost::toDto)
                 .collect(Collectors.toList());
     }
 
     public OrderBoostDto findActiveBoost() throws OrderBoostNotFoundException {
-        return orderBoostRepository
+        return orderBoostQueryRepository
                 .findActiveBoost(applicationSession.getActualUser().getId())
                 .map(OrderBoost::toDto)
                 .orElseThrow(OrderBoostNotFoundException::new);
     }
 
     public boolean isActiveBoost(){
-        return orderBoostRepository.findByUser_IdOrBooster_IdAndStatus(applicationSession.getActualUser().getId(), applicationSession.getActualUser().getId(), EnumOrderStatus.NEW);
+        return orderBoostQueryRepository.findByUser_IdOrBooster_IdAndStatus(applicationSession.getActualUser().getId(), applicationSession.getActualUser().getId(), EnumOrderStatus.NEW);
     }
 }

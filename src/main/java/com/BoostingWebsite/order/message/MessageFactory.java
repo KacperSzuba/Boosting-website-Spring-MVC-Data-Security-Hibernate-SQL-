@@ -1,21 +1,21 @@
 package com.BoostingWebsite.order.message;
 
 import com.BoostingWebsite.account.SimpleUserDto;
-import com.BoostingWebsite.account.UserFacade;
+import com.BoostingWebsite.account.UserQueryRepository;
 import com.BoostingWebsite.order.message.dto.MessageDTO;
 import org.springframework.stereotype.Service;
 
 @Service
 class MessageFactory {
-    private final UserFacade userFacade;
+    private final UserQueryRepository userQueryRepository;
 
-    MessageFactory(UserFacade userFacade) {
-        this.userFacade = userFacade;
+    MessageFactory(final UserQueryRepository userQueryRepository) {
+        this.userQueryRepository = userQueryRepository;
     }
 
     Message from(MessageDTO messageDTO){
-        SimpleUserDto sender = userFacade.findUserByUsername(messageDTO.getSenderName());
-        SimpleUserDto recipient = userFacade.findUserByUsername(messageDTO.getRecipientName());
+        SimpleUserDto sender = userQueryRepository.findByUsername(messageDTO.getSenderName());
+        SimpleUserDto recipient = userQueryRepository.findByUsername(messageDTO.getRecipientName());
 
         return new Message(messageDTO.getContent(), sender, recipient);
     }

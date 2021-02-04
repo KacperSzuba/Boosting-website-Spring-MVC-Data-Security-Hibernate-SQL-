@@ -4,10 +4,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 class UserValidator {
-    private final UserRepository userRepository;
+    private final UserQueryRepository userQueryRepository;
 
-    UserValidator(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    UserValidator(UserQueryRepository userQueryRepository) {
+        this.userQueryRepository = userQueryRepository;
     }
 
     static boolean isConfirmPasswordIsValid(String confirmPassword) {
@@ -19,7 +19,7 @@ class UserValidator {
     }
 
     private boolean checkIfUserNotExists(User user) {
-        boolean isUserExist = userRepository.existsUserByUsername(user.getUsername());
+        boolean isUserExist = userQueryRepository.existsUserByUsername(user.getUsername());
         if (isUserExist) {
             throw new IllegalArgumentException("User with this username already exist");
         } else {
@@ -28,7 +28,7 @@ class UserValidator {
     }
 
     private boolean checkIfEmailNotExist(User user) {
-        boolean isEmailExist = userRepository.existsUserByEmail(user.getEmail());
+        boolean isEmailExist = userQueryRepository.existsUserByEmail(user.getEmail());
         if (isEmailExist) {
             throw new IllegalArgumentException("User with this email already exist");
         } else {

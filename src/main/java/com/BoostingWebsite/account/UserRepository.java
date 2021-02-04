@@ -13,8 +13,6 @@ interface UserRepository extends CrudRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
 
-    boolean existsUserByEmail(String email);
-
     boolean existsUserByUsername(String username);
 
     @Transactional
