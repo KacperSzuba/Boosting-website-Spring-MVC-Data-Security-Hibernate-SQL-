@@ -21,4 +21,6 @@ interface SqlOrderBoostQueryRepository extends OrderBoostQueryRepository, CrudRe
 
     @Query(value = "select orderboost from OrderBoost orderboost where orderboost.status = 'COMPLETED' and orderboost.booster.id =:id")
     List<OrderBoost> findDoneOrderBoost(@Param("id") Long id);
+
+    OrderBoost save(OrderBoost orderBoost);
 }

@@ -8,4 +8,6 @@ interface MessageRepository  {
     List<Message> list(@Param("id") Long id);
 
     List<Message> getChatMessages(@Param("senderId") Long senderId, @Param("recipientId") Long recipientId);
+
+    Message save(Message message);
 }

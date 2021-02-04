@@ -16,4 +16,6 @@ public interface OrderBoostQueryRepository{
     List<OrderBoost> getFreeOrderBoosts();
 
     List<OrderBoost> findDoneOrderBoost(@Param("id") Long id);
+
+    OrderBoost save(OrderBoost orderBoost);
 }

@@ -12,4 +12,6 @@ interface SqlMessageRepository extends MessageRepository, CrudRepository<Message
 
     @Query(value = "select messages from Message messages where messages.recipient.id in (:senderId, :recipientId) and messages.author.id in (:senderId, :recipientId) order by date asc")
     List<Message> getChatMessages(@Param("senderId") Long senderId, @Param("recipientId") Long recipientId);
+
+    Message save(Message message);
 }

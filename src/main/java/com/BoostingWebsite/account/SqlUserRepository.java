@@ -32,4 +32,8 @@ interface SqlUserRepository extends UserRepository, CrudRepository<User, Long> {
 
     @Query(value = "SELECT u.roles FROM User u WHERE u.id = :id")
     UserRole getUserRole(@Param("id") Long id);
+
+    Optional<User> findById(Long id);
+
+    User save(User user);
 }

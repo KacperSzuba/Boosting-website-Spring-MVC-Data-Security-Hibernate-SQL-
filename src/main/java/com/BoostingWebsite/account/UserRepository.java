@@ -18,4 +18,8 @@ interface UserRepository {
     void changeEmail(@Param("id") Long id, @Param("email") String email);
 
     UserRole getUserRole(@Param("id") Long id);
+
+    Optional<User> findById(Long id);
+
+    User save(User user);
 }
