@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Dancing+Script:600|Roboto&display=swap&subset=latin-ext" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <div th:replace="header :: nav"></div>
+            <div layout:fragment="content"></div>
+            <div th:replace="footer :: footer"></div>
+
+            <script src="/js/navigation/mobile.js"></script>
+            <script src="/js/navigation/desktop.js"></script>
+        </div>
+    </body>
+</html>
