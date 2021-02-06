@@ -1,10 +1,15 @@
 package com.BoostingWebsite.api;
 
+import com.BoostingWebsite.order.OrderBoostFacade;
+import com.BoostingWebsite.order.exception.OrderBoostNotFoundException;
+import com.BoostingWebsite.utils.ConstFacade;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.BoostingWebsite.order.enumeration.Region;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,6 +18,8 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
+@SessionScope
 class LeagueOfLegendsAPIConnector {
     private final String region;
     private final String username;
@@ -23,18 +30,12 @@ class LeagueOfLegendsAPIConnector {
     private static final String LOL_SUMMONER_ID = ".api.riotgames.com/lol/league/v4/entries/by-summoner/";
     private static final String API_KEY = "?api_key=";
 
-    LeagueOfLegendsAPIConnector(String username, Region region) {
-        this.username = username;
-        this.region = region.getValue();
+    @Autowired
+    LeagueOfLegendsAPIConnector(OrderBoostFacade orderBoostFacade, ConstFacade constFacade) throws OrderBoostNotFoundException {
+        this.username = orderBoostFacade.findActiveBoost().getLolUsername();
+        this.region = orderBoostFacade.findActiveBoost().getRegion().getValue();
         summonerId = retrieveSummonerId();
-        apiKeyValue = null;
-    }
-
-    LeagueOfLegendsAPIConnector(String apiKeyValue, String username, Region region) {
-        this.username = username;
-        this.region = region.getValue();
-        summonerId = retrieveSummonerId();
-        this.apiKeyValue = apiKeyValue;
+        apiKeyValue = constFacade.getLeagueOfLegendsApiKey();
     }
 
     private String retrieveSummonerId(){
