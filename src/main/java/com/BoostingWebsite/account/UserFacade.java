@@ -80,19 +80,14 @@ public class UserFacade {
         userRepository.changeUserEnabledStatement(id, true);
     }
 
-    public boolean createAccount(User user, String confirmPassword) {
+    public void createAccount(User user) {
         try {
-            if (userValidator.isAccountCreatedCorrectly(user, confirmPassword)) {
-                UserRole userRole = userRoleFacade.save(RoleName.ROLE_USER);
+            UserRole userRole = userRoleFacade.save(RoleName.ROLE_USER);
 
-                String password = passwordEncoder.encode(user.getPassword());
-                userRepository.save(new User(user.getUsername(), password, false, user.getEmail(), List.of(userRole)));
-            }
-
-            return true;
+            String password = passwordEncoder.encode(user.getPassword());
+            userRepository.save(new User(user.getUsername(), password, false, user.getEmail(), List.of(userRole)));
         } catch (Exception exception) {
             user.setCreationErrorMessage("Invalid registration");
-            return false;
         }
     }
 }

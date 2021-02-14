@@ -18,11 +18,13 @@ class RegisterController {
     private final UserFacade userFacade;
     private final EmailManager emailManager;
     private final ApplicationSession applicationSession;
+    private final UserValidator userValidator;
 
-    RegisterController(final UserFacade userFacade, final EmailManager emailManager, final ApplicationSession applicationSession) {
+    RegisterController(final UserFacade userFacade, final EmailManager emailManager, final ApplicationSession applicationSession, final UserValidator userValidator) {
         this.userFacade = userFacade;
         this.emailManager = emailManager;
         this.applicationSession = applicationSession;
+        this.userValidator = userValidator;
     }
 
     @GetMapping
@@ -38,7 +40,8 @@ class RegisterController {
             model.addAttribute("confirmPasswordErrorMessage", "Confirmation password length should be between 7 and 20 letters");
             return "account/register";
         } else {
-            if (userFacade.createAccount(user, confirmPassword)) {
+            if (userValidator.canCreateAccount(user, confirmPassword)) {
+                userFacade.createAccount(user);
                 model.addAttribute("confirmEmailMessage", "Login to the e-mail address provided and confirm your identity.");
                 emailManager.confirmEmail(applicationSession.getAppUrl(), generateToken(), userFacade.findByUsername(user.getUsername()));
                 return "account/login";

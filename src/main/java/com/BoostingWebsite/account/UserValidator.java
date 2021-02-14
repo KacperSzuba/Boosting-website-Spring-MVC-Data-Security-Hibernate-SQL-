@@ -14,7 +14,7 @@ class UserValidator {
         return confirmPassword.length() >= 7 && confirmPassword.length() <= 20;
     }
 
-    boolean isAccountCreatedCorrectly(User user, String confirmPassword) {
+    boolean canCreateAccount(User user, String confirmPassword) {
         return checkIfEmailNotExist(user) && checkIfUserNotExists(user) && checkIfPasswordsAreTheSame(user, confirmPassword);
     }
 
