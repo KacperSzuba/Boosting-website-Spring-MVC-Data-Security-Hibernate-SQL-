@@ -1,5 +1,6 @@
 package com.BoostingWebsite.api;
 
+import com.BoostingWebsite.api.LeagueOfLegendsAPIConnector;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
