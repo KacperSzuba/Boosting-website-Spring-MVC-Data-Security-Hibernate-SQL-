@@ -3,12 +3,10 @@ package com.BoostingWebsite.utils;
 import com.BoostingWebsite.account.UserFacade;
 import com.BoostingWebsite.account.UserDto;
 import com.BoostingWebsite.account.RoleName;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
-@Component
 public class ApplicationSession {
     private final UserFacade userFacade;
     private final HttpServletRequest request;

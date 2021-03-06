@@ -39,12 +39,4 @@ class Const {
     String getValue(){
         return value;
     }
-
-    ConstDto toDto(){
-        return ConstDto.builder()
-                .withId(id)
-                .withEnumConst(enumConst)
-                .withValue(value)
-                .build();
-    }
 }

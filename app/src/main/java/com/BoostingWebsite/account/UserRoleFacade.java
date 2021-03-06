@@ -1,13 +1,10 @@
 package com.BoostingWebsite.account;
 
-import org.springframework.stereotype.Service;
-
-@Service
 public class UserRoleFacade {
 
     private final UserRoleRepository userRoleRepository;
 
-    public UserRoleFacade(UserRoleRepository userRoleRepository) {
+    public UserRoleFacade(final UserRoleRepository userRoleRepository) {
         this.userRoleRepository = userRoleRepository;
     }
 

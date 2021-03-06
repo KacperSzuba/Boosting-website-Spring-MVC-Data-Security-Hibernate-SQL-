@@ -3,9 +3,7 @@ package com.BoostingWebsite.email;
 import com.BoostingWebsite.account.SimpleUserDto;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.stereotype.Component;
 
-@Component
 public class EmailService {
 
     private final JavaMailSender emailSender;
@@ -34,5 +32,4 @@ public class EmailService {
         String url = contextPath + "/account/remind/password/token?id=" + user.getId() + "&token=" + token;
         sendEmail(user.getEmail(), "Reset Password", " \r\n" + url);
     }
-
 }

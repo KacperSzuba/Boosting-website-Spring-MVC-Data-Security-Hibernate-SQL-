@@ -1,12 +1,10 @@
 package com.BoostingWebsite.account;
 
 import com.BoostingWebsite.account.exception.UserNotFoundException;
-import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
 import java.util.Optional;
 
-@Component
 public class UserTokenFacade {
 
     private final UserTokenRepository userTokenRepository;

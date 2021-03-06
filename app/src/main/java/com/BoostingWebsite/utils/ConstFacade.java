@@ -1,8 +1,5 @@
 package com.BoostingWebsite.utils;
 
-import org.springframework.stereotype.Service;
-
-@Service
 public class ConstFacade {
 
     private final ConstRepository constRepository;

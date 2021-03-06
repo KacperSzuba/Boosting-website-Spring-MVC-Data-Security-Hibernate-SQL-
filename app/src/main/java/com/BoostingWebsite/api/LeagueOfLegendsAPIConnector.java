@@ -7,9 +7,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.SessionScope;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,8 +15,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
-@SessionScope
 class LeagueOfLegendsAPIConnector {
     private final String region;
     private final String username;
@@ -30,8 +25,7 @@ class LeagueOfLegendsAPIConnector {
     private static final String LOL_SUMMONER_ID = ".api.riotgames.com/lol/league/v4/entries/by-summoner/";
     private static final String API_KEY = "?api_key=";
 
-    @Autowired
-    LeagueOfLegendsAPIConnector(OrderBoostFacade orderBoostFacade, ConstFacade constFacade) throws OrderBoostNotFoundException {
+    LeagueOfLegendsAPIConnector(final OrderBoostFacade orderBoostFacade, final ConstFacade constFacade) throws OrderBoostNotFoundException {
         this.username = orderBoostFacade.findActiveBoost().getLolUsername();
         this.region = orderBoostFacade.findActiveBoost().getRegion().getValue();
         summonerId = retrieveSummonerId();

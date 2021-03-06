@@ -4,12 +4,10 @@ import com.BoostingWebsite.account.SimpleUserDto;
 import com.BoostingWebsite.order.OrderBoostFacade;
 import com.BoostingWebsite.order.exception.OrderBoostNotFoundException;
 import com.BoostingWebsite.order.message.dto.MessageDTO;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
 public class MessageFacade {
     private final MessageRepository messageRepository;
     private final OrderBoostFacade orderBoostFacade;

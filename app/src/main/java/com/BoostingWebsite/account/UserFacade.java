@@ -2,12 +2,10 @@ package com.BoostingWebsite.account;
 
 import com.BoostingWebsite.account.exception.UserNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
 public class UserFacade {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;

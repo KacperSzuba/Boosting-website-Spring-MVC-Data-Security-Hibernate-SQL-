@@ -1,12 +1,9 @@
 package com.BoostingWebsite.account;
 
-import org.springframework.stereotype.Component;
-
-@Component
 class UserValidator {
     private final UserQueryRepository userQueryRepository;
 
-    UserValidator(UserQueryRepository userQueryRepository) {
+    UserValidator(final UserQueryRepository userQueryRepository) {
         this.userQueryRepository = userQueryRepository;
     }
 

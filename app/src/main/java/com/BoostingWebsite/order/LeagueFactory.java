@@ -1,8 +1,5 @@
 package com.BoostingWebsite.order;
 
-import org.springframework.stereotype.Service;
-
-@Service
 class LeagueFactory {
     LeagueDto toDto(League league){
         return LeagueDto.builder()

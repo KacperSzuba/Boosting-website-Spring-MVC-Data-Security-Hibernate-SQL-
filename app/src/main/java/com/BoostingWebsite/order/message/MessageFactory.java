@@ -3,9 +3,7 @@ package com.BoostingWebsite.order.message;
 import com.BoostingWebsite.account.SimpleUserDto;
 import com.BoostingWebsite.account.UserQueryRepository;
 import com.BoostingWebsite.order.message.dto.MessageDTO;
-import org.springframework.stereotype.Service;
 
-@Service
 class MessageFactory {
     private final UserQueryRepository userQueryRepository;
 

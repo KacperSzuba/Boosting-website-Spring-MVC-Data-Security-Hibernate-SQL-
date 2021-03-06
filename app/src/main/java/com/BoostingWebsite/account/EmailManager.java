@@ -7,14 +7,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Service;
 import com.BoostingWebsite.utils.EmailValidator;
 
 import java.util.Collections;
 
 import static com.BoostingWebsite.utils.EmailValidator.whetherTheEmailsAreTheSame;
 
-@Service
 class EmailManager {
     private final ApplicationSession applicationSession;
     private final EmailService emailService;

@@ -3,11 +3,9 @@ package com.BoostingWebsite.api;
 import com.BoostingWebsite.order.LeagueDto;
 import com.BoostingWebsite.order.Division;
 import com.BoostingWebsite.order.Tier;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
-@Service
 public class LeagueOfLegendsAPIFacade {
     private final LeagueOfLegendsAPIConnector leagueOfLegendsAPIConnector;
 
