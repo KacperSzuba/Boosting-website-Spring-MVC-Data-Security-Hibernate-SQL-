@@ -1,0 +1,214 @@
+@import "utils.scss";
+
+/* Footer  */
+
+footer {
+  background-color: $gray-color;
+  color: $white-color;
+
+  & div.wrap{
+    width: 80%;
+    margin: 0 auto;
+
+    & section{
+      @include display-flex-column;
+      width: 90%;
+      margin: 15% auto 0;
+      padding: 0 7.5%;
+    }
+  }
+
+  & .text{
+    @include display-flex-column;
+
+    & h1{
+      text-align: center;
+      margin: 5% 5% 10%;
+      padding-bottom: 5%;
+      font-size: 36px;
+      font-family: 'Dancing Script', cursive;
+      border-bottom: 1px solid $blue-color;
+
+      &:nth-last-of-type(1) {
+        margin-bottom: 5%;
+      }
+    }
+  }
+  & div.customer,
+  & div.pages{
+    @include display-flex-column;
+  }
+
+  & h2{
+    font-family: 'Dancing Script', cursive;
+    font-size: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 2.5%;
+    padding-bottom: 2.5%;
+    border-bottom: 1px solid $blue-color;
+  }
+
+  & div a{
+    text-decoration: none;
+    color: $white-color;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    margin-bottom: 2.5%;
+    transition: 0.3s linear;
+  }
+}
+
+.customer {
+  margin-bottom: 10%;
+}
+
+@media (orientation: portrait) and (min-width: 375px){
+  footer{
+    & .text h1{
+      font-size: 40px;
+    }
+
+    & h2{
+      font-size: 22px;
+    }
+
+    & div a{
+      font-size: 18px;
+    }
+  }
+  .footer-navigation {
+    padding: 0 5%;
+  }
+}
+
+@media (orientation: portrait) and (min-width: 768px) {
+  footer{
+    & .text h1{
+      font-size: 44px;
+    }
+
+    & h2{
+      font-size: 28px;
+    }
+
+    & div a{
+      font-size: 22px;
+    }
+  }
+}
+
+@media (orientation: landscape) and (min-width: 550px) {
+  footer{
+    & .text h1{
+      font-size: 40px;
+    }
+
+    & h2{
+      font-size: 22px;
+    }
+
+    & div a{
+      font-size: 18px;
+    }
+  }
+}
+
+@media (orientation: landscape) and (min-width: 730px) {
+  footer{
+    & .text h1{
+      font-size: 44px;
+    }
+
+    & h2{
+      font-size: 28px;
+    }
+
+    & div a{
+      font-size: 20px;
+    }
+  }
+}
+
+
+@media (min-width: 1024px) {
+  .footer-navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0;
+    width: 90%;
+    margin: 0 auto;
+
+    & .pages,
+    & .customer{
+      flex-basis: 40%;
+    }
+
+    & h2{
+      text-align: left;
+    }
+  }
+
+  footer{
+    & .text {
+      width: 80%;
+      margin: 0 auto;
+
+      & h1:nth-last-of-type(1) {
+        margin-bottom: 5%;
+      }
+
+      & h1{
+        padding-bottom: 2.5%;
+        font-size: 44px;
+      }
+    }
+
+    & h2{
+      font-size: 34px;
+      padding-bottom: 5%;
+      margin-bottom: 10%;
+    }
+
+    & div a{
+      font-size: 20px;
+      margin-left: 2.5%;
+    }
+
+    & div a:hover{
+      color: $blue-color;
+    }
+  }
+}
+
+@media (min-width: 1300px) {
+  .footer-navigation {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  footer{
+    & .text h1 {
+      font-size: 50px;
+    }
+
+    & h2 {
+      font-size: 34px;
+    }
+
+    & div a {
+      font-size: 24px;
+    }
+  }
+}
+
+@media (min-width: 1300px) {
+  .footer-navigation {
+    width: 85%;
+  }
+
+  footer h2 {
+    font-size: 36px;
+  }
+}

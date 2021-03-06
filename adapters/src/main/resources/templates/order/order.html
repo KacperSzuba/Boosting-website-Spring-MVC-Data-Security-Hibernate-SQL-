@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="template">
+    <head>
+        <title>Order</title>
+        <link type="text/css" rel="stylesheet" th:href="@{/style/order/order.css}" />
+    </head>
+    <body layout:fragment="content">
+        <div th:if="${orderBoost != null}" id="login-notification" class="notification notification-error">
+            <span class="close-button">&times;</span>
+            <h3>Info!</h3>
+            <p>You already have an order. Wait for its implementation and then place another order</p>
+        </div>
+
+        <main class="division">
+            <form th:action="@{/templates/order}" th:object="${orderBoost}" method="post">
+                <section class="current">
+                    <h2>Current League</h2>
+
+                    <div class="wrap-image">
+                        <img src="../images/Iron/Iron4.png" alt="Current league image">
+                    </div>
+
+                    <div class="league-info">
+                        <div class="form-group">
+                            <h3>Tier</h3>
+
+                            <div class="select-wrap">
+                                <select id="currentTier" class="custom-select" th:field="*{currentLeagueDto.tier}">
+                                    <option th:each="currentTier : ${tiers}" th:value="${currentTier}" th:text="${currentTier.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <h3>Division</h3>
+
+                            <div class="select-wrap">
+                                <select id="currentDivision" class="custom-select" th:field="*{currentLeagueDto.division}">
+                                    <option th:each="currentDivision : ${divisions}" th:value="${currentDivision}" th:text="${currentDivision.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <h3>Points</h3>
+
+                            <div class="select-wrap">
+                                <select id="currentPoints" class="custom-select" th:field="*{currentLeagueDto.points}">
+                                    <option th:each="currentPoints : ${points}" th:value="${currentPoints}" th:text="${currentPoints.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <h3 class="lp-gain">LP gain</h3>
+
+                            <div class="select-wrap">
+                                <select id="LPGainPerWin" class="custom-select" >
+                                    <option th:each="LP : ${LPGainPerWin}" th:value="${LP}" th:text="${LP.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="desired">
+                    <h2>Desired League</h2>
+
+                    <div class="wrap-image">
+                        <img src="../images/Bronze/Bronze4.png" alt="Desired league image">
+                    </div>
+
+                    <div class="league-info">
+                        <div class="form-group">
+                            <h3>Tier</h3>
+
+                            <div class="select-wrap">
+                                <select id="destinationTier" class="custom-select" th:field="*{destinationLeagueDto.tier}">
+                                    <option th:each="destinationTier : ${tiers}" th:value="${destinationTier}" th:text="${destinationTier.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <h3>Division</h3>
+
+                            <div class="select-wrap">
+                                <select id="destinationDivision" class="custom-select" th:field="*{destinationLeagueDto.division}">
+                                    <option th:each="destinationDivision : ${divisions}" th:value="${destinationDivision}" th:text="${destinationDivision.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <h3 class="server">Server</h3>
+
+                            <div class="select-wrap">
+                                <select id="region" class="custom-select" th:field="*{accountDetails.region}">
+                                    <option th:each="region : ${regions}" th:value="${region}" th:text="${region}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <h3 class="server">Queue Type</h3>
+                            <div class="select-wrap">
+                                <ul>
+                                    <li th:each="type : ${queueType}">
+                                        <input type="radio" th:field="*{queueType}" th:value="${type}"/>
+                                        <label th:for="${type}" th:text="${type.name}"></label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="account-info">
+                    <h2>Account information</h2>
+
+                    <div class="form-group">
+                        <input id="lolUsername" th:field="*{accountDetails.lolUsername}" type="text" class="form-control" required="">
+                        <label class="animated-label" for="lolUsername">Enter your username</label>
+                        <span class="error" th:if="${#fields.hasErrors('accountDetails.lolUsername')}" th:errors="*{accountDetails.lolUsername}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input id="lolPassword" th:field="*{accountDetails.lolPassword}" type="password" class="form-control" required="">
+                        <label class="animated-label" for="lolPassword">Enter your password</label>
+                        <span class="error" th:if="${#fields.hasErrors('accountDetails.lolPassword')}" th:errors="*{accountDetails.lolPassword}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea id="noteToBooster" th:field="*{noteToBooster}" class="form-control" required=""></textarea>
+                        <label class="animated-label" for="noteToBooster">Enter your note to booster</label>
+                    </div>
+                </section>
+
+                <section class="price">
+                    <h2>Your Order</h2>
+
+                    <div class="extras">
+                        <label th:each="extra : ${extras}">
+                            <input type="checkbox" name="extras" th:text="${extra.name}" th:value="${extra}" th:field="*{extras}"/>
+                        </label>
+                    </div>
+
+                    <div class="wrap">
+                        <h3 class="total-price">Total: </h3>
+                        <p class="total-costs">60</p>
+                    </div>
+
+                    <input class="btn-sm" type="submit" th:disabled="${whetherUserHasOrder}" value="Place order" />
+                </section>
+            </form>
+        </main>
+
+        <script src="/js/image-swaping.js"></script>
+        <script src="/js/notifications.js"></script>
+        <script src="/js/order/order-resume.js"></script>
+    </body>
+</html>

@@ -1,0 +1,78 @@
+@import "../utils/utils.scss", "../utils/header.scss", "../utils/footer.scss";
+
+@include basic-settings;
+
+#free-orders{
+  @include main;
+
+  & .free-order{
+    @include cart(5%);
+    position: relative;
+    
+    & h1{
+      text-align: center;
+    }
+
+    & .show-details{
+      cursor: pointer;
+      position: absolute;
+      top: 5%;
+      right: 10%;
+
+      & .fas{
+        display: block;
+        font-size: 22px;
+      }
+    }
+
+    & .images{
+      display: flex;
+
+      & .wrap-image{
+        & img{
+          max-width:100%;
+        }
+
+        & .league{
+          text-align: center;
+        }
+      }
+
+      & .right-arrow{
+        & span{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+          font-size: 30px;
+          font-weight: 700;
+        }
+      }
+    }
+
+    & .form-group{
+      @include form-group(auto);
+
+      & input{
+        @include custom-select;
+      }
+
+      & label{
+        @include animated-label;
+      }
+    }
+
+    & .region,
+    & .price,
+    & .username,
+    & .note-to-booster{
+      display: flex;
+
+      & p{
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}
