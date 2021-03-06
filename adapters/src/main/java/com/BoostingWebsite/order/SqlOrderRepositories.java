@@ -23,3 +23,7 @@ interface SqlOrderBoostQueryRepository extends OrderBoostQueryRepository, CrudRe
 
     OrderBoost save(OrderBoost orderBoost);
 }
+
+interface SqlOrderExtrasRepository extends OrderExtrasRepository, CrudRepository<OrderExtras, Long> {
+    List<OrderExtras> findAll();
+}

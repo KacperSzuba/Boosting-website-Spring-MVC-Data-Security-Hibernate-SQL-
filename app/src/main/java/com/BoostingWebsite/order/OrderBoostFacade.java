@@ -47,7 +47,7 @@ public class OrderBoostFacade {
     }
 
     public List<OrderExtras> getOrderExtras(){
-        return (List<OrderExtras>) orderExtrasRepository.findAll();
+        return orderExtrasRepository.findAll();
     }
 
     public List<OrderBoostDto> getFreeOrderBoosts(){

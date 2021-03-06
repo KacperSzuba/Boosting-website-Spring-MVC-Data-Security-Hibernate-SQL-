@@ -35,7 +35,6 @@ class ContactController {
             return "contact-us";
         } else {
             if (whetherEmailIsValid(contact.getEmail())) {
-                contact.setDate(LocalDate.now());
                 contactRepository.save(contact);
                 return "redirect:/";
             } else {

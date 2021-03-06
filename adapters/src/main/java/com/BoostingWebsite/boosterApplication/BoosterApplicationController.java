@@ -34,6 +34,7 @@ class BoosterApplicationController {
             model.addAttribute("regions", Region.values());
             return "booster-application/booster-application";
         }
+
         boosterApplicationRepository.save(boosterApplication);
         return "redirect:/";
     }

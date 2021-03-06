@@ -8,6 +8,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @DynamicUpdate
@@ -31,7 +32,7 @@ class Contact {
     @NotEmpty(message = "Question cannot be empty")
     private String question;
 
-    private LocalDate date;
+    private LocalDateTime date;
 
     @PersistenceConstructor
     public Contact() {
@@ -73,11 +74,16 @@ class Contact {
         this.question = question;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    void setDate(LocalDate date) {
+    void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    @PrePersist
+    public void prePersist(){
+        date = LocalDateTime.now();
     }
 }

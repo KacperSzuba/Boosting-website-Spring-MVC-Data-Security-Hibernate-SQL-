@@ -1,6 +1,7 @@
 package com.BoostingWebsite.order;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
 
-interface OrderExtrasRepository extends CrudRepository<OrderExtras, Long> {
+interface OrderExtrasRepository {
+    List<OrderExtras> findAll();
 }

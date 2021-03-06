@@ -1,7 +1,5 @@
 package com.BoostingWebsite.account;
 
-import com.BoostingWebsite.account.UserToken;
-
 import java.util.Optional;
 
 interface UserTokenRepository {

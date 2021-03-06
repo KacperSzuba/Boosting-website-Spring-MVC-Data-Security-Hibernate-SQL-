@@ -1,7 +1,5 @@
 package com.BoostingWebsite.account;
 
-import org.springframework.data.repository.query.Param;
-
 import java.util.Optional;
 
 interface UserRepository {
@@ -11,13 +9,13 @@ interface UserRepository {
 
     boolean existsUserByUsername(String username);
 
-    void changeUserEnabledStatement(@Param("id") Long id, @Param("enabled") boolean enabled);
+    void changeUserEnabledStatement(Long id, boolean enabled);
 
-    void changePassword(@Param("id") Long id, @Param("password") String password);
+    void changePassword(Long id, String password);
 
-    void changeEmail(@Param("id") Long id, @Param("email") String email);
+    void changeEmail(Long id, String email);
 
-    UserRole getUserRole(@Param("id") Long id);
+    UserRole getUserRole(Long id);
 
     Optional<User> findById(Long id);
 

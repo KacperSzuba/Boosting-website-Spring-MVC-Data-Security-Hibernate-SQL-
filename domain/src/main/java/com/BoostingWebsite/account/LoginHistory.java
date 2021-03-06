@@ -1,6 +1,5 @@
 package com.BoostingWebsite.account;
 
-import com.BoostingWebsite.account.User;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.PersistenceConstructor;
 

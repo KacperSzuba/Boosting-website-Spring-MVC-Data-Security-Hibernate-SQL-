@@ -8,6 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+interface SqlLoginHistoryRepository extends LoginHistoryRepository, CrudRepository<LoginHistory, Long> {
+    LoginHistory save(LoginHistory loginHistory);
+}
+
 interface SqlUserRepository extends UserRepository, CrudRepository<User, Long> {
     User findByUsername(String username);
 
@@ -36,4 +40,21 @@ interface SqlUserRepository extends UserRepository, CrudRepository<User, Long> {
     Optional<User> findById(Long id);
 
     User save(User user);
+}
+
+interface SqlUserRoleRepository extends UserRoleRepository, CrudRepository<UserRole, Long> {
+    @Query(value = "SELECT ur FROM UserRole ur WHERE ur.roleName = :role")
+    UserRole getUserRole(@Param("role") RoleName role);
+
+    UserRole save(UserRole userRole);
+}
+
+interface SqlUserTokenRepository extends UserTokenRepository, CrudRepository<UserToken, Long> {
+    Optional<UserToken> findByUser_Username(String username);
+
+    UserToken findByToken(String token);
+
+    void delete(UserToken userToken);
+
+    UserToken save(UserToken userToken);
 }
