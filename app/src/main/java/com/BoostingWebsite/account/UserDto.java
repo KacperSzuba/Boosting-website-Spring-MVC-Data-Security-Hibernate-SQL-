@@ -12,7 +12,7 @@ public class UserDto {
     private final String password;
     private final boolean enabled;
     private final String email;
-    private final List<UserRole> roles;
+    private final List<UserRoleSnapshot> roles;
 
     public Long getId() {
         return id;
@@ -34,7 +34,7 @@ public class UserDto {
         return email;
     }
 
-    public List<UserRole> getRoles() {
+    public List<UserRoleSnapshot> getRoles() {
         return roles;
     }
 
@@ -53,7 +53,7 @@ public class UserDto {
         private String password;
         private boolean enabled;
         private String email;
-        private List<UserRole> roles;
+        private List<UserRoleSnapshot> roles;
 
         private Builder(){}
 
@@ -86,7 +86,7 @@ public class UserDto {
             return this;
         }
 
-        public Builder withRoles(List<UserRole> roles) {
+        public Builder withRoles(List<UserRoleSnapshot> roles) {
             this.roles = roles;
             return this;
         }

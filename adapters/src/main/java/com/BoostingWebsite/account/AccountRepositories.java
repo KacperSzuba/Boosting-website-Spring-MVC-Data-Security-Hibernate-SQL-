@@ -1,60 +1,186 @@
 package com.BoostingWebsite.account;
 
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-interface SqlLoginHistoryRepository extends LoginHistoryRepository, CrudRepository<LoginHistory, Long> {
-    LoginHistory save(LoginHistory loginHistory);
+interface SqlLoginHistoryRepository extends CrudRepository<LoginHistorySnapshot, Long> {
+    LoginHistorySnapshot save(LoginHistorySnapshot loginHistory);
 }
 
-interface SqlUserRepository extends UserRepository, CrudRepository<User, Long> {
-    User findByUsername(String username);
+@org.springframework.stereotype.Repository
+class LoginHistoryRepositoryImpl implements LoginHistoryRepository {
+    private final SqlLoginHistoryRepository repository;
 
-    Optional<User> findByEmail(String email);
+    LoginHistoryRepositoryImpl(SqlLoginHistoryRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public LoginHistory save(LoginHistory loginHistory) {
+        return LoginHistory.restore(repository.save(loginHistory.getSnapshot()));
+    }
+}
+
+interface SqlUserRepository extends CrudRepository<UserSnapshot, Long> {
+    @Query(value = "SELECT user FROM UserSnapshot user WHERE user.username = :usernameOrEmail or user.email = :usernameOrEmail")
+    Optional<UserSnapshot> findByUsernameOrEmail(String usernameOrEmail);
+
+    Optional<UserSnapshot> findByEmail(String email);
 
     boolean existsUserByUsername(String username);
 
-    @Transactional
-    @Modifying
-    @Query(value = "UPDATE User u SET u.enabled =:enabled WHERE u.id=:id")
-    void changeUserEnabledStatement(@Param("id") Long id, @Param("enabled") boolean enabled);
-
-    @Transactional
-    @Modifying
-    @Query(value = "UPDATE User u SET u.password =:password WHERE u.id=:id")
-    void changePassword(@Param("id") Long id, @Param("password") String password);
-
-    @Transactional
-    @Modifying
-    @Query(value = "UPDATE User u SET u.email =:email WHERE u.id=:id")
-    void changeEmail(@Param("id") Long id, @Param("email") String email);
-
-    @Query(value = "SELECT u.roles FROM User u WHERE u.id = :id")
+    @Query(value = "SELECT u.roles FROM UserSnapshot u WHERE u.id = :id")
     UserRole getUserRole(@Param("id") Long id);
 
-    Optional<User> findById(Long id);
+    Optional<UserSnapshot> findById(Long id);
 
-    User save(User user);
+    UserSnapshot save(UserSnapshot user);
 }
 
-interface SqlUserRoleRepository extends UserRoleRepository, CrudRepository<UserRole, Long> {
-    @Query(value = "SELECT ur FROM UserRole ur WHERE ur.roleName = :role")
-    UserRole getUserRole(@Param("role") RoleName role);
+@org.springframework.stereotype.Repository
+class UserRepositoryImpl implements UserRepository {
+    private final SqlUserRepository repository;
 
-    UserRole save(UserRole userRole);
+    UserRepositoryImpl(SqlUserRepository sqlUserRepository) {
+        this.repository = sqlUserRepository;
+    }
+
+    @Override
+    public Optional<User> findByUsernameOrEmail(String usernameOrEmail) {
+        return repository.findByUsernameOrEmail(usernameOrEmail).map(User::restore);
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return repository.findByEmail(email).map(User::restore);
+    }
+
+    @Override
+    public boolean existsUserByUsername(String username) {
+        return repository.existsUserByUsername(username);
+    }
+
+    @Override
+    public UserRole getUserRole(Long id) {
+        return repository.getUserRole(id);
+    }
+
+    @Override
+    public Optional<User> findById(Long id) {
+        return repository.findById(id).map(User::restore);
+    }
+
+    @Override
+    public User save(User user) {
+        return User.restore(repository.save(user.getSnapshot()));
+    }
 }
 
-interface SqlUserTokenRepository extends UserTokenRepository, CrudRepository<UserToken, Long> {
-    Optional<UserToken> findByUser_Username(String username);
+interface SqlUserRoleRepository extends CrudRepository<UserRoleSnapshot, Long> {
+    @Query(value = "SELECT ur FROM UserRoleSnapshot ur WHERE ur.roleName = :role")
+    UserRoleSnapshot getUserRole(@Param("role") RoleName role);
 
-    UserToken findByToken(String token);
+    UserRoleSnapshot save(UserRoleSnapshot userRole);
+}
 
-    void delete(UserToken userToken);
+@org.springframework.stereotype.Repository
+class UserRoleRepositoryImpl implements UserRoleRepository {
+    private final SqlUserRoleRepository repository;
 
-    UserToken save(UserToken userToken);
+    UserRoleRepositoryImpl(SqlUserRoleRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public UserRole getUserRole(RoleName role) {
+        return UserRole.restore(repository.getUserRole(role));
+    }
+
+    @Override
+    public UserRole save(UserRole userRole) {
+        return UserRole.restore(repository.save(userRole.getSnapshot()));
+    }
+}
+
+interface SqlUserTokenRepository extends CrudRepository<UserTokenSnapshot, Long> {
+    Optional<UserTokenSnapshot> findByUser_Username(String username);
+
+    UserTokenSnapshot findByToken(String token);
+
+    void delete(UserTokenSnapshot userToken);
+
+    UserTokenSnapshot save(UserTokenSnapshot userToken);
+}
+
+
+@org.springframework.stereotype.Repository
+class UserTokenRepositoryImpl implements UserTokenRepository {
+    private final SqlUserTokenRepository repository;
+
+    UserTokenRepositoryImpl(SqlUserTokenRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public Optional<UserToken> findByUser_Username(String username) {
+        return repository.findByUser_Username(username).map(UserToken::restore);
+    }
+
+    @Override
+    public UserToken findByToken(String token) {
+        return UserToken.restore(repository.findByToken(token));
+    }
+
+    @Override
+    public void delete(UserToken userToken) {
+        repository.delete(userToken.getSnapshot());
+    }
+
+    @Override
+    public UserToken save(UserToken userToken) {
+        return UserToken.restore(userToken.getSnapshot());
+    }
+}
+
+
+interface SqlUserQueryRepository extends CrudRepository<UserSnapshot, Long> {
+    boolean existsUserByEmail(String email);
+
+    boolean existsUserByUsername(String username);
+
+    UserSnapshot findByUsername(String username);
+
+    Optional<UserSnapshot> getById(Long id);
+}
+
+@org.springframework.stereotype.Repository
+class UserQueryRepositoryImpl implements UserQueryRepository {
+    private final SqlUserQueryRepository repository;
+
+    UserQueryRepositoryImpl(SqlUserQueryRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public boolean existsUserByEmail(String email) {
+        return repository.existsUserByEmail(email);
+    }
+
+    @Override
+    public boolean existsUserByUsername(String username) {
+        return repository.existsUserByUsername(username);
+    }
+
+    @Override
+    public SimpleUserDto findByUsername(String username) {
+        return null;
+    }
+
+    @Override
+    public Optional<SimpleUserDto> getById(Long id) {
+        return Optional.empty();
+    }
 }

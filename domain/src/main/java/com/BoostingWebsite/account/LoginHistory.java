@@ -1,47 +1,31 @@
 package com.BoostingWebsite.account;
 
-import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.data.annotation.PersistenceConstructor;
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@DynamicUpdate
-@Entity
-@Table(name = "login_history")
+
 class LoginHistory {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private User user;
     private LocalDateTime date;
 
-    @ManyToOne
-    private User user;
+    LoginHistory(){}
 
-    @PersistenceConstructor
-    public LoginHistory() {
-    }
-
-    LoginHistory(User user) {
+    private LoginHistory(Long id, User user, LocalDateTime date) {
+        this.id = id;
         this.user = user;
+        this.date = date;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    @PrePersist
-    public void prePersist(){
+    void create(User user){
+        this.user = user;
         date = LocalDateTime.now();
+    }
+
+    static LoginHistory restore(LoginHistorySnapshot snapshot){
+        return new LoginHistory(snapshot.getId(), User.restore(snapshot.getUser()), snapshot.getDate());
+    }
+
+    LoginHistorySnapshot getSnapshot(){
+        return new LoginHistorySnapshot(id, user.getSnapshot(), date);
     }
 }

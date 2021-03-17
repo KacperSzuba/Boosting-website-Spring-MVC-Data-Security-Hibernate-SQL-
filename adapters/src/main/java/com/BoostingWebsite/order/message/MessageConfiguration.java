@@ -2,6 +2,7 @@ package com.BoostingWebsite.order.message;
 
 import com.BoostingWebsite.account.UserQueryRepository;
 import com.BoostingWebsite.order.OrderBoostFacade;
+import com.BoostingWebsite.utils.BaseController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

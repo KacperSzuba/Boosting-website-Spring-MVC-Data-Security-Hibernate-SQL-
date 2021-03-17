@@ -1,129 +1,66 @@
 package com.BoostingWebsite.account;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-import org.hibernate.annotations.Type;
-import org.springframework.data.annotation.PersistenceConstructor;
+import com.BoostingWebsite.account.exception.DataMismatchException;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Entity
-@Table(name = "users")
+import static com.BoostingWebsite.utils.PasswordValidator.isPasswordLengthSufficient;
+import static com.BoostingWebsite.utils.PasswordValidator.whetherThePasswordsAreTheSame;
+
+
 class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Size(min = 7, max = 20, message = "Username length should be between 7 and 20 letters")
     private String username;
-
-    @Size(min = 7, message = "Password length should be between 7 and 20 letters")
     private String password;
-
-    @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean enabled;
-
-    @NotEmpty(message = "E-mail cannot be empty")
-    @Email(message = "Invalid email")
     private String email;
-
-    @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<UserRole> roles;
-
-    @Transient
     private String creationErrorMessage;
 
-    @PersistenceConstructor
-    public User() {
-    }
+    User(){}
 
-    User(Long id, String username, String email){
+    private User(Long id, String username, String password, boolean enabled, String email, List<UserRole> roles) {
         this.id = id;
         this.username = username;
-        this.email = email;
-    }
-
-    User(String username, String password, boolean enabled, String email, List<UserRole> roles) {
-        this.username = username;
         this.password = password;
         this.enabled = enabled;
         this.email = email;
         this.roles = roles;
     }
 
-    Long getId() {
-        return id;
-    }
-
-    String getUsername() {
-        return username;
-    }
-
-    void setUsername(String username) {
-        this.username = username;
-    }
-
-    String getPassword() {
-        return password;
-    }
-
-    void setPassword(String password) {
-        this.password = password;
-    }
-
-    boolean isEnabled() {
-        return enabled;
-    }
-
-    void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    String getEmail() {
-        return email;
-    }
-
-    void setEmail(String email) {
-        this.email = email;
-    }
-
-    List<UserRole> getRoles() {
-        return roles;
-    }
-
-    void setRoles(List<UserRole> roles) {
-        this.roles = roles;
-    }
-
-    String getCreationErrorMessage() {
-        return creationErrorMessage;
-    }
-
-    void setCreationErrorMessage(String creationErrorMessage) {
+    void creationMessage(String creationErrorMessage){
         this.creationErrorMessage = creationErrorMessage;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", enabled=" + enabled +
-                ", email='" + email + '\'' +
-                ", roles=" + roles +
-                '}';
+    void enable(){
+        enabled = true;
+    }
+
+    void changeEmail(String email){
+        this.email = email;
+    }
+
+    boolean canResetPassword(String newPassword, String confirmNewPassword) throws DataMismatchException {
+        return isPasswordLengthSufficient(newPassword) && whetherThePasswordsAreTheSame(newPassword, confirmNewPassword);
+    }
+
+    boolean canChangePassword(String currentPassword, String newPassword, String confirmNewPassword) throws DataMismatchException {
+        return isPasswordLengthSufficient(newPassword) &&
+                whetherThePasswordsAreTheSame(newPassword, confirmNewPassword) &&
+                whetherThePasswordsAreTheSame(password, currentPassword);
+    }
+
+    void changePassword(String password){
+        this.password = password;
+    }
+
+    static User restore(UserSnapshot snapshot){
+        return new User(snapshot.getId(), snapshot.getUsername(), snapshot.getPassword(), snapshot.isEnabled(), snapshot.getEmail(), snapshot.getRoles().stream().map(UserRole::restore).collect(Collectors.toList()));
+    }
+
+    UserSnapshot getSnapshot(){
+        return new UserSnapshot(id, username, password, enabled, email, roles.stream().map(UserRole::getSnapshot).collect(Collectors.toList()), creationErrorMessage);
     }
 }
 

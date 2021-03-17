@@ -1,10 +1,12 @@
 package com.BoostingWebsite.account;
 
-public class UserRoleFacade {
+import com.BoostingWebsite.utils.BaseFacade;
+
+public class UserRoleBusiness extends BaseFacade {
 
     private final UserRoleRepository userRoleRepository;
 
-    public UserRoleFacade(final UserRoleRepository userRoleRepository) {
+    public UserRoleBusiness(final UserRoleRepository userRoleRepository) {
         this.userRoleRepository = userRoleRepository;
     }
 

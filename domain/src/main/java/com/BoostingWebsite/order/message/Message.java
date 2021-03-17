@@ -1,6 +1,7 @@
 package com.BoostingWebsite.order.message;
 
 import com.BoostingWebsite.account.SimpleUserDto;
+import com.BoostingWebsite.account.SimpleUserDtoSnapshot;
 import org.springframework.data.annotation.PersistenceConstructor;
 
 import javax.persistence.*;
@@ -18,11 +19,11 @@ class Message implements Comparable<Message> {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "message_sender")
-    private SimpleUserDto author;
+    private SimpleUserDtoSnapshot author;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "recipient_of_the_message")
-    private SimpleUserDto recipient;
+    private SimpleUserDtoSnapshot recipient;
 
     private LocalDateTime date;
 
@@ -30,7 +31,7 @@ class Message implements Comparable<Message> {
     protected Message() {
     }
 
-    Message(String message, SimpleUserDto author, SimpleUserDto recipient) {
+    Message(String message, SimpleUserDtoSnapshot author, SimpleUserDtoSnapshot recipient) {
         this.message = message;
         this.author = author;
         this.recipient = recipient;
@@ -41,19 +42,19 @@ class Message implements Comparable<Message> {
         return id;
     }
 
-    SimpleUserDto getAuthor() {
+    SimpleUserDtoSnapshot getAuthor() {
         return author;
     }
 
-    void setAuthor(SimpleUserDto author) {
+    void setAuthor(SimpleUserDtoSnapshot author) {
         this.author = author;
     }
 
-    SimpleUserDto getRecipient() {
+    SimpleUserDtoSnapshot getRecipient() {
         return recipient;
     }
 
-    void setRecipient(SimpleUserDto recipient) {
+    void setRecipient(SimpleUserDtoSnapshot recipient) {
         this.recipient = recipient;
     }
 

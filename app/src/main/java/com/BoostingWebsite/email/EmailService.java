@@ -13,10 +13,6 @@ public class EmailService {
     }
 
     public void sendEmail(String to, String subject, String content) {
-        tryToSendEmail(to, subject, content);
-    }
-
-    private void tryToSendEmail(String to, String subject, String content) {
         try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setTo(to);
@@ -29,7 +25,7 @@ public class EmailService {
     }
 
     public void constructResetTokenEmail(String contextPath, String token, SimpleUserDto user) {
-        String url = contextPath + "/account/remind/password/token?id=" + user.getId() + "&token=" + token;
-        sendEmail(user.getEmail(), "Reset Password", " \r\n" + url);
+        String url = contextPath + "/account/remind/password/token?id=" + user.getSnapshot().getId() + "&token=" + token;
+        sendEmail(user.getSnapshot() .getEmail(), "Reset Password", " \r\n" + url);
     }
 }

@@ -1,11 +1,13 @@
 package com.BoostingWebsite.order;
 
+import com.BoostingWebsite.account.SimpleUserDto;
 import com.BoostingWebsite.api.LeagueOfLegendsAPIFacade;
 import com.BoostingWebsite.order.dto.OrderBoostDto;
 import com.BoostingWebsite.order.exception.OrderBoostNotFoundException;
 import com.BoostingWebsite.order.message.MessageFacade;
 import com.BoostingWebsite.order.message.dto.MessageDTO;
 import com.BoostingWebsite.utils.ApplicationSession;
+import com.BoostingWebsite.utils.BaseController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -21,7 +23,7 @@ import java.io.IOException;
 
 @Controller
 @RequestMapping("/order/preview")
-class OrderPreviewController {
+class OrderPreviewController extends BaseController {
     private static final Logger logger = LogManager.getLogger(OrderPreviewController.class);
 
     private final ApplicationSession applicationSession;
@@ -43,8 +45,8 @@ class OrderPreviewController {
             OrderBoostDto orderBoost = orderBoostFacade.findActiveBoost();
 
             model.addAttribute("orderBoost", orderBoost);
-            model.addAttribute("messages", messageFacade.getChatMessages(orderBoost.getUser(), orderBoost.getBooster()));
-            model.addAttribute("username", applicationSession.getActualUser().getUsername());
+            model.addAttribute("messages", messageFacade.getChatMessages(SimpleUserDto.restore(orderBoost.getUser()), SimpleUserDto.restore(orderBoost.getBooster())));
+            model.addAttribute("username", applicationSession.getContext().getUser().getUsername());
             model.addAttribute("currentLeague", leagueOfLegendsAPIFacade.getCurrentLeague());
         }
         catch (OrderBoostNotFoundException | IOException ex){

@@ -3,10 +3,11 @@ package com.BoostingWebsite.api;
 import com.BoostingWebsite.order.LeagueDto;
 import com.BoostingWebsite.order.Division;
 import com.BoostingWebsite.order.Tier;
+import com.BoostingWebsite.utils.BaseFacade;
 
 import java.io.IOException;
 
-public class LeagueOfLegendsAPIFacade {
+public class LeagueOfLegendsAPIFacade extends BaseFacade {
     private final LeagueOfLegendsAPIConnector leagueOfLegendsAPIConnector;
 
     public LeagueOfLegendsAPIFacade(final LeagueOfLegendsAPIConnector leagueOfLegendsAPIConnector) {

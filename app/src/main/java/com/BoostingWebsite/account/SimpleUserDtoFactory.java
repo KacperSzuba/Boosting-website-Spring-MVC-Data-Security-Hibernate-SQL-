@@ -1,11 +1,31 @@
 package com.BoostingWebsite.account;
 
+import java.util.ArrayList;
+
 class SimpleUserDtoFactory {
     User from(final SimpleUserDto source){
-        return new User(source.getId(), source.getUsername(), source.getEmail());
+        SimpleUserDtoSnapshot snapshot = source.getSnapshot();
+        return User.restore(
+                new UserSnapshot(
+                        snapshot.getId(),
+                        snapshot.getUsername(),
+                        null,
+                        false,
+                        snapshot.getEmail(),
+                        new ArrayList<>(),
+                        null
+                )
+        );
     }
 
     SimpleUserDto to(final User source){
-        return new SimpleUserDto(source.getId(), source.getUsername(), source.getEmail());
+        UserSnapshot snapshot = source.getSnapshot();
+        return SimpleUserDto.restore(
+                new SimpleUserDtoSnapshot(
+                        snapshot.getId(),
+                        snapshot.getUsername(),
+                        snapshot.getEmail()
+                )
+        );
     }
 }

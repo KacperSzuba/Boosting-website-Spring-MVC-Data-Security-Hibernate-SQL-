@@ -1,81 +1,32 @@
 package com.BoostingWebsite.account;
 
-import com.BoostingWebsite.account.SimpleUserDto;
-import org.springframework.data.annotation.PersistenceConstructor;
-
-import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
 
-@Entity
-@Table(name = "password_reset_token")
 class UserToken {
     private static final int EXPIRATION = 60 * 24;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String token;
-
-    @OneToOne(targetEntity = SimpleUserDto.class, fetch = FetchType.EAGER)
-    @JoinColumn(nullable = false, name = "user_id")
     private SimpleUserDto user;
-
     private Date expiryDate;
 
-    @PersistenceConstructor
-    protected UserToken() {
-    }
-
-    UserToken(final String token) {
-        this.token = token;
-        this.expiryDate = calculateExpiryDate(EXPIRATION);
-    }
-
-    UserToken(final String token, final SimpleUserDto user) {
+    private UserToken(Long id, String token, SimpleUserDto user, Date expiryDate) {
+        this.id = id;
         this.token = token;
         this.user = user;
-        this.expiryDate = calculateExpiryDate(EXPIRATION);
-    }
-
-    Long getId() {
-        return id;
-    }
-
-    String getToken() {
-        return token;
-    }
-
-    void setToken(final String token) {
-        this.token = token;
-    }
-
-    SimpleUserDto getUser() {
-        return user;
-    }
-
-    void setUser(final SimpleUserDto user) {
-        this.user = user;
-    }
-
-    Date getExpiryDate() {
-        return expiryDate;
-    }
-
-    void setExpiryDate(final Date expiryDate) {
         this.expiryDate = expiryDate;
-    }
-
-    private Date calculateExpiryDate(final int expiryTimeInMinutes) {
-        final Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(new Date().getTime());
-        cal.add(Calendar.MINUTE, expiryTimeInMinutes);
-        return new Date(cal.getTime().getTime());
     }
 
     void updateToken(final String token) {
         this.token = token;
-        this.expiryDate = calculateExpiryDate(EXPIRATION);
+        this.expiryDate = calculateExpiryDate();
+    }
+
+    private Date calculateExpiryDate() {
+        final Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(new Date().getTime());
+        cal.add(Calendar.MINUTE, UserToken.EXPIRATION);
+        return new Date(cal.getTime().getTime());
     }
 
     @Override
@@ -121,16 +72,15 @@ class UserToken {
         } else if (!user.equals(other.user)) {
             return false;
         }
+
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "UserToken{" +
-                "id=" + id +
-                ", token='" + token + '\'' +
-                ", user=" + user +
-                ", expiryDate=" + expiryDate +
-                '}';
+    static UserToken restore(UserTokenSnapshot snapshot){
+        return new UserToken(snapshot.getId(), snapshot.getToken(), SimpleUserDto.restore(snapshot.getUser()), snapshot.getExpiryDate());
+    }
+
+    UserTokenSnapshot getSnapshot(){
+        return new UserTokenSnapshot(id, token, user.getSnapshot(), expiryDate);
     }
 }

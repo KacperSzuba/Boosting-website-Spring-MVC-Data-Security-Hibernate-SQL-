@@ -5,12 +5,13 @@ import com.BoostingWebsite.account.UserQueryRepository;
 import com.BoostingWebsite.order.dto.OrderBoostDto;
 import com.BoostingWebsite.order.exception.OrderBoostNotFoundException;
 import com.BoostingWebsite.utils.ApplicationSession;
+import com.BoostingWebsite.utils.BaseFacade;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class OrderBoostFacade {
+public class OrderBoostFacade extends BaseFacade {
     private final ApplicationSession applicationSession;
     private final OrderBoostQueryRepository orderBoostQueryRepository;
     private final OrderExtrasRepository orderExtrasRepository;
@@ -34,16 +35,16 @@ public class OrderBoostFacade {
     }
 
     public void makeOrder(OrderBoost orderBoost) {
-        SimpleUserDto user = userQueryRepository.getById(applicationSession.getActualUser().getId()).get();
+        SimpleUserDto user = userQueryRepository.getById(applicationSession.getContext().getUser().getId()).get();
 
         orderBoost.setDate(LocalDateTime.now());
-        orderBoost.setUser(user);
+        orderBoost.setUser(user.getSnapshot());
         orderBoost.setStatus(EnumOrderStatus.NEW);
         orderBoostQueryRepository.save(orderBoost);
     }
 
     public boolean whetherUserHasOrder(){
-        return orderBoostQueryRepository.existsByBooster_IdOrUser_IdAndStatus(applicationSession.getActualUser().getId(), applicationSession.getActualUser().getId(), EnumOrderStatus.NEW);
+        return orderBoostQueryRepository.existsByBooster_IdOrUser_IdAndStatus(applicationSession.getContext().getUser().getId(), applicationSession.getContext().getUser().getId(), EnumOrderStatus.NEW);
     }
 
     public List<OrderExtras> getOrderExtras(){
@@ -57,20 +58,20 @@ public class OrderBoostFacade {
     }
 
     public List<OrderBoostDto> getCompletedOrderBoosts(){
-        return orderBoostQueryRepository.findDoneOrderBoost(applicationSession.getActualUser().getId()).stream()
+        return orderBoostQueryRepository.findDoneOrderBoost(applicationSession.getContext().getUser().getId()).stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
     public OrderBoostDto findActiveBoost() throws OrderBoostNotFoundException {
         return orderBoostQueryRepository
-                .findActiveBoost(applicationSession.getActualUser().getId())
+                .findActiveBoost(applicationSession.getContext().getUser().getId())
                 .map(this::toDto)
                 .orElseThrow(OrderBoostNotFoundException::new);
     }
 
     public boolean isActiveBoost(){
-        return orderBoostQueryRepository.findByUser_IdOrBooster_IdAndStatus(applicationSession.getActualUser().getId(), applicationSession.getActualUser().getId(), EnumOrderStatus.NEW);
+        return orderBoostQueryRepository.findByUser_IdOrBooster_IdAndStatus(applicationSession.getContext().getUser().getId(), applicationSession.getContext().getUser().getId(), EnumOrderStatus.NEW);
     }
 
     private OrderBoostDto toDto(OrderBoost orderBoost){

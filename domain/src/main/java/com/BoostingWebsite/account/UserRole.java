@@ -1,36 +1,19 @@
 package com.BoostingWebsite.account;
 
-import org.hibernate.annotations.Immutable;
-import org.springframework.data.annotation.PersistenceConstructor;
-
-import javax.persistence.*;
-
-@Entity
-@Table(name = "user_roles")
-@Immutable
 class UserRole {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @Enumerated(EnumType.STRING)
+    private Long id;
     private RoleName roleName;
 
-    @PersistenceConstructor
-    UserRole() {
-    }
-
-    UserRole(RoleName roleName) {
+    private UserRole(Long id, RoleName roleName) {
+        this.id = id;
         this.roleName = roleName;
     }
 
-    int getId() {
-        return id;
+    static UserRole restore(UserRoleSnapshot snapshot){
+        return new UserRole(snapshot.getId(), snapshot.getRoleName());
     }
 
-    RoleName getRoleName() {
-        return roleName;
+    UserRoleSnapshot getSnapshot(){
+        return new UserRoleSnapshot(id, roleName);
     }
-
 }

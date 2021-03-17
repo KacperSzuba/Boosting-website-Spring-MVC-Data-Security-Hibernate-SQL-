@@ -1,6 +1,7 @@
 package com.BoostingWebsite.order.dto;
 
 import com.BoostingWebsite.account.SimpleUserDto;
+import com.BoostingWebsite.account.SimpleUserDtoSnapshot;
 import com.BoostingWebsite.order.LeagueDto;
 import com.BoostingWebsite.order.OrderExtras;
 import com.BoostingWebsite.order.EnumOrderStatus;
@@ -28,8 +29,8 @@ public class OrderBoostDto {
     private final Region region;
     private final LeagueDto currentLeagueDto;
     private final LeagueDto destinationLeagueDto;
-    private final SimpleUserDto user;
-    private final SimpleUserDto booster;
+    private final SimpleUserDtoSnapshot user;
+    private final SimpleUserDtoSnapshot booster;
     private final Set<OrderExtras> extras;
     private final EnumOrderStatus status;
     private final QueueType queueType;
@@ -96,11 +97,11 @@ public class OrderBoostDto {
         return destinationLeagueDto;
     }
 
-    public SimpleUserDto getUser() {
+    public SimpleUserDtoSnapshot getUser() {
         return user;
     }
 
-    public SimpleUserDto getBooster() {
+    public SimpleUserDtoSnapshot getBooster() {
         return booster;
     }
 
@@ -135,8 +136,8 @@ public class OrderBoostDto {
         private Region region;
         private LeagueDto currentLeagueDto;
         private LeagueDto destinationLeagueDto;
-        private SimpleUserDto user;
-        private SimpleUserDto booster;
+        private SimpleUserDtoSnapshot user;
+        private SimpleUserDtoSnapshot booster;
         private Set<OrderExtras> extras;
         private EnumOrderStatus status;
         private QueueType queueType;
@@ -199,12 +200,12 @@ public class OrderBoostDto {
             return this;
         }
 
-        public Builder withUser(SimpleUserDto user) {
+        public Builder withUser(SimpleUserDtoSnapshot user) {
             this.user = user;
             return this;
         }
 
-        public Builder withBooster(SimpleUserDto booster) {
+        public Builder withBooster(SimpleUserDtoSnapshot booster) {
             this.booster = booster;
             return this;
         }

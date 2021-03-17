@@ -1,0 +1,92 @@
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
+      http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd"
+                 version="2.1">
+    <entity class="com.BoostingWebsite.account.UserSnapshot" access="FIELD">
+        <table name="users" />
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY" />
+            </id>
+
+            <basic name="username" />
+
+            <basic name="password" />
+
+            <basic name="enabled" />
+
+            <basic name="email" />
+
+            <many-to-many name="roles">
+                <join-table name="users_roles">
+                    <join-column name="user_id"/>
+                    <inverse-join-column name="roles_id"/>
+                </join-table>
+            </many-to-many>
+
+            <transient name="creationErrorMessage"/>
+        </attributes>
+    </entity>
+
+    <entity class="com.BoostingWebsite.account.UserRoleSnapshot" access="FIELD">
+        <table name="user_roles" />
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY" />
+            </id>
+
+            <basic name="roleName">
+                <enumerated>STRING</enumerated>
+            </basic>
+        </attributes>
+    </entity>
+
+    <entity class="com.BoostingWebsite.account.LoginHistorySnapshot" access="FIELD">
+        <table name="login_history" />
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY" />
+            </id>
+
+            <basic name="date">
+            </basic>
+
+            <many-to-one name="user">
+            </many-to-one>
+        </attributes>
+    </entity>
+
+    <entity class="com.BoostingWebsite.account.SimpleUserDtoSnapshot" access="FIELD">
+        <table name="users" />
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY" />
+            </id>
+
+            <basic name="username" />
+
+            <basic name="email" />
+        </attributes>
+    </entity>
+
+    <entity class="com.BoostingWebsite.account.UserTokenSnapshot" access="FIELD">
+        <table name="password_reset_token" />
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY" />
+            </id>
+
+            <basic name="token" />
+
+            <basic name="expiryDate">
+                <temporal>DATE</temporal>
+            </basic>
+
+            <one-to-one name="user" target-entity="com.BoostingWebsite.account.SimpleUserDtoSnapshot" fetch="EAGER">
+                <join-column nullable="false" name="user_id" />
+            </one-to-one>
+        </attributes>
+    </entity>
+
+</entity-mappings>

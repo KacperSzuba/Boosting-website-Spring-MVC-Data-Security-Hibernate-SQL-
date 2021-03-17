@@ -1,6 +1,7 @@
 package com.BoostingWebsite.account;
 
 import com.BoostingWebsite.account.exception.DataMismatchException;
+import com.BoostingWebsite.utils.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/account/change/email")
-class EmailManagerController {
+class EmailManagerController extends BaseController {
 
-    private final EmailManager emailManager;
+    private final EmailManagerFacade facade;
 
-    EmailManagerController(final EmailManager emailManager) {
-        this.emailManager = emailManager;
+    EmailManagerController(EmailManagerFacade facade) {
+        this.facade = facade;
     }
 
     @GetMapping
@@ -25,12 +26,11 @@ class EmailManagerController {
     @GetMapping("/form")
     String changeEmail(@RequestParam("currentEmail") String currentEmail, @RequestParam("email") String email, @RequestParam("confirmEmail") String confirmEmail, Model model) {
         try {
-            emailManager.changeEmail(currentEmail, email, confirmEmail);
+            facade.changeEmail(currentEmail, email, confirmEmail);
             model.addAttribute("newEmail", "Your e-mail has been successfully changed to: " + email);
         } catch (DataMismatchException e) {
             model.addAttribute("newEmail", e.getMessage());
         }
         return "account/change-email";
     }
-
 }

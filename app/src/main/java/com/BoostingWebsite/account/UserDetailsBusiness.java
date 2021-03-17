@@ -8,33 +8,30 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
-class UserRepositoryUserDetailsService implements UserDetailsService {
+class UserDetailsBusiness implements UserDetailsService {
     private final UserRepository userRepository;
-    private final LoginHistoryFacade loginHistoryFacade;
+    private final LoginHistoryBusiness loginHistoryBusiness;
 
-    UserRepositoryUserDetailsService(final UserRepository userRepository, final LoginHistoryFacade loginHistoryFacade) {
+    UserDetailsBusiness(UserRepository userRepository, LoginHistoryBusiness loginHistoryBusiness) {
         this.userRepository = userRepository;
-        this.loginHistoryFacade = loginHistoryFacade;
+        this.loginHistoryBusiness = loginHistoryBusiness;
     }
 
     @Override
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(usernameOrEmail);
+        Optional<User> user = userRepository.findByUsernameOrEmail(usernameOrEmail);
 
-        if (user == null && userRepository.findByEmail(usernameOrEmail).isPresent()) {
-            user = userRepository.findByEmail(usernameOrEmail).get();
-        }
-
-        if (user != null) {
-            Collection<GrantedAuthority> authorities = user.getRoles()
+        if (user != null && user.isPresent()) {
+            Collection<GrantedAuthority> authorities = user.get().getSnapshot().getRoles()
                     .stream()
                     .map(userRole -> new SimpleGrantedAuthority(userRole.getRoleName().toString()))
                     .collect(Collectors.toCollection(ArrayList::new));
-            loginHistoryFacade.save(user);
+            loginHistoryBusiness.save(user.get());
             return new org.springframework.security.core.userdetails.
-                    User(usernameOrEmail, user.getPassword(), user.isEnabled(), true,
+                    User(usernameOrEmail, user.get().getSnapshot().getPassword(), user.get().getSnapshot().isEnabled(), true,
                     true, true, authorities);
         } else {
             throw new UsernameNotFoundException("User " + usernameOrEmail + " not found");

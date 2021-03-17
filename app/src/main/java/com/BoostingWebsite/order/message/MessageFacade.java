@@ -4,11 +4,12 @@ import com.BoostingWebsite.account.SimpleUserDto;
 import com.BoostingWebsite.order.OrderBoostFacade;
 import com.BoostingWebsite.order.exception.OrderBoostNotFoundException;
 import com.BoostingWebsite.order.message.dto.MessageDTO;
+import com.BoostingWebsite.utils.BaseFacade;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MessageFacade {
+public class MessageFacade extends BaseFacade {
     private final MessageRepository messageRepository;
     private final OrderBoostFacade orderBoostFacade;
     private final MessageFactory messageFactory;
@@ -28,7 +29,7 @@ public class MessageFacade {
             throw new OrderBoostNotFoundException();
         }
 
-        return messageRepository.getChatMessages(sender.getId(), recipient.getId()).stream()
+        return messageRepository.getChatMessages(sender.getSnapshot().getId(), recipient.getSnapshot().getId()).stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }

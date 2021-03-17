@@ -1,30 +1,25 @@
 package com.BoostingWebsite.account;
 
-import com.BoostingWebsite.utils.ApplicationSession;
+import com.BoostingWebsite.account.exception.DataMismatchException;
+import com.BoostingWebsite.utils.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.UUID;
-
-import static com.BoostingWebsite.utils.PasswordValidator.isPasswordLengthSufficient;
 
 @Controller
 @RequestMapping("/register")
-class RegisterController {
+class RegisterController extends BaseController {
+    private final RegisterFacade facade;
 
-    private final UserFacade userFacade;
-    private final EmailManager emailManager;
-    private final ApplicationSession applicationSession;
-    private final UserValidator userValidator;
-
-    RegisterController(final UserFacade userFacade, final EmailManager emailManager, final ApplicationSession applicationSession, final UserValidator userValidator) {
-        this.userFacade = userFacade;
-        this.emailManager = emailManager;
-        this.applicationSession = applicationSession;
-        this.userValidator = userValidator;
+    RegisterController(RegisterFacade facade) {
+        this.facade = facade;
     }
 
     @GetMapping
@@ -36,16 +31,15 @@ class RegisterController {
 
     @PostMapping
     String register(@Valid @ModelAttribute("user") User user, BindingResult result, @RequestParam("confirmPassword") String confirmPassword, Model model) {
-        if (result.hasErrors() || isPasswordLengthSufficient(confirmPassword)) {
-            model.addAttribute("confirmPasswordErrorMessage", "Confirmation password length should be between 7 and 20 letters");
+        if (result.hasErrors()) {
             return "account/register";
         } else {
-            if (userValidator.canCreateAccount(user, confirmPassword)) {
-                userFacade.createAccount(user);
+            try {
+                facade.createAccount(user, confirmPassword);
                 model.addAttribute("confirmEmailMessage", "Login to the e-mail address provided and confirm your identity.");
-                emailManager.confirmEmail(applicationSession.getAppUrl(), generateToken(), userFacade.findByUsername(user.getUsername()));
                 return "account/login";
-            } else {
+            } catch (DataMismatchException e) {
+                model.addAttribute("confirmEmailMessage", e.getMessage());
                 return "account/register";
             }
         }
@@ -53,17 +47,14 @@ class RegisterController {
 
     @GetMapping("/confirm")
     String confirmEmail(@RequestParam("id") Long id, @RequestParam("token") String token) {
-        String confirmEmail = emailManager.emailTokenConfirmation(id, token);
+        String confirmEmail = facade.confirm(id, token);
+
         if (confirmEmail != null) {
             return "redirect:/login";
         }
 
-        userFacade.setEnabled(id);
+        facade.enable(id);
 
         return "redirect:/login";
-    }
-
-    private String generateToken() {
-        return UUID.randomUUID().toString();
     }
 }

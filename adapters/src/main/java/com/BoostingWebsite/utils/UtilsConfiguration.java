@@ -1,16 +1,18 @@
 package com.BoostingWebsite.utils;
 
-import com.BoostingWebsite.account.UserFacade;
+import com.BoostingWebsite.account.UserBusiness;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.context.annotation.SessionScope;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Configuration
 class UtilsConfiguration {
     @Bean
-    ApplicationSession applicationSession(final UserFacade userFacade, final HttpServletRequest request){
-        return new ApplicationSession(userFacade, request);
+    @SessionScope
+    ApplicationSession applicationSession(final UserBusiness userBusiness, final HttpServletRequest request){
+        return new ApplicationSession(userBusiness, request);
     }
 
     @Bean

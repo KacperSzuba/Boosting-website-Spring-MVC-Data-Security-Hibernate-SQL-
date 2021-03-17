@@ -1,6 +1,7 @@
 package com.BoostingWebsite.order;
 
 import com.BoostingWebsite.boosterApplication.Region;
+import com.BoostingWebsite.utils.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,7 +14,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/order")
-class OrderController {
+class OrderController extends BaseController {
 
     private final OrderBoostFacade orderBoostFacade;
 

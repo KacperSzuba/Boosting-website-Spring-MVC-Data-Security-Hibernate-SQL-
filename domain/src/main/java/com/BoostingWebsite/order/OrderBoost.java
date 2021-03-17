@@ -1,6 +1,7 @@
 package com.BoostingWebsite.order;
 
 import com.BoostingWebsite.account.SimpleUserDto;
+import com.BoostingWebsite.account.SimpleUserDtoSnapshot;
 import com.BoostingWebsite.boosterApplication.Region;
 import com.BoostingWebsite.order.message.SimpleMessageDto;
 import org.hibernate.annotations.Type;
@@ -75,11 +76,11 @@ class OrderBoost {
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "users_id")
-    private SimpleUserDto user;
+    private SimpleUserDtoSnapshot user;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "boosters_id")
-    private SimpleUserDto booster;
+    private SimpleUserDtoSnapshot booster;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(
@@ -151,19 +152,19 @@ class OrderBoost {
         this.destinationLeague = destinationLeague;
     }
 
-    SimpleUserDto getUser() {
+    SimpleUserDtoSnapshot getUser() {
         return user;
     }
 
-    void setUser(SimpleUserDto user) {
+    void setUser(SimpleUserDtoSnapshot user) {
         this.user = user;
     }
 
-    SimpleUserDto getBooster() {
+    SimpleUserDtoSnapshot getBooster() {
         return booster;
     }
 
-    void setBooster(SimpleUserDto booster) {
+    void setBooster(SimpleUserDtoSnapshot booster) {
         this.booster = booster;
     }
 

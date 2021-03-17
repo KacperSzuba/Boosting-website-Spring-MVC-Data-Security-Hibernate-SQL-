@@ -1,5 +1,6 @@
 package com.BoostingWebsite.home;
 
+import com.BoostingWebsite.utils.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/")
-class HomeController {
+class HomeController extends BaseController {
 
     @GetMapping
     String showHomePage() {

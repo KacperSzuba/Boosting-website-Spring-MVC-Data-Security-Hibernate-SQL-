@@ -1,66 +1,76 @@
 package com.BoostingWebsite.account;
 
 import com.BoostingWebsite.email.EmailService;
-import com.BoostingWebsite.utils.ApplicationSession;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 class AccountConfiguration {
-
     @Bean
-    EmailManager emailManager(
-            final ApplicationSession applicationSession,
-            final EmailService emailService,
-            final UserTokenFacade userTokenFacade,
-            final UserFacade userFacade){
-        return new EmailManager(applicationSession, emailService, userTokenFacade, userFacade, new SimpleUserDtoFactory());
+    UserDetailsBusiness userDetailsBusiness(final UserRepository userRepository, final LoginHistoryBusiness loginHistoryBusiness){
+        return new UserDetailsBusiness(userRepository, loginHistoryBusiness);
     }
 
     @Bean
-    LoginHistoryFacade loginHistoryFacade(final LoginHistoryRepository loginHistoryRepository){
-        return new LoginHistoryFacade(loginHistoryRepository);
+    LoginHistoryBusiness loginHistoryBusiness(final LoginHistoryRepository loginHistoryRepository){
+        return new LoginHistoryBusiness(loginHistoryRepository);
     }
 
     @Bean
-    PasswordManager passwordManager(
-            final PasswordEncoder passwordEncoder,
-            final UserFacade userFacade,
-            final ApplicationSession applicationSession,
-            final UserTokenFacade tokenRecorder,
-            final EmailService emailService
-    ){
-        return new PasswordManager(passwordEncoder, userFacade, applicationSession, tokenRecorder, emailService, new SimpleUserDtoFactory());
-    }
-
-    @Bean
-    UserFacade userFacade(
+    UserBusiness userBusiness(
             final PasswordEncoder passwordEncoder,
             final UserRepository userRepository,
-            final UserRoleFacade userRoleFacade,
-            final UserTokenFacade userTokenFacade,
-            final UserQueryRepository userQueryRepository
+            final UserRoleBusiness userRoleBusiness,
+            final UserTokenBusiness userTokenBusiness,
+            final UserQueryRepository userQueryRepository,
+            final LoginHistoryBusiness loginHistoryBusiness,
+            final EmailService emailService
     ){
-        return new UserFacade(passwordEncoder, userRepository, userRoleFacade, userTokenFacade, new SimpleUserDtoFactory(), userQueryRepository);
+        return new UserBusiness(
+                passwordEncoder,
+                userRepository,
+                userRoleBusiness,
+                userTokenBusiness,
+                new SimpleUserDtoFactory(),
+                userQueryRepository,
+                loginHistoryBusiness,
+                emailService,
+                new UserFactory());
     }
 
     @Bean
-    UserRoleFacade userRoleFacade(final UserRoleRepository userRoleRepository){
-        return new UserRoleFacade(userRoleRepository);
+    UserRoleBusiness userRoleBusiness(final UserRoleRepository userRoleRepository){
+        return new UserRoleBusiness(userRoleRepository);
     }
 
     @Bean
-    UserTokenFacade userTokenFacade(final UserTokenRepository userTokenRepository){
-        return new UserTokenFacade(userTokenRepository);
-    }
-
-    @Bean UserValidator userValidator(final UserQueryRepository userQueryRepository){
-        return new UserValidator(userQueryRepository);
+    UserTokenBusiness userTokenBusiness(final UserTokenRepository userTokenRepository){
+        return new UserTokenBusiness(userTokenRepository, new SimpleUserDtoFactory());
     }
 
     @Bean
-    UserRepositoryUserDetailsService userRepositoryUserDetailsService(final UserRepository userRepository, final LoginHistoryFacade loginHistoryFacade){
-        return new UserRepositoryUserDetailsService(userRepository, loginHistoryFacade);
+    EmailManagerFacade emailManagerFacade(final UserBusiness userBusiness){
+        return new EmailManagerFacade(userBusiness);
+    }
+
+    @Bean
+    PasswordManagerFacade passwordManagerFacade(final UserBusiness userBusiness){
+        return new PasswordManagerFacade(userBusiness);
+    }
+
+    @Bean
+    PasswordReminderFacade passwordReminderFacade(final UserBusiness userBusiness, final UserTokenBusiness userTokenBusiness){
+        return new PasswordReminderFacade(userBusiness, userTokenBusiness);
+    }
+
+    @Bean
+    PasswordResetFacade passwordResetFacade(final UserBusiness userBusiness){
+        return new PasswordResetFacade(userBusiness);
+    }
+
+    @Bean
+    RegisterFacade registerFacade(final UserBusiness userBusiness, final UserTokenBusiness userTokenBusiness){
+        return new RegisterFacade(userBusiness, userTokenBusiness);
     }
 }
