@@ -15,5 +15,7 @@
         <module>adapters</module>
         <module>app</module>
         <module>domain</module>
+        <module>commands</module>
+        <module>config</module>
     </modules>
 </project>
