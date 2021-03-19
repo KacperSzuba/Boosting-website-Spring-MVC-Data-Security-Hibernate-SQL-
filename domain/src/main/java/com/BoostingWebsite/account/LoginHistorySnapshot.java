@@ -7,7 +7,7 @@ class LoginHistorySnapshot {
     private UserSnapshot user;
     private LocalDateTime date;
 
-    public LoginHistorySnapshot(){}
+    protected LoginHistorySnapshot(){}
 
     LoginHistorySnapshot(final Long id, final UserSnapshot user, final LocalDateTime date) {
         this.id = id;

@@ -3,6 +3,9 @@
                  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
       http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd"
                  version="2.1">
+
+    <!-- Account config -->
+
     <entity class="com.BoostingWebsite.account.UserSnapshot" access="FIELD">
         <table name="users" />
         <attributes>
@@ -86,6 +89,27 @@
             <one-to-one name="user" target-entity="com.BoostingWebsite.account.SimpleUserDtoSnapshot" fetch="EAGER">
                 <join-column nullable="false" name="user_id" />
             </one-to-one>
+        </attributes>
+    </entity>
+
+    <entity class="com.BoostingWebsite.boosterApplication.BoosterApplicationSnapshot" access="FIELD">
+        <table name="booster_application" />
+
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY" />
+            </id>
+            <basic name="skype" />
+            <basic name="discord" />
+            <basic name="email" />
+            <basic name="opgg" />
+            <basic name="region" />
+            <basic name="leagueRank" />
+            <basic name="averageNumberOfHoursPlayedDaily" />
+            <basic name="age" />
+            <basic name="country" />
+            <basic name="bestFormOfContact" />
+            <basic name="motivation" />
         </attributes>
     </entity>
 

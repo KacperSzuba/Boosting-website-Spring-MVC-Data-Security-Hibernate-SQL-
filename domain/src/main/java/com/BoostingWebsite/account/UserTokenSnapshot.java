@@ -8,7 +8,7 @@ class UserTokenSnapshot {
     private SimpleUserDtoSnapshot user;
     private Date expiryDate;
 
-    public UserTokenSnapshot(){}
+    protected UserTokenSnapshot(){}
 
     UserTokenSnapshot(Long id, String token, SimpleUserDtoSnapshot user, Date expiryDate) {
         this.id = id;

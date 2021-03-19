@@ -14,29 +14,28 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/booster-application")
 class BoosterApplicationController extends BaseController {
+    private final BoosterApplicationFacade facade;
 
-    private final BoosterApplicationRepository boosterApplicationRepository;
-
-    BoosterApplicationController(final BoosterApplicationRepository boosterApplicationRepository) {
-        this.boosterApplicationRepository = boosterApplicationRepository;
+    BoosterApplicationController(BoosterApplicationFacade facade) {
+        this.facade = facade;
     }
 
     @GetMapping
     String boosterApplicationPage(Model model) {
-        BoosterApplication boosterApplication = new BoosterApplication();
-        model.addAttribute("boosterApplication", boosterApplication);
+        BoosterApplicationDto boosterApplicationDto = new BoosterApplicationDto();
+        model.addAttribute("boosterApplicationDto", boosterApplicationDto);
         model.addAttribute("regions", Region.values());
         return "booster-application/booster-application";
     }
 
     @PostMapping
-    String boosterApplicationForm(@Valid @ModelAttribute("boosterApplication") BoosterApplication boosterApplication, BindingResult bindingResult, Model model) {
+    String boosterApplicationForm(@Valid @ModelAttribute("boosterApplicationDto") BoosterApplicationDto boosterApplicationDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("regions", Region.values());
             return "booster-application/booster-application";
         }
 
-        boosterApplicationRepository.save(boosterApplication);
+        facade.save(boosterApplicationDto);
         return "redirect:/";
     }
 

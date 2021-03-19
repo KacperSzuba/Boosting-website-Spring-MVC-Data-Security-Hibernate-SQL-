@@ -16,7 +16,7 @@ class UserSnapshot {
     private List<UserRoleSnapshot> roles;
     private String creationErrorMessage;
 
-    public UserSnapshot(){}
+    protected UserSnapshot(){}
 
     UserSnapshot(Long id, String username, String password, boolean enabled, String email, List<UserRoleSnapshot> roles, String creationErrorMessage) {
         this.id = id;

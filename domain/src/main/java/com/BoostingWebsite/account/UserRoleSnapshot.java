@@ -4,7 +4,7 @@ class UserRoleSnapshot {
     private Long id;
     private RoleName roleName;
 
-    public UserRoleSnapshot(){}
+    protected UserRoleSnapshot(){}
 
     UserRoleSnapshot(Long id, RoleName roleName) {
         this.id = id;

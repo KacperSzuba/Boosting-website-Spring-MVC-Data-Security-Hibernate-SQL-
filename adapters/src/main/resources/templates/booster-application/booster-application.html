@@ -91,7 +91,7 @@
         <section class="login-form">
             <div class="wrap">
                 <h1>Booster application</h1>
-                <form method="post" th:action="@{/templates/booster-application}" th:object="${boosterApplication}">
+                <form method="post" th:action="@{/booster-application}" th:object="${boosterApplicationDto}">
                     <div class="form-group">
                         <input id="skype" type="text" class="form-control" th:field="*{skype}" required="">
                         <label class="animated-label" for="skype">Skype</label>

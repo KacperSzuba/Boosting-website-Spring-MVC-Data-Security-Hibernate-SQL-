@@ -24,18 +24,6 @@
     <dependencies>
         <dependency>
             <groupId>com.BoostingWebsite</groupId>
-            <artifactId>domain</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.BoostingWebsite</groupId>
-            <artifactId>app</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.BoostingWebsite</groupId>
             <artifactId>commands</artifactId>
             <version>${project.version}</version>
         </dependency>

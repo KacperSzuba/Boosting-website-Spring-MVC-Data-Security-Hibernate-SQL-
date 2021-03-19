@@ -5,7 +5,7 @@ public class SimpleUserDtoSnapshot {
     private String username;
     private String email;
 
-    public SimpleUserDtoSnapshot(){}
+    protected SimpleUserDtoSnapshot(){}
 
     public SimpleUserDtoSnapshot(final Long id, final String username, final String email) {
         this.id = id;
