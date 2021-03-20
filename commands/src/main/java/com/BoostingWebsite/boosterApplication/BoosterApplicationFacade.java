@@ -1,5 +1,7 @@
 package com.BoostingWebsite.boosterApplication;
 
+import com.BoostingWebsite.boosterApplication.dto.BoosterApplicationDto;
+
 class BoosterApplicationFacade {
     private final BoosterApplicationBusiness boosterApplicationBusiness;
     private final BoosterApplicationFactory boosterApplicationFactory;

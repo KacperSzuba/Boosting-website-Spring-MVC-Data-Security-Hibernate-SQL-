@@ -1,4 +1,6 @@
-package com.BoostingWebsite.boosterApplication;
+package com.BoostingWebsite.boosterApplication.dto;
+
+import com.BoostingWebsite.boosterApplication.Region;
 
 public class BoosterApplicationDto {
     private Long id;
@@ -14,7 +16,7 @@ public class BoosterApplicationDto {
     private String bestFormOfContact;
     private String motivation;
 
-    Long getId() {
+    public Long getId() {
         return id;
     }
 

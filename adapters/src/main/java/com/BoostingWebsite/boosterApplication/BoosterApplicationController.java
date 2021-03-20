@@ -1,5 +1,6 @@
 package com.BoostingWebsite.boosterApplication;
 
+import com.BoostingWebsite.boosterApplication.dto.BoosterApplicationDto;
 import com.BoostingWebsite.utils.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

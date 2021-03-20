@@ -1,6 +1,6 @@
 package com.BoostingWebsite.boosterApplication;
 
-class BoosterApplicationSnapshot {
+public class BoosterApplicationSnapshot {
     private Long id;
     private String skype;
     private String discord;

@@ -1,7 +1,8 @@
 package com.BoostingWebsite.boosterApplication;
 
-class BoosterApplicationFactory {
+import com.BoostingWebsite.boosterApplication.dto.BoosterApplicationDto;
 
+class BoosterApplicationFactory {
     BoosterApplication from(BoosterApplicationDto boosterApplicationDto){
         return BoosterApplication.restore(
                 new BoosterApplicationSnapshot(

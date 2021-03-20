@@ -13,7 +13,7 @@
             <div class="wrap">
                 <h1>Contact form</h1>
 
-                <form th:action="@{/contact-us/send}" th:object="${contact}" method="get">
+                <form th:action="@{/contact-us}" th:object="${contactDto}" method="post">
                     <div class="form-group">
                         <input id="name" th:field="*{name}" type="text" class="form-control" required="">
                         <label class="animated-label" for="name">Name</label>
