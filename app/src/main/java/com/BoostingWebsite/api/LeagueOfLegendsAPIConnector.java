@@ -2,7 +2,7 @@ package com.BoostingWebsite.api;
 
 import com.BoostingWebsite.order.OrderBoostFacade;
 import com.BoostingWebsite.order.exception.OrderBoostNotFoundException;
-import com.BoostingWebsite.utils.ConstFacade;
+import com.BoostingWebsite.utils.ConstBusiness;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -25,11 +25,11 @@ class LeagueOfLegendsAPIConnector {
     private static final String LOL_SUMMONER_ID = ".api.riotgames.com/lol/league/v4/entries/by-summoner/";
     private static final String API_KEY = "?api_key=";
 
-    LeagueOfLegendsAPIConnector(final OrderBoostFacade orderBoostFacade, final ConstFacade constFacade) throws OrderBoostNotFoundException {
+    LeagueOfLegendsAPIConnector(final OrderBoostFacade orderBoostFacade, final ConstBusiness constBusiness) throws OrderBoostNotFoundException {
         this.username = orderBoostFacade.findActiveBoost().getLolUsername();
         this.region = orderBoostFacade.findActiveBoost().getRegion().getValue();
         summonerId = retrieveSummonerId();
-        apiKeyValue = constFacade.getLeagueOfLegendsApiKey();
+        apiKeyValue = constBusiness.getLeagueOfLegendsApiKey();
     }
 
     private String retrieveSummonerId(){

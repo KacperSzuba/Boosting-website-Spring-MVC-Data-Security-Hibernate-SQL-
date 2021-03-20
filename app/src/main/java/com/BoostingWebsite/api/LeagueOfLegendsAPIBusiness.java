@@ -7,10 +7,10 @@ import com.BoostingWebsite.utils.BaseFacade;
 
 import java.io.IOException;
 
-public class LeagueOfLegendsAPIFacade extends BaseFacade {
+public class LeagueOfLegendsAPIBusiness extends BaseFacade {
     private final LeagueOfLegendsAPIConnector leagueOfLegendsAPIConnector;
 
-    public LeagueOfLegendsAPIFacade(final LeagueOfLegendsAPIConnector leagueOfLegendsAPIConnector) {
+    public LeagueOfLegendsAPIBusiness(final LeagueOfLegendsAPIConnector leagueOfLegendsAPIConnector) {
         this.leagueOfLegendsAPIConnector = leagueOfLegendsAPIConnector;
     }
 

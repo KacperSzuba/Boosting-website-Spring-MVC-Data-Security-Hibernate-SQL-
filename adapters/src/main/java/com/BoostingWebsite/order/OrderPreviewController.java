@@ -1,7 +1,7 @@
 package com.BoostingWebsite.order;
 
 import com.BoostingWebsite.account.SimpleUserDto;
-import com.BoostingWebsite.api.LeagueOfLegendsAPIFacade;
+import com.BoostingWebsite.api.LeagueOfLegendsAPIBusiness;
 import com.BoostingWebsite.order.dto.OrderBoostDto;
 import com.BoostingWebsite.order.exception.OrderBoostNotFoundException;
 import com.BoostingWebsite.order.message.MessageFacade;
@@ -29,13 +29,13 @@ class OrderPreviewController extends BaseController {
     private final ApplicationSession applicationSession;
     private final OrderBoostFacade orderBoostFacade;
     private final MessageFacade messageFacade;
-    private final LeagueOfLegendsAPIFacade leagueOfLegendsAPIFacade;
+    private final LeagueOfLegendsAPIBusiness leagueOfLegendsAPIBusiness;
 
     OrderPreviewController(final ApplicationSession applicationSession, final OrderBoostFacade orderBoostFacade, final MessageFacade messageFacade,
-                           final LeagueOfLegendsAPIFacade leagueOfLegendsAPIFacade) {
+                           final LeagueOfLegendsAPIBusiness leagueOfLegendsAPIBusiness) {
         this.orderBoostFacade = orderBoostFacade;
         this.messageFacade = messageFacade;
-        this.leagueOfLegendsAPIFacade = leagueOfLegendsAPIFacade;
+        this.leagueOfLegendsAPIBusiness = leagueOfLegendsAPIBusiness;
         this.applicationSession = applicationSession;
     }
 
@@ -47,7 +47,7 @@ class OrderPreviewController extends BaseController {
             model.addAttribute("orderBoost", orderBoost);
             model.addAttribute("messages", messageFacade.getChatMessages(SimpleUserDto.restore(orderBoost.getUser()), SimpleUserDto.restore(orderBoost.getBooster())));
             model.addAttribute("username", applicationSession.getContext().getUser().getUsername());
-            model.addAttribute("currentLeague", leagueOfLegendsAPIFacade.getCurrentLeague());
+            model.addAttribute("currentLeague", leagueOfLegendsAPIBusiness.getCurrentLeague());
         }
         catch (OrderBoostNotFoundException | IOException ex){
             model.addAttribute("orderBoost", OrderBoostDto.builder().build());

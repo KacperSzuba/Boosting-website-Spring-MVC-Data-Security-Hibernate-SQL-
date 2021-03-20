@@ -8,7 +8,7 @@ import org.springframework.web.context.annotation.SessionScope;
 import javax.servlet.http.HttpServletRequest;
 
 @Configuration
-class UtilsConfiguration {
+class UtilsConfig {
     @Bean
     @SessionScope
     ApplicationSession applicationSession(final UserBusiness userBusiness, final HttpServletRequest request){
@@ -16,7 +16,7 @@ class UtilsConfiguration {
     }
 
     @Bean
-    ConstFacade constFacade(final ConstRepository constRepository){
-        return new ConstFacade(constRepository);
+    ConstBusiness constFacade(final ConstRepository constRepository){
+        return new ConstBusiness(constRepository);
     }
 }

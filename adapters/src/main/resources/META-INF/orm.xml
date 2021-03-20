@@ -128,4 +128,21 @@
         </attributes>
     </entity>
 
+    <entity class="com.BoostingWebsite.utils.ConstSnapshot" access="FIELD">
+        <table name="consts" />
+
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY" />
+            </id>
+            <basic name="enumConst">
+                <column name="const"  nullable="false"/>
+                <enumerated>STRING</enumerated>
+            </basic>
+            <basic name="value">
+                <column nullable="false" />
+            </basic>
+        </attributes>
+    </entity>
+
 </entity-mappings>

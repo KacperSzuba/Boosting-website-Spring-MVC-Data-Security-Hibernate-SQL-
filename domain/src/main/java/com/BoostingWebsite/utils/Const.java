@@ -1,42 +1,21 @@
 package com.BoostingWebsite.utils;
 
-import org.hibernate.annotations.Immutable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-@Entity
-@Table(name = "consts")
-@Immutable
 class Const {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "const")
-    @Enumerated(EnumType.STRING)
-    @NotNull
     private EnumConst enumConst;
-
-    @NotNull
     private String value;
 
-    Long getId() {
-        return id;
+    private Const(Long id, EnumConst enumConst, String value) {
+        this.id = id;
+        this.enumConst = enumConst;
+        this.value = value;
     }
 
-    EnumConst getConst(){
-        return enumConst;
+    static Const restore(ConstSnapshot snapshot){
+        return new Const(snapshot.getId(), snapshot.getEnumConst(), snapshot.getValue());
     }
 
-    String getValue(){
-        return value;
+    ConstSnapshot getSnapshot(){
+        return new ConstSnapshot(id, enumConst, value);
     }
 }
