@@ -9,16 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/order/orderHistory")
 class OrderHistoryController extends BaseController {
+    private final OrderHistoryFacade facade;
 
-    private final OrderBoostFacade orderBoostFacade;
-
-    OrderHistoryController(final OrderBoostFacade orderBoostFacade) {
-        this.orderBoostFacade = orderBoostFacade;
+    OrderHistoryController(OrderHistoryFacade facade) {
+        this.facade = facade;
     }
 
     @GetMapping
     String orderPreviewPage(Model model) {
-        model.addAttribute("orderHistory", orderBoostFacade.getCompletedOrderBoosts());
+        model.addAttribute("orderHistory", facade.getCompletedOrderBoosts());
         return "order/orderHistory";
     }
 }

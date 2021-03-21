@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/order/freeOrders")
 class FreeOrdersController extends BaseController {
 
-    private final OrderBoostFacade orderBoostFacade;
+    private final FreeOrdersFacade facade;
 
-    FreeOrdersController(final OrderBoostFacade orderBoostFacade) {
-        this.orderBoostFacade = orderBoostFacade;
+    FreeOrdersController(FreeOrdersFacade facade) {
+        this.facade = facade;
     }
 
     @GetMapping
     String orderPreviewPage(Model model) {
-        model.addAttribute("freeOrders", orderBoostFacade.getFreeOrderBoosts());
+        model.addAttribute("freeOrders", facade.getFreeOrderBoosts());
 
         return "order/freeOrders";
     }

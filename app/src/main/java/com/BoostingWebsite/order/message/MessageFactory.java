@@ -15,6 +15,20 @@ class MessageFactory {
         SimpleUserDto sender = userQueryRepository.findByUsername(messageDTO.getSenderName());
         SimpleUserDto recipient = userQueryRepository.findByUsername(messageDTO.getRecipientName());
 
-        return new Message(messageDTO.getContent(), sender.getSnapshot(), recipient.getSnapshot());
+        return Message.restore(new MessageSnapshot(
+                0L,
+                messageDTO.getContent(),
+                sender.getSnapshot(),
+                recipient.getSnapshot(),
+                null));
+    }
+
+    MessageDTO toDto(Message message){
+        MessageSnapshot snapshot = message.getSnapshot();
+        return MessageDTO.builder()
+                .withSenderName(snapshot.getAuthor().getUsername())
+                .withRecipientName(snapshot.getRecipient().getUsername())
+                .withContent(snapshot.getMessage())
+                .build();
     }
 }

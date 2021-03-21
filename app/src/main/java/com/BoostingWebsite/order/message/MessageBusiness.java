@@ -1,7 +1,7 @@
 package com.BoostingWebsite.order.message;
 
 import com.BoostingWebsite.account.SimpleUserDto;
-import com.BoostingWebsite.order.OrderBoostFacade;
+import com.BoostingWebsite.order.OrderBoostBusiness;
 import com.BoostingWebsite.order.exception.OrderBoostNotFoundException;
 import com.BoostingWebsite.order.message.dto.MessageDTO;
 import com.BoostingWebsite.utils.BaseFacade;
@@ -9,14 +9,14 @@ import com.BoostingWebsite.utils.BaseFacade;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MessageFacade extends BaseFacade {
+public class MessageBusiness extends BaseFacade {
     private final MessageRepository messageRepository;
-    private final OrderBoostFacade orderBoostFacade;
+    private final OrderBoostBusiness orderBoostBusiness;
     private final MessageFactory messageFactory;
 
-    public MessageFacade(final MessageRepository messageRepository, final OrderBoostFacade orderBoostFacade, final MessageFactory messageFactory) {
+    public MessageBusiness(final MessageRepository messageRepository, final OrderBoostBusiness orderBoostBusiness, final MessageFactory messageFactory) {
         this.messageRepository = messageRepository;
-        this.orderBoostFacade = orderBoostFacade;
+        this.orderBoostBusiness = orderBoostBusiness;
         this.messageFactory = messageFactory;
     }
 
@@ -25,24 +25,16 @@ public class MessageFacade extends BaseFacade {
     }
 
     public List<MessageDTO> getChatMessages(SimpleUserDto sender, SimpleUserDto recipient) throws OrderBoostNotFoundException {
-        if(!orderBoostFacade.isActiveBoost()){
+        if(!orderBoostBusiness.isActiveBoost()){
             throw new OrderBoostNotFoundException();
         }
 
         return messageRepository.getChatMessages(sender.getSnapshot().getId(), recipient.getSnapshot().getId()).stream()
-                .map(this::toDto)
+                .map(messageFactory::toDto)
                 .collect(Collectors.toList());
     }
 
-    public synchronized void saveMessage(MessageDTO messageDTO){
+    public synchronized void save(MessageDTO messageDTO){
         messageRepository.save(messageFactory.from(messageDTO));
-    }
-
-    MessageDTO toDto(Message message){
-        return MessageDTO.builder()
-                .withSenderName(message.getAuthor().getUsername())
-                .withRecipientName(message.getRecipient().getUsername())
-                .withContent(message.getMessage())
-                .build();
     }
 }

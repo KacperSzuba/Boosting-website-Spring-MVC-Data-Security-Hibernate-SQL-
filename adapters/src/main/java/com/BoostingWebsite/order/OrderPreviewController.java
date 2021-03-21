@@ -1,12 +1,9 @@
 package com.BoostingWebsite.order;
 
 import com.BoostingWebsite.account.SimpleUserDto;
-import com.BoostingWebsite.api.LeagueOfLegendsAPIBusiness;
 import com.BoostingWebsite.order.dto.OrderBoostDto;
 import com.BoostingWebsite.order.exception.OrderBoostNotFoundException;
-import com.BoostingWebsite.order.message.MessageFacade;
 import com.BoostingWebsite.order.message.dto.MessageDTO;
-import com.BoostingWebsite.utils.ApplicationSession;
 import com.BoostingWebsite.utils.BaseController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,28 +23,21 @@ import java.io.IOException;
 class OrderPreviewController extends BaseController {
     private static final Logger logger = LogManager.getLogger(OrderPreviewController.class);
 
-    private final ApplicationSession applicationSession;
-    private final OrderBoostFacade orderBoostFacade;
-    private final MessageFacade messageFacade;
-    private final LeagueOfLegendsAPIBusiness leagueOfLegendsAPIBusiness;
+    private final OrderPreviewFacade facade;
 
-    OrderPreviewController(final ApplicationSession applicationSession, final OrderBoostFacade orderBoostFacade, final MessageFacade messageFacade,
-                           final LeagueOfLegendsAPIBusiness leagueOfLegendsAPIBusiness) {
-        this.orderBoostFacade = orderBoostFacade;
-        this.messageFacade = messageFacade;
-        this.leagueOfLegendsAPIBusiness = leagueOfLegendsAPIBusiness;
-        this.applicationSession = applicationSession;
+    OrderPreviewController(OrderPreviewFacade facade) {
+        this.facade = facade;
     }
 
     @GetMapping
     String orderPreviewPage(Model model) {
         try{
-            OrderBoostDto orderBoost = orderBoostFacade.findActiveBoost();
+            OrderBoostDto orderBoost = facade.findActiveBoost();
 
             model.addAttribute("orderBoost", orderBoost);
-            model.addAttribute("messages", messageFacade.getChatMessages(SimpleUserDto.restore(orderBoost.getUser()), SimpleUserDto.restore(orderBoost.getBooster())));
+            model.addAttribute("messages", facade.getChatMessages(SimpleUserDto.restore(orderBoost.getUser()), SimpleUserDto.restore(orderBoost.getBooster())));
             model.addAttribute("username", applicationSession.getContext().getUser().getUsername());
-            model.addAttribute("currentLeague", leagueOfLegendsAPIBusiness.getCurrentLeague());
+            model.addAttribute("currentLeague", facade.getCurrentLeague());
         }
         catch (OrderBoostNotFoundException | IOException ex){
             model.addAttribute("orderBoost", OrderBoostDto.builder().build());
@@ -60,7 +50,7 @@ class OrderPreviewController extends BaseController {
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/javainuse")
     MessageDTO sendMessage(@Payload MessageDTO messageDTO) {
-        messageFacade.saveMessage(messageDTO);
+        facade.saveMessage(messageDTO);
         return messageDTO;
     }
 

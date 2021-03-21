@@ -1,20 +1,19 @@
 package com.BoostingWebsite.order.message;
 
 import com.BoostingWebsite.account.UserQueryRepository;
-import com.BoostingWebsite.order.OrderBoostFacade;
-import com.BoostingWebsite.utils.BaseController;
+import com.BoostingWebsite.order.OrderBoostBusiness;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-class MessageConfiguration {
+class MessageConfig {
 
     @Bean
-    MessageFacade messageFacade(
+    MessageBusiness messageBusiness(
             final MessageRepository messageRepository,
-            final OrderBoostFacade orderBoostFacade,
+            final OrderBoostBusiness orderBoostBusiness,
             final UserQueryRepository userQueryRepository
     ){
-        return new MessageFacade(messageRepository, orderBoostFacade, new MessageFactory(userQueryRepository));
+        return new MessageBusiness(messageRepository, orderBoostBusiness, new MessageFactory(userQueryRepository));
     }
 }

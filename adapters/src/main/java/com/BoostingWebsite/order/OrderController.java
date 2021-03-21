@@ -15,11 +15,10 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/order")
 class OrderController extends BaseController {
+    private final OrderFacade facade;
 
-    private final OrderBoostFacade orderBoostFacade;
-
-    public OrderController(final OrderBoostFacade orderBoostFacade) {
-        this.orderBoostFacade = orderBoostFacade;
+    OrderController(OrderFacade facade) {
+        this.facade = facade;
     }
 
     @GetMapping
@@ -31,10 +30,10 @@ class OrderController extends BaseController {
         model.addAttribute("LPGainPerWin", LPGainPerWin.values());
         model.addAttribute("queueType", QueueType.values());
         model.addAttribute("defaultSelectedQueueType", QueueType.RANKED_SOLO_DUO.getName());
-        model.addAttribute("extras", orderBoostFacade.getOrderExtras());
+        model.addAttribute("extras", facade.getOrderExtras());
 
         try {
-            model.addAttribute("whetherUserHasOrder", orderBoostFacade.whetherUserHasOrder());
+            model.addAttribute("whetherUserHasOrder", facade.whetherUserHasOrder());
         }
         catch (NullPointerException ex){
             return "redirect:/login";
@@ -50,16 +49,14 @@ class OrderController extends BaseController {
         if (result.hasErrors()) {
             return "order/order";
         }
-        try {
-            if (orderBoostFacade.isLeagueIsValid(orderBoost)) {
-                orderBoostFacade.makeOrder(orderBoost);
+        else {
+            try {
+                facade.makeOrder(orderBoost);
                 return "redirect:/";
-            } else {
+            } catch (IllegalArgumentException ex) {
+                ex.printStackTrace();
                 return "order/order";
             }
-        } catch (NullPointerException ex) {
-            ex.printStackTrace();
-            return "redirect:/login";
         }
     }
 }

@@ -145,4 +145,132 @@
         </attributes>
     </entity>
 
+    <entity class="com.BoostingWebsite.order.message.MessageSnapshot" access="FIELD">
+        <table name="messages" />
+
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY" />
+            </id>
+            <basic name="message" />
+            <basic name="date" />
+            <one-to-one name="author" target-entity="com.BoostingWebsite.account.SimpleUserDtoSnapshot" fetch="EAGER">
+                <join-column nullable="false" name="message_sender" />
+            </one-to-one>
+
+            <one-to-one name="recipient" target-entity="com.BoostingWebsite.account.SimpleUserDtoSnapshot" fetch="EAGER">
+                <join-column nullable="false" name="recipient_of_the_message" />
+            </one-to-one>
+        </attributes>
+    </entity>
+
+    <entity class="com.BoostingWebsite.order.message.SimpleMessageDtoSnapshot" access="FIELD">
+        <table name="messages" />
+
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY" />
+            </id>
+            <basic name="message" />
+            <basic name="authorId" >
+                <column name="message_sender"/>
+            </basic>
+            <basic name="recipientId" >
+                <column name="recipient_of_the_message"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <entity class="com.BoostingWebsite.order.OrderExtrasSnapshot" access="FIELD">
+        <table name="order_extras" />
+
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY" />
+            </id>
+            <basic name="name" />
+        </attributes>
+    </entity>
+
+    <entity class="com.BoostingWebsite.order.OrderBoostSnapshot" access="FIELD">
+        <table name="orders_boost" />
+
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY" />
+            </id>
+            <basic name="noteToBooster" />
+            <basic name="paid" />
+            <basic name="price" />
+            <basic name="summonerID" />
+            <basic name="lolUsername" />
+            <basic name="lolPassword" />
+            <basic name="region">
+                <enumerated>STRING</enumerated>
+            </basic>
+            <basic name="status">
+                <column nullable="false"/>
+                <enumerated>STRING</enumerated>
+            </basic>
+            <basic name="queueType">
+                <column nullable="false"/>
+                <enumerated>STRING</enumerated>
+            </basic>
+            <basic name="date"/>
+            <one-to-many name="messages" fetch="EAGER" orphan-removal="true" />
+            <one-to-one name="user" target-entity="com.BoostingWebsite.account.SimpleUserDtoSnapshot" fetch="EAGER">
+                <join-column nullable="false" name="users_id" />
+            </one-to-one>
+            <one-to-one name="booster" target-entity="com.BoostingWebsite.account.SimpleUserDtoSnapshot" fetch="EAGER">
+                <join-column nullable="false" name="boosters_id" />
+            </one-to-one>
+            <many-to-many name="extras">
+                <join-table name="order_boost_extras">
+                    <join-column name="order_boost_id"/>
+                    <inverse-join-column name="order_extras_id"/>
+                </join-table>
+            </many-to-many>
+            <embedded name="currentLeague">
+                <attribute-override name="tier">
+                    <column name="current_tier"/>
+                </attribute-override>
+
+                <attribute-override name="division">
+                    <column name="current_division"/>
+                </attribute-override>
+
+                <attribute-override name="points">
+                    <column name="current_points"/>
+                </attribute-override>
+            </embedded>
+            <embedded name="destinationLeague">
+                <attribute-override name="tier">
+                    <column name="destination_tier"/>
+                </attribute-override>
+
+                <attribute-override name="division">
+                    <column name="destination_division"/>
+                </attribute-override>
+
+                <attribute-override name="points">
+                    <column name="destination_points"/>
+                </attribute-override>
+            </embedded>
+        </attributes>
+    </entity>
+
+    <embeddable class="com.BoostingWebsite.order.League" access="FIELD">
+        <attributes>
+            <basic name="tier">
+                <enumerated>STRING</enumerated>
+            </basic>
+            <basic name="division">
+                <enumerated>STRING</enumerated>
+            </basic>
+            <basic name="points">
+                <enumerated>STRING</enumerated>
+            </basic>
+            <transient name="leaguePoints"/>
+        </attributes>
+    </embeddable>
 </entity-mappings>

@@ -48,6 +48,16 @@ public class UserBusiness extends BaseFacade {
         return user.get();
     }
 
+    public SimpleUserDto findSimpleUserDtoById(Long id){
+        Optional<SimpleUserDto> user = userQueryRepository.getById(id);
+
+        if(user.isEmpty()){
+            throw new UserNotFoundException("User not found!");
+        }
+
+        return user.get();
+    }
+
     public boolean existsUserByEmail(String email){
         return userQueryRepository.existsUserByEmail(email);
     }
