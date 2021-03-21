@@ -6,6 +6,7 @@ import com.BoostingWebsite.contact.dto.ContactDto;
 class ContactFacade {
     private final ContactBusiness contactBusiness;
     private final ContactFactory contactFactory;
+
     ContactFacade(ContactBusiness contactBusiness, ContactFactory contactFactory) {
         this.contactBusiness = contactBusiness;
         this.contactFactory = contactFactory;

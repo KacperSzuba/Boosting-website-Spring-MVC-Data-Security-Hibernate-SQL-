@@ -4,11 +4,11 @@ import com.BoostingWebsite.account.SimpleUserDto;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
-public class EmailService {
+public class EmailBusiness {
 
     private final JavaMailSender emailSender;
 
-    public EmailService(final JavaMailSender emailSender) {
+    public EmailBusiness(final JavaMailSender emailSender) {
         this.emailSender = emailSender;
     }
 

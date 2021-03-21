@@ -1,33 +1,26 @@
 package com.BoostingWebsite.utils;
 
-import com.BoostingWebsite.account.UserBusiness;
 import com.BoostingWebsite.account.UserDto;
-import com.BoostingWebsite.account.RoleName;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
 
 public class ApplicationSession {
-    private final UserBusiness userBusiness;
     private final HttpServletRequest request;
 
     private ApplicationContext context;
 
-    public ApplicationSession(final UserBusiness userBusiness, final HttpServletRequest request) {
-        this.userBusiness = userBusiness;
+    public ApplicationSession(final HttpServletRequest request) {
         this.request = request;
     }
 
     public void setUser(UserDto user){
-        context = new ApplicationContext(user);
+        context = context.getInstance();
+        context.setUser(user);
     }
 
     public ApplicationContext getContext(){
         return context;
-    }
-
-    public RoleName getCurrentUserRole(UserDto userDto) {
-        return userBusiness.getRoleName(userDto);
     }
 
     public String getAppUrl() {

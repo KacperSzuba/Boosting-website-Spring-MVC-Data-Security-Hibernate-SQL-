@@ -8,7 +8,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 class EmailServiceConfiguration {
 
     @Bean
-    EmailService emailService(final JavaMailSender emailSender){
-        return new EmailService(emailSender);
+    EmailBusiness emailBusiness(final JavaMailSender emailSender){
+        return new EmailBusiness(emailSender);
     }
 }

@@ -1,8 +1,8 @@
 package com.BoostingWebsite.account;
 
-import com.BoostingWebsite.utils.BaseFacade;
+import com.BoostingWebsite.utils.BaseBusiness;
 
-public class UserRoleBusiness extends BaseFacade {
+public class UserRoleBusiness extends BaseBusiness {
 
     private final UserRoleRepository userRoleRepository;
 

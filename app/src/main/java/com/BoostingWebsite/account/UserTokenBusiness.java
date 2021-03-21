@@ -1,7 +1,7 @@
 package com.BoostingWebsite.account;
 
 import com.BoostingWebsite.account.exception.UserNotFoundException;
-import com.BoostingWebsite.utils.BaseFacade;
+import com.BoostingWebsite.utils.BaseBusiness;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Optional;
 
-public class UserTokenBusiness extends BaseFacade {
+public class UserTokenBusiness extends BaseBusiness {
 
     private final UserTokenRepository userTokenRepository;
     private final SimpleUserDtoFactory simpleUserDtoFactory;

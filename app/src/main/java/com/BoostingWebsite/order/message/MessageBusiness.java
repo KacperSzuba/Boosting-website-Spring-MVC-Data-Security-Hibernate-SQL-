@@ -4,12 +4,12 @@ import com.BoostingWebsite.account.SimpleUserDto;
 import com.BoostingWebsite.order.OrderBoostBusiness;
 import com.BoostingWebsite.order.exception.OrderBoostNotFoundException;
 import com.BoostingWebsite.order.message.dto.MessageDTO;
-import com.BoostingWebsite.utils.BaseFacade;
+import com.BoostingWebsite.utils.BaseBusiness;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MessageBusiness extends BaseFacade {
+public class MessageBusiness extends BaseBusiness {
     private final MessageRepository messageRepository;
     private final OrderBoostBusiness orderBoostBusiness;
     private final MessageFactory messageFactory;

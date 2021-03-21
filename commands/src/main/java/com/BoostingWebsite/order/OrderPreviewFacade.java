@@ -14,6 +14,7 @@ class OrderPreviewFacade {
     private final OrderBoostBusiness orderBoostBusiness;
     private final LeagueOfLegendsAPIBusiness leagueOfLegendsAPIBusiness;
     private final MessageBusiness messageBusiness;
+
     public OrderPreviewFacade(
             final OrderBoostBusiness orderBoostBusiness,
             final LeagueOfLegendsAPIBusiness leagueOfLegendsAPIBusiness,

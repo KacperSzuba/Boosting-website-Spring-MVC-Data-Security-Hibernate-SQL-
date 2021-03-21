@@ -1,8 +1,8 @@
 package com.BoostingWebsite.account;
 
-import com.BoostingWebsite.utils.BaseFacade;
+import com.BoostingWebsite.utils.BaseBusiness;
 
-public class LoginHistoryBusiness extends BaseFacade {
+public class LoginHistoryBusiness extends BaseBusiness {
 
     private final LoginHistoryRepository loginHistoryRepository;
 

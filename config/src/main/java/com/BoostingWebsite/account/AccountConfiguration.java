@@ -1,6 +1,7 @@
 package com.BoostingWebsite.account;
 
-import com.BoostingWebsite.email.EmailService;
+import com.BoostingWebsite.email.EmailBusiness;
+import com.BoostingWebsite.utils.ApplicationSession;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -8,8 +9,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 class AccountConfiguration {
     @Bean
-    UserDetailsBusiness userDetailsBusiness(final UserRepository userRepository, final LoginHistoryBusiness loginHistoryBusiness){
-        return new UserDetailsBusiness(userRepository, loginHistoryBusiness);
+    UserDetailsBusiness userDetailsBusiness(
+            final UserRepository userRepository,
+            final LoginHistoryBusiness loginHistoryBusiness,
+            final ApplicationSession session){
+        return new UserDetailsBusiness(userRepository, loginHistoryBusiness, session, new UserFactory());
     }
 
     @Bean
@@ -25,7 +29,7 @@ class AccountConfiguration {
             final UserTokenBusiness userTokenBusiness,
             final UserQueryRepository userQueryRepository,
             final LoginHistoryBusiness loginHistoryBusiness,
-            final EmailService emailService
+            final EmailBusiness emailBusiness
     ){
         return new UserBusiness(
                 passwordEncoder,
@@ -35,7 +39,7 @@ class AccountConfiguration {
                 new SimpleUserDtoFactory(),
                 userQueryRepository,
                 loginHistoryBusiness,
-                emailService,
+                emailBusiness,
                 new UserFactory());
     }
 

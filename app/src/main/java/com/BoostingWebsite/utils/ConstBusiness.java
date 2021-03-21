@@ -1,6 +1,6 @@
 package com.BoostingWebsite.utils;
 
-public class ConstBusiness extends BaseFacade{
+public class ConstBusiness extends BaseBusiness {
 
     private final ConstRepository constRepository;
 

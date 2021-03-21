@@ -2,8 +2,8 @@ package com.BoostingWebsite.account;
 
 import com.BoostingWebsite.account.exception.DataMismatchException;
 import com.BoostingWebsite.account.exception.UserNotFoundException;
-import com.BoostingWebsite.email.EmailService;
-import com.BoostingWebsite.utils.BaseFacade;
+import com.BoostingWebsite.email.EmailBusiness;
+import com.BoostingWebsite.utils.BaseBusiness;
 import com.BoostingWebsite.utils.EmailValidator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -13,7 +13,7 @@ import static com.BoostingWebsite.utils.EmailValidator.whetherEmailIsValid;
 import static com.BoostingWebsite.utils.EmailValidator.whetherTheEmailsAreTheSame;
 import static com.BoostingWebsite.utils.PasswordValidator.whetherThePasswordsAreTheSame;
 
-public class UserBusiness extends BaseFacade {
+public class UserBusiness extends BaseBusiness {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final UserRoleBusiness userRoleBusiness;
@@ -21,12 +21,12 @@ public class UserBusiness extends BaseFacade {
     private final SimpleUserDtoFactory simpleUserDtoFactory;
     private final UserQueryRepository userQueryRepository;
     private final LoginHistoryBusiness loginHistoryBusiness;
-    private final EmailService emailService;
+    private final EmailBusiness emailBusiness;
     private final UserFactory userFactory;
 
     UserBusiness(PasswordEncoder passwordEncoder, UserRepository userRepository, UserRoleBusiness userRoleBusiness,
                  UserTokenBusiness userTokenBusiness, SimpleUserDtoFactory simpleUserDtoFactory, UserQueryRepository userQueryRepository,
-                 LoginHistoryBusiness loginHistoryBusiness, EmailService emailService, UserFactory userFactory) {
+                 LoginHistoryBusiness loginHistoryBusiness, EmailBusiness emailBusiness, UserFactory userFactory) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.userRoleBusiness = userRoleBusiness;
@@ -34,7 +34,7 @@ public class UserBusiness extends BaseFacade {
         this.simpleUserDtoFactory = simpleUserDtoFactory;
         this.userQueryRepository = userQueryRepository;
         this.loginHistoryBusiness = loginHistoryBusiness;
-        this.emailService = emailService;
+        this.emailBusiness = emailBusiness;
         this.userFactory = userFactory;
     }
 
@@ -102,7 +102,7 @@ public class UserBusiness extends BaseFacade {
     void confirmEmail(String contextPath, String token, User user) {
         String url = contextPath + "/register/confirm?id=" + user.getSnapshot().getId() + "&token=" + token;
         userTokenBusiness.saveOrUpdateToken(token, simpleUserDtoFactory.to(user));
-        emailService.sendEmail(user.getSnapshot().getEmail(), "Confirm email", " \r\n" + url);
+        emailBusiness.sendEmail(user.getSnapshot().getEmail(), "Confirm email", " \r\n" + url);
     }
 
     void changeEmail(String currentEmail, String email, String confirmEmail) throws DataMismatchException {
@@ -142,7 +142,7 @@ public class UserBusiness extends BaseFacade {
             User user = findByEmail(email);
             userTokenBusiness.saveOrUpdateToken(applicationSession.getToken(), simpleUserDtoFactory.to(user));
             String token = userTokenBusiness.findByUser(simpleUserDtoFactory.to(user)).getToken();
-            emailService.constructResetTokenEmail(applicationSession.getAppUrl(), token, simpleUserDtoFactory.to(user));
+            emailBusiness.constructResetTokenEmail(applicationSession.getAppUrl(), token, simpleUserDtoFactory.to(user));
         }
 
         throw new DataMismatchException("This e-mail is invalid!");

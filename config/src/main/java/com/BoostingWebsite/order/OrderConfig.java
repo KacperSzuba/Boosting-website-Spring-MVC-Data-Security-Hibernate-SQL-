@@ -11,7 +11,8 @@ class OrderConfig {
     @Bean
     OrderBoostBusiness orderBoostBusiness(
             final UserBusiness userBusiness,
-            final OrderBoostQueryRepository orderBoostQueryRepository){
+            final OrderBoostQueryRepository orderBoostQueryRepository
+    ){
         return new OrderBoostBusiness(userBusiness, orderBoostQueryRepository, new LeagueFactory());
     }
 

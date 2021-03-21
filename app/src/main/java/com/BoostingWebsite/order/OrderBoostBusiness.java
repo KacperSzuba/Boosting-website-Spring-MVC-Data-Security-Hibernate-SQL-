@@ -5,12 +5,12 @@ import com.BoostingWebsite.account.UserBusiness;
 import com.BoostingWebsite.order.dto.OrderBoostDto;
 import com.BoostingWebsite.order.exception.OrderBoostNotFoundException;
 import com.BoostingWebsite.order.message.SimpleMessageDto;
-import com.BoostingWebsite.utils.BaseFacade;
+import com.BoostingWebsite.utils.BaseBusiness;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class OrderBoostBusiness extends BaseFacade {
+public class OrderBoostBusiness extends BaseBusiness {
     private final UserBusiness userBusiness;
     private final OrderBoostQueryRepository orderBoostQueryRepository;
     private final LeagueFactory leagueFactory;

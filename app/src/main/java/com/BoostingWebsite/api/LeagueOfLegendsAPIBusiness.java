@@ -3,11 +3,11 @@ package com.BoostingWebsite.api;
 import com.BoostingWebsite.order.LeagueDto;
 import com.BoostingWebsite.order.Division;
 import com.BoostingWebsite.order.Tier;
-import com.BoostingWebsite.utils.BaseFacade;
+import com.BoostingWebsite.utils.BaseBusiness;
 
 import java.io.IOException;
 
-public class LeagueOfLegendsAPIBusiness extends BaseFacade {
+public class LeagueOfLegendsAPIBusiness extends BaseBusiness {
     private final LeagueOfLegendsAPIConnector leagueOfLegendsAPIConnector;
 
     public LeagueOfLegendsAPIBusiness(final LeagueOfLegendsAPIConnector leagueOfLegendsAPIConnector) {
