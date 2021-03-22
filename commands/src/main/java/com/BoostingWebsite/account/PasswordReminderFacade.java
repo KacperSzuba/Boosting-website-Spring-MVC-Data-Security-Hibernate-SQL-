@@ -1,21 +1,20 @@
 package com.BoostingWebsite.account;
 
 import com.BoostingWebsite.account.exception.DataMismatchException;
+import com.BoostingWebsite.utils.BaseFacade;
 
-class PasswordReminderFacade {
-    private final UserBusiness userBusiness;
-    private final UserTokenBusiness userTokenBusiness;
+class PasswordReminderFacade extends BaseFacade {
+    private final AccountCommandHandler accountCommandHandler;
 
-    PasswordReminderFacade(UserBusiness userBusiness, UserTokenBusiness userTokenBusiness) {
-        this.userBusiness = userBusiness;
-        this.userTokenBusiness = userTokenBusiness;
+    PasswordReminderFacade(AccountCommandHandler accountCommandHandler) {
+        this.accountCommandHandler = accountCommandHandler;
     }
 
     void remindPassword(String email) throws DataMismatchException {
-        userBusiness.remindPassword(email);
+        accountCommandHandler.remindPassword(email);
     }
 
     String confirm(Long id, String token){
-        return userTokenBusiness.confirm(id, token);
+        return accountCommandHandler.confirm(id, token);
     }
 }

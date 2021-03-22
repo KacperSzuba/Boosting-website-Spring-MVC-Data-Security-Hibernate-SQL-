@@ -54,27 +54,32 @@ class AccountConfiguration {
     }
 
     @Bean
-    EmailManagerFacade emailManagerFacade(final UserBusiness userBusiness){
-        return new EmailManagerFacade(userBusiness);
+    EmailManagerFacade emailManagerFacade(final AccountCommandHandler accountCommandHandler){
+        return new EmailManagerFacade(accountCommandHandler);
     }
 
     @Bean
-    PasswordManagerFacade passwordManagerFacade(final UserBusiness userBusiness){
-        return new PasswordManagerFacade(userBusiness);
+    PasswordManagerFacade passwordManagerFacade(final AccountCommandHandler accountCommandHandler){
+        return new PasswordManagerFacade(accountCommandHandler);
     }
 
     @Bean
-    PasswordReminderFacade passwordReminderFacade(final UserBusiness userBusiness, final UserTokenBusiness userTokenBusiness){
-        return new PasswordReminderFacade(userBusiness, userTokenBusiness);
+    PasswordReminderFacade passwordReminderFacade(final AccountCommandHandler accountCommandHandler){
+        return new PasswordReminderFacade(accountCommandHandler);
     }
 
     @Bean
-    PasswordResetFacade passwordResetFacade(final UserBusiness userBusiness){
-        return new PasswordResetFacade(userBusiness);
+    PasswordResetFacade passwordResetFacade(final AccountCommandHandler accountCommandHandler){
+        return new PasswordResetFacade(accountCommandHandler);
     }
 
     @Bean
-    RegisterFacade registerFacade(final UserBusiness userBusiness, final UserTokenBusiness userTokenBusiness){
-        return new RegisterFacade(userBusiness, userTokenBusiness);
+    RegisterFacade registerFacade(final AccountCommandHandler accountCommandHandler){
+        return new RegisterFacade(accountCommandHandler);
+    }
+
+    @Bean
+    AccountCommandHandler accountCommandHandler(final UserBusiness userBusiness, final UserTokenBusiness userTokenBusiness){
+        return new AccountCommandHandler(userBusiness, userTokenBusiness);
     }
 }

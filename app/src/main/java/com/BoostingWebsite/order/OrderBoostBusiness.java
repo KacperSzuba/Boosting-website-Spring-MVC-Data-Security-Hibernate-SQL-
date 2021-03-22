@@ -1,7 +1,6 @@
 package com.BoostingWebsite.order;
 
 import com.BoostingWebsite.account.SimpleUserDto;
-import com.BoostingWebsite.account.UserBusiness;
 import com.BoostingWebsite.order.dto.OrderBoostDto;
 import com.BoostingWebsite.order.exception.OrderBoostNotFoundException;
 import com.BoostingWebsite.order.message.SimpleMessageDto;
@@ -10,54 +9,48 @@ import com.BoostingWebsite.utils.BaseBusiness;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class OrderBoostBusiness extends BaseBusiness {
-    private final UserBusiness userBusiness;
+class OrderBoostBusiness extends BaseBusiness {
     private final OrderBoostQueryRepository orderBoostQueryRepository;
     private final LeagueFactory leagueFactory;
 
-    public OrderBoostBusiness(
-            final UserBusiness userBusiness,
-            final OrderBoostQueryRepository orderBoostQueryRepository,
-            LeagueFactory leagueFactory) {
-        this.userBusiness = userBusiness;
+    OrderBoostBusiness(final OrderBoostQueryRepository orderBoostQueryRepository, LeagueFactory leagueFactory) {
         this.orderBoostQueryRepository = orderBoostQueryRepository;
         this.leagueFactory = leagueFactory;
     }
 
-    public void makeOrder(OrderBoost orderBoost) {
+    void makeOrder(OrderBoost orderBoost, SimpleUserDto userDto) {
         if (orderBoost.isLeagueIsValid()){
-            SimpleUserDto user = userBusiness.findSimpleUserDtoById(applicationSession.getContext().getUser().getId());
-            orderBoost.makeOrder(user.getSnapshot());
+            orderBoost.makeOrder(userDto.getSnapshot());
             orderBoostQueryRepository.save(orderBoost);
         }
 
         throw new IllegalArgumentException("Your league is invalid!");
     }
 
-    public boolean whetherUserHasOrder(){
+    boolean whetherUserHasOrder(){
         return orderBoostQueryRepository.existsByBooster_IdOrUser_IdAndStatus(applicationSession.getContext().getUser().getId(), applicationSession.getContext().getUser().getId(), EnumOrderStatus.NEW);
     }
 
-    public List<OrderBoostDto> getFreeOrderBoosts(){
+    List<OrderBoostDto> getFreeOrderBoosts(){
         return orderBoostQueryRepository.getFreeOrderBoosts().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
-    public List<OrderBoostDto> getCompletedOrderBoosts(){
+    List<OrderBoostDto> getCompletedOrderBoosts(){
         return orderBoostQueryRepository.findDoneOrderBoost(applicationSession.getContext().getUser().getId()).stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
-    public OrderBoostDto findActiveBoost() throws OrderBoostNotFoundException {
+    OrderBoostDto findActiveBoost() throws OrderBoostNotFoundException {
         return orderBoostQueryRepository
                 .findActiveBoost(applicationSession.getContext().getUser().getId())
                 .map(this::toDto)
                 .orElseThrow(OrderBoostNotFoundException::new);
     }
 
-    public boolean isActiveBoost(){
+    boolean isActiveBoost(){
         return orderBoostQueryRepository.findByUser_IdOrBooster_IdAndStatus(applicationSession.getContext().getUser().getId(), applicationSession.getContext().getUser().getId(), EnumOrderStatus.NEW);
     }
 

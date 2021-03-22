@@ -1,17 +1,18 @@
 package com.BoostingWebsite.order;
 
 import com.BoostingWebsite.order.dto.OrderBoostDto;
+import com.BoostingWebsite.utils.BaseFacade;
 
 import java.util.List;
 
-class OrderHistoryFacade {
-    private final OrderBoostBusiness orderBoostBusiness;
+class OrderHistoryFacade extends BaseFacade {
+    private final OrderCommandHandler orderCommandHandler;
 
-    OrderHistoryFacade(OrderBoostBusiness orderBoostBusiness) {
-        this.orderBoostBusiness = orderBoostBusiness;
+    OrderHistoryFacade(OrderCommandHandler orderCommandHandler) {
+        this.orderCommandHandler = orderCommandHandler;
     }
 
     List<OrderBoostDto> getCompletedOrderBoosts() {
-        return orderBoostBusiness.getCompletedOrderBoosts();
+        return orderCommandHandler.getCompletedOrderBoosts();
     }
 }

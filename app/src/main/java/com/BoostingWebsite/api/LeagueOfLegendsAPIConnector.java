@@ -1,6 +1,6 @@
 package com.BoostingWebsite.api;
 
-import com.BoostingWebsite.order.OrderBoostBusiness;
+import com.BoostingWebsite.order.OrderCommandHandler;
 import com.BoostingWebsite.order.exception.OrderBoostNotFoundException;
 import com.BoostingWebsite.utils.ConstBusiness;
 import com.google.gson.JsonArray;
@@ -25,9 +25,9 @@ class LeagueOfLegendsAPIConnector {
     private static final String LOL_SUMMONER_ID = ".api.riotgames.com/lol/league/v4/entries/by-summoner/";
     private static final String API_KEY = "?api_key=";
 
-    LeagueOfLegendsAPIConnector(final OrderBoostBusiness orderBoostBusiness, final ConstBusiness constBusiness) throws OrderBoostNotFoundException {
-        this.username = orderBoostBusiness.findActiveBoost().getLolUsername();
-        this.region = orderBoostBusiness.findActiveBoost().getRegion().getValue();
+    LeagueOfLegendsAPIConnector(final OrderCommandHandler orderCommandHandler, final ConstBusiness constBusiness) throws OrderBoostNotFoundException {
+        this.username = orderCommandHandler.findActiveBoost().getLolUsername();
+        this.region = orderCommandHandler.findActiveBoost().getRegion().getValue();
         summonerId = retrieveSummonerId();
         apiKeyValue = constBusiness.getLeagueOfLegendsApiKey();
     }

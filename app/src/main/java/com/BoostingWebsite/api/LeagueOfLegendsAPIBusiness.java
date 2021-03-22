@@ -7,14 +7,14 @@ import com.BoostingWebsite.utils.BaseBusiness;
 
 import java.io.IOException;
 
-public class LeagueOfLegendsAPIBusiness extends BaseBusiness {
+class LeagueOfLegendsAPIBusiness extends BaseBusiness {
     private final LeagueOfLegendsAPIConnector leagueOfLegendsAPIConnector;
 
-    public LeagueOfLegendsAPIBusiness(final LeagueOfLegendsAPIConnector leagueOfLegendsAPIConnector) {
+    LeagueOfLegendsAPIBusiness(final LeagueOfLegendsAPIConnector leagueOfLegendsAPIConnector) {
         this.leagueOfLegendsAPIConnector = leagueOfLegendsAPIConnector;
     }
 
-    public LeagueDto getCurrentLeague() throws IOException {
+     LeagueDto getCurrentLeague() throws IOException {
         Tier tier = Tier.valueOf(leagueOfLegendsAPIConnector.getActualSoloDuoTier());
         Division division = Division.getDivision(leagueOfLegendsAPIConnector.getActualSoloDuoDivision());
         int leaguePoints = Integer.parseInt(leagueOfLegendsAPIConnector.getActualSoloDuoLeaguePoints());

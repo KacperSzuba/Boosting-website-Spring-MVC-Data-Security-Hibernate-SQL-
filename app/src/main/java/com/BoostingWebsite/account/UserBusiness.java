@@ -13,7 +13,7 @@ import static com.BoostingWebsite.utils.EmailValidator.whetherEmailIsValid;
 import static com.BoostingWebsite.utils.EmailValidator.whetherTheEmailsAreTheSame;
 import static com.BoostingWebsite.utils.PasswordValidator.whetherThePasswordsAreTheSame;
 
-public class UserBusiness extends BaseBusiness {
+class UserBusiness extends BaseBusiness {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final UserRoleBusiness userRoleBusiness;
@@ -48,7 +48,7 @@ public class UserBusiness extends BaseBusiness {
         return user.get();
     }
 
-    public SimpleUserDto findSimpleUserDtoById(Long id){
+    SimpleUserDto findSimpleUserDtoById(Long id){
         Optional<SimpleUserDto> user = userQueryRepository.getById(id);
 
         if(user.isEmpty()){
@@ -58,17 +58,17 @@ public class UserBusiness extends BaseBusiness {
         return user.get();
     }
 
-    public boolean existsUserByEmail(String email){
+    boolean existsUserByEmail(String email){
         return userQueryRepository.existsUserByEmail(email);
     }
 
-    public RoleName getRoleName(UserDto userDto){
+    RoleName getRoleName(UserDto userDto){
         User user = findById(userDto.getId());
 
         return userRepository.getUserRole(user.getSnapshot().getId()).getSnapshot().getRoleName();
     }
 
-    public User findByEmail(String email){
+    User findByEmail(String email){
         Optional<User> user = userRepository.findByEmail(email);
 
         if(user.isEmpty()){
@@ -78,13 +78,13 @@ public class UserBusiness extends BaseBusiness {
         return user.get();
     }
 
-    public void enable(Long id){
+    void enable(Long id){
         User user = findById(id);
         user.enable();
         userRepository.save(user);
     }
 
-    public void createAccount(User user) {
+    void createAccount(User user) {
         try {
             /*
             UserRole userRole = userRoleFacade.save(RoleName.ROLE_USER);

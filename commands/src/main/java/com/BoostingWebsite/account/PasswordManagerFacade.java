@@ -1,15 +1,15 @@
 package com.BoostingWebsite.account;
 
 import com.BoostingWebsite.account.exception.DataMismatchException;
+import com.BoostingWebsite.utils.BaseFacade;
 
-class PasswordManagerFacade {
-    private final UserBusiness userBusiness;
+class PasswordManagerFacade extends BaseFacade {
+    private final AccountCommandHandler accountCommandHandler;
 
-    PasswordManagerFacade(UserBusiness userBusiness) {
-        this.userBusiness = userBusiness;
+    PasswordManagerFacade(AccountCommandHandler accountCommandHandler) {
+        this.accountCommandHandler = accountCommandHandler;
     }
-
     void changePassword(String currentPassword, String newPassword, String confirmNewPassword) throws DataMismatchException {
-        userBusiness.changePassword(currentPassword, newPassword, confirmNewPassword);
+        accountCommandHandler.changePassword(currentPassword, newPassword, confirmNewPassword);
     }
 }

@@ -12,17 +12,17 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Optional;
 
-public class UserTokenBusiness extends BaseBusiness {
+class UserTokenBusiness extends BaseBusiness {
 
     private final UserTokenRepository userTokenRepository;
     private final SimpleUserDtoFactory simpleUserDtoFactory;
 
-    public UserTokenBusiness(final UserTokenRepository userTokenRepository, final SimpleUserDtoFactory simpleUserDtoFactory) {
+    UserTokenBusiness(final UserTokenRepository userTokenRepository, final SimpleUserDtoFactory simpleUserDtoFactory) {
         this.userTokenRepository = userTokenRepository;
         this.simpleUserDtoFactory = simpleUserDtoFactory;
     }
 
-    public void saveOrUpdateToken(String token, SimpleUserDto user) {
+    void saveOrUpdateToken(String token, SimpleUserDto user) {
         if (checkIfUserHasTokenGenerated(user)) {
             saveToken(token, user);
         } else {
@@ -52,7 +52,7 @@ public class UserTokenBusiness extends BaseBusiness {
         return this.userTokenRepository.findByUser_Username(user.getSnapshot().getUsername()).isEmpty();
     }
 
-    public UserTokenDto findByUser(SimpleUserDto user){
+     UserTokenDto findByUser(SimpleUserDto user){
         Optional<UserToken> userToken = userTokenRepository.findByUser_Username(user.getSnapshot().getUsername());
 
         if(userToken.isEmpty()){
@@ -62,11 +62,11 @@ public class UserTokenBusiness extends BaseBusiness {
         return toDto(userToken.get());
     }
 
-    public UserTokenDto findByToken(String token){
+    UserTokenDto findByToken(String token){
         return toDto(userTokenRepository.findByToken(token));
     }
 
-    public String validateToken(long id, String token) {
+    String validateToken(long id, String token) {
         UserTokenDto passToken = findByToken(token);
         if ((passToken == null) || (passToken.getUser().getSnapshot().getId() != id)) {
             return "invalid";

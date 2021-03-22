@@ -1,7 +1,7 @@
 package com.BoostingWebsite.order.message;
 
 import com.BoostingWebsite.account.UserQueryRepository;
-import com.BoostingWebsite.order.OrderBoostBusiness;
+import com.BoostingWebsite.order.OrderCommandHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,11 +9,12 @@ import org.springframework.context.annotation.Configuration;
 class MessageConfig {
 
     @Bean
-    MessageBusiness messageBusiness(
-            final MessageRepository messageRepository,
-            final OrderBoostBusiness orderBoostBusiness,
-            final UserQueryRepository userQueryRepository
-    ){
-        return new MessageBusiness(messageRepository, orderBoostBusiness, new MessageFactory(userQueryRepository));
+    MessageBusiness messageBusiness(final MessageRepository messageRepository, final UserQueryRepository userQueryRepository){
+        return new MessageBusiness(messageRepository , new MessageFactory(userQueryRepository));
+    }
+
+    @Bean
+    MessageCommandHandler messageCommandHandler(final MessageBusiness messageBusiness, final OrderCommandHandler orderCommandHandler){
+        return new MessageCommandHandler(messageBusiness, orderCommandHandler);
     }
 }

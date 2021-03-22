@@ -1,27 +1,24 @@
 package com.BoostingWebsite.account;
 
 import com.BoostingWebsite.account.exception.DataMismatchException;
+import com.BoostingWebsite.utils.BaseFacade;
 
-class RegisterFacade {
-    private final UserBusiness userBusiness;
-    private final UserTokenBusiness userTokenBusiness;
+class RegisterFacade extends BaseFacade {
+    private final AccountCommandHandler accountCommandHandler;
 
-    RegisterFacade(UserBusiness userBusiness, UserTokenBusiness userTokenBusiness) {
-        this.userBusiness = userBusiness;
-        this.userTokenBusiness = userTokenBusiness;
+    RegisterFacade(AccountCommandHandler accountCommandHandler) {
+        this.accountCommandHandler = accountCommandHandler;
     }
 
     void createAccount(User user, String confirmPassword) throws DataMismatchException {
-        if(userBusiness.canCreateAccount(user, confirmPassword)){
-            userBusiness.createAccount(user);
-        }
+        accountCommandHandler.createAccount(user, confirmPassword);
     }
 
     void enable(Long id){
-        userBusiness.enable(id);
+        accountCommandHandler.enable(id);
     }
 
     String confirm(Long id, String token){
-        return userTokenBusiness.confirm(id, token);
+        return accountCommandHandler.confirm(id, token);
     }
 }

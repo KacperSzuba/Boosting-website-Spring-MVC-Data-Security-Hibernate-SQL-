@@ -2,8 +2,9 @@ package com.BoostingWebsite.contact;
 
 import com.BoostingWebsite.account.exception.EmailNotFoundException;
 import com.BoostingWebsite.contact.dto.ContactDto;
+import com.BoostingWebsite.utils.BaseFacade;
 
-class ContactFacade {
+class ContactFacade extends BaseFacade {
     private final ContactBusiness contactBusiness;
     private final ContactFactory contactFactory;
 
