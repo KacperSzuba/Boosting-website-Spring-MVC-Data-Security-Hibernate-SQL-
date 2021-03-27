@@ -1,5 +1,7 @@
 package com.BoostingWebsite.utils;
 
+import java.util.Optional;
+
 interface ConstRepository {
-    Const findByEnumConst(EnumConst enumConst);
+    Optional<Const> findByEnumConst(EnumConst enumConst);
 }

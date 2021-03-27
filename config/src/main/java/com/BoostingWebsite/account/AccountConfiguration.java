@@ -50,7 +50,7 @@ class AccountConfiguration {
 
     @Bean
     UserTokenBusiness userTokenBusiness(final UserTokenRepository userTokenRepository){
-        return new UserTokenBusiness(userTokenRepository, new SimpleUserDtoFactory());
+        return new UserTokenBusiness(userTokenRepository, new SimpleUserDtoFactory(), new UserTokenFactory());
     }
 
     @Bean

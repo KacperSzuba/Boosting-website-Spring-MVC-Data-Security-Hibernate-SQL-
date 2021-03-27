@@ -9,7 +9,7 @@ interface SqlUserQueryRepository extends CrudRepository<UserSnapshot, Long> {
 
     boolean existsUserByUsername(String username);
 
-    UserSnapshot findByUsername(String username);
+    Optional<UserSnapshot> findByUsername(String username);
 
     Optional<UserSnapshot> getById(Long id);
 }

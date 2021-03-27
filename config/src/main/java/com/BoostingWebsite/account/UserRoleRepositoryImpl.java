@@ -2,6 +2,8 @@ package com.BoostingWebsite.account;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 class UserRoleRepositoryImpl implements UserRoleRepository {
     private final SqlUserRoleRepository repository;
@@ -11,8 +13,8 @@ class UserRoleRepositoryImpl implements UserRoleRepository {
     }
 
     @Override
-    public UserRole getUserRole(RoleName role) {
-        return UserRole.restore(repository.getUserRole(role));
+    public Optional<UserRole> getUserRole(RoleName role) {
+        return repository.getUserRole(role).map(UserRole::restore);
     }
 
     @Override

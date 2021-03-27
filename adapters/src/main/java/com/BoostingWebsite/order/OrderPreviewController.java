@@ -40,8 +40,8 @@ class OrderPreviewController extends BaseController {
             model.addAttribute("currentLeague", facade.getCurrentLeague());
         }
         catch (OrderBoostNotFoundException | IOException ex){
+            logger.error("Error during showing order preview page!", ex);
             model.addAttribute("orderBoost", OrderBoostDto.builder().build());
-            logger.error(ex);
         }
 
         return "order/orderPreview";

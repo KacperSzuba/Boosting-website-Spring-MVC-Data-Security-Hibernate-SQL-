@@ -28,7 +28,7 @@ class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public UserRole getUserRole(Long id) {
+    public Optional<UserRole> getUserRole(Long id) {
         return repository.getUserRole(id);
     }
 

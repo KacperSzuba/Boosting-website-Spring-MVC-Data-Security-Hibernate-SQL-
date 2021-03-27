@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 
 @Configuration
-class EmailServiceConfiguration {
+class EmailConfig {
 
     @Bean
     EmailBusiness emailBusiness(final JavaMailSender emailSender){

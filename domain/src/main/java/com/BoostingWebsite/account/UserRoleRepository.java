@@ -1,9 +1,9 @@
 package com.BoostingWebsite.account;
 
-import org.springframework.data.repository.query.Param;
+import java.util.Optional;
 
 interface UserRoleRepository {
-    UserRole getUserRole(@Param("role") RoleName role);
+    Optional<UserRole> getUserRole(RoleName role);
 
     UserRole save(UserRole userRole);
 }

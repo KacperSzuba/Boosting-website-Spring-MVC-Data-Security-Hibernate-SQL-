@@ -2,6 +2,8 @@ package com.BoostingWebsite.account;
 
 import com.BoostingWebsite.account.exception.DataMismatchException;
 import com.BoostingWebsite.utils.BaseController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +18,8 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/register")
 class RegisterController extends BaseController {
+    private static final Logger logger  = LoggerFactory.getLogger(RegisterController.class);
+
     private final RegisterFacade facade;
 
     RegisterController(RegisterFacade facade) {
@@ -38,8 +42,9 @@ class RegisterController extends BaseController {
                 facade.createAccount(user, confirmPassword);
                 model.addAttribute("confirmEmailMessage", "Login to the e-mail address provided and confirm your identity.");
                 return "account/login";
-            } catch (DataMismatchException e) {
-                model.addAttribute("confirmEmailMessage", e.getMessage());
+            } catch (DataMismatchException ex) {
+                logger.error("Error during registering!", ex);
+                model.addAttribute("confirmEmailMessage", ex.getMessage());
                 return "account/register";
             }
         }

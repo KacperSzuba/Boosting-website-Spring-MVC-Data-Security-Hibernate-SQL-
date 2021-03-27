@@ -2,6 +2,8 @@ package com.BoostingWebsite.utils;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 class ConstRepositoryImpl implements ConstRepository{
     private final SqlConstRepository repository;
@@ -11,7 +13,7 @@ class ConstRepositoryImpl implements ConstRepository{
     }
 
     @Override
-    public Const findByEnumConst(EnumConst enumConst) {
-        return Const.restore(repository.findByEnumConst(enumConst));
+    public Optional<Const> findByEnumConst(EnumConst enumConst) {
+        return repository.findByEnumConst(enumConst).map(Const::restore);
     }
 }

@@ -7,7 +7,7 @@ import java.util.Optional;
 interface SqlUserTokenRepository extends CrudRepository<UserTokenSnapshot, Long> {
     Optional<UserTokenSnapshot> findByUser_Username(String username);
 
-    UserTokenSnapshot findByToken(String token);
+    Optional<UserTokenSnapshot> findByToken(String token);
 
     void delete(UserTokenSnapshot userToken);
 

@@ -15,7 +15,7 @@ interface SqlUserRepository extends CrudRepository<UserSnapshot, Long> {
     boolean existsUserByUsername(String username);
 
     @Query(value = "SELECT u.roles FROM UserSnapshot u WHERE u.id = :id")
-    UserRole getUserRole(@Param("id") Long id);
+    Optional<UserRole> getUserRole(@Param("id") Long id);
 
     Optional<UserSnapshot> findById(Long id);
 

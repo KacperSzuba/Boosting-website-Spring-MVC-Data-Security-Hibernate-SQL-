@@ -47,7 +47,7 @@ class OrderBoostBusiness extends BaseBusiness {
         return orderBoostQueryRepository
                 .findActiveBoost(applicationSession.getContext().getUser().getId())
                 .map(this::toDto)
-                .orElseThrow(OrderBoostNotFoundException::new);
+                .orElseThrow(() -> new OrderBoostNotFoundException("Order boost not found!"));
     }
 
     boolean isActiveBoost(){

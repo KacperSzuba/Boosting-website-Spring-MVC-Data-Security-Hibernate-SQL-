@@ -2,6 +2,8 @@ package com.BoostingWebsite.order;
 
 import com.BoostingWebsite.boosterApplication.Region;
 import com.BoostingWebsite.utils.BaseController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +17,8 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/order")
 class OrderController extends BaseController {
+    private static final Logger logger  = LoggerFactory.getLogger(OrderController.class);
+
     private final OrderFacade facade;
 
     OrderController(OrderFacade facade) {
@@ -36,6 +40,7 @@ class OrderController extends BaseController {
             model.addAttribute("whetherUserHasOrder", facade.whetherUserHasOrder());
         }
         catch (NullPointerException ex){
+            logger.error("Error during showing order page!", ex);
             return "redirect:/login";
         }
 
@@ -45,7 +50,7 @@ class OrderController extends BaseController {
     }
 
     @PostMapping
-    String accountInformation(@Valid @ModelAttribute("orderBoost") OrderBoost orderBoost, BindingResult result) {
+    String makingOrder(@Valid @ModelAttribute("orderBoost") OrderBoost orderBoost, BindingResult result) {
         if (result.hasErrors()) {
             return "order/order";
         }
@@ -54,7 +59,7 @@ class OrderController extends BaseController {
                 facade.makeOrder(orderBoost);
                 return "redirect:/";
             } catch (IllegalArgumentException ex) {
-                ex.printStackTrace();
+                logger.error("Error during making order!", ex);
                 return "order/order";
             }
         }

@@ -1,12 +1,16 @@
 package com.BoostingWebsite.api;
 
+import com.BoostingWebsite.email.EmailBusiness;
 import com.BoostingWebsite.order.OrderCommandHandler;
 import com.BoostingWebsite.order.exception.OrderBoostNotFoundException;
 import com.BoostingWebsite.utils.ConstBusiness;
+import com.BoostingWebsite.utils.exception.ConstNotFoundException;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,6 +20,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 class LeagueOfLegendsAPIConnector {
+    private static final Logger logger  = LoggerFactory.getLogger(LeagueOfLegendsAPIConnector.class);
+
     private final String region;
     private final String username;
     private final String summonerId;
@@ -25,7 +31,7 @@ class LeagueOfLegendsAPIConnector {
     private static final String LOL_SUMMONER_ID = ".api.riotgames.com/lol/league/v4/entries/by-summoner/";
     private static final String API_KEY = "?api_key=";
 
-    LeagueOfLegendsAPIConnector(final OrderCommandHandler orderCommandHandler, final ConstBusiness constBusiness) throws OrderBoostNotFoundException {
+    LeagueOfLegendsAPIConnector(final OrderCommandHandler orderCommandHandler, final ConstBusiness constBusiness) throws OrderBoostNotFoundException, ConstNotFoundException {
         this.username = orderCommandHandler.findActiveBoost().getLolUsername();
         this.region = orderCommandHandler.findActiveBoost().getRegion().getValue();
         summonerId = retrieveSummonerId();
@@ -40,8 +46,8 @@ class LeagueOfLegendsAPIConnector {
             summonerId = jsonObject.get("id").toString();
 
             return removeQuotes(summonerId);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            logger.error("Error during retrieving summoner!", ex);
 
             throw new SummonerNotFoundException();
         }

@@ -6,7 +6,7 @@ interface UserTokenRepository {
 
     Optional<UserToken> findByUser_Username(String username);
 
-    UserToken findByToken(String token);
+    Optional<UserToken> findByToken(String token);
 
     void delete(UserToken userToken);
 

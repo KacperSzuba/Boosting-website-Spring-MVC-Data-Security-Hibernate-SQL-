@@ -19,8 +19,8 @@ class UserTokenRepositoryImpl implements UserTokenRepository {
     }
 
     @Override
-    public UserToken findByToken(String token) {
-        return UserToken.restore(repository.findByToken(token));
+    public Optional<UserToken> findByToken(String token) {
+        return repository.findByToken(token).map(UserToken::restore);
     }
 
     @Override

@@ -5,15 +5,17 @@ import com.BoostingWebsite.account.exception.UserNotFoundException;
 import com.BoostingWebsite.email.EmailBusiness;
 import com.BoostingWebsite.utils.BaseBusiness;
 import com.BoostingWebsite.utils.EmailValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.Optional;
 
 import static com.BoostingWebsite.utils.EmailValidator.whetherEmailIsValid;
 import static com.BoostingWebsite.utils.EmailValidator.whetherTheEmailsAreTheSame;
 import static com.BoostingWebsite.utils.PasswordValidator.whetherThePasswordsAreTheSame;
 
 class UserBusiness extends BaseBusiness {
+    private static final Logger logger  = LoggerFactory.getLogger(UserBusiness.class);
+
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final UserRoleBusiness userRoleBusiness;
@@ -39,23 +41,13 @@ class UserBusiness extends BaseBusiness {
     }
 
     User findById(Long id){
-        Optional<User> user = userRepository.findById(id);
-
-        if(user.isEmpty()){
-            throw new UserNotFoundException("User not found!");
-        }
-
-        return user.get();
+        return userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found!"));
     }
 
     SimpleUserDto findSimpleUserDtoById(Long id){
-        Optional<SimpleUserDto> user = userQueryRepository.getById(id);
-
-        if(user.isEmpty()){
-            throw new UserNotFoundException("User not found!");
-        }
-
-        return user.get();
+        return userQueryRepository.getById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found!"));
     }
 
     boolean existsUserByEmail(String email){
@@ -65,17 +57,12 @@ class UserBusiness extends BaseBusiness {
     RoleName getRoleName(UserDto userDto){
         User user = findById(userDto.getId());
 
-        return userRepository.getUserRole(user.getSnapshot().getId()).getSnapshot().getRoleName();
+        return userRepository.getUserRole(user.getSnapshot().getId()).get().getSnapshot().getRoleName();
     }
 
     User findByEmail(String email){
-        Optional<User> user = userRepository.findByEmail(email);
-
-        if(user.isEmpty()){
-            throw new UserNotFoundException("User not found!");
-        }
-
-        return user.get();
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException("User not found!"));
     }
 
     void enable(Long id){
@@ -94,7 +81,8 @@ class UserBusiness extends BaseBusiness {
 
             confirmEmail(applicationSession.getAppUrl(), applicationSession.getToken(), user);
              */
-        } catch (Exception exception) {
+        } catch (Exception ex) {
+            logger.error("Error while creating a user", ex);
             user.creationMessage("Invalid registration");
         }
     }

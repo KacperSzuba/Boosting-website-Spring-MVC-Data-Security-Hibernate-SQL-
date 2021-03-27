@@ -1,14 +1,5 @@
 package com.BoostingWebsite.contact;
 
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
-import org.springframework.data.annotation.PersistenceConstructor;
-
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static com.BoostingWebsite.utils.EmailValidator.whetherEmailIsValid;

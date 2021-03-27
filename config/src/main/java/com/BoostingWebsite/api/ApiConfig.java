@@ -3,6 +3,7 @@ package com.BoostingWebsite.api;
 import com.BoostingWebsite.order.OrderCommandHandler;
 import com.BoostingWebsite.order.exception.OrderBoostNotFoundException;
 import com.BoostingWebsite.utils.ConstBusiness;
+import com.BoostingWebsite.utils.exception.ConstNotFoundException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.annotation.SessionScope;
@@ -12,7 +13,7 @@ class ApiConfig {
 
     @Bean
     @SessionScope
-    LeagueOfLegendsAPIConnector leagueOfLegendsAPIConnector(final OrderCommandHandler orderCommandHandler, final ConstBusiness constBusiness) throws OrderBoostNotFoundException {
+    LeagueOfLegendsAPIConnector leagueOfLegendsAPIConnector(final OrderCommandHandler orderCommandHandler, final ConstBusiness constBusiness) throws OrderBoostNotFoundException, ConstNotFoundException {
         return new LeagueOfLegendsAPIConnector(orderCommandHandler, constBusiness);
     }
 

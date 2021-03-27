@@ -3,6 +3,8 @@ package com.BoostingWebsite.contact;
 import com.BoostingWebsite.account.exception.EmailNotFoundException;
 import com.BoostingWebsite.contact.dto.ContactDto;
 import com.BoostingWebsite.utils.BaseController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +20,8 @@ import static com.BoostingWebsite.utils.EmailValidator.whetherEmailIsValid;
 @Controller
 @RequestMapping("/contact-us")
 class ContactController extends BaseController {
+    private static final Logger logger  = LoggerFactory.getLogger(ContactController.class);
+
     private final ContactFacade facade;
 
     ContactController(ContactFacade facade) {
@@ -38,8 +42,8 @@ class ContactController extends BaseController {
             try {
                 facade.save(contactDto);
                 return "redirect:/";
-            } catch (EmailNotFoundException e) {
-                e.printStackTrace();
+            } catch (EmailNotFoundException ex) {
+                logger.error("Error during contact registration!", ex);
                 return "redirect:/contact-us";
             }
         }

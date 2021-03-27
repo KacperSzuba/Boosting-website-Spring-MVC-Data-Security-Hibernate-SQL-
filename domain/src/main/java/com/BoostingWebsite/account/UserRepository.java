@@ -9,7 +9,7 @@ interface UserRepository {
 
     boolean existsUserByUsername(String username);
 
-    UserRole getUserRole(Long id);
+    Optional<UserRole> getUserRole(Long id);
 
     Optional<User> findById(Long id);
 
